@@ -16,7 +16,7 @@ function General() {
 
   if (displayState === "form") {
     return (
-      <form className="general-form">
+      <form className="general-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="name">Name: </label>
         <input
           type="text"
@@ -41,7 +41,7 @@ function General() {
           onChange={(e) => setPhNo(e.target.value)}
           required
         />
-        <button type="button" onClick={() => handleSubmit()}>
+        <button type="submit">
           Submit
         </button>
       </form>
