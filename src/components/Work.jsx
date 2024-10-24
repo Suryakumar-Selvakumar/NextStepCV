@@ -1,46 +1,84 @@
 import { useState } from "react";
 
 export function Education() {
-    const [school, setSchool] = useState("");
-    const [titleStudy, setTitleStudy] = useState("");
-    const [dateStudy, setDateStudy] = useState("");
+    const [company, setCompany] = useState("");
+    const [place, setPlace] = useState("");
+    const [position, setPosition] = useState("");
+    const [startWork, setStartWork] = useState("");
+    const [endWork, setEndWork] = useState(""); 
+    const [role, setRole] = useState("");
+    const [roles, setRoles] = useState([]);
     const [displayState, setDisplayState] = useState("form");
+
+    function handleRoleSubmit(limit) {
+        if(roles.length < limit) {
+            setRoles([...roles, role]);
+        }
+        setRole('');
+    }
 
     function handleSubmit() {
         setDisplayState("resume");
       }
     
-      function handleEdit() {
+    function handleEdit() {
         setDisplayState("form");
       }
     
       if (displayState === "form") {
         return (
-          <form className="education-form" onSubmit={() => handleSubmit()}>
-            <label htmlFor="school">School name: </label>
+          <form className="work-form" onSubmit={() => handleSubmit()}>
+            <label htmlFor="company">Company name: </label>
             <input
               type="text"
-              id="name"
-              value={school}
-              onChange={(e) => setSchool(e.target.value)}
+              id="company"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
               required
             />
-            <label htmlFor="title-study">Title of Study: </label>
+            <label htmlFor="place">Company location: </label>
             <input
               type="text"
-              id="title-study"
-              value={titleStudy}
-              onChange={(e) => setTitleStudy(e.target.value)}
+              id="place"
+              value={place}
+              onChange={(e) => setPlace(e.target.value)}
               required
             />
-            <label htmlFor="date-study">Date of Study: </label>
+            <label htmlFor="position">Position: </label>
+            <input
+              type="text"
+              id="position"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              required
+            />
+            <label htmlFor="start-work">Start date: </label>
             <input
               type="date"
-              id="date-study"
-              value={dateStudy}
-              onChange={(e) => setDateStudy(e.target.value)}
+              id="start-work"
+              value={startWork}
+              onChange={(e) => setStartWork(e.target.value)}
               required
             />
+            <label htmlFor="end-work">Start date: </label>
+            <input
+              type="date"
+              id="end-work"
+              value={endWork}
+              onChange={(e) => setEndWork(e.target.value)}
+              required
+            />
+            <form onSubmit={() => handleRoleSubmit(5)}>
+            <label htmlFor="role">Job roles: Click to add more</label>
+            <input 
+              type="text" 
+              id="role" 
+              value={role} 
+              onChange={(e) => setRole(e.target.value)}
+              required
+            />
+            <button type="submit">Add role</button>
+            </form>
             <button type="submit">
               Submit
             </button>

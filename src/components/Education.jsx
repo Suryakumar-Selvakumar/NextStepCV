@@ -3,7 +3,8 @@ import { useState } from "react";
 export function Education() {
     const [school, setSchool] = useState("");
     const [titleStudy, setTitleStudy] = useState("");
-    const [dateStudy, setDateStudy] = useState("");
+    const [startDateStudy, setStartDateStudy] = useState("");
+    const [endDateStudy, setEndDateStudy] = useState("");
     const [displayState, setDisplayState] = useState("form");
 
     function handleSubmit() {
@@ -33,12 +34,20 @@ export function Education() {
               onChange={(e) => setTitleStudy(e.target.value)}
               required
             />
-            <label htmlFor="date-study">Date of Study: </label>
+            <label htmlFor="start-date-study">Date of Study: </label>
             <input
               type="date"
-              id="date-study"
-              value={dateStudy}
-              onChange={(e) => setDateStudy(e.target.value)}
+              id="start-date-study"
+              value={startDateStudy}
+              onChange={(e) => setStartDateStudy(e.target.value)}
+              required
+            />
+            <label htmlFor="end-date-study">Date of Study: </label>
+            <input
+              type="date"
+              id="end-date-study"
+              value={endDateStudy}
+              onChange={(e) => setEndDateStudy(e.target.value)}
               required
             />
             <button type="submit">
