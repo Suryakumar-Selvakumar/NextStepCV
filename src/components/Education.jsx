@@ -50,7 +50,7 @@ export function Education() {
     
       if (displayState === "resume") {
         return (
-          <div className="education">
+          <div className="education-resume">
             <div>
             <p id="school-education">{school}</p>
             <p id="title-study-education">{titleStudy}</p>
