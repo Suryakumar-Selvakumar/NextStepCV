@@ -63,11 +63,3 @@ export function Education() {
         );
       }
 }
-
-// function Education() {
-//   const [experiences, setExperiences] = useState([<Experiences key={0} />]);
-
-  
-// }
-
-// export { General };
