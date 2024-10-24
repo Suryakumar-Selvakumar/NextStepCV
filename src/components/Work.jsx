@@ -10,6 +10,24 @@ export function Education() {
     const [roles, setRoles] = useState([]);
     const [displayState, setDisplayState] = useState("form");
 
+    function returnToday() {
+        let today = new Date();
+        var dd = String(today.getDate()).padStart(2, "0");
+        var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + "-" + mm + "-" + dd;
+        return today;
+    }
+
+    function renderEndDate() {
+        const today = returnToday();
+        if(endWork === today) {
+            return "Present";
+        } else {
+            return endWork;
+        }
+    }
+
     function handleRoleSubmit(limit) {
         if(roles.length < limit) {
             setRoles([...roles, role]);
@@ -69,7 +87,7 @@ export function Education() {
               required
             />
             <form onSubmit={() => handleRoleSubmit(5)}>
-            <label htmlFor="role">Job roles: Click to add more</label>
+            <label htmlFor="role">Job roles: Click button to add more</label>
             <input 
               type="text" 
               id="role" 
@@ -88,12 +106,20 @@ export function Education() {
     
       if (displayState === "resume") {
         return (
-          <div className="education-resume">
+          <div className="work-resume">
             <div>
-            <p id="school-education">{school}</p>
-            <p id="title-study-education">{titleStudy}</p>
+                <p id="company-work">{company}</p>
+                <p id="place-work">{place}</p>
             </div>
-              <p id="date-study">{dateStudy}</p>
+            <div>
+                <p id="position-work">{position}</p>
+                <p id="start-end-date">{startWork} &#8210; {renderEndDate()}</p>
+            </div>
+            <ul className="roles-resume">
+            {roles.map((role, index) => (
+                <li key={index}>{role}</li>
+            ))}
+            </ul>
             <button type="button" onClick={() => handleEdit()}>
               Edit
             </button>
