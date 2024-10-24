@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-function Education(schoolVar, titleStudyVar, dateStudyVar) {
-    const [school, setSchool] = useState({schoolVar});
-    const [titleStudy, setTitleStudy] = useState({titleStudyVar});
-    const [dateStudy, setDateStudy] = useState({dateStudyVar});
+export function Education() {
+    const [school, setSchool] = useState("");
+    const [titleStudy, setTitleStudy] = useState("");
+    const [dateStudy, setDateStudy] = useState("");
     const [displayState, setDisplayState] = useState("form");
 
     function handleSubmit() {
@@ -16,7 +16,7 @@ function Education(schoolVar, titleStudyVar, dateStudyVar) {
     
       if (displayState === "form") {
         return (
-          <form className="education-form">
+          <form className="education-form" onSubmit={() => handleSubmit()}>
             <label htmlFor="school">School name: </label>
             <input
               type="text"
@@ -41,7 +41,7 @@ function Education(schoolVar, titleStudyVar, dateStudyVar) {
               onChange={(e) => setDateStudy(e.target.value)}
               required
             />
-            <button type="button" onClick={() => handleSubmit()}>
+            <button type="submit">
               Submit
             </button>
           </form>
@@ -51,19 +51,17 @@ function Education(schoolVar, titleStudyVar, dateStudyVar) {
       if (displayState === "resume") {
         return (
           <div className="education">
-            <p id="school-education">{school}</p>
             <div>
-              <p id="email-general">{email}</p>
-              <p> | </p>
-              <p id="ph-no-general">{phNo}</p>
+            <p id="school-education">{school}</p>
+            <p id="title-study-education">{titleStudy}</p>
             </div>
+              <p id="date-study">{dateStudy}</p>
             <button type="button" onClick={() => handleEdit()}>
               Edit
             </button>
           </div>
         );
       }
-
 }
 
 // function Education() {
