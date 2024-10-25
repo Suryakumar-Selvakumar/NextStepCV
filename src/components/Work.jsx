@@ -6,7 +6,7 @@ export function Work() {
     const [position, setPosition] = useState("");
     const [startWork, setStartWork] = useState("");
     const [endWork, setEndWork] = useState(""); 
-    const [role, setRole] = useState({});
+    const [role, setRole] = useState({id: 0, value: ""});
     const [roles, setRoles] = useState([]);
     const [displayState, setDisplayState] = useState("form");
 
@@ -45,15 +45,14 @@ export function Work() {
         });
     }
 
-    function handleRoleSubmit(limit) {
-        if(roles.length < limit) {
+    function addRole(limit) {
+        if(roles.length < limit && role.value !== "") {
         setRoles([...roles, {id:crypto.randomUUID(), value: role.value}]);
     }
         setRole({id: 0, value: ""});
     }
 
     function updateRole() {
-        console.log(role);
         const updatedRoles =  roles.map(r => {
             if(r.id === role.id) {
                 return {...r, value: role.value};
@@ -62,6 +61,10 @@ export function Work() {
             }
         });
         setRoles(updatedRoles);
+    }
+
+    function deleteRole(roleId) {
+      setRoles(roles.filter(role => role.id !== roleId));
     }
     
       if (displayState === "form") {
@@ -115,7 +118,7 @@ export function Work() {
               value={role.value} 
               onChange={(e) => setRole({...role, value:e.target.value})}
             />
-            <button type="button" onClick={() => handleRoleSubmit(5)}>Add role</button>
+            <button type="button" onClick={() => addRole(5)}>Add role</button>
             <button type="button" onClick={() => updateRole()}>Update role</button>
             <button type="submit">
               Submit
