@@ -21,7 +21,7 @@ export function WorkSection() {
         Add Work Experience
       </button>
       {experiences.map((exp) => (
-        <>
+        <Fragment key={crypto.randomUUID()}>
           {exp}
           <button
             id="delete-work"
@@ -30,7 +30,7 @@ export function WorkSection() {
           >
             Delete Work experience
           </button>
-        </>
+        </Fragment>
       ))}
     </div>
   );
