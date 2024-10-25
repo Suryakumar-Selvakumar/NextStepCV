@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-export function Education() {
+export function Work() {
     const [company, setCompany] = useState("");
     const [place, setPlace] = useState("");
     const [position, setPosition] = useState("");
     const [startWork, setStartWork] = useState("");
     const [endWork, setEndWork] = useState(""); 
-    const [role, setRole] = useState("");
+    const [role, setRole] = useState({});
     const [roles, setRoles] = useState([]);
     const [displayState, setDisplayState] = useState("form");
 
@@ -28,13 +28,6 @@ export function Education() {
         }
     }
 
-    function handleRoleSubmit(limit) {
-        if(roles.length < limit) {
-            setRoles([...roles, role]);
-        }
-        setRole('');
-    }
-
     function handleSubmit() {
         setDisplayState("resume");
       }
@@ -42,9 +35,38 @@ export function Education() {
     function handleEdit() {
         setDisplayState("form");
       }
+
+
+    function editRole(roleId) {
+        roles.forEach((r) => {
+            if(r.id === roleId) {
+                setRole({id: r.id, value: r.value});
+            }
+        });
+    }
+
+    function handleRoleSubmit(limit) {
+        if(roles.length < limit) {
+        setRoles([...roles, {id:crypto.randomUUID(), value: role.value}]);
+    }
+        setRole({id: 0, value: ""});
+    }
+
+    function updateRole() {
+        console.log(role);
+        const updatedRoles =  roles.map(r => {
+            if(r.id === role.id) {
+                return {...r, value: role.value};
+            } else {
+                return r;
+            }
+        });
+        setRoles(updatedRoles);
+    }
     
       if (displayState === "form") {
         return (
+            <>
           <form className="work-form" onSubmit={() => handleSubmit()}>
             <label htmlFor="company">Company name: </label>
             <input
@@ -86,21 +108,29 @@ export function Education() {
               onChange={(e) => setEndWork(e.target.value)}
               required
             />
-            <form onSubmit={() => handleRoleSubmit(5)}>
-            <label htmlFor="role">Job roles: Click button to add more</label>
+            <label htmlFor="role">Job roles: Click Add Role to add more and Update Role to update existing role</label>
             <input 
               type="text" 
               id="role" 
-              value={role} 
-              onChange={(e) => setRole(e.target.value)}
-              required
+              value={role.value} 
+              onChange={(e) => setRole({...role, value:e.target.value})}
             />
-            <button type="submit">Add role</button>
-            </form>
+            <button type="button" onClick={() => handleRoleSubmit(5)}>Add role</button>
+            <button type="button" onClick={() => updateRole()}>Update role</button>
             <button type="submit">
               Submit
             </button>
           </form>
+          <ul>
+          {roles.map((role) => 
+                <li key={role.id}>
+                    {role.value}
+                    <button type="button" id="edit-role-btn" onClick={() => editRole(role.id)}>Edit Role</button>
+                    <button type="button" id="delete-role-btn" onClick={() => deleteRole(role.id)}>Delete Role</button>
+                </li>
+            )}
+          </ul>
+          </>
         );
       }
     
@@ -116,8 +146,8 @@ export function Education() {
                 <p id="start-end-date">{startWork} &#8210; {renderEndDate()}</p>
             </div>
             <ul className="roles-resume">
-            {roles.map((role, index) => (
-                <li key={index}>{role}</li>
+            {roles.map((role) => (
+                <li key={role.id}>{role.value}</li>
             ))}
             </ul>
             <button type="button" onClick={() => handleEdit()}>
