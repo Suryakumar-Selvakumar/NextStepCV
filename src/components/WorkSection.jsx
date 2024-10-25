@@ -3,7 +3,7 @@ import { Work } from "./Work";
 import { Fragment } from "react";
 
 export function WorkSection() {
-  const [experiences, setExperiences] = useState([]);
+  const [experiences, setExperiences] = useState([<Work key={crypto.randomUUID()} />]);
 
   function addWork(limit) {
     if (experiences.length < limit) {

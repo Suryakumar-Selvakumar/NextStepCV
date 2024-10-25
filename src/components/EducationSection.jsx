@@ -3,12 +3,16 @@ import { Education } from "./Education";
 import { Fragment } from "react";
 
 export function EducationSection() {
-  const [experiences, setExperiences] = useState([<Education />]);
+  const [experiences, setExperiences] = useState([<Education key={crypto.randomUUID()}/>]);
 
   function addEducation(limit) {
     if (experiences.length < limit) {
-      setExperiences([...experiences, <Education />]);
+      setExperiences([...experiences, <Education key={crypto.randomUUID()}/>]);
     }
+  }
+
+  function deleteEducation(key) {
+    setExperiences(experiences.filter((exp) => exp.key !== key));
   }
 
   return (
@@ -16,8 +20,17 @@ export function EducationSection() {
       <button type="button" id="add-education" onClick={() => addEducation(3)}>
         Add Education
       </button>
-      {experiences.map((exp, index) => (
-        <Fragment key={index}>{exp}</Fragment>
+      {experiences.map((exp) => (
+        <Fragment key={crypto.randomUUID()}>
+          {exp}
+          <button
+            id="delete-education"
+            type="button"
+            onClick={() => deleteEducation(exp.key)}
+          >
+            Delete Education
+          </button>
+        </Fragment>
       ))}
     </div>
   );
