@@ -3,12 +3,16 @@ import { Work } from "./Work";
 import { Fragment } from "react";
 
 export function WorkSection() {
-  const [experiences, setExperiences] = useState([<Work />]);
+  const [experiences, setExperiences] = useState([]);
 
   function addWork(limit) {
     if (experiences.length < limit) {
-      setExperiences([...experiences, <Work />]);
+      setExperiences([...experiences, <Work key={crypto.randomUUID()} />]);
     }
+  }
+
+  function deleteWork(key) {
+    setExperiences(experiences.filter((exp) => exp.key !== key));
   }
 
   return (
@@ -16,8 +20,17 @@ export function WorkSection() {
       <button type="button" id="add-work" onClick={() => addWork(2)}>
         Add Work Experience
       </button>
-      {experiences.map((exp, index) => (
-        <Fragment key={index}>{exp}</Fragment>
+      {experiences.map((exp) => (
+        <>
+          {exp}
+          <button
+            id="delete-work"
+            type="button"
+            onClick={() => deleteWork(exp.key)}
+          >
+            Delete Work experience
+          </button>
+        </>
       ))}
     </div>
   );
