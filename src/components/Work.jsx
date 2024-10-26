@@ -120,7 +120,7 @@ export function Work() {
             required
           />
           <label htmlFor="role">
-            Job roles: Click Add Role to add more and Update Role to update
+            Job roles: Click Add Role to add roles and Update Role to update
             existing role
           </label>
           <input
@@ -129,7 +129,7 @@ export function Work() {
             value={role.value}
             onChange={(e) => setRole({ ...role, value: e.target.value })}
           />
-          <button type="button" onClick={() => addRole(5)} id="add-role">
+          <button type="button" onClick={() => addRole(4)} id="add-role">
             Add role
           </button>
           <button type="button" onClick={() => updateRole()} id="update-role">
