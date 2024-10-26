@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/technicalSkills.css";
 
 export function TechnicalSkills() {
   const [skills, setSkills] = useState([]);
@@ -28,14 +29,80 @@ export function TechnicalSkills() {
         },
       ]);
     }
+
+    if (skillsGroup.skillsType === "" && skillsGroup.skillsList !== "") {
+      setSkillsGroup({
+        id: 0,
+        skillsType: "",
+        skillsList: skillsGroup.skillsList,
+      });
+    } else if (skillsGroup.skillsType !== "" && skillsGroup.skillsList === "") {
+      setSkillsGroup({
+        id: 0,
+        skillsType: skillsGroup.skillsType,
+        skillsList: "",
+      });
+    } else {
+      setSkillsGroup({
+        id: 0,
+        skillsType: "",
+        skillsList: "",
+      });
+    }
+  }
+
+  function editSkillsGroup(skillsGroupId) {
+    skills.forEach((skill) => {
+      if (skill.id === skillsGroupId) {
+        setSkillsGroup({
+          id: skill.id,
+          skillsType: skill.skillsType,
+          skillsList: skill.skillsList,
+        });
+      }
+    });
+    document.getElementById("update-skills-group").style.cssText =
+      "display: inline;";
+    document.getElementById("add-skills-group").style.cssText =
+      "display: none;";
+  }
+
+  function updateSkillsGroup() {
+    const updatedSkills = skills.map((skill) => {
+      if (skill.id === skillsGroup.id) {
+        return {
+          ...skill,
+          skillsType: skillsGroup.skillsType,
+          skillsList: skillsGroup.skillsList,
+        };
+      } else {
+        return skill;
+      }
+    });
+    setSkills(updatedSkills);
+    setSkillsGroup({
+      id: 0,
+      skillsType: "",
+      skillsList: "",
+    });
+    document.getElementById("update-skills-group").style.cssText =
+      "display: none;";
+    document.getElementById("add-skills-group").style.cssText =
+      "display: inline;";
+  }
+
+  function deleteSkillsGroup(skillsGroupId) {
+    setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
+    document.getElementById("update-skills-group").style.cssText =
+      "display: none;";
+    document.getElementById("add-skills-group").style.cssText =
+      "display: inline;";
     setSkillsGroup({
       id: 0,
       skillsType: "",
       skillsList: "",
     });
   }
-
-  
 
   if (displayState === "form") {
     return (
@@ -99,6 +166,4 @@ export function TechnicalSkills() {
       </>
     );
   }
-
-
 }
