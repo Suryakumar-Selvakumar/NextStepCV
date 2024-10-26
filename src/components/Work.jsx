@@ -31,10 +31,12 @@ export function Work() {
 
   function handleSubmit() {
     setDisplayState("resume");
+    document.getElementById("add-work").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
     setDisplayState("form");
+    document.getElementById("add-work").style.cssText = "display: none;";
   }
 
   function editRole(roleId) {
