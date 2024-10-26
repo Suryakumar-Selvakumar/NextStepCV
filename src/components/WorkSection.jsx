@@ -3,16 +3,18 @@ import { Work } from "./Work";
 import { Fragment } from "react";
 
 export function WorkSection() {
-  const [experiences, setExperiences] = useState([<Work key={crypto.randomUUID()} />]);
+  const [experiences, setExperiences] = useState([]);
 
   function addWork(limit) {
     if (experiences.length < limit) {
       setExperiences([...experiences, <Work key={crypto.randomUUID()} />]);
+      document.getElementById("add-work").style.cssText = "display: none;";
     }
   }
 
   function deleteWork(key) {
     setExperiences(experiences.filter((exp) => exp.key !== key));
+    document.getElementById("add-work").style.cssText = "display: inline;";
   }
 
   return (
