@@ -4,16 +4,16 @@ import { General } from "./components/General";
 import { EducationSection } from "./components/EducationSection";
 import { WorkSection } from "./components/WorkSection";
 import { TechnicalSkills } from "./components/TechnicalSkills";
-import { Project } from "./components/Project";
+import { ProjectSection } from "./components/ProjectSection";
 
 function App() {
   return (
     <>
-      <General />
+      {/* <General />
       <EducationSection />
-      <TechnicalSkills />
+      <TechnicalSkills /> */}
       <WorkSection />
-      <Project />
+      {/* <ProjectSection /> */}
     </>
   );
 }

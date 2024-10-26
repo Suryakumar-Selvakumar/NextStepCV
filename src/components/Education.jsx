@@ -9,10 +9,12 @@ export function Education() {
 
   function handleSubmit() {
     setDisplayState("resume");
+    document.getElementById("add-education").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
     setDisplayState("form");
+    document.getElementById("add-education").style.cssText = "display: none;";
   }
 
   if (displayState === "form") {
@@ -62,7 +64,9 @@ export function Education() {
           <p id="school-education">{school}</p>
           <p id="title-study-education">{titleStudy}</p>
         </div>
-        <p id="date-study-education">{startDateStudy} &#8210; {endDateStudy}</p>
+        <p id="date-study-education">
+          {startDateStudy} &#8210; {endDateStudy}
+        </p>
         <button type="button" onClick={() => handleEdit()}>
           Edit
         </button>

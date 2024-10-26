@@ -13,10 +13,12 @@ export function Project() {
 
   function handleSubmit() {
     setDisplayState("resume");
+    document.getElementById("add-project").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
     setDisplayState("form");
+    document.getElementById("add-project").style.cssText = "display: none;";
   }
 
   function editDetail(detailId) {

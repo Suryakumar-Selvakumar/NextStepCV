@@ -3,16 +3,18 @@ import { Education } from "./Education";
 import { Fragment } from "react";
 
 export function EducationSection() {
-  const [experiences, setExperiences] = useState([<Education key={crypto.randomUUID()}/>]);
+  const [experiences, setExperiences] = useState([]);
 
   function addEducation(limit) {
     if (experiences.length < limit) {
-      setExperiences([...experiences, <Education key={crypto.randomUUID()}/>]);
+      setExperiences([...experiences, <Education key={crypto.randomUUID()} />]);
+      document.getElementById("add-education").style.cssText = "display: none;";
     }
   }
 
   function deleteEducation(key) {
     setExperiences(experiences.filter((exp) => exp.key !== key));
+    document.getElementById("add-education").style.cssText = "display: inline;";
   }
 
   return (
