@@ -14,6 +14,10 @@ export function TechnicalSkills() {
     setDisplayState("resume");
   }
 
+  function handleEdit() {
+    setDisplayState("form");
+  }
+
   function addSkillsGroup(limit) {
     if (
       skills.length < limit &&
@@ -164,6 +168,20 @@ export function TechnicalSkills() {
           ))}
         </div>
       </>
+    );
+  }
+
+  if (displayState === "resume") {
+    return (
+      <div className="technical-skills-resume">
+        {skills.map((skillsGroup) => (
+            <div key={skillsGroup.id}>
+              {skillsGroup.skillsType}: {skillsGroup.skillsList}
+            </div>))}
+        <button type="button" onClick={() => handleEdit()}>
+          Edit
+        </button>
+      </div>
     );
   }
 }
