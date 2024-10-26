@@ -55,17 +55,19 @@ export function Work() {
   }
 
   function updateRole() {
-    const updatedRoles = roles.map((r) => {
-      if (r.id === role.id) {
-        return { ...r, value: role.value };
-      } else {
-        return r;
-      }
-    });
-    setRoles(updatedRoles);
-    setRole({ id: 0, value: "" });
-    document.getElementById("update-role").style.cssText = "display: none;";
-    document.getElementById("add-role").style.cssText = "display: inline;";
+    if (role.value !== "") {
+      const updatedRoles = roles.map((r) => {
+        if (r.id === role.id) {
+          return { ...r, value: role.value };
+        } else {
+          return r;
+        }
+      });
+      setRoles(updatedRoles);
+      setRole({ id: 0, value: "" });
+      document.getElementById("update-role").style.cssText = "display: none;";
+      document.getElementById("add-role").style.cssText = "display: inline;";
+    }
   }
 
   function deleteRole(roleId) {

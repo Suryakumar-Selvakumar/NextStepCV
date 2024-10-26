@@ -72,27 +72,29 @@ export function TechnicalSkills() {
   }
 
   function updateSkillsGroup() {
-    const updatedSkills = skills.map((skill) => {
-      if (skill.id === skillsGroup.id) {
-        return {
-          ...skill,
-          skillsType: skillsGroup.skillsType,
-          skillsList: skillsGroup.skillsList,
-        };
-      } else {
-        return skill;
-      }
-    });
-    setSkills(updatedSkills);
-    setSkillsGroup({
-      id: 0,
-      skillsType: "",
-      skillsList: "",
-    });
-    document.getElementById("update-skills-group").style.cssText =
-      "display: none;";
-    document.getElementById("add-skills-group").style.cssText =
-      "display: inline;";
+    if (skillsGroup.skillsType !== "" && skillsGroup.skillsList !== "") {
+      const updatedSkills = skills.map((skill) => {
+        if (skill.id === skillsGroup.id) {
+          return {
+            ...skill,
+            skillsType: skillsGroup.skillsType,
+            skillsList: skillsGroup.skillsList,
+          };
+        } else {
+          return skill;
+        }
+      });
+      setSkills(updatedSkills);
+      setSkillsGroup({
+        id: 0,
+        skillsType: "",
+        skillsList: "",
+      });
+      document.getElementById("update-skills-group").style.cssText =
+        "display: none;";
+      document.getElementById("add-skills-group").style.cssText =
+        "display: inline;";
+    }
   }
 
   function deleteSkillsGroup(skillsGroupId) {
@@ -175,9 +177,10 @@ export function TechnicalSkills() {
     return (
       <div className="technical-skills-resume">
         {skills.map((skillsGroup) => (
-            <div key={skillsGroup.id}>
-              {skillsGroup.skillsType}: {skillsGroup.skillsList}
-            </div>))}
+          <div key={skillsGroup.id}>
+            {skillsGroup.skillsType}: {skillsGroup.skillsList}
+          </div>
+        ))}
         <button type="button" onClick={() => handleEdit()}>
           Edit
         </button>
