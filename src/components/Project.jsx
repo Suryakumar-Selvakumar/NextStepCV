@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/project.css";
 
 export function Project() {
   const [projectDetails, setProjectDetails] = useState({
@@ -43,19 +44,21 @@ export function Project() {
   }
 
   function updateDetail() {
-    const updatedDetails = projectDetails.details.map((dt) => {
-      if (dt.id === detail.id) {
-        return { ...dt, value: detail.value };
-      } else {
-        return dt;
-      }
-    });
-    setProjectDetails({ ...projectDetails, details: updatedDetails });
-    setDetail({ id: 0, value: "" });
-    document.getElementById("update-detail-btn").style.cssText =
-      "display: none;";
-    document.getElementById("add-detail-btn").style.cssText =
-      "display: inline;";
+    if (detail.value !== "") {
+      const updatedDetails = projectDetails.details.map((dt) => {
+        if (dt.id === detail.id) {
+          return { ...dt, value: detail.value };
+        } else {
+          return dt;
+        }
+      });
+      setProjectDetails({ ...projectDetails, details: updatedDetails });
+      setDetail({ id: 0, value: "" });
+      document.getElementById("update-detail-btn").style.cssText =
+        "display: none;";
+      document.getElementById("add-detail-btn").style.cssText =
+        "display: inline;";
+    }
   }
 
   function deleteDetail(detailId) {
@@ -63,8 +66,10 @@ export function Project() {
       ...projectDetails,
       details: projectDetails.details.filter((dt) => dt.id !== detailId),
     });
-    document.getElementById("update-detail-btn").style.cssText = "display: none;";
-    document.getElementById("add-detail-btn").style.cssText = "display: inline;";
+    document.getElementById("update-detail-btn").style.cssText =
+      "display: none;";
+    document.getElementById("add-detail-btn").style.cssText =
+      "display: inline;";
     setDetail({ id: 0, value: "" });
   }
 
