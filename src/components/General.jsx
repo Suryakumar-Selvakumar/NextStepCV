@@ -14,6 +14,7 @@ export function General() {
     // Will hide the form
     document.querySelector(".general-form").style.cssText = "display: none;";
     // Will add the data to the local storage which will be retrieved by GeneralResume
+    // localStorage will also save the data on double rendering due to strict mode
 
     // Will display the contact-details-card
     document.querySelector(".contact-details-card").style.cssText =
