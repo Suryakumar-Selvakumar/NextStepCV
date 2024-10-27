@@ -2,19 +2,21 @@ import { useState } from "react";
 import "../styles/work.css";
 
 export function Work() {
-  const [company, setCompany] = useState("");
-  const [place, setPlace] = useState("");
-  const [position, setPosition] = useState("");
-  const [startWork, setStartWork] = useState("");
-  const [endWork, setEndWork] = useState("");
+  const [workDetails, setWorkDetails] = useState({
+    company: "",
+    place: "",
+    position: "",
+    startWork: "",
+    endWork: "",
+    roles: [],
+  });
   const [role, setRole] = useState({ id: 0, value: "" });
-  const [roles, setRoles] = useState([]);
   const [displayState, setDisplayState] = useState("form");
 
   function returnToday() {
     let today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, "0");
     var yyyy = today.getFullYear();
     today = yyyy + "-" + mm + "-" + dd;
     return today;
@@ -22,10 +24,10 @@ export function Work() {
 
   function renderEndDate() {
     const today = returnToday();
-    if (endWork === today) {
+    if (workDetails.endWork >= today) {
       return "Present";
     } else {
-      return endWork;
+      return workDetails.endWork;
     }
   }
 
@@ -40,7 +42,7 @@ export function Work() {
   }
 
   function editRole(roleId) {
-    roles.forEach((r) => {
+    workDetails.roles.forEach((r) => {
       if (r.id === roleId) {
         setRole({ id: r.id, value: r.value });
       }
@@ -50,22 +52,28 @@ export function Work() {
   }
 
   function addRole(limit) {
-    if (roles.length < limit && role.value !== "") {
-      setRoles([...roles, { id: crypto.randomUUID(), value: role.value }]);
+    if (workDetails.roles.length < limit && role.value !== "") {
+      setWorkDetails({
+        ...workDetails,
+        roles: [
+          ...workDetails.roles,
+          { id: crypto.randomUUID(), value: role.value },
+        ],
+      });
     }
     setRole({ id: 0, value: "" });
   }
 
   function updateRole() {
     if (role.value !== "") {
-      const updatedRoles = roles.map((r) => {
+      const updatedRoles = workDetails.roles.map((r) => {
         if (r.id === role.id) {
           return { ...r, value: role.value };
         } else {
           return r;
         }
       });
-      setRoles(updatedRoles);
+      setWorkDetails({ ...workDetails, roles: updatedRoles });
       setRole({ id: 0, value: "" });
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
@@ -73,7 +81,10 @@ export function Work() {
   }
 
   function deleteRole(roleId) {
-    setRoles(roles.filter((role) => role.id !== roleId));
+    setWorkDetails({
+      ...workDetails,
+      roles: workDetails.roles.filter((role) => role.id !== roleId),
+    });
     document.getElementById("update-role").style.cssText = "display: none;";
     document.getElementById("add-role").style.cssText = "display: inline;";
     setRole({ id: 0, value: "" });
@@ -87,40 +98,50 @@ export function Work() {
           <input
             type="text"
             id="company"
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
+            value={workDetails.company}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, company: e.target.value })
+            }
             required
           />
           <label htmlFor="place">Company location: </label>
           <input
             type="text"
             id="place"
-            value={place}
-            onChange={(e) => setPlace(e.target.value)}
+            value={workDetails.place}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, place: e.target.value })
+            }
             required
           />
           <label htmlFor="position">Position: </label>
           <input
             type="text"
             id="position"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
+            value={workDetails.position}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, position: e.target.value })
+            }
             required
           />
           <label htmlFor="start-work">Start date: </label>
           <input
             type="date"
             id="start-work"
-            value={startWork}
-            onChange={(e) => setStartWork(e.target.value)}
+            value={workDetails.startWork}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, startWork: e.target.value })
+            }
             required
           />
           <label htmlFor="end-work">Start date: </label>
           <input
             type="date"
             id="end-work"
-            value={endWork}
-            onChange={(e) => setEndWork(e.target.value)}
+            value={workDetails.endWork}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, endWork: e.target.value })
+            }
             required
           />
           <label htmlFor="role">
@@ -142,7 +163,7 @@ export function Work() {
           <button type="submit">Submit</button>
         </form>
         <ul>
-          {roles.map((role) => (
+          {workDetails.roles.map((role) => (
             <li key={role.id}>
               {role.value}
               <button
@@ -170,17 +191,17 @@ export function Work() {
     return (
       <div className="work-resume">
         <div>
-          <p id="company-work">{company}</p>
-          <p id="place-work">{place}</p>
+          <p id="company-work">{workDetails.company}</p>
+          <p id="place-work">{workDetails.place}</p>
         </div>
         <div>
-          <p id="position-work">{position}</p>
+          <p id="position-work">{workDetails.position}</p>
           <p id="start-end-date">
-            {startWork} &#8210; {renderEndDate()}
+            {workDetails.startWork} &#8210; {renderEndDate()}
           </p>
         </div>
         <ul className="roles-resume">
-          {roles.map((role) => (
+          {workDetails.roles.map((role) => (
             <li key={role.id}>{role.value}</li>
           ))}
         </ul>
