@@ -10,19 +10,15 @@ export function Education() {
     gpa: 0,
     completedStudy: true,
   });
-  const [displayState, setDisplayState] = useState("form");
 
   function handleSubmit() {
-    setDisplayState("resume");
     document.getElementById("add-education").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
-    setDisplayState("form");
     document.getElementById("add-education").style.cssText = "display: none;";
   }
 
-  if (displayState === "form") {
     return (
       <form className="education-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="school">School name: </label>
@@ -125,35 +121,5 @@ export function Education() {
         <button type="submit">Submit</button>
       </form>
     );
-  }
-
-  if (displayState === "resume") {
-    return (
-      <div className="education-resume">
-        <div>
-          <p id="school-education">{educationDetails.school}</p>
-          <p id="place-study-education">{educationDetails.placeStudy}</p>
-        </div>
-        <div>
-          <p id="title-gpa-education">
-            {educationDetails.titleStudy}{" "}
-            <b>(GPA: {educationDetails.gpa}/4.0)</b>
-          </p>
-          {educationDetails.startDateStudy ? (
-            <p id="date-study-education">
-              {educationDetails.startDateStudy} &#8210;{" "}
-              {educationDetails.endDateStudy}
-            </p>
-          ) : (
-            <p id="date-study-education">
-              Expected Graduation Year: {educationDetails.endDateStudy}
-            </p>
-          )}
-        </div>
-        <button type="button" onClick={() => handleEdit()}>
-          Edit
-        </button>
-      </div>
-    );
-  }
+  
 }
