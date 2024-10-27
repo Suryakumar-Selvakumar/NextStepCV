@@ -8,14 +8,11 @@ export function TechnicalSkills() {
     skillsType: "",
     skillsList: "",
   });
-  const [displayState, setDisplayState] = useState("form");
 
   function handleSubmit() {
-    setDisplayState("resume");
   }
 
   function handleEdit() {
-    setDisplayState("form");
   }
 
   function addSkillsGroup(limit) {
@@ -110,7 +107,6 @@ export function TechnicalSkills() {
     });
   }
 
-  if (displayState === "form") {
     return (
       <>
         <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
@@ -171,20 +167,5 @@ export function TechnicalSkills() {
         </div>
       </>
     );
-  }
-
-  if (displayState === "resume") {
-    return (
-      <div className="technical-skills-resume">
-        {skills.map((skillsGroup) => (
-          <div key={skillsGroup.id}>
-            {skillsGroup.skillsType}: {skillsGroup.skillsList}
-          </div>
-        ))}
-        <button type="button" onClick={() => handleEdit()}>
-          Edit
-        </button>
-      </div>
-    );
-  }
+  
 }

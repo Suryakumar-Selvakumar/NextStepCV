@@ -21,9 +21,6 @@ export function GeneralResume() {
         <p> | </p>
         <p id="github-general">{contactDetails.gitHub}</p>
       </div>
-      <button type="button" onClick={() => handleEdit()}>
-        Edit
-      </button>
     </div>
   );
 }
