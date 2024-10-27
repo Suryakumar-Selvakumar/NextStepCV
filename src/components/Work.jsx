@@ -11,7 +11,6 @@ export function Work() {
     roles: [],
   });
   const [role, setRole] = useState({ id: 0, value: "" });
-  const [displayState, setDisplayState] = useState("form");
 
   function returnToday() {
     let today = new Date();
@@ -32,12 +31,10 @@ export function Work() {
   }
 
   function handleSubmit() {
-    setDisplayState("resume");
     document.getElementById("add-work").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
-    setDisplayState("form");
     document.getElementById("add-work").style.cssText = "display: none;";
   }
 
@@ -90,7 +87,6 @@ export function Work() {
     setRole({ id: 0, value: "" });
   }
 
-  if (displayState === "form") {
     return (
       <>
         <form className="work-form" onSubmit={() => handleSubmit()}>
@@ -185,30 +181,5 @@ export function Work() {
         </ul>
       </>
     );
-  }
-
-  if (displayState === "resume") {
-    return (
-      <div className="work-resume">
-        <div>
-          <p id="company-work">{workDetails.company}</p>
-          <p id="place-work">{workDetails.place}</p>
-        </div>
-        <div>
-          <p id="position-work">{workDetails.position}</p>
-          <p id="start-end-date">
-            {workDetails.startWork} &#8210; {renderEndDate()}
-          </p>
-        </div>
-        <ul className="roles-resume">
-          {workDetails.roles.map((role) => (
-            <li key={role.id}>{role.value}</li>
-          ))}
-        </ul>
-        <button type="button" onClick={() => handleEdit()}>
-          Edit
-        </button>
-      </div>
-    );
-  }
+  
 }
