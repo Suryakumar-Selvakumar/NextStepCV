@@ -1,6 +1,7 @@
 import { useState } from "react";
+import "../styles/General.css";
 
-function General() {
+export function General() {
   const [contactDetails, setContactDetails] = useState({
     name: "",
     phNo: "",
@@ -10,12 +11,25 @@ function General() {
   });
 
   function handleSubmit() {
+    // Will hide the form
+    document.querySelector(".general-form").style.cssText = "display: none;";
+    // Will add the data to the local storage which will be retrieved by GeneralResume
+
+    // Will display the contact-details-card
+    document.querySelector(".contact-details-card").style.cssText =
+      "display: block;";
   }
 
   function handleEdit() {
+    // Will display the form to update the details
+    document.querySelector(".general-form").style.cssText = "display: block;";
   }
 
-    return (
+  return (
+    <>
+      <button id="edit-general-details" onClick={() => handleEdit()}>
+        Edit Details
+      </button>
       <form className="general-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="name">Name: </label>
         <input
@@ -69,8 +83,13 @@ function General() {
         />
         <button type="submit">Submit</button>
       </form>
-    );
-
+      <div className="contact-details-card">
+        <p>{contactDetails.name}</p>
+        <p>{contactDetails.phNo}</p>
+        <p>{contactDetails.email}</p>
+        <p>{contactDetails.linkedIn}</p>
+        <p>{contactDetails.gitHub}</p>
+      </div>
+    </>
+  );
 }
-
-export { General };
