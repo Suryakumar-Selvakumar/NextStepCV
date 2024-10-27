@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       {/* <General /> */}
-      <EducationSection />
+      {/* <EducationSection /> */}
       {/* <TechnicalSkills /> */}
       {/* <WorkSection /> */}
       {/* <ProjectSection /> */}
