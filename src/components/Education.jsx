@@ -83,6 +83,7 @@ export function Education() {
           onChange={(e) =>
             setEducationDetails({
               ...educationDetails,
+              startDateStudy: "",
               completedStudy: e.target.checked,
             })
           }
@@ -104,7 +105,11 @@ export function Education() {
             />
           </>
         )}
-        <label htmlFor="end-date-study">{educationDetails.completedStudy? "End Date: " : "Expected Graduation Year: "}</label>
+        <label htmlFor="end-date-study">
+          {educationDetails.completedStudy
+            ? "End Date: "
+            : "Expected Graduation Year: "}
+        </label>
         <input
           type="date"
           id="end-date-study"
@@ -134,10 +139,16 @@ export function Education() {
             {educationDetails.titleStudy}{" "}
             <b>(GPA: {educationDetails.gpa}/4.0)</b>
           </p>
-          <p id="date-study-education">
-            {educationDetails.startDateStudy} &#8210;{" "}
-            {educationDetails.endDateStudy}
-          </p>
+          {educationDetails.startDateStudy ? (
+            <p id="date-study-education">
+              {educationDetails.startDateStudy} &#8210;{" "}
+              {educationDetails.endDateStudy}
+            </p>
+          ) : (
+            <p id="date-study-education">
+              Expected Graduation Year: {educationDetails.endDateStudy}
+            </p>
+          )}
         </div>
         <button type="button" onClick={() => handleEdit()}>
           Edit

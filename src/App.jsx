@@ -9,10 +9,10 @@ import { ProjectSection } from "./components/ProjectSection";
 function App() {
   return (
     <>
-      {/* <General />
+      {/* <General /> */}
       <EducationSection />
-      <TechnicalSkills /> */}
-      <WorkSection />
+      {/* <TechnicalSkills /> */}
+      {/* <WorkSection /> */}
       {/* <ProjectSection /> */}
     </>
   );
