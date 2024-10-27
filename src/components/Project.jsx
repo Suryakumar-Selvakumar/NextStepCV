@@ -9,15 +9,12 @@ export function Project() {
     details: [],
   });
   const [detail, setDetail] = useState({ id: 0, value: "" });
-  const [displayState, setDisplayState] = useState("form");
 
   function handleSubmit() {
-    setDisplayState("resume");
     document.getElementById("add-project").style.cssText = "display: inline;";
   }
 
   function handleEdit() {
-    setDisplayState("form");
     document.getElementById("add-project").style.cssText = "display: none;";
   }
 
@@ -75,7 +72,6 @@ export function Project() {
     setDetail({ id: 0, value: "" });
   }
 
-  if (displayState === "form") {
     return (
       <>
         <form className="project-form" onSubmit={() => handleSubmit()}>
@@ -164,26 +160,4 @@ export function Project() {
         </ul>
       </>
     );
-  }
-
-  if (displayState === "resume") {
-    return (
-      <div className="project-resume">
-        <div>
-          <p id="name-tech-stack-project">
-            {projectDetails.projectName} | <i>{projectDetails.techStack}</i>
-          </p>
-          <p id="date-project">{projectDetails.projectDate}</p>
-        </div>
-        <ul className="project-details-resume">
-          {projectDetails.details.map((dt) => (
-            <li key={dt.id}>{dt.value}</li>
-          ))}
-        </ul>
-        <button type="button" onClick={() => handleEdit()}>
-          Edit
-        </button>
-      </div>
-    );
-  }
 }
