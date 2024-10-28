@@ -10,14 +10,31 @@ export function TechnicalSkills() {
     skillsList: "",
   });
 
-  function handleSubmit() {
-    // Store the data in localStorage
-
-    // Hide the form
+  function handleSubmit(limit) {
     if (skills.length >= 1) {
+      // Store the data in localStorage
+
+      // Hide the form
       document.querySelector(".technical-skills-form").style.cssText =
         "display: none;";
+
+      // Display the Add Technical Skills button
+      document.getElementById("add-technical-skills").style.cssText =
+        "display: block";
     }
+
+    if (skills.length === limit) {
+      // Hide the Add Technical Skills button when limit is reached
+      document.getElementById("add-technical-skills").style.cssText =
+        "display: none;";
+    }
+  }
+
+  function addTechnicalSkills() {
+    document.querySelector(".technical-skills-form").style.cssText =
+      "display: block;";
+    document.getElementById("add-technical-skills").style.cssText =
+      "display: none;";
   }
 
   function addSkillsGroup(limit) {
@@ -103,20 +120,29 @@ export function TechnicalSkills() {
 
   function deleteSkillsGroup(skillsGroupId) {
     setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
-    document.getElementById("add-skills-group").style.cssText =
-    "display: inline;";
-    document.getElementById("update-skills-group").style.cssText =
-      "display: none;";
-    setSkillsGroup({
-      id: 0,
-      skillsType: "",
-      skillsList: "",
-    });
+    if (skills.length === 1) {
+      document.getElementById("update-skills-group").style.cssText =
+        "display: none;";
+      document.getElementById("add-skills-group").style.cssText =
+        "display: inline;";
+      setSkillsGroup({
+        id: 0,
+        skillsType: "",
+        skillsList: "",
+      });
+    }
   }
 
   return (
     <>
-      <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
+      <button
+        type="button"
+        id="add-technical-skills"
+        onClick={() => addTechnicalSkills(5)}
+      >
+        Add Technical Skills
+      </button>
+      <form className="technical-skills-form" onSubmit={() => handleSubmit(5)}>
         <label htmlFor="skills-type">Enter skills type: </label>
         <input
           type="text"
