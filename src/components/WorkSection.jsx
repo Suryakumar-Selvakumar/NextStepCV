@@ -168,9 +168,12 @@ export function WorkSection() {
       ...workDetails,
       roles: workDetails.roles.filter((role) => role.id !== roleId),
     });
-    document.getElementById("update-role").style.cssText = "display: none;";
-    document.getElementById("add-role").style.cssText = "display: inline;";
-    setRole({ id: 0, value: "" });
+
+    if (workDetails.roles.length === 1) {
+      document.getElementById("update-role").style.cssText = "display: none;";
+      document.getElementById("add-role").style.cssText = "display: inline;";
+      setRole({ id: 0, value: "" });
+    }
   }
 
   return (
