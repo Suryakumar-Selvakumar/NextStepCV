@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Fragment } from "react";
+import { Detail } from "./Detail";
 
 export function ProjectSection() {
   const [projects, setProjects] = useState([]);
@@ -216,25 +217,14 @@ export function ProjectSection() {
           Update
         </button>
       </form>
-      <ul>
+      <ul className="detail-cards">
         {projectDetails.details.map((dt) => (
-          <li key={dt.id}>
-            {dt.value}
-            <button
-              type="button"
-              id="edit-detail-btn"
-              onClick={() => editDetail(dt.id)}
-            >
-              Edit Detail
-            </button>
-            <button
-              type="button"
-              id="delete-detail-btn"
-              onClick={() => deleteDetail(dt.id)}
-            >
-              Delete Detail
-            </button>
-          </li>
+          <Detail
+            key={dt.id}
+            detail={dt}
+            editDetail={editDetail}
+            deleteDetail={deleteDetail}
+          />
         ))}
       </ul>
       <div className="project-cards">
