@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../styles/work.css";
+import "../styles/Work.css";
 
 export function Work(props) {
   const work = props.work;

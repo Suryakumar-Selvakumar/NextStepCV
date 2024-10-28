@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
-import { Fragment } from "react";
 import { Detail } from "./Detail";
 
 export function ProjectSection() {
@@ -130,10 +129,10 @@ export function ProjectSection() {
         }
       });
       setProjectDetails({ ...projectDetails, details: updatedDetails });
-      setDetail({ id: 0, value: "" });
-      document.getElementById("update-detail").style.cssText = "display: none;";
       document.getElementById("add-detail-btn").style.cssText =
         "display: inline;";
+      setDetail({ id: 0, value: "" });
+      document.getElementById("update-detail").style.cssText = "display: none;";
     }
   }
 
@@ -142,10 +141,13 @@ export function ProjectSection() {
       ...projectDetails,
       details: projectDetails.details.filter((dt) => dt.id !== detailId),
     });
-    document.getElementById("update-detail").style.cssText = "display: none;";
     document.getElementById("add-detail-btn").style.cssText =
       "display: inline;";
-    setDetail({ id: 0, value: "" });
+
+    if (projectDetails.details.length === 1) {
+      document.getElementById("update-detail").style.cssText = "display: none;";
+      setDetail({ id: 0, value: "" });
+    }
   }
 
   return (

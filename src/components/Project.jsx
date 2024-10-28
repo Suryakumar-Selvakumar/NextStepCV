@@ -1,4 +1,4 @@
-import "../styles/project.css";
+import "../styles/Project.css";
 
 export function Project(props) {
   const project = props.project;
