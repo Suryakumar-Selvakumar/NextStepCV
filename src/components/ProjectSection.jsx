@@ -103,7 +103,7 @@ export function ProjectSection() {
       }
     });
     document.getElementById("update-detail").style.cssText = "display: inline;";
-    document.getElementById("add-detail-btn").style.cssText = "display: none;";
+    document.getElementById("add-detail").style.cssText = "display: none;";
   }
 
   function addDetail(limit) {
@@ -129,8 +129,7 @@ export function ProjectSection() {
         }
       });
       setProjectDetails({ ...projectDetails, details: updatedDetails });
-      document.getElementById("add-detail-btn").style.cssText =
-        "display: inline;";
+      document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
       document.getElementById("update-detail").style.cssText = "display: none;";
     }
@@ -141,11 +140,10 @@ export function ProjectSection() {
       ...projectDetails,
       details: projectDetails.details.filter((dt) => dt.id !== detailId),
     });
-    document.getElementById("add-detail-btn").style.cssText =
-      "display: inline;";
 
     if (projectDetails.details.length === 1) {
       document.getElementById("update-detail").style.cssText = "display: none;";
+      document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
     }
   }
@@ -202,7 +200,7 @@ export function ProjectSection() {
           value={detail.value}
           onChange={(e) => setDetail({ ...detail, value: e.target.value })}
         />
-        <button type="button" onClick={() => addDetail(5)} id="add-detail-btn">
+        <button type="button" onClick={() => addDetail(5)} id="add-detail">
           Add detail
         </button>
         <button type="button" onClick={() => updateDetail()} id="update-detail">
