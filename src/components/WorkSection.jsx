@@ -102,7 +102,7 @@ export function WorkSection() {
   }
 
   function deleteWork(workId) {
-    setExperiences(experiences.filter((exp) => exp.key !== workId));
+    setExperiences(experiences.filter((exp) => exp.id !== workId));
   }
 
   function handleSubmit() {
