@@ -239,16 +239,12 @@ export function ProjectSection() {
       </ul>
       <div className="project-cards">
         {projects.map((proj) => (
-          <Fragment key={crypto.randomUUID()}>
-            {proj}
-            <button
-              id="delete-project"
-              type="button"
-              onClick={() => deleteProject(proj.key)}
-            >
-              Delete Project
-            </button>
-          </Fragment>
+          <Project
+            key={proj.id}
+            project={proj}
+            editProject={editProject}
+            deleteProject={deleteProject}
+          />
         ))}
       </div>
     </>

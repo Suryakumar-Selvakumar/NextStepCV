@@ -162,7 +162,7 @@ export function EducationSection() {
         {experiences.map((exp) => (
           <Education
             key={exp.id}
-            educationDetails={exp}
+            education={exp}
             editEducation={editEducation}
             deleteEducation={deleteEducation}
           />

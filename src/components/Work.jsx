@@ -2,24 +2,24 @@ import { useState } from "react";
 import "../styles/work.css";
 
 export function Work(props) {
-  const workDetails = props.workDetails;
+  const work = props.work;
 
   return (
-    <div key={workDetails.id}>
-      <p>{workDetails.company}</p>
-      <p>{workDetails.place}</p>
-      <p>{workDetails.position}</p>
+    <div key={work.id}>
+      <p>{work.company}</p>
+      <p>{work.place}</p>
+      <p>{work.position}</p>
       <button
         id="edit-work"
         type="button"
-        onClick={() => props.editWork(workDetails.id)}
+        onClick={() => props.editWork(work.id)}
       >
         Edit Work experience
       </button>
       <button
         id="delete-work"
         type="button"
-        onClick={() => props.deleteWork(workDetails.id)}
+        onClick={() => props.deleteWork(work.id)}
       >
         Delete Work experience
       </button>
