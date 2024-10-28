@@ -8,10 +8,10 @@ export function Sidebar() {
   return (
     <>
       {/* <General /> */}
-      <EducationSection />
-      {/* <TechnicalSkills />
+      {/* <EducationSection /> */}
+      {/* <TechnicalSkills /> */}
       <WorkSection />
-      <ProjectSection /> */}
+      {/* <ProjectSection /> */}
     </>
   );
 }

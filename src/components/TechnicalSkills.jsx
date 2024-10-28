@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SkillsGroup } from "./SkillsGroup";
 import "../styles/technicalSkills.css";
 
 export function TechnicalSkills() {
@@ -10,9 +11,13 @@ export function TechnicalSkills() {
   });
 
   function handleSubmit() {
-  }
+    // Store the data in localStorage
 
-  function handleEdit() {
+    // Hide the form
+    if (skills.length >= 1) {
+      document.querySelector(".technical-skills-form").style.cssText =
+        "display: none;";
+    }
   }
 
   function addSkillsGroup(limit) {
@@ -66,6 +71,8 @@ export function TechnicalSkills() {
       "display: inline;";
     document.getElementById("add-skills-group").style.cssText =
       "display: none;";
+    document.querySelector(".technical-skills-form").style.cssText =
+      "display: block;";
   }
 
   function updateSkillsGroup() {
@@ -107,65 +114,53 @@ export function TechnicalSkills() {
     });
   }
 
-    return (
-      <>
-        <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
-          <label htmlFor="skills-type">Enter skills type: </label>
-          <input
-            type="text"
-            id="skills-type"
-            value={skillsGroup.skillsType}
-            onChange={(e) =>
-              setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
-            }
+  return (
+    <>
+      <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
+        <label htmlFor="skills-type">Enter skills type: </label>
+        <input
+          type="text"
+          id="skills-type"
+          value={skillsGroup.skillsType}
+          onChange={(e) =>
+            setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
+          }
+        />
+        <label htmlFor="skills-list">Enter list of skills: </label>
+        <input
+          type="text"
+          id="skills-list"
+          value={skillsGroup.skillsList}
+          onChange={(e) =>
+            setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
+          }
+        />
+        <button
+          type="button"
+          onClick={() => addSkillsGroup(5)}
+          id="add-skills-group"
+        >
+          Add Skills Group
+        </button>
+        <button
+          type="button"
+          onClick={() => updateSkillsGroup()}
+          id="update-skills-group"
+        >
+          Update Skills Group
+        </button>
+        <button type="submit">Submit</button>
+      </form>
+      <div className="technical-skills-cards">
+        {skills.map((skillsGroup) => (
+          <SkillsGroup
+            key={skillsGroup.id}
+            skillsGroup={skillsGroup}
+            editSkillsGroup={editSkillsGroup}
+            deleteSkillsGroup={deleteSkillsGroup}
           />
-          <label htmlFor="skills-list">Enter list of skills: </label>
-          <input
-            type="text"
-            id="skills-list"
-            value={skillsGroup.skillsList}
-            onChange={(e) =>
-              setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
-            }
-          />
-          <button
-            type="button"
-            onClick={() => addSkillsGroup(5)}
-            id="add-skills-group"
-          >
-            Add Skills Group
-          </button>
-          <button
-            type="button"
-            onClick={() => updateSkillsGroup()}
-            id="update-skills-group"
-          >
-            Update Skills Group
-          </button>
-          <button type="submit">Submit</button>
-        </form>
-        <div>
-          {skills.map((skillsGroup) => (
-            <div key={skillsGroup.id}>
-              {skillsGroup.skillsType}: {skillsGroup.skillsList}
-              <button
-                type="button"
-                id="edit-skills-group-btn"
-                onClick={() => editSkillsGroup(skillsGroup.id)}
-              >
-                Edit Skills Group
-              </button>
-              <button
-                type="button"
-                id="delete-skills-group-btn"
-                onClick={() => deleteSkillsGroup(skillsGroup.id)}
-              >
-                Delete Skills Group
-              </button>
-            </div>
-          ))}
-        </div>
-      </>
-    );
-  
+        ))}
+      </div>
+    </>
+  );
 }

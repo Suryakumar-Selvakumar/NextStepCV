@@ -1,5 +1,5 @@
-import { Fragment, useState } from "react";
 import { Education } from "./Education";
+import { useState } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection() {
