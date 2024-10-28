@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SkillsGroup } from "./SkillsGroup";
-import "../styles/technicalSkills.css";
+import "../styles/TechnicalSkills.css";
 
 export function TechnicalSkills() {
   const [skills, setSkills] = useState([]);
