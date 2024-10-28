@@ -103,10 +103,10 @@ export function TechnicalSkills() {
 
   function deleteSkillsGroup(skillsGroupId) {
     setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
+    document.getElementById("add-skills-group").style.cssText =
+    "display: inline;";
     document.getElementById("update-skills-group").style.cssText =
       "display: none;";
-    document.getElementById("add-skills-group").style.cssText =
-      "display: inline;";
     setSkillsGroup({
       id: 0,
       skillsType: "",

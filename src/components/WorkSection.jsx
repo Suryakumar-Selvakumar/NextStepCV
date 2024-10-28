@@ -266,7 +266,7 @@ export function WorkSection() {
         {experiences.map((exp) => (
           <Work
             key={exp.id}
-            workDetails={workDetails}
+            work={exp}
             editWork={editWork}
             deleteWork={deleteWork}
           />

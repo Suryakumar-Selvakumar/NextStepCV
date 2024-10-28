@@ -1,23 +1,23 @@
 export function Education(props) {
-  const educationDetails = props.educationDetails;
+  const education = props.education;
   return (
     <div className="education-card">
-      <p>{educationDetails.school}</p>
-      <p>{educationDetails.placeStudy}</p>
-      <p>{educationDetails.titleStudy}</p>
-      <p>{educationDetails.gpa}</p>
+      <p>{education.school}</p>
+      <p>{education.placeStudy}</p>
+      <p>{education.titleStudy}</p>
+      <p>{education.gpa}</p>
       <p></p>
       <button
         id="edit-education"
         type="button"
-        onClick={() => props.editEducation(educationDetails.id)}
+        onClick={() => props.editEducation(education.id)}
       >
         Delete Education
       </button>
       <button
         id="delete-education"
         type="button"
-        onClick={() => props.deleteEducation(educationDetails.id)}
+        onClick={() => props.deleteEducation(education.id)}
       >
         Delete Education
       </button>
