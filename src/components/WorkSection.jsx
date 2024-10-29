@@ -4,7 +4,8 @@ import { Role } from "./Role";
 import "../styles/WorkSection.css";
 
 export function WorkSection() {
-  const [experiences, setExperiences] = useState([]);
+  const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
+  const [experiences, setExperiences] = useState(storedExperiences);
   const [workDetails, setWorkDetails] = useState({
     id: 0,
     company: "",
@@ -17,7 +18,7 @@ export function WorkSection() {
   const [role, setRole] = useState({ id: 0, value: "" });
 
   useEffect(() => {
-    localStorage.setItem("")
+    localStorage.setItem("experiences", JSON.stringify(experiences));
   }, [experiences]);
 
   function returnToday() {
@@ -118,8 +119,6 @@ export function WorkSection() {
 
     // Display the add button again
     document.getElementById("add-work").style.cssText = "display: inline;";
-
-    // Store the data in localStorage
 
     // Hide the form
     document.querySelector(".work-form").style.cssText = "display: none;";
