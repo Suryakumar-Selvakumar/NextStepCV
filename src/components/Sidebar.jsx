@@ -10,8 +10,8 @@ export function Sidebar() {
     <>
       {/* <General /> has no limit*/}
       {/* <EducationSection /> limit state added */}
-      <TechnicalSkills />
-      {/* <WorkSection /> */}
+      {/* <TechnicalSkills /> limit state added */}
+      <WorkSection />
       {/* <ProjectSection /> */}
     </>
   );

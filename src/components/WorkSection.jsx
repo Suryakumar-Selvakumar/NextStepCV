@@ -18,6 +18,8 @@ export function WorkSection() {
     roles: [],
   });
   const [role, setRole] = useState({ id: 0, value: "" });
+  const [workLimit, setWorkLimit] = useState(2);
+  const [roleLimit, setRoleLimit] = useState(4);
 
   useEffect(() => {
     localStorage.setItem("experiences", JSON.stringify(experiences));
@@ -41,16 +43,31 @@ export function WorkSection() {
     }
   }
 
-  function addWork(limit) {
-    if (experiences.length < limit) {
+  function addWork() {
+    if (experiences.length < workLimit) {
       document.getElementById("add-work").style.cssText = "display: none;";
       document.querySelector(".work-form").style.cssText = "display: block;";
+      document.querySelector(".limit-error").style.cssText = "display: none;";
+    } else {
+      document.querySelector(".limit-error").style.cssText = "display: block;";
+    }
+
+    if (workDetails.roles.length === roleLimit) {
+      document.getElementById("add-role").disabled = true;
+    } else {
+      document.getElementById("add-role").disabled = false;
     }
   }
 
   function editWork(workId) {
     experiences.forEach((work) => {
       if (work.id === workId) {
+        if (work.roles.length === roleLimit) {
+          document.getElementById("add-role").disabled = true;
+        } else {
+          document.getElementById("add-role").disabled = false;
+        }
+
         setWorkDetails({
           id: work.id,
           company: work.company,
@@ -66,6 +83,7 @@ export function WorkSection() {
     document.getElementById("submit-work").style.cssText = "display: none;";
     document.getElementById("update-work").style.cssText = "display: inline;";
     document.querySelector(".work-form").style.cssText = "display: block;";
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function updateWork() {
@@ -116,6 +134,27 @@ export function WorkSection() {
 
   function deleteWork(workId) {
     setExperiences(experiences.filter((exp) => exp.id !== workId));
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (workDetails.id === workId || experiences.length === 1) {
+      document.getElementById("update-role").style.cssText = "display: none;";
+      document.getElementById("add-role").style.cssText = "display: inline;";
+      document.querySelector(".work-form").style.cssText = "display: none;";
+      document.getElementById("add-work").style.cssText = "display: inline;";
+      document.getElementById("update-work").style.cssText = "display: none;";
+      document.getElementById("submit-work").style.cssText = "display: block;";
+
+      setWorkDetails({
+        id: 0,
+        company: "",
+        place: "",
+        position: "",
+        startWork: "",
+        endWork: "",
+        roles: [],
+      });
+      setRole({ id: 0, value: "" });
+    }
   }
 
   function handleSubmit() {
@@ -135,18 +174,8 @@ export function WorkSection() {
     document.querySelector(".work-cards").style.cssText = "display: block;";
   }
 
-  function editRole(roleId) {
-    workDetails.roles.forEach((r) => {
-      if (r.id === roleId) {
-        setRole({ id: r.id, value: r.value });
-      }
-    });
-    document.getElementById("update-role").style.cssText = "display: inline;";
-    document.getElementById("add-role").style.cssText = "display: none;";
-  }
-
-  function addRole(limit) {
-    if (workDetails.roles.length < limit && role.value !== "") {
+  function addRole() {
+    if (workDetails.roles.length < roleLimit && role.value !== "") {
       setWorkDetails({
         ...workDetails,
         roles: [
@@ -156,6 +185,20 @@ export function WorkSection() {
       });
     }
     setRole({ id: 0, value: "" });
+    if (workDetails.roles.length + 1 === roleLimit) {
+      document.getElementById("add-role").disabled = true;
+    }
+  }
+
+  function editRole(roleId) {
+    workDetails.roles.forEach((r) => {
+      if (r.id === roleId) {
+        setRole({ id: r.id, value: r.value });
+      }
+    });
+    document.getElementById("update-role").style.cssText = "display: inline;";
+    document.getElementById("add-role").style.cssText = "display: none;";
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function updateRole() {
@@ -171,6 +214,12 @@ export function WorkSection() {
       setRole({ id: 0, value: "" });
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
+
+      if (workDetails.roles.length === roleLimit) {
+        document.getElementById("add-role").disabled = true;
+      } else {
+        document.getElementById("add-role").disabled = false;
+      }
     }
   }
 
@@ -185,13 +234,22 @@ export function WorkSection() {
       document.getElementById("add-role").style.cssText = "display: inline;";
       setRole({ id: 0, value: "" });
     }
+
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (workDetails.roles.length - 1 === roleLimit) {
+      document.getElementById("add-role").disabled = true;
+    } else {
+      document.getElementById("add-role").disabled = false;
+    }
   }
 
   return (
     <>
-      <button type="button" id="add-work" onClick={() => addWork(2)}>
+      <button type="button" id="add-work" onClick={() => addWork()}>
         Add Work Experience
       </button>
+      <div className="limit-error">Work limit reached!</div>
       <form className="work-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="company">Company name: </label>
         <input
@@ -250,7 +308,7 @@ export function WorkSection() {
           value={role.value}
           onChange={(e) => setRole({ ...role, value: e.target.value })}
         />
-        <button type="button" onClick={() => addRole(4)} id="add-role">
+        <button type="button" onClick={() => addRole()} id="add-role">
           Add role
         </button>
         <button type="button" onClick={() => updateRole()} id="update-role">
