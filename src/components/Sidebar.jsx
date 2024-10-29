@@ -11,7 +11,7 @@ export function Sidebar() {
       {/* <General /> has no limit*/}
       {/* <EducationSection /> limit state added */}
       {/* <TechnicalSkills /> limit state added */}
-      <WorkSection />
+      {/* <WorkSection /> limit states added*/}
       {/* <ProjectSection /> */}
     </>
   );

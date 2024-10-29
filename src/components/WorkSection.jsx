@@ -16,6 +16,7 @@ export function WorkSection() {
     startWork: "",
     endWork: "",
     roles: [],
+    stillWorking: false,
   });
   const [role, setRole] = useState({ id: 0, value: "" });
   const [workLimit, setWorkLimit] = useState(2);
@@ -76,6 +77,7 @@ export function WorkSection() {
           startWork: work.startWork,
           endWork: work.endWork,
           roles: work.roles,
+          stillWorking: work.stillWorking,
         });
       }
     });
@@ -91,8 +93,7 @@ export function WorkSection() {
       workDetails.company !== "" &&
       workDetails.place !== "" &&
       workDetails.position !== "" &&
-      workDetails.startWork !== "" &&
-      workDetails.endWork !== ""
+      workDetails.startWork !== ""
     ) {
       const updatedExperiences = experiences.map((work) => {
         if (work.id === workDetails.id) {
@@ -104,6 +105,7 @@ export function WorkSection() {
             startWork: workDetails.startWork,
             endWork: workDetails.endWork,
             roles: workDetails.roles,
+            stillWorking: workDetails.stillWorking,
           };
         } else {
           return work;
@@ -118,6 +120,7 @@ export function WorkSection() {
         startWork: "",
         endWork: "",
         roles: [],
+        stillWorking: false,
       });
       setRole({
         id: 0,
@@ -152,6 +155,7 @@ export function WorkSection() {
         startWork: "",
         endWork: "",
         roles: [],
+        stillWorking: false,
       });
       setRole({ id: 0, value: "" });
     }
@@ -281,7 +285,20 @@ export function WorkSection() {
           }
           required
         />
-        <label htmlFor="start-work">Start date: </label>
+        <label htmlFor="still-working">Still Working? </label>
+        <input
+          type="checkbox"
+          id="still-working"
+          checked={workDetails.stillWorking}
+          onChange={(e) =>
+            setWorkDetails({
+              ...workDetails,
+              endWork: "",
+              stillWorking: e.target.checked,
+            })
+          }
+        />
+        <label htmlFor="start-work">Position start date: </label>
         <input
           type="date"
           id="start-work"
@@ -291,16 +308,20 @@ export function WorkSection() {
           }
           required
         />
-        <label htmlFor="end-work">Start date: </label>
-        <input
-          type="date"
-          id="end-work"
-          value={workDetails.endWork}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, endWork: e.target.value })
-          }
-          required
-        />
+        {!workDetails.stillWorking && (
+          <>
+            <label htmlFor="end-work">Position end date: </label>
+            <input
+              type="date"
+              id="end-work"
+              value={workDetails.endWork}
+              onChange={(e) =>
+                setWorkDetails({ ...workDetails, endWork: e.target.value })
+              }
+              required
+            />
+          </>
+        )}
         <label htmlFor="role">Job roles:</label>
         <input
           type="text"
