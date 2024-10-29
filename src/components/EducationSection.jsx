@@ -1,9 +1,10 @@
 import { Education } from "./Education";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection() {
-  const [courses, setCourses] = useState([]);
+  const storedCourses = JSON.parse(localStorage.getItem("courses"));
+  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -15,6 +16,10 @@ export function EducationSection() {
     completedStudy: true,
   });
 
+  useEffect(() => {
+    localStorage.setItem("courses", JSON.stringify(courses));
+  }, [courses]);
+
   function addEducation(limit) {
     if (courses.length < limit) {
       document.getElementById("add-education").style.cssText = "display: none;";
@@ -23,17 +28,94 @@ export function EducationSection() {
     }
   }
 
+  function editEducation(courseId) {
+    // Hide the add education button
+    document.getElementById("add-education").style.cssText = "display: none;";
+
+    // Update the styles of the submit and update buttons
+    document.getElementById("submit-education").style.cssText =
+      "display: none;";
+    document.getElementById("update-education").style.cssText =
+      "display: inline;";
+
+    // Display the form to allow editing of details
+    document.querySelector(".education-form").style.cssText = "display: block;";
+
+    //Logic to update the form fields to include data from the item whose edit button was clicked on
+    courses.forEach((ed) => {
+      if (ed.id === courseId) {
+        setEducationDetails({
+          id: ed.id,
+          school: ed.school,
+          placeStudy: ed.placeStudy,
+          titleStudy: ed.titleStudy,
+          startDateStudy: ed.startDateStudy,
+          endDateStudy: ed.endDateStudy,
+          gpa: ed.gpa,
+          completedStudy: ed.completedStudy,
+        });
+      }
+    });
+  }
+
+  function updateEducation() {
+    if (
+      educationDetails.school !== "" &&
+      educationDetails.placeStudy !== "" &&
+      educationDetails.titleStudy !== "" &&
+      educationDetails.endDateStudy !== "" &&
+      educationDetails.gpa !== 0
+    ) {
+      const updatedCourses = courses.map((ed) => {
+        if (ed.id === educationDetails.id) {
+          return {
+            ...ed,
+            school: educationDetails.school,
+            placeStudy: educationDetails.placeStudy,
+            titleStudy: educationDetails.titleStudy,
+            startDateStudy: educationDetails.startDateStudy,
+            endDateStudy: educationDetails.endDateStudy,
+            gpa: educationDetails.gpa,
+            completedStudy: educationDetails.completedStudy,
+          };
+        } else {
+          return ed;
+        }
+      });
+
+      setCourses(updatedCourses);
+      setEducationDetails({
+        id: 0,
+        school: "",
+        placeStudy: "",
+        titleStudy: "",
+        startDateStudy: "",
+        endDateStudy: "",
+        gpa: 0,
+        completedStudy: true,
+      });
+
+      document.getElementById("update-education").style.cssText =
+        "display: none;";
+      document.getElementById("add-education").style.cssText =
+        "display: inline;";
+      document.getElementById("submit-education").style.cssText =
+        "display: block;";
+      document.querySelector(".education-form").style.cssText =
+        "display: none;";
+    }
+  }
+
+  function deleteEducation(courseId) {
+    setCourses(courses.filter((exp) => exp.id !== courseId));
+  }
+
   function handleSubmit() {
     // Logic to add the education to the courses state
-    setCourses([
-      ...courses,
-      { ...educationDetails, id: crypto.randomUUID() },
-    ]);
+    setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
     document.getElementById("add-education").style.cssText = "display: inline;";
-
-    // Store the data in localStorage
 
     // Hide the form
     document.querySelector(".education-form").style.cssText = "display: none;";
@@ -41,15 +123,6 @@ export function EducationSection() {
     // Display the class containing Education component cards
     document.querySelector(".education-cards").style.cssText =
       "display: block;";
-  }
-
-  function editEducation() {
-    document.getElementById("add-education").style.cssText = "display: none;";
-  }
-
-  function deleteEducation(compId) {
-    setCourses(courses.filter((exp) => exp.id !== compId));
-    document.getElementById("add-education").style.cssText = "display: inline;";
   }
 
   return (
@@ -156,7 +229,16 @@ export function EducationSection() {
           }
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit" id="submit-education">
+          Submit
+        </button>
+        <button
+          type="button"
+          id="update-education"
+          onClick={() => updateEducation()}
+        >
+          Update
+        </button>
       </form>
       <div className="education-cards">
         {courses.map((exp) => (

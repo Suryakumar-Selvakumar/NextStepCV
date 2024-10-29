@@ -12,7 +12,7 @@ export function Education(props) {
         type="button"
         onClick={() => props.editEducation(education.id)}
       >
-        Delete Education
+        Edit Education
       </button>
       <button
         id="delete-education"
