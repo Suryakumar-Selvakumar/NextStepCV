@@ -7,10 +7,10 @@ import { ProjectSection } from "./ProjectSection";
 export function Sidebar() {
   return (
     <>
-      {/* <General /> */}
-      <EducationSection />
-      {/* <TechnicalSkills /> */}
-      {/* <WorkSection /> ls done */}
+      {/* <General /> lS done*/}
+      {/* <EducationSection /> lS done */}
+      <TechnicalSkills />
+      {/* <WorkSection /> lS done */}
       {/* <ProjectSection /> */}
     </>
   );

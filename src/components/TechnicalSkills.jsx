@@ -1,19 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SkillsGroup } from "./SkillsGroup";
 import "../styles/TechnicalSkills.css";
 
 export function TechnicalSkills() {
-  const [skills, setSkills] = useState([]);
+  const storedSkills = JSON.parse(localStorage.getItem("skills"));
+  const [skills, setSkills] = useState(storedSkills ? storedSkills : []);
   const [skillsGroup, setSkillsGroup] = useState({
     id: 0,
     skillsType: "",
     skillsList: "",
   });
 
+  useEffect(() => {
+    localStorage.setItem("skills", JSON.stringify(skills));
+  }, [skills]);
+
   function handleSubmit(limit) {
     if (skills.length >= 1) {
-      // Store the data in localStorage
-
       // Hide the form
       document.querySelector(".technical-skills-form").style.cssText =
         "display: none;";
@@ -88,6 +91,8 @@ export function TechnicalSkills() {
       "display: inline;";
     document.getElementById("add-skills-group").style.cssText =
       "display: none;";
+    document.getElementById("add-technical-skills").style.cssText =
+      "display: none;";
     document.querySelector(".technical-skills-form").style.cssText =
       "display: block;";
   }
@@ -115,12 +120,17 @@ export function TechnicalSkills() {
         "display: none;";
       document.getElementById("add-skills-group").style.cssText =
         "display: inline;";
+      document.getElementById("update-skills-group").style.cssText =
+        "display: none;";
+      document.getElementById("add-technical-skills").style.cssText =
+        "display: inline;";
     }
   }
 
   function deleteSkillsGroup(skillsGroupId) {
     setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
-    if (skills.length === 1) {
+
+    if (skillsGroup.id === skillsGroupId || skills.length === 1) {
       document.getElementById("update-skills-group").style.cssText =
         "display: none;";
       document.getElementById("add-skills-group").style.cssText =
