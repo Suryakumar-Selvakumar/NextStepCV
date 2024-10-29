@@ -85,6 +85,8 @@ export function ProjectSection() {
       document.getElementById("submit-project").style.cssText =
         "display: block;";
       document.querySelector(".project-form").style.cssText = "display: none;";
+      document.getElementById("update-detail").style.cssText = "display: none;";
+      document.getElementById("add-detail").style.cssText = "display: inline;";
     }
   }
 

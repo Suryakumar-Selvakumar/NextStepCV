@@ -5,7 +5,9 @@ import "../styles/WorkSection.css";
 
 export function WorkSection() {
   const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
-  const [experiences, setExperiences] = useState(storedExperiences);
+  const [experiences, setExperiences] = useState(
+    storedExperiences ? storedExperiences : []
+  );
   const [workDetails, setWorkDetails] = useState({
     id: 0,
     company: "",
@@ -99,10 +101,16 @@ export function WorkSection() {
         endWork: "",
         roles: [],
       });
+      setRole({
+        id: 0,
+        value: "",
+      });
       document.getElementById("update-work").style.cssText = "display: none;";
       document.getElementById("add-work").style.cssText = "display: inline;";
       document.getElementById("submit-work").style.cssText = "display: block;";
       document.querySelector(".work-form").style.cssText = "display: none;";
+      document.getElementById("update-role").style.cssText = "display: none;";
+      document.getElementById("add-role").style.cssText = "display: inline;";
     }
   }
 
@@ -172,7 +180,7 @@ export function WorkSection() {
       roles: workDetails.roles.filter((role) => role.id !== roleId),
     });
 
-    if (workDetails.roles.length === 1) {
+    if (role.id === roleId || workDetails.roles.length === 1) {
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
       setRole({ id: 0, value: "" });
@@ -235,10 +243,7 @@ export function WorkSection() {
           }
           required
         />
-        <label htmlFor="role">
-          Job roles: Click Add Role to add roles and Update Role to update
-          existing role
-        </label>
+        <label htmlFor="role">Job roles:</label>
         <input
           type="text"
           id="role"
