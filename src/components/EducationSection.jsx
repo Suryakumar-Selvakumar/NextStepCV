@@ -45,6 +45,9 @@ export function EducationSection() {
     // Display the form to allow editing of details
     document.querySelector(".education-form").style.cssText = "display: block;";
 
+    // Hide the limit reached error
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
     //Logic to update the form fields to include data from the item whose edit button was clicked on
     courses.forEach((ed) => {
       if (ed.id === courseId) {

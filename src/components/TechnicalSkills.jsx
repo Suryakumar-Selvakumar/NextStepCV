@@ -10,12 +10,13 @@ export function TechnicalSkills() {
     skillsType: "",
     skillsList: "",
   });
+  const [limit, setLimit] = useState(5);
 
   useEffect(() => {
     localStorage.setItem("skills", JSON.stringify(skills));
   }, [skills]);
 
-  function handleSubmit(limit) {
+  function handleSubmit() {
     if (skills.length >= 1) {
       // Hide the form
       document.querySelector(".technical-skills-form").style.cssText =
@@ -25,22 +26,21 @@ export function TechnicalSkills() {
       document.getElementById("add-technical-skills").style.cssText =
         "display: block";
     }
-
-    if (skills.length === limit) {
-      // Hide the Add Technical Skills button when limit is reached
-      document.getElementById("add-technical-skills").style.cssText =
-        "display: none;";
-    }
   }
 
   function addTechnicalSkills() {
-    document.querySelector(".technical-skills-form").style.cssText =
-      "display: block;";
-    document.getElementById("add-technical-skills").style.cssText =
-      "display: none;";
+    if (skills.length < limit) {
+      document.querySelector(".technical-skills-form").style.cssText =
+        "display: block;";
+      document.getElementById("add-technical-skills").style.cssText =
+        "display: none;";
+      document.querySelector(".limit-error").style.cssText = "display: none;";
+    } else {
+      document.querySelector(".limit-error").style.cssText = "display: block;";
+    }
   }
 
-  function addSkillsGroup(limit) {
+  function addSkillsGroup() {
     if (
       skills.length < limit &&
       skillsGroup.skillsType !== "" &&
@@ -75,6 +75,10 @@ export function TechnicalSkills() {
         skillsList: "",
       });
     }
+
+    if (skills.length + 1 === limit) {
+      document.getElementById("add-skills-group").disabled = true;
+    }
   }
 
   function editSkillsGroup(skillsGroupId) {
@@ -95,6 +99,7 @@ export function TechnicalSkills() {
       "display: none;";
     document.querySelector(".technical-skills-form").style.cssText =
       "display: block;";
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function updateSkillsGroup() {
@@ -122,8 +127,14 @@ export function TechnicalSkills() {
         "display: inline;";
       document.getElementById("update-skills-group").style.cssText =
         "display: none;";
-      document.getElementById("add-technical-skills").style.cssText =
-        "display: inline;";
+      // document.getElementById("add-technical-skills").style.cssText =
+      //   "display: inline;";
+
+      if (skills.length === limit) {
+        document.getElementById("add-skills-group").disabled = true;
+      } else {
+        document.getElementById("add-skills-group").disabled = false;
+      }
     }
   }
 
@@ -141,6 +152,14 @@ export function TechnicalSkills() {
         skillsList: "",
       });
     }
+
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (skills.length -1 === limit) {
+      document.getElementById("add-skills-group").disabled = true;
+    } else {
+      document.getElementById("add-skills-group").disabled = false;
+    }
   }
 
   return (
@@ -148,11 +167,12 @@ export function TechnicalSkills() {
       <button
         type="button"
         id="add-technical-skills"
-        onClick={() => addTechnicalSkills(5)}
+        onClick={() => addTechnicalSkills()}
       >
         Add Technical Skills
       </button>
-      <form className="technical-skills-form" onSubmit={() => handleSubmit(5)}>
+      <div className="limit-error">Skills limit reached!</div>
+      <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="skills-type">Enter skills type: </label>
         <input
           type="text"
@@ -173,7 +193,7 @@ export function TechnicalSkills() {
         />
         <button
           type="button"
-          onClick={() => addSkillsGroup(5)}
+          onClick={() => addSkillsGroup()}
           id="add-skills-group"
         >
           Add Skills Group
