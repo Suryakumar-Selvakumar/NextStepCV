@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
 
 export function ProjectSection() {
-  const [projects, setProjects] = useState([]);
+  const storedProjects = JSON.parse(localStorage.getItem("projects"));
+  console.log(storedProjects);
+  const [projects, setProjects] = useState(
+    storedProjects ? storedProjects : []
+  );
   const [projectDetails, setProjectDetails] = useState({
     id: 0,
     projectName: "",
@@ -13,6 +17,10 @@ export function ProjectSection() {
     details: [],
   });
   const [detail, setDetail] = useState({ id: 0, value: "" });
+
+  useEffect(() => {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }, [projects]);
 
   function addProject(limit) {
     if (projects.length < limit) {
@@ -67,6 +75,10 @@ export function ProjectSection() {
         projectDate: "",
         details: [],
       });
+      setDetail({
+        id: 0,
+        value: "",
+      });
       document.getElementById("update-project").style.cssText =
         "display: none;";
       document.getElementById("add-project").style.cssText = "display: inline;";
@@ -96,16 +108,6 @@ export function ProjectSection() {
     document.querySelector(".project-cards").style.cssText = "display: block;";
   }
 
-  function editDetail(detailId) {
-    projectDetails.details.forEach((dt) => {
-      if (dt.id === detailId) {
-        setDetail({ id: dt.id, value: dt.value });
-      }
-    });
-    document.getElementById("update-detail").style.cssText = "display: inline;";
-    document.getElementById("add-detail").style.cssText = "display: none;";
-  }
-
   function addDetail(limit) {
     if (projectDetails.details.length < limit && detail.value !== "") {
       setProjectDetails({
@@ -117,6 +119,16 @@ export function ProjectSection() {
       });
     }
     setDetail({ id: 0, value: "" });
+  }
+
+  function editDetail(detailId) {
+    projectDetails.details.forEach((dt) => {
+      if (dt.id === detailId) {
+        setDetail({ id: dt.id, value: dt.value });
+      }
+    });
+    document.getElementById("update-detail").style.cssText = "display: inline;";
+    document.getElementById("add-detail").style.cssText = "display: none;";
   }
 
   function updateDetail() {
@@ -141,7 +153,7 @@ export function ProjectSection() {
       details: projectDetails.details.filter((dt) => dt.id !== detailId),
     });
 
-    if (projectDetails.details.length === 1) {
+    if (detail.id === detailId || projectDetails.details.length === 1) {
       document.getElementById("update-detail").style.cssText = "display: none;";
       document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });

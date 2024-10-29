@@ -9,9 +9,9 @@ export function Sidebar() {
     <>
       {/* <General /> lS done*/}
       {/* <EducationSection /> lS done */}
-      <TechnicalSkills />
+      {/* <TechnicalSkills /> lS done */}
       {/* <WorkSection /> lS done */}
-      {/* <ProjectSection /> */}
+      <ProjectSection />
     </>
   );
 }
