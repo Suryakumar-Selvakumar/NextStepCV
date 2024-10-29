@@ -15,16 +15,20 @@ export function EducationSection() {
     gpa: 0,
     completedStudy: true,
   });
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     localStorage.setItem("courses", JSON.stringify(courses));
   }, [courses]);
 
-  function addEducation(limit) {
+  function addEducation() {
     if (courses.length < limit) {
       document.getElementById("add-education").style.cssText = "display: none;";
       document.querySelector(".education-form").style.cssText =
         "display: block;";
+      document.querySelector(".limit-error").style.cssText = "display: none;";
+    } else {
+      document.querySelector(".limit-error").style.cssText = "display: block;";
     }
   }
 
@@ -108,6 +112,7 @@ export function EducationSection() {
 
   function deleteEducation(courseId) {
     setCourses(courses.filter((exp) => exp.id !== courseId));
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function handleSubmit() {
@@ -127,9 +132,10 @@ export function EducationSection() {
 
   return (
     <>
-      <button type="button" id="add-education" onClick={() => addEducation(3)}>
+      <button type="button" id="add-education" onClick={() => addEducation()}>
         Add Education
       </button>
+      <div className="limit-error">Education limit reached!</div>
       <form className="education-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="school">School name: </label>
         <input

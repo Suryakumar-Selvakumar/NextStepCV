@@ -1,3 +1,11 @@
 .education-form {
   display: none;
 }
+
+#update-education {
+  display: none;
+}
+
+.limit-error {
+  display: none;
+}
