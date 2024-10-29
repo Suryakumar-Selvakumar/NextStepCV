@@ -1,27 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/General.css";
 
 export function General() {
-  const [contactDetails, setContactDetails] = useState({
-    name: "",
-    phNo: "",
-    email: "",
-    linkedIn: "",
-    gitHub: "",
-  });
+  const updatedContactDetails = JSON.parse(
+    localStorage.getItem("contactDetails")
+  );
+  const [contactDetails, setContactDetails] = useState(
+    updatedContactDetails
+      ? updatedContactDetails
+      : {
+          name: "",
+          phNo: "",
+          email: "",
+          linkedIn: "",
+          gitHub: "",
+          formSubmitted: false,
+        }
+  );
+
+  useEffect(() => {
+    localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
+  }, [contactDetails]);
 
   function handleSubmit() {
+    // Add a formSubmitted prop to the contactDetails state
+    setContactDetails({ ...contactDetails, formSubmitted: true });
+
     // Will hide the form
     document.querySelector(".general-form").style.cssText = "display: none;";
-    // Will add the data to the local storage which will be retrieved by GeneralResume
-    // localStorage will also save the data on double rendering due to strict mode
 
     // Will display the contact-details-card
     document.querySelector(".contact-details-card").style.cssText =
       "display: block;";
+
+    // Display the editDetails button on submit
+    document.getElementById("edit-general-details").style.cssText =
+      "display: block;";
   }
 
   function handleEdit() {
+    // Hide the edit button after it was pressed
+    document.getElementById("edit-general-details").style.cssText =
+      "display: none;";
+
+    // Make formSubmitted false on edit
+    setContactDetails({ ...contactDetails, formSubmitted: false });
+
     // Will display the form to update the details
     document.querySelector(".general-form").style.cssText = "display: block;";
   }
@@ -29,7 +53,7 @@ export function General() {
   return (
     <>
       <button id="edit-general-details" onClick={() => handleEdit()}>
-        Edit Details
+        {contactDetails.formSubmitted ? "Edit Details" : "Add Details"}
       </button>
       <form className="general-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="name">Name: </label>
@@ -82,15 +106,17 @@ export function General() {
           }
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
       </form>
-      <div className="contact-details-card">
-        <p>{contactDetails.name}</p>
-        <p>{contactDetails.phNo}</p>
-        <p>{contactDetails.email}</p>
-        <p>{contactDetails.linkedIn}</p>
-        <p>{contactDetails.gitHub}</p>
-      </div>
+      {contactDetails.formSubmitted && (
+        <div className="contact-details-card">
+          <p>{contactDetails.name}</p>
+          <p>{contactDetails.phNo}</p>
+          <p>{contactDetails.email}</p>
+          <p>{contactDetails.linkedIn}</p>
+          <p>{contactDetails.gitHub}</p>
+        </div>
+      )}
     </>
   );
 }

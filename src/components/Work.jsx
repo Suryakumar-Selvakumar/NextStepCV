@@ -5,7 +5,7 @@ export function Work(props) {
   const work = props.work;
 
   return (
-    <div className="work-card" key={work.id}>
+    <div className="work-card">
       <p>{work.company}</p>
       <p>{work.place}</p>
       <p>{work.position}</p>
