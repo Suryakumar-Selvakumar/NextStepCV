@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection() {
-  const [experiences, setExperiences] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -16,7 +16,7 @@ export function EducationSection() {
   });
 
   function addEducation(limit) {
-    if (experiences.length < limit) {
+    if (courses.length < limit) {
       document.getElementById("add-education").style.cssText = "display: none;";
       document.querySelector(".education-form").style.cssText =
         "display: block;";
@@ -24,9 +24,9 @@ export function EducationSection() {
   }
 
   function handleSubmit() {
-    // Logic to add the education to the experiences state
-    setExperiences([
-      ...experiences,
+    // Logic to add the education to the courses state
+    setCourses([
+      ...courses,
       { ...educationDetails, id: crypto.randomUUID() },
     ]);
 
@@ -48,7 +48,7 @@ export function EducationSection() {
   }
 
   function deleteEducation(compId) {
-    setExperiences(experiences.filter((exp) => exp.id !== compId));
+    setCourses(courses.filter((exp) => exp.id !== compId));
     document.getElementById("add-education").style.cssText = "display: inline;";
   }
 
@@ -159,7 +159,7 @@ export function EducationSection() {
         <button type="submit">Submit</button>
       </form>
       <div className="education-cards">
-        {experiences.map((exp) => (
+        {courses.map((exp) => (
           <Education
             key={exp.id}
             education={exp}

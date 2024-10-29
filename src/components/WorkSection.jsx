@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Work } from "./Work";
 import { Role } from "./Role";
 import "../styles/WorkSection.css";
@@ -15,6 +15,10 @@ export function WorkSection() {
     roles: [],
   });
   const [role, setRole] = useState({ id: 0, value: "" });
+
+  useEffect(() => {
+    localStorage.setItem("")
+  }, [experiences]);
 
   function returnToday() {
     let today = new Date();
