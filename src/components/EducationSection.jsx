@@ -1,5 +1,5 @@
 import { Education } from "./Education";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection() {
@@ -17,36 +17,40 @@ export function EducationSection() {
   });
   const [limit, setLimit] = useState(3);
 
+  // DOM refs
+  const addEducationBtn = useRef(null);
+  const educationForm = useRef(null);
+  const submitEducationBtn = useRef(null);
+  const updateEducationBtn = useRef(null);
+  const limitErrorDiv = useRef(null);
+
   useEffect(() => {
     localStorage.setItem("courses", JSON.stringify(courses));
   }, [courses]);
 
   function addEducation() {
     if (courses.length < limit) {
-      document.getElementById("add-education").style.cssText = "display: none;";
-      document.querySelector(".education-form").style.cssText =
-        "display: block;";
-      document.querySelector(".limit-error").style.cssText = "display: none;";
+      addEducationBtn.current.style.cssText = "display: none;";
+      educationForm.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      document.querySelector(".limit-error").style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: block;";
     }
   }
 
   function editEducation(courseId) {
     // Hide the add education button
-    document.getElementById("add-education").style.cssText = "display: none;";
+    addEducationBtn.current.style.cssText = "display: none;";
 
     // Update the styles of the submit and update buttons
-    document.getElementById("submit-education").style.cssText =
-      "display: none;";
-    document.getElementById("update-education").style.cssText =
-      "display: inline;";
+    submitEducationBtn.current.style.cssText = "display: none;";
+    updateEducationBtn.current.style.cssText = "display: inline;";
 
     // Display the form to allow editing of details
-    document.querySelector(".education-form").style.cssText = "display: block;";
+    educationForm.current.style.cssText = "display: block;";
 
     // Hide the limit reached error
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     //Logic to update the form fields to include data from the item whose edit button was clicked on
     courses.forEach((ed) => {
@@ -102,30 +106,22 @@ export function EducationSection() {
         completedStudy: true,
       });
 
-      document.getElementById("update-education").style.cssText =
-        "display: none;";
-      document.getElementById("add-education").style.cssText =
-        "display: inline;";
-      document.getElementById("submit-education").style.cssText =
-        "display: inline;";
-      document.querySelector(".education-form").style.cssText =
-        "display: none;";
+      updateEducationBtn.current.style.cssText = "display: none;";
+      addEducationBtn.current.style.cssText = "display: inline;";
+      submitEducationBtn.current.style.cssText = "display: inline;";
+      educationForm.current.style.cssText = "display: none;";
     }
   }
 
   function deleteEducation(courseId) {
     setCourses(courses.filter((exp) => exp.id !== courseId));
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (educationDetails.id === courseId || courses.length === 1) {
-      document.querySelector(".education-form").style.cssText =
-        "display: none;";
-      document.getElementById("add-education").style.cssText =
-        "display: inline;";
-      document.getElementById("update-education").style.cssText =
-        "display: none;";
-      document.getElementById("submit-education").style.cssText =
-        "display: inline;";
+      educationForm.current.style.cssText = "display: none;";
+      addEducationBtn.current.style.cssText = "display: inline;";
+      updateEducationBtn.current.style.cssText = "display: none;";
+      submitEducationBtn.current.style.cssText = "display: inline;";
 
       setEducationDetails({
         id: 0,
@@ -145,10 +141,10 @@ export function EducationSection() {
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
-    document.getElementById("add-education").style.cssText = "display: inline;";
+    addEducationBtn.current.style.cssText = "display: inline;";
 
     // Hide the form
-    document.querySelector(".education-form").style.cssText = "display: none;";
+    educationForm.current.style.cssText = "display: none;";
 
     // Display the class containing Education component cards
     document.querySelector(".education-cards").style.cssText =
@@ -157,10 +153,10 @@ export function EducationSection() {
 
   function handleCancel() {
     // Hide the form
-    document.querySelector(".education-form").style.cssText = "display: none;";
+    educationForm.current.style.cssText = "display: none;";
 
     // Display the add button again
-    document.getElementById("add-education").style.cssText = "display: inline;";
+    addEducationBtn.current.style.cssText = "display: inline;";
 
     // Reset educationDetails
     setEducationDetails({
@@ -177,11 +173,20 @@ export function EducationSection() {
 
   return (
     <>
-      <button type="button" id="add-education" onClick={() => addEducation()}>
+      <button
+        type="button"
+        id="add-education"
+        ref={addEducationBtn}
+        onClick={() => addEducation()}
+      >
         Add Education
       </button>
-      <div className="limit-error">Education limit reached!</div>
-      <form className="education-form" onSubmit={() => handleSubmit()}>
+      <div className="limit-error" ref={limitErrorDiv}>Education limit reached!</div>
+      <form
+        className="education-form"
+        ref={educationForm}
+        onSubmit={() => handleSubmit()}
+      >
         <label htmlFor="school">School name: </label>
         <input
           type="text"
@@ -287,12 +292,13 @@ export function EducationSection() {
         >
           Cancel
         </button>
-        <button type="submit" id="submit-education">
+        <button type="submit" ref={submitEducationBtn} id="submit-education">
           Submit
         </button>
         <button
           type="button"
           id="update-education"
+          ref={updateEducationBtn}
           onClick={() => updateEducation()}
         >
           Update

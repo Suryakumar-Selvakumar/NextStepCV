@@ -8,8 +8,8 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <>
-      <General />
-      {/* <EducationSection /> Cancel button added*/}
+      {/* <General /> useRef() integrated */}
+      {/* <EducationSection /> useRef() integrated */}
       {/* <TechnicalSkills /> Cancel button added */}
       {/* <WorkSection /> Cancel button added*/}
       {/* <ProjectSection /> Cancel button added */}
