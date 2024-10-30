@@ -28,6 +28,28 @@ export function TechnicalSkills() {
     }
   }
 
+  function handleCancel() {
+    // Hide the form
+    document.querySelector(".technical-skills-form").style.cssText =
+      "display: none;";
+
+    // Display the Add Technical Skills button
+    document.getElementById("add-technical-skills").style.cssText =
+      "display: block";
+
+    document.getElementById("update-skills-group").style.cssText =
+      "display: none;";
+    document.getElementById("add-skills-group").style.cssText =
+      "display: inline;";
+
+    // Reset skillsGroup
+    setSkillsGroup({
+      id: 0,
+      skillsType: "",
+      skillsList: "",
+    });
+  }
+
   function addTechnicalSkills() {
     if (skills.length < limit) {
       document.querySelector(".technical-skills-form").style.cssText =
@@ -204,6 +226,9 @@ export function TechnicalSkills() {
           id="update-skills-group"
         >
           Update Skills Group
+        </button>
+        <button type="button" onClick={() => handleCancel()}>
+          Cancel
         </button>
         <button type="submit">Submit</button>
       </form>
