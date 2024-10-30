@@ -177,7 +177,7 @@ export function WorkSection() {
     document.getElementById("update-work").style.cssText = "display: none;";
     document.getElementById("submit-work").style.cssText = "display: inline;";
 
-    // Reset workDetails
+    // Reset workDetails and role
     setWorkDetails({
       id: 0,
       company: "",

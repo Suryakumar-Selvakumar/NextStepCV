@@ -12,7 +12,7 @@ export function Sidebar() {
       {/* <EducationSection /> Cancel button added*/}
       {/* <TechnicalSkills /> Cancel button added */}
       {/* <WorkSection /> Cancel button added*/}
-      {/* <ProjectSection /> */}
+      <ProjectSection />
     </>
   );
 }

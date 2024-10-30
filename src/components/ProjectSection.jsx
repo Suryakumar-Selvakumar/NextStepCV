@@ -119,7 +119,7 @@ export function ProjectSection() {
       document.getElementById("update-project").style.cssText =
         "display: none;";
       document.getElementById("submit-project").style.cssText =
-        "display: block;";
+        "display: inline;";
 
       setProjectDetails({
         id: 0,
@@ -144,6 +144,33 @@ export function ProjectSection() {
 
     // Display the class containing Project component cards
     document.querySelector(".project-cards").style.cssText = "display: block;";
+  }
+
+  function handleCancel() {
+    // Display the add button again
+    document.getElementById("add-project").style.cssText = "display: inline;";
+
+    // Hide the form
+    document.querySelector(".project-form").style.cssText = "display: none;";
+
+    // Hide Update detail button and bring back Add detail button
+    document.getElementById("update-detail").style.cssText = "display: none;";
+    document.getElementById("add-detail").style.cssText = "display: inline;";
+
+    // Hide Update button and bring back Submit button
+    document.getElementById("update-project").style.cssText = "display: none;";
+    document.getElementById("submit-project").style.cssText =
+      "display: inline;";
+
+    // Reset projectDetails and detail
+    setProjectDetails({
+      id: 0,
+      projectName: "",
+      techStack: "",
+      projectDate: "",
+      details: [],
+    });
+    setDetail({ id: 0, value: "" });
   }
 
   function addDetail() {
@@ -274,6 +301,13 @@ export function ProjectSection() {
         </button>
         <button type="button" onClick={() => updateDetail()} id="update-detail">
           Update detail
+        </button>
+        <button
+          type="button"
+          id="cancel-project"
+          onClick={() => handleCancel()}
+        >
+          Cancel
         </button>
         <button type="submit" id="submit-project">
           Submit
