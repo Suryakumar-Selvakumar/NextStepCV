@@ -8,7 +8,7 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <>
-      {/* <General /> has no limit*/}
+      <General />
       {/* <EducationSection /> limit state added */}
       {/* <TechnicalSkills /> limit state added */}
       {/* <WorkSection /> limit states added*/}

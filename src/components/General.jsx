@@ -25,17 +25,13 @@ export function General() {
   function handleSubmit() {
     // Add a formSubmitted prop to the contactDetails state
     setContactDetails({ ...contactDetails, formSubmitted: true });
-
-    // Will hide the form
-    document.querySelector(".general-form").style.cssText = "display: none;";
-
-    // Will display the contact-details-card
-    document.querySelector(".contact-details-card").style.cssText =
-      "display: block;";
-
+    
     // Display the editDetails button on submit
     document.getElementById("edit-general-details").style.cssText =
       "display: block;";
+
+    // Will hide the form
+    document.querySelector(".general-form").style.cssText = "display: none;";
   }
 
   function handleEdit() {
@@ -48,6 +44,13 @@ export function General() {
 
     // Will display the form to update the details
     document.querySelector(".general-form").style.cssText = "display: block;";
+  }
+
+  function handleCancel() {
+    document.querySelector(".general-form").style.cssText = "display: none;";
+    document.getElementById("edit-general-details").style.cssText =
+      "display: inline;";
+    setContactDetails({ ...contactDetails, formSubmitted: true });
   }
 
   return (
@@ -106,6 +109,9 @@ export function General() {
           }
           required
         />
+        <button type="button" onClick={() => handleCancel()}>
+          Cancel
+        </button>
         <button type="submit">Save</button>
       </form>
       {contactDetails.formSubmitted && (
