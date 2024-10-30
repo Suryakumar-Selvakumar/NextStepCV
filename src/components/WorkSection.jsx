@@ -1,21 +1,13 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
-=======
-import { useState } from "react";
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
 import { Work } from "./Work";
 import { Role } from "./Role";
 import "../styles/WorkSection.css";
 
 export function WorkSection() {
-<<<<<<< HEAD
   const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
   const [experiences, setExperiences] = useState(
     storedExperiences ? storedExperiences : []
   );
-=======
-  const [experiences, setExperiences] = useState([]);
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   const [workDetails, setWorkDetails] = useState({
     id: 0,
     company: "",
@@ -24,7 +16,6 @@ export function WorkSection() {
     startWork: "",
     endWork: "",
     roles: [],
-<<<<<<< HEAD
     stillWorking: false,
   });
   const [role, setRole] = useState({ id: 0, value: "" });
@@ -48,48 +39,18 @@ export function WorkSection() {
       document.getElementById("add-role").disabled = true;
     } else {
       document.getElementById("add-role").disabled = false;
-=======
-  });
-  const [role, setRole] = useState({ id: 0, value: "" });
-
-  function returnToday() {
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-  }
-
-  function renderEndDate() {
-    const today = returnToday();
-    if (workDetails.endWork >= today) {
-      return "Present";
-    } else {
-      return workDetails.endWork;
-    }
-  }
-
-  function addWork(limit) {
-    if (experiences.length < limit) {
-      document.getElementById("add-work").style.cssText = "display: none;";
-      document.querySelector(".work-form").style.cssText = "display: block;";
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
   function editWork(workId) {
     experiences.forEach((work) => {
       if (work.id === workId) {
-<<<<<<< HEAD
         if (work.roles.length === roleLimit) {
           document.getElementById("add-role").disabled = true;
         } else {
           document.getElementById("add-role").disabled = false;
         }
 
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
         setWorkDetails({
           id: work.id,
           company: work.company,
@@ -98,10 +59,7 @@ export function WorkSection() {
           startWork: work.startWork,
           endWork: work.endWork,
           roles: work.roles,
-<<<<<<< HEAD
           stillWorking: work.stillWorking,
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
         });
       }
     });
@@ -109,10 +67,7 @@ export function WorkSection() {
     document.getElementById("submit-work").style.cssText = "display: none;";
     document.getElementById("update-work").style.cssText = "display: inline;";
     document.querySelector(".work-form").style.cssText = "display: block;";
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function updateWork() {
@@ -120,12 +75,7 @@ export function WorkSection() {
       workDetails.company !== "" &&
       workDetails.place !== "" &&
       workDetails.position !== "" &&
-<<<<<<< HEAD
       workDetails.startWork !== ""
-=======
-      workDetails.startWork !== "" &&
-      workDetails.endWork !== ""
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     ) {
       const updatedExperiences = experiences.map((work) => {
         if (work.id === workDetails.id) {
@@ -137,10 +87,7 @@ export function WorkSection() {
             startWork: workDetails.startWork,
             endWork: workDetails.endWork,
             roles: workDetails.roles,
-<<<<<<< HEAD
             stillWorking: workDetails.stillWorking,
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
           };
         } else {
           return work;
@@ -155,30 +102,23 @@ export function WorkSection() {
         startWork: "",
         endWork: "",
         roles: [],
-<<<<<<< HEAD
         stillWorking: false,
       });
       setRole({
         id: 0,
         value: "",
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       });
       document.getElementById("update-work").style.cssText = "display: none;";
       document.getElementById("add-work").style.cssText = "display: inline;";
       document.getElementById("submit-work").style.cssText = "display: block;";
       document.querySelector(".work-form").style.cssText = "display: none;";
-<<<<<<< HEAD
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
   function deleteWork(workId) {
     setExperiences(experiences.filter((exp) => exp.id !== workId));
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
 
     if (workDetails.id === workId || experiences.length === 1) {
@@ -201,8 +141,6 @@ export function WorkSection() {
       });
       setRole({ id: 0, value: "" });
     }
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function handleSubmit() {
@@ -215,11 +153,6 @@ export function WorkSection() {
     // Display the add button again
     document.getElementById("add-work").style.cssText = "display: inline;";
 
-<<<<<<< HEAD
-=======
-    // Store the data in localStorage
-
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     // Hide the form
     document.querySelector(".work-form").style.cssText = "display: none;";
 
@@ -227,7 +160,6 @@ export function WorkSection() {
     document.querySelector(".work-cards").style.cssText = "display: block;";
   }
 
-<<<<<<< HEAD
   function addRole() {
     if (workDetails.roles.length < roleLimit && role.value !== "") {
       setWorkDetails({
@@ -244,8 +176,6 @@ export function WorkSection() {
     }
   }
 
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   function editRole(roleId) {
     workDetails.roles.forEach((r) => {
       if (r.id === roleId) {
@@ -254,23 +184,7 @@ export function WorkSection() {
     });
     document.getElementById("update-role").style.cssText = "display: inline;";
     document.getElementById("add-role").style.cssText = "display: none;";
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
-=======
-  }
-
-  function addRole(limit) {
-    if (workDetails.roles.length < limit && role.value !== "") {
-      setWorkDetails({
-        ...workDetails,
-        roles: [
-          ...workDetails.roles,
-          { id: crypto.randomUUID(), value: role.value },
-        ],
-      });
-    }
-    setRole({ id: 0, value: "" });
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function updateRole() {
@@ -286,15 +200,12 @@ export function WorkSection() {
       setRole({ id: 0, value: "" });
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
-<<<<<<< HEAD
 
       if (workDetails.roles.length === roleLimit) {
         document.getElementById("add-role").disabled = true;
       } else {
         document.getElementById("add-role").disabled = false;
       }
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
@@ -304,16 +215,11 @@ export function WorkSection() {
       roles: workDetails.roles.filter((role) => role.id !== roleId),
     });
 
-<<<<<<< HEAD
     if (role.id === roleId || workDetails.roles.length === 1) {
-=======
-    if (workDetails.roles.length === 1) {
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
       setRole({ id: 0, value: "" });
     }
-<<<<<<< HEAD
 
     document.querySelector(".limit-error").style.cssText = "display: none;";
 
@@ -322,22 +228,14 @@ export function WorkSection() {
     } else {
       document.getElementById("add-role").disabled = false;
     }
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   return (
     <>
-<<<<<<< HEAD
       <button type="button" id="add-work" onClick={() => addWork()}>
         Add Work Experience
       </button>
       <div className="limit-error">Work limit reached!</div>
-=======
-      <button type="button" id="add-work" onClick={() => addWork(2)}>
-        Add Work Experience
-      </button>
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       <form className="work-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="company">Company name: </label>
         <input
@@ -369,7 +267,6 @@ export function WorkSection() {
           }
           required
         />
-<<<<<<< HEAD
         <label htmlFor="still-working">Still Working? </label>
         <input
           type="checkbox"
@@ -384,9 +281,6 @@ export function WorkSection() {
           }
         />
         <label htmlFor="start-work">Position start date: </label>
-=======
-        <label htmlFor="start-work">Start date: </label>
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
         <input
           type="date"
           id="start-work"
@@ -396,7 +290,6 @@ export function WorkSection() {
           }
           required
         />
-<<<<<<< HEAD
         {!workDetails.stillWorking && (
           <>
             <label htmlFor="end-work">Position end date: </label>
@@ -412,33 +305,13 @@ export function WorkSection() {
           </>
         )}
         <label htmlFor="role">Job roles:</label>
-=======
-        <label htmlFor="end-work">Start date: </label>
-        <input
-          type="date"
-          id="end-work"
-          value={workDetails.endWork}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, endWork: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="role">
-          Job roles: Click Add Role to add roles and Update Role to update
-          existing role
-        </label>
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
         <input
           type="text"
           id="role"
           value={role.value}
           onChange={(e) => setRole({ ...role, value: e.target.value })}
         />
-<<<<<<< HEAD
         <button type="button" onClick={() => addRole()} id="add-role">
-=======
-        <button type="button" onClick={() => addRole(4)} id="add-role">
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
           Add role
         </button>
         <button type="button" onClick={() => updateRole()} id="update-role">

@@ -77,20 +77,6 @@ export function General() {
           onChange={(e) =>
             setContactDetails({ ...contactDetails, phNo: e.target.value })
           }
-          value={contactDetails.name}
-          onChange={(e) =>
-            setContactDetails({ ...contactDetails, name: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="ph-no">Phone Number: </label>
-        <input
-          type="tel"
-          id="ph-no"
-          value={contactDetails.phNo}
-          onChange={(e) =>
-            setContactDetails({ ...contactDetails, phNo: e.target.value })
-          }
           required
         />
         <label htmlFor="email">Email: </label>
@@ -111,31 +97,10 @@ export function General() {
           onChange={(e) =>
             setContactDetails({ ...contactDetails, linkedIn: e.target.value })
           }
-          value={contactDetails.email}
-          onChange={(e) =>
-            setContactDetails({ ...contactDetails, email: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="linked-in">LinkedIn: </label>
-        <input
-          type="text"
-          id="linked-in"
-          value={contactDetails.linkedIn}
-          onChange={(e) =>
-            setContactDetails({ ...contactDetails, linkedIn: e.target.value })
-          }
           required
         />
         <label htmlFor="github">GitHub: </label>
-        <label htmlFor="github">GitHub: </label>
         <input
-          type="text"
-          id="github"
-          value={contactDetails.gitHub}
-          onChange={(e) =>
-            setContactDetails({ ...contactDetails, gitHub: e.target.value })
-          }
           type="text"
           id="github"
           value={contactDetails.gitHub}

@@ -1,21 +1,13 @@
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
-=======
-import { useState } from "react";
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
 
 export function ProjectSection() {
-<<<<<<< HEAD
   const storedProjects = JSON.parse(localStorage.getItem("projects"));
   const [projects, setProjects] = useState(
     storedProjects ? storedProjects : []
   );
-=======
-  const [projects, setProjects] = useState([]);
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   const [projectDetails, setProjectDetails] = useState({
     id: 0,
     projectName: "",
@@ -24,7 +16,6 @@ export function ProjectSection() {
     details: [],
   });
   const [detail, setDetail] = useState({ id: 0, value: "" });
-<<<<<<< HEAD
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
 
@@ -45,28 +36,18 @@ export function ProjectSection() {
       document.getElementById("add-detail").disabled = true;
     } else {
       document.getElementById("add-detail").disabled = false;
-=======
-
-  function addProject(limit) {
-    if (projects.length < limit) {
-      document.getElementById("add-project").style.cssText = "display: none;";
-      document.querySelector(".project-form").style.cssText = "display: block;";
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
   function editProject(projectId) {
     projects.forEach((proj) => {
       if (proj.id === projectId) {
-<<<<<<< HEAD
         if (proj.details.length === detailLimit) {
           document.getElementById("add-detail").disabled = true;
         } else {
           document.getElementById("add-detail").disabled = false;
         }
 
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
         setProjectDetails({
           id: proj.id,
           projectName: proj.projectName,
@@ -81,10 +62,7 @@ export function ProjectSection() {
     document.getElementById("update-project").style.cssText =
       "display: inline;";
     document.querySelector(".project-form").style.cssText = "display: block;";
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function updateProject() {
@@ -114,30 +92,23 @@ export function ProjectSection() {
         projectDate: "",
         details: [],
       });
-<<<<<<< HEAD
       setDetail({
         id: 0,
         value: "",
       });
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       document.getElementById("update-project").style.cssText =
         "display: none;";
       document.getElementById("add-project").style.cssText = "display: inline;";
       document.getElementById("submit-project").style.cssText =
         "display: block;";
       document.querySelector(".project-form").style.cssText = "display: none;";
-<<<<<<< HEAD
       document.getElementById("update-detail").style.cssText = "display: none;";
       document.getElementById("add-detail").style.cssText = "display: inline;";
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
   function deleteProject(projectId) {
     setProjects(projects.filter((proj) => proj.id !== projectId));
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
 
     if (projectDetails.id === projectId || projects.length === 1) {
@@ -159,8 +130,6 @@ export function ProjectSection() {
       });
       setDetail({ id: 0, value: "" });
     }
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function handleSubmit() {
@@ -170,11 +139,6 @@ export function ProjectSection() {
     // Display the add button again
     document.getElementById("add-project").style.cssText = "display: inline;";
 
-<<<<<<< HEAD
-=======
-    //Store the data in localStorage
-
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     // Hide the form
     document.querySelector(".project-form").style.cssText = "display: none;";
 
@@ -182,7 +146,6 @@ export function ProjectSection() {
     document.querySelector(".project-cards").style.cssText = "display: block;";
   }
 
-<<<<<<< HEAD
   function addDetail() {
     if (projectDetails.details.length < detailLimit && detail.value !== "") {
       setProjectDetails({
@@ -199,8 +162,6 @@ export function ProjectSection() {
     }
   }
 
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   function editDetail(detailId) {
     projectDetails.details.forEach((dt) => {
       if (dt.id === detailId) {
@@ -209,23 +170,7 @@ export function ProjectSection() {
     });
     document.getElementById("update-detail").style.cssText = "display: inline;";
     document.getElementById("add-detail").style.cssText = "display: none;";
-<<<<<<< HEAD
     document.querySelector(".limit-error").style.cssText = "display: none;";
-=======
-  }
-
-  function addDetail(limit) {
-    if (projectDetails.details.length < limit && detail.value !== "") {
-      setProjectDetails({
-        ...projectDetails,
-        details: [
-          ...projectDetails.details,
-          { id: crypto.randomUUID(), value: detail.value },
-        ],
-      });
-    }
-    setDetail({ id: 0, value: "" });
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   function updateDetail() {
@@ -238,7 +183,6 @@ export function ProjectSection() {
         }
       });
       setProjectDetails({ ...projectDetails, details: updatedDetails });
-<<<<<<< HEAD
       setDetail({ id: 0, value: "" });
       document.getElementById("update-detail").style.cssText = "display: none;";
       document.getElementById("add-detail").style.cssText = "display: inline;";
@@ -248,11 +192,6 @@ export function ProjectSection() {
       } else {
         document.getElementById("add-detail").disabled = false;
       }
-=======
-      document.getElementById("add-detail").style.cssText = "display: inline;";
-      setDetail({ id: 0, value: "" });
-      document.getElementById("update-detail").style.cssText = "display: none;";
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     }
   }
 
@@ -262,16 +201,11 @@ export function ProjectSection() {
       details: projectDetails.details.filter((dt) => dt.id !== detailId),
     });
 
-<<<<<<< HEAD
     if (detail.id === detailId || projectDetails.details.length === 1) {
-=======
-    if (projectDetails.details.length === 1) {
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       document.getElementById("update-detail").style.cssText = "display: none;";
       document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
     }
-<<<<<<< HEAD
 
     document.querySelector(".limit-error").style.cssText = "display: none;";
 
@@ -280,22 +214,14 @@ export function ProjectSection() {
     } else {
       document.getElementById("add-detail").disabled = false;
     }
-=======
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   }
 
   return (
     <>
-<<<<<<< HEAD
       <button type="button" id="add-project" onClick={() => addProject()}>
         Add Project
       </button>
       <div className="limit-error">Project limit reached!</div>
-=======
-      <button type="button" id="add-project" onClick={() => addProject(4)}>
-        Add Project
-      </button>
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       <form className="project-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="project-name">Project name: </label>
         <input
@@ -343,11 +269,7 @@ export function ProjectSection() {
           value={detail.value}
           onChange={(e) => setDetail({ ...detail, value: e.target.value })}
         />
-<<<<<<< HEAD
         <button type="button" onClick={() => addDetail()} id="add-detail">
-=======
-        <button type="button" onClick={() => addDetail(5)} id="add-detail">
->>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
           Add detail
         </button>
         <button type="button" onClick={() => updateDetail()} id="update-detail">
