@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "../styles/General.css";
 
 export function General() {
@@ -17,6 +17,8 @@ export function General() {
           formSubmitted: false,
         }
   );
+  const editGeneralDetailsBtn = useRef(null);
+  const generalForm = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
@@ -27,38 +29,42 @@ export function General() {
     setContactDetails({ ...contactDetails, formSubmitted: true });
 
     // Display the editDetails button on submit
-    document.getElementById("edit-general-details").style.cssText =
+    editGeneralDetailsBtn.current.style.cssText =
       "display: block;";
 
     // Will hide the form
-    document.querySelector(".general-form").style.cssText = "display: none;";
+    generalForm.current.style.cssText = "display: none;";
   }
 
   function handleEdit() {
     // Hide the edit button after it was pressed
-    document.getElementById("edit-general-details").style.cssText =
+    editGeneralDetailsBtn.current.style.cssText =
       "display: none;";
 
     // Make formSubmitted false on edit
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
     // Will display the form to update the details
-    document.querySelector(".general-form").style.cssText = "display: block;";
+    generalForm.current.style.cssText = "display: block;";
   }
 
   function handleCancel() {
-    document.querySelector(".general-form").style.cssText = "display: none;";
-    document.getElementById("edit-general-details").style.cssText =
+    generalForm.current.style.cssText = "display: none;";
+    editGeneralDetailsBtn.current.style.cssText =
       "display: inline;";
     setContactDetails({ ...contactDetails, formSubmitted: true });
   }
 
   return (
     <>
-      <button id="edit-general-details" onClick={() => handleEdit()}>
+      <button
+        id="edit-general-details"
+        ref={editGeneralDetailsBtn}
+        onClick={() => handleEdit()}
+      >
         {contactDetails.formSubmitted ? "Edit Details" : "Add Details"}
       </button>
-      <form className="general-form" onSubmit={() => handleSubmit()}>
+      <form className="general-form" ref={generalForm} onSubmit={() => handleSubmit()}>
         <label htmlFor="name">Name: </label>
         <input
           type="text"

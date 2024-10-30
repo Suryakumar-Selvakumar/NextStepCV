@@ -145,7 +145,7 @@ export function ProjectSection() {
     // Display the class containing Project component cards
     document.querySelector(".project-cards").style.cssText = "display: block;";
   }
-
+  
   function handleCancel() {
     // Display the add button again
     document.getElementById("add-project").style.cssText = "display: inline;";

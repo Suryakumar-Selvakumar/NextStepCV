@@ -8,11 +8,11 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <>
-      {/* <General /> Cancel button added*/}
+      <General />
       {/* <EducationSection /> Cancel button added*/}
       {/* <TechnicalSkills /> Cancel button added */}
       {/* <WorkSection /> Cancel button added*/}
-      <ProjectSection />
+      {/* <ProjectSection /> Cancel button added */}
     </>
   );
 }
