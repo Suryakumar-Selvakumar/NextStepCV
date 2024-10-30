@@ -25,7 +25,7 @@ export function General() {
   function handleSubmit() {
     // Add a formSubmitted prop to the contactDetails state
     setContactDetails({ ...contactDetails, formSubmitted: true });
-    
+
     // Display the editDetails button on submit
     document.getElementById("edit-general-details").style.cssText =
       "display: block;";
@@ -109,10 +109,16 @@ export function General() {
           }
           required
         />
-        <button type="button" onClick={() => handleCancel()}>
+        <button
+          type="button"
+          id="cancel-general"
+          onClick={() => handleCancel()}
+        >
           Cancel
         </button>
-        <button type="submit">Save</button>
+        <button type="submit" id="submit-general">
+          Save
+        </button>
       </form>
       {contactDetails.formSubmitted && (
         <div className="contact-details-card">

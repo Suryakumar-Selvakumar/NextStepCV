@@ -27,6 +27,8 @@ export function WorkSection() {
   }, [experiences]);
 
   function addWork() {
+    document.getElementById("update-work").style.cssText = "display: none;";
+
     if (experiences.length < workLimit) {
       document.getElementById("add-work").style.cssText = "display: none;";
       document.querySelector(".work-form").style.cssText = "display: block;";
@@ -110,7 +112,7 @@ export function WorkSection() {
       });
       document.getElementById("update-work").style.cssText = "display: none;";
       document.getElementById("add-work").style.cssText = "display: inline;";
-      document.getElementById("submit-work").style.cssText = "display: block;";
+      document.getElementById("submit-work").style.cssText = "display: inline;";
       document.querySelector(".work-form").style.cssText = "display: none;";
       document.getElementById("update-role").style.cssText = "display: none;";
       document.getElementById("add-role").style.cssText = "display: inline;";
@@ -127,7 +129,7 @@ export function WorkSection() {
       document.querySelector(".work-form").style.cssText = "display: none;";
       document.getElementById("add-work").style.cssText = "display: inline;";
       document.getElementById("update-work").style.cssText = "display: none;";
-      document.getElementById("submit-work").style.cssText = "display: block;";
+      document.getElementById("submit-work").style.cssText = "display: inline;";
 
       setWorkDetails({
         id: 0,
@@ -158,6 +160,35 @@ export function WorkSection() {
 
     // Display the class containing Work component cards
     document.querySelector(".work-cards").style.cssText = "display: block;";
+  }
+
+  function handleCancel() {
+    // Display the add button again
+    document.getElementById("add-work").style.cssText = "display: inline;";
+
+    // Hide the form
+    document.querySelector(".work-form").style.cssText = "display: none;";
+
+    // Hide Update role button and bring back Add role button
+    document.getElementById("update-role").style.cssText = "display: none;";
+    document.getElementById("add-role").style.cssText = "display: inline;";
+
+    // Hide Update button and bring back submit button
+    document.getElementById("update-work").style.cssText = "display: none;";
+    document.getElementById("submit-work").style.cssText = "display: inline;";
+
+    // Reset workDetails
+    setWorkDetails({
+      id: 0,
+      company: "",
+      place: "",
+      position: "",
+      startWork: "",
+      endWork: "",
+      roles: [],
+      stillWorking: false,
+    });
+    setRole({ id: 0, value: "" });
   }
 
   function addRole() {
@@ -316,6 +347,9 @@ export function WorkSection() {
         </button>
         <button type="button" onClick={() => updateRole()} id="update-role">
           Update role
+        </button>
+        <button type="button" id="cancel-work" onClick={() => handleCancel()}>
+          Cancel
         </button>
         <button type="submit" id="submit-work">
           Submit

@@ -280,7 +280,11 @@ export function EducationSection() {
           }
           required
         />
-        <button type="button" onClick={() => handleCancel()}>
+        <button
+          type="button"
+          id="cancel-education"
+          onClick={() => handleCancel()}
+        >
           Cancel
         </button>
         <button type="submit" id="submit-education">

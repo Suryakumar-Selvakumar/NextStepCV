@@ -227,10 +227,16 @@ export function TechnicalSkills() {
         >
           Update Skills Group
         </button>
-        <button type="button" onClick={() => handleCancel()}>
+        <button
+          type="button"
+          id="cancel-technical-skills"
+          onClick={() => handleCancel()}
+        >
           Cancel
         </button>
-        <button type="submit">Submit</button>
+        <button type="submit" id="submit-technical-skills">
+          Submit
+        </button>
       </form>
       <div className="technical-skills-cards">
         {skills.map((skillsGroup) => (
