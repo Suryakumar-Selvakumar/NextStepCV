@@ -5,7 +5,6 @@ import { Detail } from "./Detail";
 
 export function ProjectSection() {
   const storedProjects = JSON.parse(localStorage.getItem("projects"));
-  console.log(storedProjects);
   const [projects, setProjects] = useState(
     storedProjects ? storedProjects : []
   );
@@ -17,21 +16,38 @@ export function ProjectSection() {
     details: [],
   });
   const [detail, setDetail] = useState({ id: 0, value: "" });
+  const [projectLimit, setProjectLimit] = useState(4);
+  const [detailLimit, setDetailLimit] = useState(5);
 
   useEffect(() => {
     localStorage.setItem("projects", JSON.stringify(projects));
   }, [projects]);
 
-  function addProject(limit) {
-    if (projects.length < limit) {
+  function addProject() {
+    if (projects.length < projectLimit) {
       document.getElementById("add-project").style.cssText = "display: none;";
       document.querySelector(".project-form").style.cssText = "display: block;";
+      document.querySelector(".limit-error").style.cssText = "display: none;";
+    } else {
+      document.querySelector(".limit-error").style.cssText = "display: block;";
+    }
+
+    if (projectDetails.details.length === detailLimit) {
+      document.getElementById("add-detail").disabled = true;
+    } else {
+      document.getElementById("add-detail").disabled = false;
     }
   }
 
   function editProject(projectId) {
     projects.forEach((proj) => {
       if (proj.id === projectId) {
+        if (proj.details.length === detailLimit) {
+          document.getElementById("add-detail").disabled = true;
+        } else {
+          document.getElementById("add-detail").disabled = false;
+        }
+
         setProjectDetails({
           id: proj.id,
           projectName: proj.projectName,
@@ -46,6 +62,7 @@ export function ProjectSection() {
     document.getElementById("update-project").style.cssText =
       "display: inline;";
     document.querySelector(".project-form").style.cssText = "display: block;";
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function updateProject() {
@@ -92,6 +109,27 @@ export function ProjectSection() {
 
   function deleteProject(projectId) {
     setProjects(projects.filter((proj) => proj.id !== projectId));
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (projectDetails.id === projectId || projects.length === 1) {
+      document.getElementById("update-detail").style.cssText = "display: none;";
+      document.getElementById("add-detail").style.cssText = "display: inline;";
+      document.querySelector(".project-form").style.cssText = "display: none;";
+      document.getElementById("add-project").style.cssText = "display: inline;";
+      document.getElementById("update-project").style.cssText =
+        "display: none;";
+      document.getElementById("submit-project").style.cssText =
+        "display: block;";
+
+      setProjectDetails({
+        id: 0,
+        projectName: "",
+        techStack: "",
+        projectDate: "",
+        details: [],
+      });
+      setDetail({ id: 0, value: "" });
+    }
   }
 
   function handleSubmit() {
@@ -101,8 +139,6 @@ export function ProjectSection() {
     // Display the add button again
     document.getElementById("add-project").style.cssText = "display: inline;";
 
-    //Store the data in localStorage
-
     // Hide the form
     document.querySelector(".project-form").style.cssText = "display: none;";
 
@@ -110,8 +146,8 @@ export function ProjectSection() {
     document.querySelector(".project-cards").style.cssText = "display: block;";
   }
 
-  function addDetail(limit) {
-    if (projectDetails.details.length < limit && detail.value !== "") {
+  function addDetail() {
+    if (projectDetails.details.length < detailLimit && detail.value !== "") {
       setProjectDetails({
         ...projectDetails,
         details: [
@@ -121,6 +157,9 @@ export function ProjectSection() {
       });
     }
     setDetail({ id: 0, value: "" });
+    if (projectDetails.details.length + 1 === detailLimit) {
+      document.getElementById("add-detail").disabled = true;
+    }
   }
 
   function editDetail(detailId) {
@@ -131,6 +170,7 @@ export function ProjectSection() {
     });
     document.getElementById("update-detail").style.cssText = "display: inline;";
     document.getElementById("add-detail").style.cssText = "display: none;";
+    document.querySelector(".limit-error").style.cssText = "display: none;";
   }
 
   function updateDetail() {
@@ -143,9 +183,15 @@ export function ProjectSection() {
         }
       });
       setProjectDetails({ ...projectDetails, details: updatedDetails });
-      document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
       document.getElementById("update-detail").style.cssText = "display: none;";
+      document.getElementById("add-detail").style.cssText = "display: inline;";
+
+      if (projectDetails.details.length === detailLimit) {
+        document.getElementById("add-detail").disabled = true;
+      } else {
+        document.getElementById("add-detail").disabled = false;
+      }
     }
   }
 
@@ -160,13 +206,22 @@ export function ProjectSection() {
       document.getElementById("add-detail").style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
     }
+
+    document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (projectDetails.details.length - 1 === detailLimit) {
+      document.getElementById("add-detail").disabled = true;
+    } else {
+      document.getElementById("add-detail").disabled = false;
+    }
   }
 
   return (
     <>
-      <button type="button" id="add-project" onClick={() => addProject(4)}>
+      <button type="button" id="add-project" onClick={() => addProject()}>
         Add Project
       </button>
+      <div className="limit-error">Project limit reached!</div>
       <form className="project-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="project-name">Project name: </label>
         <input
@@ -214,7 +269,7 @@ export function ProjectSection() {
           value={detail.value}
           onChange={(e) => setDetail({ ...detail, value: e.target.value })}
         />
-        <button type="button" onClick={() => addDetail(5)} id="add-detail">
+        <button type="button" onClick={() => addDetail()} id="add-detail">
           Add detail
         </button>
         <button type="button" onClick={() => updateDetail()} id="update-detail">

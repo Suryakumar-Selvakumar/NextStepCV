@@ -26,24 +26,6 @@ export function WorkSection() {
     localStorage.setItem("experiences", JSON.stringify(experiences));
   }, [experiences]);
 
-  function returnToday() {
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-  }
-
-  function renderEndDate() {
-    const today = returnToday();
-    if (workDetails.endWork >= today) {
-      return "Present";
-    } else {
-      return workDetails.endWork;
-    }
-  }
-
   function addWork() {
     if (experiences.length < workLimit) {
       document.getElementById("add-work").style.cssText = "display: none;";
