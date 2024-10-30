@@ -1,10 +1,18 @@
 import { Education } from "./Education";
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection() {
   const storedCourses = JSON.parse(localStorage.getItem("courses"));
   const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
+=======
+import { useState } from "react";
+import "../styles/EducationSection.css";
+
+export function EducationSection() {
+  const [experiences, setExperiences] = useState([]);
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -15,6 +23,7 @@ export function EducationSection() {
     gpa: 0,
     completedStudy: true,
   });
+<<<<<<< HEAD
   const [limit, setLimit] = useState(3);
 
   useEffect(() => {
@@ -121,10 +130,32 @@ export function EducationSection() {
   function handleSubmit() {
     // Logic to add the education to the courses state
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
+=======
+
+  function addEducation(limit) {
+    if (experiences.length < limit) {
+      document.getElementById("add-education").style.cssText = "display: none;";
+      document.querySelector(".education-form").style.cssText =
+        "display: block;";
+    }
+  }
+
+  function handleSubmit() {
+    // Logic to add the education to the experiences state
+    setExperiences([
+      ...experiences,
+      { ...educationDetails, id: crypto.randomUUID() },
+    ]);
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
 
     // Display the add button again
     document.getElementById("add-education").style.cssText = "display: inline;";
 
+<<<<<<< HEAD
+=======
+    // Store the data in localStorage
+
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
     // Hide the form
     document.querySelector(".education-form").style.cssText = "display: none;";
 
@@ -133,12 +164,29 @@ export function EducationSection() {
       "display: block;";
   }
 
+<<<<<<< HEAD
   return (
     <>
       <button type="button" id="add-education" onClick={() => addEducation()}>
         Add Education
       </button>
       <div className="limit-error">Education limit reached!</div>
+=======
+  function editEducation() {
+    document.getElementById("add-education").style.cssText = "display: none;";
+  }
+
+  function deleteEducation(compId) {
+    setExperiences(experiences.filter((exp) => exp.id !== compId));
+    document.getElementById("add-education").style.cssText = "display: inline;";
+  }
+
+  return (
+    <>
+      <button type="button" id="add-education" onClick={() => addEducation(3)}>
+        Add Education
+      </button>
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
       <form className="education-form" onSubmit={() => handleSubmit()}>
         <label htmlFor="school">School name: </label>
         <input
@@ -238,6 +286,7 @@ export function EducationSection() {
           }
           required
         />
+<<<<<<< HEAD
         <button type="submit" id="submit-education">
           Submit
         </button>
@@ -251,6 +300,12 @@ export function EducationSection() {
       </form>
       <div className="education-cards">
         {courses.map((exp) => (
+=======
+        <button type="submit">Submit</button>
+      </form>
+      <div className="education-cards">
+        {experiences.map((exp) => (
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769
           <Education
             key={exp.id}
             education={exp}

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .education-form {
   display: none;
 }
@@ -5,3 +6,12 @@
 #update-education {
   display: none;
 }
+=======
+.education-cards {
+  display: none;
+}
+
+.education-form {
+  display: none;
+}
+>>>>>>> 9ebe82d7b02dd12e60dc0224825f30889513e769

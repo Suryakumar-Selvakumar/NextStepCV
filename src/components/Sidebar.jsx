@@ -8,10 +8,10 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <>
-      <General />
-      {/* <EducationSection /> limit state added */}
-      {/* <TechnicalSkills /> limit state added */}
-      {/* <WorkSection /> limit states added*/}
+      {/* <General /> Cancel button added*/}
+      {/* <EducationSection /> */}
+      {/* <TechnicalSkills /> */}
+      {/* <WorkSection /> */}
       {/* <ProjectSection /> */}
     </>
   );
