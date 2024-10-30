@@ -9,7 +9,7 @@ export function Sidebar() {
   return (
     <>
       {/* <General /> Cancel button added*/}
-      {/* <EducationSection /> */}
+      {/* <EducationSection /> Cancel button added*/}
       {/* <TechnicalSkills /> */}
       {/* <WorkSection /> */}
       {/* <ProjectSection /> */}

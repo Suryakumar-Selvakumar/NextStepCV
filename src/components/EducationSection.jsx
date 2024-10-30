@@ -107,7 +107,7 @@ export function EducationSection() {
       document.getElementById("add-education").style.cssText =
         "display: inline;";
       document.getElementById("submit-education").style.cssText =
-        "display: block;";
+        "display: inline;";
       document.querySelector(".education-form").style.cssText =
         "display: none;";
     }
@@ -116,6 +116,28 @@ export function EducationSection() {
   function deleteEducation(courseId) {
     setCourses(courses.filter((exp) => exp.id !== courseId));
     document.querySelector(".limit-error").style.cssText = "display: none;";
+
+    if (educationDetails.id === courseId || courses.length === 1) {
+      document.querySelector(".education-form").style.cssText =
+        "display: none;";
+      document.getElementById("add-education").style.cssText =
+        "display: inline;";
+      document.getElementById("update-education").style.cssText =
+        "display: none;";
+      document.getElementById("submit-education").style.cssText =
+        "display: inline;";
+
+      setEducationDetails({
+        id: 0,
+        school: "",
+        placeStudy: "",
+        titleStudy: "",
+        startDateStudy: "",
+        endDateStudy: "",
+        gpa: 0,
+        completedStudy: true,
+      });
+    }
   }
 
   function handleSubmit() {
@@ -131,6 +153,26 @@ export function EducationSection() {
     // Display the class containing Education component cards
     document.querySelector(".education-cards").style.cssText =
       "display: block;";
+  }
+
+  function handleCancel() {
+    // Hide the form
+    document.querySelector(".education-form").style.cssText = "display: none;";
+
+    // Display the add button again
+    document.getElementById("add-education").style.cssText = "display: inline;";
+
+    // Reset educationDetails
+    setEducationDetails({
+      id: 0,
+      school: "",
+      placeStudy: "",
+      titleStudy: "",
+      startDateStudy: "",
+      endDateStudy: "",
+      gpa: 0,
+      completedStudy: true,
+    });
   }
 
   return (
@@ -238,6 +280,9 @@ export function EducationSection() {
           }
           required
         />
+        <button type="button" onClick={() => handleCancel()}>
+          Cancel
+        </button>
         <button type="submit" id="submit-education">
           Submit
         </button>
