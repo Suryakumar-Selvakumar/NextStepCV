@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Work } from "./Work";
 import { Role } from "./Role";
 import "../styles/WorkSection.css";
@@ -22,25 +22,34 @@ export function WorkSection() {
   const [workLimit, setWorkLimit] = useState(2);
   const [roleLimit, setRoleLimit] = useState(4);
 
+  // DOM refs
+  const limitErrorDiv = useRef(null);
+  const addWorkBtn = useRef(null);
+  const workForm = useRef(null);
+  const updateWorkBtn = useRef(null);
+  const addRoleBtn = useRef(null);
+  const updateRoleBtn = useRef(null);
+  const submitWorkBtn = useRef(null);
+
   useEffect(() => {
     localStorage.setItem("experiences", JSON.stringify(experiences));
   }, [experiences]);
 
   function addWork() {
-    document.getElementById("update-work").style.cssText = "display: none;";
+    updateWorkBtn.current.style.cssText = "display: none;";
 
     if (experiences.length < workLimit) {
-      document.getElementById("add-work").style.cssText = "display: none;";
-      document.querySelector(".work-form").style.cssText = "display: block;";
-      document.querySelector(".limit-error").style.cssText = "display: none;";
+      addWorkBtn.current.style.cssText = "display: none;";
+      workForm.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      document.querySelector(".limit-error").style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: block;";
     }
 
     if (workDetails.roles.length === roleLimit) {
-      document.getElementById("add-role").disabled = true;
+      addRoleBtn.current.disabled = true;
     } else {
-      document.getElementById("add-role").disabled = false;
+      addRoleBtn.current.disabled = false;
     }
   }
 
@@ -48,9 +57,9 @@ export function WorkSection() {
     experiences.forEach((work) => {
       if (work.id === workId) {
         if (work.roles.length === roleLimit) {
-          document.getElementById("add-role").disabled = true;
+          addRoleBtn.current.disabled = true;
         } else {
-          document.getElementById("add-role").disabled = false;
+          addRoleBtn.current.disabled = false;
         }
 
         setWorkDetails({
@@ -65,11 +74,11 @@ export function WorkSection() {
         });
       }
     });
-    document.getElementById("add-work").style.cssText = "display: none;";
-    document.getElementById("submit-work").style.cssText = "display: none;";
-    document.getElementById("update-work").style.cssText = "display: inline;";
-    document.querySelector(".work-form").style.cssText = "display: block;";
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    addWorkBtn.current.style.cssText = "display: none;";
+    submitWorkBtn.current.style.cssText = "display: none;";
+    updateWorkBtn.current.style.cssText = "display: inline;";
+    workForm.current.style.cssText = "display: block;";
+    limitErrorDiv.current.style.cssText = "display: none;";
   }
 
   function updateWork() {
@@ -110,26 +119,26 @@ export function WorkSection() {
         id: 0,
         value: "",
       });
-      document.getElementById("update-work").style.cssText = "display: none;";
-      document.getElementById("add-work").style.cssText = "display: inline;";
-      document.getElementById("submit-work").style.cssText = "display: inline;";
-      document.querySelector(".work-form").style.cssText = "display: none;";
-      document.getElementById("update-role").style.cssText = "display: none;";
-      document.getElementById("add-role").style.cssText = "display: inline;";
+      updateWorkBtn.current.style.cssText = "display: none;";
+      addWorkBtn.current.style.cssText = "display: inline;";
+      submitWorkBtn.current.style.cssText = "display: inline;";
+      workForm.current.style.cssText = "display: none;";
+      updateRoleBtn.current.style.cssText = "display: none;";
+      addRoleBtn.current.style.cssText = "display: inline;";
     }
   }
 
   function deleteWork(workId) {
     setExperiences(experiences.filter((exp) => exp.id !== workId));
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (workDetails.id === workId || experiences.length === 1) {
-      document.getElementById("update-role").style.cssText = "display: none;";
-      document.getElementById("add-role").style.cssText = "display: inline;";
-      document.querySelector(".work-form").style.cssText = "display: none;";
-      document.getElementById("add-work").style.cssText = "display: inline;";
-      document.getElementById("update-work").style.cssText = "display: none;";
-      document.getElementById("submit-work").style.cssText = "display: inline;";
+      updateRoleBtn.current.style.cssText = "display: none;";
+      addRoleBtn.current.style.cssText = "display: inline;";
+      workForm.current.style.cssText = "display: none;";
+      addWorkBtn.current.style.cssText = "display: inline;";
+      updateWorkBtn.current.style.cssText = "display: none;";
+      submitWorkBtn.current.style.cssText = "display: inline;";
 
       setWorkDetails({
         id: 0,
@@ -153,10 +162,10 @@ export function WorkSection() {
     ]);
 
     // Display the add button again
-    document.getElementById("add-work").style.cssText = "display: inline;";
+    addWorkBtn.current.style.cssText = "display: inline;";
 
     // Hide the form
-    document.querySelector(".work-form").style.cssText = "display: none;";
+    workForm.current.style.cssText = "display: none;";
 
     // Display the class containing Work component cards
     document.querySelector(".work-cards").style.cssText = "display: block;";
@@ -164,18 +173,18 @@ export function WorkSection() {
 
   function handleCancel() {
     // Display the add button again
-    document.getElementById("add-work").style.cssText = "display: inline;";
+    addWorkBtn.current.style.cssText = "display: inline;";
 
     // Hide the form
-    document.querySelector(".work-form").style.cssText = "display: none;";
+    workForm.current.style.cssText = "display: none;";
 
     // Hide Update role button and bring back Add role button
-    document.getElementById("update-role").style.cssText = "display: none;";
-    document.getElementById("add-role").style.cssText = "display: inline;";
+    updateRoleBtn.current.style.cssText = "display: none;";
+    addRoleBtn.current.style.cssText = "display: inline;";
 
     // Hide Update button and bring back submit button
-    document.getElementById("update-work").style.cssText = "display: none;";
-    document.getElementById("submit-work").style.cssText = "display: inline;";
+    updateWorkBtn.current.style.cssText = "display: none;";
+    submitWorkBtn.current.style.cssText = "display: inline;";
 
     // Reset workDetails and role
     setWorkDetails({
@@ -203,7 +212,7 @@ export function WorkSection() {
     }
     setRole({ id: 0, value: "" });
     if (workDetails.roles.length + 1 === roleLimit) {
-      document.getElementById("add-role").disabled = true;
+      addRoleBtn.current.disabled = true;
     }
   }
 
@@ -213,9 +222,9 @@ export function WorkSection() {
         setRole({ id: r.id, value: r.value });
       }
     });
-    document.getElementById("update-role").style.cssText = "display: inline;";
-    document.getElementById("add-role").style.cssText = "display: none;";
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    updateRoleBtn.current.style.cssText = "display: inline;";
+    addRoleBtn.current.style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
   }
 
   function updateRole() {
@@ -229,13 +238,13 @@ export function WorkSection() {
       });
       setWorkDetails({ ...workDetails, roles: updatedRoles });
       setRole({ id: 0, value: "" });
-      document.getElementById("update-role").style.cssText = "display: none;";
-      document.getElementById("add-role").style.cssText = "display: inline;";
+      updateRoleBtn.current.style.cssText = "display: none;";
+      addRoleBtn.current.style.cssText = "display: inline;";
 
       if (workDetails.roles.length === roleLimit) {
-        document.getElementById("add-role").disabled = true;
+        addRoleBtn.current.disabled = true;
       } else {
-        document.getElementById("add-role").disabled = false;
+        addRoleBtn.current.disabled = false;
       }
     }
   }
@@ -247,27 +256,38 @@ export function WorkSection() {
     });
 
     if (role.id === roleId || workDetails.roles.length === 1) {
-      document.getElementById("update-role").style.cssText = "display: none;";
-      document.getElementById("add-role").style.cssText = "display: inline;";
+      updateRoleBtn.current.style.cssText = "display: none;";
+      addRoleBtn.current.style.cssText = "display: inline;";
       setRole({ id: 0, value: "" });
     }
 
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (workDetails.roles.length - 1 === roleLimit) {
-      document.getElementById("add-role").disabled = true;
+      addRoleBtn.current.disabled = true;
     } else {
-      document.getElementById("add-role").disabled = false;
+      addRoleBtn.current.disabled = false;
     }
   }
 
   return (
     <>
-      <button type="button" id="add-work" onClick={() => addWork()}>
+      <button
+        type="button"
+        id="add-work"
+        ref={addWorkBtn}
+        onClick={() => addWork()}
+      >
         Add Work Experience
       </button>
-      <div className="limit-error">Work limit reached!</div>
-      <form className="work-form" onSubmit={() => handleSubmit()}>
+      <div className="limit-error" ref={limitErrorDiv}>
+        Work limit reached!
+      </div>
+      <form
+        className="work-form"
+        ref={workForm}
+        onSubmit={() => handleSubmit()}
+      >
         <label htmlFor="company">Company name: </label>
         <input
           type="text"
@@ -342,19 +362,34 @@ export function WorkSection() {
           value={role.value}
           onChange={(e) => setRole({ ...role, value: e.target.value })}
         />
-        <button type="button" onClick={() => addRole()} id="add-role">
+        <button
+          type="button"
+          ref={addRoleBtn}
+          onClick={() => addRole()}
+          id="add-role"
+        >
           Add role
         </button>
-        <button type="button" onClick={() => updateRole()} id="update-role">
+        <button
+          type="button"
+          ref={updateRoleBtn}
+          onClick={() => updateRole()}
+          id="update-role"
+        >
           Update role
         </button>
         <button type="button" id="cancel-work" onClick={() => handleCancel()}>
           Cancel
         </button>
-        <button type="submit" id="submit-work">
+        <button type="submit" ref={submitWorkBtn} id="submit-work">
           Submit
         </button>
-        <button id="update-work" type="button" onClick={() => updateWork()}>
+        <button
+          id="update-work"
+          type="button"
+          ref={updateWorkBtn}
+          onClick={() => updateWork()}
+        >
           Update
         </button>
       </form>

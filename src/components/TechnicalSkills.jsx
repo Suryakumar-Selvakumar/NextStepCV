@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SkillsGroup } from "./SkillsGroup";
 import "../styles/TechnicalSkills.css";
 
@@ -12,6 +12,13 @@ export function TechnicalSkills() {
   });
   const [limit, setLimit] = useState(5);
 
+  // useRef hooks for DOM nodes
+  const addTechnicalSkillsBtn = useRef(null);
+  const limitErrorDiv = useRef(null);
+  const technicalSkillsForm = useRef(null);
+  const addSkillsGroupBtn = useRef(null);
+  const updateSkillsGroupBtn = useRef(null);
+
   useEffect(() => {
     localStorage.setItem("skills", JSON.stringify(skills));
   }, [skills]);
@@ -19,28 +26,22 @@ export function TechnicalSkills() {
   function handleSubmit() {
     if (skills.length >= 1) {
       // Hide the form
-      document.querySelector(".technical-skills-form").style.cssText =
-        "display: none;";
+      technicalSkillsForm.current.style.cssText = "display: none;";
 
       // Display the Add Technical Skills button
-      document.getElementById("add-technical-skills").style.cssText =
-        "display: block";
+      addTechnicalSkillsBtn.current.style.cssText = "display: block";
     }
   }
 
   function handleCancel() {
     // Hide the form
-    document.querySelector(".technical-skills-form").style.cssText =
-      "display: none;";
+    technicalSkillsForm.current.style.cssText = "display: none;";
 
     // Display the Add Technical Skills button
-    document.getElementById("add-technical-skills").style.cssText =
-      "display: block";
+    addTechnicalSkillsBtn.current.style.cssText = "display: block";
 
-    document.getElementById("update-skills-group").style.cssText =
-      "display: none;";
-    document.getElementById("add-skills-group").style.cssText =
-      "display: inline;";
+    updateSkillsGroupBtn.current.style.cssText = "display: none;";
+    addSkillsGroupBtn.current.style.cssText = "display: inline;";
 
     // Reset skillsGroup
     setSkillsGroup({
@@ -52,13 +53,11 @@ export function TechnicalSkills() {
 
   function addTechnicalSkills() {
     if (skills.length < limit) {
-      document.querySelector(".technical-skills-form").style.cssText =
-        "display: block;";
-      document.getElementById("add-technical-skills").style.cssText =
-        "display: none;";
-      document.querySelector(".limit-error").style.cssText = "display: none;";
+      technicalSkillsForm.current.style.cssText = "display: block;";
+      addTechnicalSkillsBtn.current.style.cssText = "display: none;";
+      limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      document.querySelector(".limit-error").style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: block;";
     }
   }
 
@@ -99,7 +98,7 @@ export function TechnicalSkills() {
     }
 
     if (skills.length + 1 === limit) {
-      document.getElementById("add-skills-group").disabled = true;
+      addSkillsGroupBtn.current.disabled = true;
     }
   }
 
@@ -113,15 +112,11 @@ export function TechnicalSkills() {
         });
       }
     });
-    document.getElementById("update-skills-group").style.cssText =
-      "display: inline;";
-    document.getElementById("add-skills-group").style.cssText =
-      "display: none;";
-    document.getElementById("add-technical-skills").style.cssText =
-      "display: none;";
-    document.querySelector(".technical-skills-form").style.cssText =
-      "display: block;";
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    updateSkillsGroupBtn.current.style.cssText = "display: inline;";
+    addSkillsGroupBtn.current.style.cssText = "display: none;";
+    addTechnicalSkillsBtn.current.style.cssText = "display: none;";
+    technicalSkillsForm.current.style.cssText = "display: block;";
+    limitErrorDiv.current.style.cssText = "display: none;";
   }
 
   function updateSkillsGroup() {
@@ -143,19 +138,16 @@ export function TechnicalSkills() {
         skillsType: "",
         skillsList: "",
       });
-      document.getElementById("update-skills-group").style.cssText =
-        "display: none;";
-      document.getElementById("add-skills-group").style.cssText =
-        "display: inline;";
-      document.getElementById("update-skills-group").style.cssText =
-        "display: none;";
-      // document.getElementById("add-technical-skills").style.cssText =
+      updateSkillsGroupBtn.current.style.cssText = "display: none;";
+      addSkillsGroupBtn.current.style.cssText = "display: inline;";
+      updateSkillsGroupBtn.current.style.cssText = "display: none;";
+      // addTechnicalSkillsBtn.current.style.cssText =
       //   "display: inline;";
 
       if (skills.length === limit) {
-        document.getElementById("add-skills-group").disabled = true;
+        addSkillsGroupBtn.current.disabled = true;
       } else {
-        document.getElementById("add-skills-group").disabled = false;
+        addSkillsGroupBtn.current.disabled = false;
       }
     }
   }
@@ -164,10 +156,8 @@ export function TechnicalSkills() {
     setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
 
     if (skillsGroup.id === skillsGroupId || skills.length === 1) {
-      document.getElementById("update-skills-group").style.cssText =
-        "display: none;";
-      document.getElementById("add-skills-group").style.cssText =
-        "display: inline;";
+      updateSkillsGroupBtn.current.style.cssText = "display: none;";
+      addSkillsGroupBtn.current.style.cssText = "display: inline;";
       setSkillsGroup({
         id: 0,
         skillsType: "",
@@ -175,12 +165,12 @@ export function TechnicalSkills() {
       });
     }
 
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (skills.length - 1 === limit) {
-      document.getElementById("add-skills-group").disabled = true;
+      addSkillsGroupBtn.current.disabled = true;
     } else {
-      document.getElementById("add-skills-group").disabled = false;
+      addSkillsGroupBtn.current.disabled = false;
     }
   }
 
@@ -189,12 +179,19 @@ export function TechnicalSkills() {
       <button
         type="button"
         id="add-technical-skills"
+        ref={addTechnicalSkillsBtn}
         onClick={() => addTechnicalSkills()}
       >
         Add Technical Skills
       </button>
-      <div className="limit-error">Skills limit reached!</div>
-      <form className="technical-skills-form" onSubmit={() => handleSubmit()}>
+      <div className="limit-error" ref={limitErrorDiv}>
+        Skills limit reached!
+      </div>
+      <form
+        className="technical-skills-form"
+        ref={technicalSkillsForm}
+        onSubmit={() => handleSubmit()}
+      >
         <label htmlFor="skills-type">Enter skills type: </label>
         <input
           type="text"
@@ -217,6 +214,7 @@ export function TechnicalSkills() {
           type="button"
           onClick={() => addSkillsGroup()}
           id="add-skills-group"
+          ref={addSkillsGroupBtn}
         >
           Add Skills Group
         </button>
@@ -224,6 +222,7 @@ export function TechnicalSkills() {
           type="button"
           onClick={() => updateSkillsGroup()}
           id="update-skills-group"
+          ref={updateSkillsGroupBtn}
         >
           Update Skills Group
         </button>
@@ -235,7 +234,7 @@ export function TechnicalSkills() {
           Cancel
         </button>
         <button type="submit" id="submit-technical-skills">
-          Submit
+          Save
         </button>
       </form>
       <div className="technical-skills-cards">

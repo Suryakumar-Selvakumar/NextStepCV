@@ -10,9 +10,9 @@ export function Sidebar() {
     <>
       {/* <General /> useRef() integrated */}
       {/* <EducationSection /> useRef() integrated */}
-      {/* <TechnicalSkills /> Cancel button added */}
-      {/* <WorkSection /> Cancel button added*/}
-      {/* <ProjectSection /> Cancel button added */}
+      {/* <TechnicalSkills /> useRef() integrated */}
+      {/* <WorkSection /> useRef() integrated */}
+      <ProjectSection />
     </>
   );
 }
