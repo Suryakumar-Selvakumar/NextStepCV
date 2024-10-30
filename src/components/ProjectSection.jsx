@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
@@ -19,23 +19,32 @@ export function ProjectSection() {
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
 
+  // DOM refs
+  const addProjectBtn = useRef(null);
+  const projectForm = useRef(null);
+  const limitErrorDiv = useRef(null);
+  const addDetailBtn = useRef(null);
+  const updateProjectBtn = useRef(null);
+  const updateDetailBtn = useRef(null);
+  const submitProjectBtn = useRef(null);
+
   useEffect(() => {
     localStorage.setItem("projects", JSON.stringify(projects));
   }, [projects]);
 
   function addProject() {
     if (projects.length < projectLimit) {
-      document.getElementById("add-project").style.cssText = "display: none;";
-      document.querySelector(".project-form").style.cssText = "display: block;";
-      document.querySelector(".limit-error").style.cssText = "display: none;";
+      addProjectBtn.current.style.cssText = "display: none;";
+      projectForm.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      document.querySelector(".limit-error").style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: block;";
     }
 
     if (projectDetails.details.length === detailLimit) {
-      document.getElementById("add-detail").disabled = true;
+      addDetailBtn.current.disabled = true;
     } else {
-      document.getElementById("add-detail").disabled = false;
+      addDetailBtn.current.disabled = false;
     }
   }
 
@@ -43,9 +52,9 @@ export function ProjectSection() {
     projects.forEach((proj) => {
       if (proj.id === projectId) {
         if (proj.details.length === detailLimit) {
-          document.getElementById("add-detail").disabled = true;
+          addDetailBtn.current.disabled = true;
         } else {
-          document.getElementById("add-detail").disabled = false;
+          addDetailBtn.current.disabled = false;
         }
 
         setProjectDetails({
@@ -57,12 +66,11 @@ export function ProjectSection() {
         });
       }
     });
-    document.getElementById("add-project").style.cssText = "display: none;";
-    document.getElementById("submit-project").style.cssText = "display: none;";
-    document.getElementById("update-project").style.cssText =
-      "display: inline;";
-    document.querySelector(".project-form").style.cssText = "display: block;";
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    addProjectBtn.current.style.cssText = "display: none;";
+    submitProjectBtn.current.style.cssText = "display: none;";
+    updateProjectBtn.current.style.cssText = "display: inline;";
+    projectForm.current.style.cssText = "display: block;";
+    limitErrorDiv.current.style.cssText = "display: none;";
   }
 
   function updateProject() {
@@ -96,30 +104,26 @@ export function ProjectSection() {
         id: 0,
         value: "",
       });
-      document.getElementById("update-project").style.cssText =
-        "display: none;";
-      document.getElementById("add-project").style.cssText = "display: inline;";
-      document.getElementById("submit-project").style.cssText =
-        "display: block;";
-      document.querySelector(".project-form").style.cssText = "display: none;";
-      document.getElementById("update-detail").style.cssText = "display: none;";
-      document.getElementById("add-detail").style.cssText = "display: inline;";
+      updateProjectBtn.current.style.cssText = "display: none;";
+      addProjectBtn.current.style.cssText = "display: inline;";
+      submitProjectBtn.current.style.cssText = "display: block;";
+      projectForm.current.style.cssText = "display: none;";
+      updateDetailBtn.current.style.cssText = "display: none;";
+      addDetailBtn.current.style.cssText = "display: inline;";
     }
   }
 
   function deleteProject(projectId) {
     setProjects(projects.filter((proj) => proj.id !== projectId));
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (projectDetails.id === projectId || projects.length === 1) {
-      document.getElementById("update-detail").style.cssText = "display: none;";
-      document.getElementById("add-detail").style.cssText = "display: inline;";
-      document.querySelector(".project-form").style.cssText = "display: none;";
-      document.getElementById("add-project").style.cssText = "display: inline;";
-      document.getElementById("update-project").style.cssText =
-        "display: none;";
-      document.getElementById("submit-project").style.cssText =
-        "display: inline;";
+      updateDetailBtn.current.style.cssText = "display: none;";
+      addDetailBtn.current.style.cssText = "display: inline;";
+      projectForm.current.style.cssText = "display: none;";
+      addProjectBtn.current.style.cssText = "display: inline;";
+      updateProjectBtn.current.style.cssText = "display: none;";
+      submitProjectBtn.current.style.cssText = "display: inline;";
 
       setProjectDetails({
         id: 0,
@@ -137,30 +141,26 @@ export function ProjectSection() {
     setProjects([...projects, { ...projectDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
-    document.getElementById("add-project").style.cssText = "display: inline;";
+    addProjectBtn.current.style.cssText = "display: inline;";
 
     // Hide the form
-    document.querySelector(".project-form").style.cssText = "display: none;";
-
-    // Display the class containing Project component cards
-    document.querySelector(".project-cards").style.cssText = "display: block;";
+    projectForm.current.style.cssText = "display: none;";
   }
-  
+
   function handleCancel() {
     // Display the add button again
-    document.getElementById("add-project").style.cssText = "display: inline;";
+    addProjectBtn.current.style.cssText = "display: inline;";
 
     // Hide the form
-    document.querySelector(".project-form").style.cssText = "display: none;";
+    projectForm.current.style.cssText = "display: none;";
 
     // Hide Update detail button and bring back Add detail button
-    document.getElementById("update-detail").style.cssText = "display: none;";
-    document.getElementById("add-detail").style.cssText = "display: inline;";
+    updateDetailBtn.current.style.cssText = "display: none;";
+    addDetailBtn.current.style.cssText = "display: inline;";
 
     // Hide Update button and bring back Submit button
-    document.getElementById("update-project").style.cssText = "display: none;";
-    document.getElementById("submit-project").style.cssText =
-      "display: inline;";
+    updateProjectBtn.current.style.cssText = "display: none;";
+    submitProjectBtn.current.style.cssText = "display: inline;";
 
     // Reset projectDetails and detail
     setProjectDetails({
@@ -185,7 +185,7 @@ export function ProjectSection() {
     }
     setDetail({ id: 0, value: "" });
     if (projectDetails.details.length + 1 === detailLimit) {
-      document.getElementById("add-detail").disabled = true;
+      addDetailBtn.current.disabled = true;
     }
   }
 
@@ -195,9 +195,9 @@ export function ProjectSection() {
         setDetail({ id: dt.id, value: dt.value });
       }
     });
-    document.getElementById("update-detail").style.cssText = "display: inline;";
-    document.getElementById("add-detail").style.cssText = "display: none;";
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    updateDetailBtn.current.style.cssText = "display: inline;";
+    addDetailBtn.current.style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
   }
 
   function updateDetail() {
@@ -211,13 +211,13 @@ export function ProjectSection() {
       });
       setProjectDetails({ ...projectDetails, details: updatedDetails });
       setDetail({ id: 0, value: "" });
-      document.getElementById("update-detail").style.cssText = "display: none;";
-      document.getElementById("add-detail").style.cssText = "display: inline;";
+      updateDetailBtn.current.style.cssText = "display: none;";
+      addDetailBtn.current.style.cssText = "display: inline;";
 
       if (projectDetails.details.length === detailLimit) {
-        document.getElementById("add-detail").disabled = true;
+        addDetailBtn.current.disabled = true;
       } else {
-        document.getElementById("add-detail").disabled = false;
+        addDetailBtn.current.disabled = false;
       }
     }
   }
@@ -229,27 +229,38 @@ export function ProjectSection() {
     });
 
     if (detail.id === detailId || projectDetails.details.length === 1) {
-      document.getElementById("update-detail").style.cssText = "display: none;";
-      document.getElementById("add-detail").style.cssText = "display: inline;";
+      updateDetailBtn.current.style.cssText = "display: none;";
+      addDetailBtn.current.style.cssText = "display: inline;";
       setDetail({ id: 0, value: "" });
     }
 
-    document.querySelector(".limit-error").style.cssText = "display: none;";
+    limitErrorDiv.current.style.cssText = "display: none;";
 
     if (projectDetails.details.length - 1 === detailLimit) {
-      document.getElementById("add-detail").disabled = true;
+      addDetailBtn.current.disabled = true;
     } else {
-      document.getElementById("add-detail").disabled = false;
+      addDetailBtn.current.disabled = false;
     }
   }
 
   return (
     <>
-      <button type="button" id="add-project" onClick={() => addProject()}>
+      <button
+        type="button"
+        ref={addProjectBtn}
+        id="add-project"
+        onClick={() => addProject()}
+      >
         Add Project
       </button>
-      <div className="limit-error">Project limit reached!</div>
-      <form className="project-form" onSubmit={() => handleSubmit()}>
+      <div className="limit-error" ref={limitErrorDiv}>
+        Project limit reached!
+      </div>
+      <form
+        className="project-form"
+        ref={projectForm}
+        onSubmit={() => handleSubmit()}
+      >
         <label htmlFor="project-name">Project name: </label>
         <input
           type="text"
@@ -296,10 +307,20 @@ export function ProjectSection() {
           value={detail.value}
           onChange={(e) => setDetail({ ...detail, value: e.target.value })}
         />
-        <button type="button" onClick={() => addDetail()} id="add-detail">
+        <button
+          type="button"
+          ref={addDetailBtn}
+          onClick={() => addDetail()}
+          id="add-detail"
+        >
           Add detail
         </button>
-        <button type="button" onClick={() => updateDetail()} id="update-detail">
+        <button
+          type="button"
+          ref={updateDetailBtn}
+          onClick={() => updateDetail()}
+          id="update-detail"
+        >
           Update detail
         </button>
         <button
@@ -309,10 +330,11 @@ export function ProjectSection() {
         >
           Cancel
         </button>
-        <button type="submit" id="submit-project">
+        <button type="submit" ref={submitProjectBtn} id="submit-project">
           Submit
         </button>
         <button
+          ref={updateProjectBtn}
           id="update-project"
           type="button"
           onClick={() => updateProject()}

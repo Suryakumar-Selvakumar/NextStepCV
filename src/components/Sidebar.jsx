@@ -12,7 +12,7 @@ export function Sidebar() {
       {/* <EducationSection /> useRef() integrated */}
       {/* <TechnicalSkills /> useRef() integrated */}
       {/* <WorkSection /> useRef() integrated */}
-      <ProjectSection />
+      {/* <ProjectSection /> useRef() integrated */}
     </>
   );
 }
