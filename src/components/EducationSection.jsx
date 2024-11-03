@@ -4,7 +4,7 @@ import "../styles/EducationSection.css";
 
 export function EducationSection() {
   const storedCourses = JSON.parse(localStorage.getItem("courses"));
-  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
+  const [courses, setCourses] = useState(storedCourses);
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -25,8 +25,10 @@ export function EducationSection() {
   const limitErrorDiv = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem("courses", JSON.stringify(courses));
+    if (courses) localStorage.setItem("courses", JSON.stringify(courses));
   }, [courses]);
+
+  console.log(courses);
 
   function addEducation() {
     if (courses.length < limit) {
@@ -181,7 +183,9 @@ export function EducationSection() {
       >
         Add Education
       </button>
-      <div className="limit-error" ref={limitErrorDiv}>Education limit reached!</div>
+      <div className="limit-error" ref={limitErrorDiv}>
+        Education limit reached!
+      </div>
       <form
         className="education-form"
         ref={educationForm}
@@ -305,14 +309,15 @@ export function EducationSection() {
         </button>
       </form>
       <div className="education-cards">
-        {courses.map((exp) => (
-          <Education
-            key={exp.id}
-            education={exp}
-            editEducation={editEducation}
-            deleteEducation={deleteEducation}
-          />
-        ))}
+        {courses &&
+          courses.map((exp) => (
+            <Education
+              key={exp.id}
+              education={exp}
+              editEducation={editEducation}
+              deleteEducation={deleteEducation}
+            />
+          ))}
       </div>
     </>
   );

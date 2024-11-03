@@ -9,7 +9,7 @@ export function Sidebar() {
   return (
     <div className="sidebar">
       {/* <General /> useRef() integrated */}
-      {/* <EducationSection /> useRef() integrated */}
+      <EducationSection />
       {/* <TechnicalSkills /> useRef() integrated */}
       {/* <WorkSection /> useRef() integrated */}
       {/* <ProjectSection /> useRef() integrated */}

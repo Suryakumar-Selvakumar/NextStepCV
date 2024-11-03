@@ -14,8 +14,32 @@ export function Header() {
       gitHub: "github.com/john-smith-fake",
       formSubmitted: false,
     };
+    const dummyCourses = [
+      {
+        id: crypto.randomUUID(),
+        school: "NorthEastern University",
+        placeStudy: "Boston, Massachusetts",
+        titleStudy: "Master's in Computer Science",
+        startDateStudy: "",
+        endDateStudy: "2025-05-17",
+        gpa: 3.9,
+        completedStudy: false,
+      },
+      {
+        id: crypto.randomUUID(),
+        school: "Purdue University",
+        placeStudy: "West Lafayette, Indiana",
+        titleStudy: "Bachelor's in Computer Science",
+        startDateStudy: "2019-08-05",
+        endDateStudy: "2023-05-08",
+        gpa: 3.84,
+        completedStudy: true,
+      },
+    ];
     localStorage.clear();
     localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
+    localStorage.setItem("courses", JSON.stringify(dummyCourses));
+    location.reload();
   }
 
   function clearResume() {
@@ -27,6 +51,7 @@ export function Header() {
     localStorage.clear();
     modalContainerDiv.current.style.cssText = "visibility: hidden";
     resetModalDiv.current.style.cssText = "visibility: hidden";
+    location.reload();
   }
 
   function cancelResetResume() {
@@ -46,16 +71,20 @@ export function Header() {
           <p id="logo-text">NextStepCV</p>
         </div>
         <div className="header-buttons">
-          <button onClick={() => loadDummy()}>Load Dummy</button>
-          <button onClick={() => clearResume()}>Clear Resume</button>
-          <button>Download Resume</button>
+          <button onClick={() => loadDummy()} id="load-dummy">
+            Load Dummy
+          </button>
+          <button onClick={() => clearResume()} id="clear-resume">
+            Clear Resume
+          </button>
+          <button id="download-resume">Download Resume</button>
         </div>
       </header>
       <div className="modal-container" ref={modalContainerDiv}>
         <div className="reset-modal" ref={resetModalDiv}>
           <div className="warning-msg">
             <img
-              src="./public/warning-blue.svg"
+              src="./public/warning-gold.svg"
               alt="a warning logo"
               id="warning-img"
             />
