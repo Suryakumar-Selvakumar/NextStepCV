@@ -3,6 +3,7 @@ import { useRef } from "react";
 
 export function Header() {
   const modalContainerDiv = useRef(null);
+  const resetModalDiv = useRef(null);
 
   function loadDummy() {
     const dummyContactDetails = {
@@ -18,11 +19,19 @@ export function Header() {
   }
 
   function clearResume() {
-    modalContainerDiv.style.cssText = "visibility: visible;";
+    resetModalDiv.current.style.cssText = "visibility: visible;";
+    modalContainerDiv.current.style.cssText = "visibility: visible;";
   }
 
   function resetResume() {
-    // localStorage.clear();
+    localStorage.clear();
+    modalContainerDiv.current.style.cssText = "visibility: hidden";
+    resetModalDiv.current.style.cssText = "visibility: hidden";
+  }
+
+  function cancelResetResume() {
+    modalContainerDiv.current.style.cssText = "visibility: hidden";
+    resetModalDiv.current.style.cssText = "visibility: hidden";
   }
 
   return (
@@ -30,7 +39,7 @@ export function Header() {
       <header>
         <div className="logo">
           <img
-            src="./public/nextGold.svg"
+            src="./public/next-gold.svg"
             alt="logo of the app"
             id="logo-img"
           />
@@ -42,9 +51,16 @@ export function Header() {
           <button>Download Resume</button>
         </div>
       </header>
-      <div className="modal-container" ref={null}>
-        <div className="reset-modal">
-          <p>This will Reset the Entire Resume!</p>
+      <div className="modal-container" ref={modalContainerDiv}>
+        <div className="reset-modal" ref={resetModalDiv}>
+          <div className="warning-msg">
+            <img
+              src="./public/warning-blue.svg"
+              alt="a warning logo"
+              id="warning-img"
+            />
+            <p>This will Reset the Entire Resume!</p>
+          </div>
           <div className="reset-modal-buttons">
             <button id="okay-reset" onClick={() => resetResume()}>
               Okay
