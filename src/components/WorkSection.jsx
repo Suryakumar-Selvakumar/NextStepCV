@@ -32,7 +32,8 @@ export function WorkSection() {
   const submitWorkBtn = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem("experiences", JSON.stringify(experiences));
+    if (experiences)
+      localStorage.setItem("experiences", JSON.stringify(experiences));
   }, [experiences]);
 
   function addWork() {
@@ -404,14 +405,15 @@ export function WorkSection() {
         ))}
       </ul>
       <div className="work-cards">
-        {experiences.map((exp) => (
-          <Work
-            key={exp.id}
-            work={exp}
-            editWork={editWork}
-            deleteWork={deleteWork}
-          />
-        ))}
+        {experiences &&
+          experiences.map((exp) => (
+            <Work
+              key={exp.id}
+              work={exp}
+              editWork={editWork}
+              deleteWork={deleteWork}
+            />
+          ))}
       </div>
     </>
   );

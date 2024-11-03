@@ -4,7 +4,7 @@ import "../styles/TechnicalSkills.css";
 
 export function TechnicalSkills() {
   const storedSkills = JSON.parse(localStorage.getItem("skills"));
-  const [skills, setSkills] = useState(storedSkills);
+  const [skills, setSkills] = useState(storedSkills ? storedSkills : []);
   const [skillsGroup, setSkillsGroup] = useState({
     id: 0,
     skillsType: "",
@@ -20,7 +20,7 @@ export function TechnicalSkills() {
   const updateSkillsGroupBtn = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem("skills", JSON.stringify(skills));
+    if (skills) localStorage.setItem("skills", JSON.stringify(skills));
   }, [skills]);
 
   function handleSubmit() {

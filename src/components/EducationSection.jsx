@@ -4,7 +4,7 @@ import "../styles/EducationSection.css";
 
 export function EducationSection() {
   const storedCourses = JSON.parse(localStorage.getItem("courses"));
-  const [courses, setCourses] = useState(storedCourses);
+  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -27,8 +27,6 @@ export function EducationSection() {
   useEffect(() => {
     if (courses) localStorage.setItem("courses", JSON.stringify(courses));
   }, [courses]);
-
-  console.log(courses);
 
   function addEducation() {
     if (courses.length < limit) {

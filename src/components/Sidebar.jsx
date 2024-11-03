@@ -8,10 +8,10 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <div className="sidebar">
-      {/* <General />*/}
-      {/* <EducationSection /> */}
-      <TechnicalSkills />
-      {/* <WorkSection /> useRef() integrated */}
+      {/* <General />
+      <EducationSection />
+      <TechnicalSkills /> */}
+      <WorkSection />
       {/* <ProjectSection /> useRef() integrated */}
     </div>
   );
