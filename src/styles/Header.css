@@ -1,18 +1,32 @@
+@font-face {
+  font-family: myFontTitle;
+  src: url("../fonts/SHUTTLE-X.woff");
+}
+
 header {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
   background-color: rgb(31, 151, 255);
   width: 100%;
+  color: white;
 }
 
 .logo {
   display: flex;
+  align-items: center;
+  /* gap: 0.5rem; */
 }
 
 #logo-img {
   width: 50px;
   height: 50px;
+}
+
+#logo-text {
+  font-family: myFontTitle;
+  font-weight: 500;
+  font-size: 2.075rem;
 }
 
 .header-buttons {

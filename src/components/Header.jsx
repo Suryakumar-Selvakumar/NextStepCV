@@ -221,12 +221,12 @@ export function Header() {
     <>
       <header>
         <div className="logo">
+          <p id="logo-text">NextStep</p>
           <img
             src="./public/next-gold.svg"
             alt="logo of the app"
             id="logo-img"
           />
-          <p id="logo-text">NextStepCV</p>
         </div>
         <div className="header-buttons">
           <button onClick={() => loadDummy()} id="load-dummy">
