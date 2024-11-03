@@ -11,8 +11,8 @@ export function Sidebar() {
       {/* <General />
       <EducationSection />
       <TechnicalSkills /> */}
-      <WorkSection />
-      {/* <ProjectSection /> useRef() integrated */}
+      {/* <WorkSection /> */}
+      {/* <ProjectSection /> */}
     </div>
   );
 }

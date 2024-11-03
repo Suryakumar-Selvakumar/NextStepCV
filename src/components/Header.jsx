@@ -58,10 +58,70 @@ export function Header() {
         skillsType: "Libraries",
       },
     ];
+    const dummyExperiences = [
+      {
+        company: "Google",
+        endWork: "",
+        id: crypto.randomUUID(),
+        place: "San Francisco, California",
+        position: "Software Engineer",
+        roles: [
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Worked with product managers to re-architect a multi-page web app into a single page web-app, boosting yearly revenue by $1.4M",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Constructed the logic for a streamlined ad-serving platform that scaled to our 35M users, which improved the page speed by 15% after implementation",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Tested software for bugs and operating speed, fixing bugs and documenting processes to increase efficiency by 18%",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Iterated platform for college admissions, collaborating with a group of 4 engineers to create features across the software",
+          },
+        ],
+        startWork: "2023-06-05",
+        stillWorking: true,
+      },
+      {
+        company: "Tesla",
+        endWork: "2022-06-05",
+        id: crypto.randomUUID(),
+        place: "Austin, Texas",
+        position: "Software Engineer Intern",
+        roles: [
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Developed a full-stack web application using Flask, React, PostgreSQL and Docker to analyze GitHub data",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Explored ways to visualize GitHub Collaboration in a classroom setting",
+          },
+        ],
+        startWork: "2022-08-05",
+        stillWorking: false,
+      },
+    ];
     localStorage.clear();
     localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
     localStorage.setItem("courses", JSON.stringify(dummyCourses));
     localStorage.setItem("skills", JSON.stringify(dummyTechnicalSkills));
+    localStorage.setItem("experiences", JSON.stringify(dummyExperiences));
     location.reload();
   }
 
