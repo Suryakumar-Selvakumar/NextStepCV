@@ -29,7 +29,7 @@ export function ProjectSection() {
   const submitProjectBtn = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem("projects", JSON.stringify(projects));
+    if (projects) localStorage.setItem("projects", JSON.stringify(projects));
   }, [projects]);
 
   function addProject() {
@@ -353,14 +353,15 @@ export function ProjectSection() {
         ))}
       </ul>
       <div className="project-cards">
-        {projects.map((proj) => (
-          <Project
-            key={proj.id}
-            project={proj}
-            editProject={editProject}
-            deleteProject={deleteProject}
-          />
-        ))}
+        {projects &&
+          projects.map((proj) => (
+            <Project
+              key={proj.id}
+              project={proj}
+              editProject={editProject}
+              deleteProject={deleteProject}
+            />
+          ))}
       </div>
     </>
   );

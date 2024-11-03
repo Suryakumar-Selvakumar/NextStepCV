@@ -117,11 +117,68 @@ export function Header() {
         stillWorking: false,
       },
     ];
+    const dummyProjects = [
+      {
+        details: [
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Developed a full-stack web application using with Flask serving a REST API with React as the frontend",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Implemented GitHub OAuth to get data from user’s repositories",
+          },
+          {
+            id: crypto.randomUUID(),
+            value: "Visualized GitHub data to show collaboration",
+          },
+          {
+            id: crypto.randomUUID(),
+            value: "Used Celery and Redis for asynchronous tasks",
+          },
+        ],
+        id: crypto.randomUUID(),
+        projectDate: "2024-06-07",
+        projectName: "Gitlytics",
+        techStack: "Python, Flask, React, PostgreSQL, Docker",
+      },
+      {
+        details: [
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Developed a Minecraft server plugin to entertain kids during free time for a previous job",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Published plugin to websites gaining 2K+ downloads and an average 4.5/5-star review",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Implemented continuous delivery using TravisCI to build the plugin upon new a release",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Collaborated with Minecraft server administrators to suggest features and get feedback about the plugin",
+          },
+        ],
+        id: crypto.randomUUID(),
+        projectDate: "2023-11-21",
+        projectName: "Simple Paintball",
+        techStack: "Spigot API, Java, Maven, TravisCI, Git",
+      },
+    ];
     localStorage.clear();
     localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
     localStorage.setItem("courses", JSON.stringify(dummyCourses));
     localStorage.setItem("skills", JSON.stringify(dummyTechnicalSkills));
     localStorage.setItem("experiences", JSON.stringify(dummyExperiences));
+    localStorage.setItem("projects", JSON.stringify(dummyProjects));
     location.reload();
   }
 
