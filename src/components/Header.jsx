@@ -233,9 +233,9 @@ export function Header() {
             Load Dummy
           </button>
           <button onClick={() => clearResume()} id="clear-resume">
-            Clear Resume
+            Clear
           </button>
-          <button id="download-resume">Download Resume</button>
+          <button id="download-resume">Download</button>
         </div>
       </header>
       <div className="modal-container" ref={modalContainerDiv}>
