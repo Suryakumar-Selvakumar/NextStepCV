@@ -149,6 +149,24 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
+              "Built a full-stack web app to allow users to simulate and visualize outcomes of poker hands against opponents of different play styles using open source cards.js on the front-end",
+          },
+          {
+            id: crypto.randomUUID(),
+            value:
+              "Utilized sci-kit learn in Python to simulate possible outcomes under different scenarios that the user chose",
+          },
+        ],
+        id: crypto.randomUUID(),
+        projectDate: "2024-01-21",
+        projectName: "Poker Simulation",
+        techStack: "JavaScript, Python, Git",
+      },
+      {
+        details: [
+          {
+            id: crypto.randomUUID(),
+            value:
               "Developed a Minecraft server plugin to entertain kids during free time for a previous job",
           },
           {
@@ -168,7 +186,7 @@ export function Header() {
           },
         ],
         id: crypto.randomUUID(),
-        projectDate: "2023-11-21",
+        projectDate: "2023-08-21",
         projectName: "Simple Paintball",
         techStack: "Spigot API, Java, Maven, TravisCI, Git",
       },
