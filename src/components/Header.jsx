@@ -36,9 +36,32 @@ export function Header() {
         completedStudy: true,
       },
     ];
+    const dummyTechnicalSkills = [
+      {
+        id: crypto.randomUUID(),
+        skillsList: "Java, Python, C/C++, SQL, JavaScript, HTML/CSS",
+        skillsType: "Programming Languages",
+      },
+      {
+        id: crypto.randomUUID(),
+        skillsList: "React, Node.js, Flask, WordPress, RESTAPI",
+        skillsType: "Frameworks",
+      },
+      {
+        id: crypto.randomUUID(),
+        skillsList: "Git, Docker, VS Code, Anaconda, Google Cloud",
+        skillsType: "Developer Tools",
+      },
+      {
+        id: crypto.randomUUID(),
+        skillsList: "Pandas, NumPy, Matplotlib",
+        skillsType: "Libraries",
+      },
+    ];
     localStorage.clear();
     localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
     localStorage.setItem("courses", JSON.stringify(dummyCourses));
+    localStorage.setItem("skills", JSON.stringify(dummyTechnicalSkills));
     location.reload();
   }
 

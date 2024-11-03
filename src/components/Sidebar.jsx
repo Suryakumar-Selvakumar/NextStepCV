@@ -8,9 +8,9 @@ import "../styles/Sidebar.css";
 export function Sidebar() {
   return (
     <div className="sidebar">
-      {/* <General /> useRef() integrated */}
-      <EducationSection />
-      {/* <TechnicalSkills /> useRef() integrated */}
+      {/* <General />*/}
+      {/* <EducationSection /> */}
+      <TechnicalSkills />
       {/* <WorkSection /> useRef() integrated */}
       {/* <ProjectSection /> useRef() integrated */}
     </div>

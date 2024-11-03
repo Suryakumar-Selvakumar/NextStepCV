@@ -4,7 +4,7 @@ import "../styles/TechnicalSkills.css";
 
 export function TechnicalSkills() {
   const storedSkills = JSON.parse(localStorage.getItem("skills"));
-  const [skills, setSkills] = useState(storedSkills ? storedSkills : []);
+  const [skills, setSkills] = useState(storedSkills);
   const [skillsGroup, setSkillsGroup] = useState({
     id: 0,
     skillsType: "",
@@ -238,14 +238,15 @@ export function TechnicalSkills() {
         </button>
       </form>
       <div className="technical-skills-cards">
-        {skills.map((skillsGroup) => (
-          <SkillsGroup
-            key={skillsGroup.id}
-            skillsGroup={skillsGroup}
-            editSkillsGroup={editSkillsGroup}
-            deleteSkillsGroup={deleteSkillsGroup}
-          />
-        ))}
+        {skills &&
+          skills.map((skillsGroup) => (
+            <SkillsGroup
+              key={skillsGroup.id}
+              skillsGroup={skillsGroup}
+              editSkillsGroup={editSkillsGroup}
+              deleteSkillsGroup={deleteSkillsGroup}
+            />
+          ))}
       </div>
     </>
   );
