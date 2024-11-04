@@ -48,12 +48,14 @@ h6 {
 }
 
 #root {
-  isolation: isolate;
-}
-
-#root {
   height: 100vh;
   display: grid;
   grid-template-rows: min-content 1fr;
   width: 100%;
+  isolation: isolate;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
 }

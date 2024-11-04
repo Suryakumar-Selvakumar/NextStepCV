@@ -1,3 +1,45 @@
 .general-form {
   display: none;
 }
+
+.general-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.5rem;
+}
+
+.general-main {
+  display: none;
+}
+
+.visible {
+  display: block;
+  animation: expand 250ms ease-in-out;
+  transform-origin: top;
+}
+
+.not-visible {
+  animation: shrink 250s ease-in-out;
+  transform-origin: top;
+}
+
+@keyframes expand {
+  0% {
+    transform: scaleY(0);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    transform: scaleY(0);
+  }
+}
