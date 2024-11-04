@@ -18,6 +18,7 @@ export function WorkSection() {
     roles: [],
     stillWorking: false,
   });
+  const [mainVisible, setMainVisible] = useState(false);
   const [role, setRole] = useState({ id: 0, value: "" });
   const [workLimit, setWorkLimit] = useState(2);
   const [roleLimit, setRoleLimit] = useState(4);
@@ -30,6 +31,7 @@ export function WorkSection() {
   const addRoleBtn = useRef(null);
   const updateRoleBtn = useRef(null);
   const submitWorkBtn = useRef(null);
+  const dropDownSvg = useRef(null);
 
   useEffect(() => {
     if (experiences)
@@ -155,7 +157,10 @@ export function WorkSection() {
     }
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    // Prevent form submission to avoid page reload
+    e.preventDefault();
+
     // Logic to add work to the experiences state
     setExperiences([
       ...experiences,
@@ -272,149 +277,182 @@ export function WorkSection() {
   }
 
   return (
-    <>
-      <button
-        type="button"
-        id="add-work"
-        ref={addWorkBtn}
-        onClick={() => addWork()}
+    <div className="work">
+      <div
+        className="work-header"
+        onClick={() => {
+          setMainVisible(!mainVisible);
+          dropDownSvg.current.classList.toggle("rotate-dropdown");
+        }}
       >
-        Add Work Experience
-      </button>
-      <div className="limit-error" ref={limitErrorDiv}>
-        Work limit reached!
-      </div>
-      <form
-        className="work-form"
-        ref={workForm}
-        onSubmit={() => handleSubmit()}
-      >
-        <label htmlFor="company">Company name: </label>
-        <input
-          type="text"
-          id="company"
-          value={workDetails.company}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, company: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="place">Company location: </label>
-        <input
-          type="text"
-          id="place"
-          value={workDetails.place}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, place: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="position">Position: </label>
-        <input
-          type="text"
-          id="position"
-          value={workDetails.position}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, position: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="still-working">Still Working? </label>
-        <input
-          type="checkbox"
-          id="still-working"
-          checked={workDetails.stillWorking}
-          onChange={(e) =>
-            setWorkDetails({
-              ...workDetails,
-              endWork: "",
-              stillWorking: e.target.checked,
-            })
-          }
-        />
-        <label htmlFor="start-work">Position start date: </label>
-        <input
-          type="date"
-          id="start-work"
-          value={workDetails.startWork}
-          onChange={(e) =>
-            setWorkDetails({ ...workDetails, startWork: e.target.value })
-          }
-          required
-        />
-        {!workDetails.stillWorking && (
-          <>
-            <label htmlFor="end-work">Position end date: </label>
-            <input
-              type="date"
-              id="end-work"
-              value={workDetails.endWork}
-              onChange={(e) =>
-                setWorkDetails({ ...workDetails, endWork: e.target.value })
-              }
-              required
-            />
-          </>
-        )}
-        <label htmlFor="role">Job roles:</label>
-        <input
-          type="text"
-          id="role"
-          value={role.value}
-          onChange={(e) => setRole({ ...role, value: e.target.value })}
-        />
-        <button
-          type="button"
-          ref={addRoleBtn}
-          onClick={() => addRole()}
-          id="add-role"
+        <h2
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
         >
-          Add role
-        </button>
-        <button
-          type="button"
-          ref={updateRoleBtn}
-          onClick={() => updateRole()}
-          id="update-role"
+          Work Experience
+        </h2>
+        <svg
+          ref={dropDownSvg}
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+          className="dropdown-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
         >
-          Update role
-        </button>
-        <button type="button" id="cancel-work" onClick={() => handleCancel()}>
-          Cancel
-        </button>
-        <button type="submit" ref={submitWorkBtn} id="submit-work">
-          Submit
-        </button>
-        <button
-          id="update-work"
-          type="button"
-          ref={updateWorkBtn}
-          onClick={() => updateWork()}
-        >
-          Update
-        </button>
-      </form>
-      <ul className="role-cards">
-        {workDetails.roles.map((role) => (
-          <Role
-            key={role.id}
-            role={role}
-            editRole={editRole}
-            deleteRole={deleteRole}
+          <path
+            fill="black"
+            d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
           />
-        ))}
-      </ul>
-      <div className="work-cards">
-        {experiences &&
-          experiences.map((exp) => (
-            <Work
-              key={exp.id}
-              work={exp}
-              editWork={editWork}
-              deleteWork={deleteWork}
+        </svg>
+      </div>
+      <div className={mainVisible ? "work-main visible" : "work-main"}>
+        <button
+          type="button"
+          id="add-work"
+          ref={addWorkBtn}
+          onClick={() => addWork()}
+        >
+          Add Work Experience
+        </button>
+        <div className="limit-error" ref={limitErrorDiv}>
+          Work limit reached!
+        </div>
+        <form
+          className="work-form"
+          ref={workForm}
+          onSubmit={() => handleSubmit()}
+        >
+          <label htmlFor="company">Company name: </label>
+          <input
+            type="text"
+            id="company"
+            value={workDetails.company}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, company: e.target.value })
+            }
+            required
+          />
+          <label htmlFor="place">Company location: </label>
+          <input
+            type="text"
+            id="place"
+            value={workDetails.place}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, place: e.target.value })
+            }
+            required
+          />
+          <label htmlFor="position">Position: </label>
+          <input
+            type="text"
+            id="position"
+            value={workDetails.position}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, position: e.target.value })
+            }
+            required
+          />
+          <label htmlFor="still-working">Still Working? </label>
+          <input
+            type="checkbox"
+            id="still-working"
+            checked={workDetails.stillWorking}
+            onChange={(e) =>
+              setWorkDetails({
+                ...workDetails,
+                endWork: "",
+                stillWorking: e.target.checked,
+              })
+            }
+          />
+          <label htmlFor="start-work">Position start date: </label>
+          <input
+            type="date"
+            id="start-work"
+            value={workDetails.startWork}
+            onChange={(e) =>
+              setWorkDetails({ ...workDetails, startWork: e.target.value })
+            }
+            required
+          />
+          {!workDetails.stillWorking && (
+            <>
+              <label htmlFor="end-work">Position end date: </label>
+              <input
+                type="date"
+                id="end-work"
+                value={workDetails.endWork}
+                onChange={(e) =>
+                  setWorkDetails({ ...workDetails, endWork: e.target.value })
+                }
+                required
+              />
+            </>
+          )}
+          <label htmlFor="role">Job roles:</label>
+          <input
+            type="text"
+            id="role"
+            value={role.value}
+            onChange={(e) => setRole({ ...role, value: e.target.value })}
+          />
+          <button
+            type="button"
+            ref={addRoleBtn}
+            onClick={() => addRole()}
+            id="add-role"
+          >
+            Add role
+          </button>
+          <button
+            type="button"
+            ref={updateRoleBtn}
+            onClick={() => updateRole()}
+            id="update-role"
+          >
+            Update role
+          </button>
+          <button type="button" id="cancel-work" onClick={() => handleCancel()}>
+            Cancel
+          </button>
+          <button type="submit" ref={submitWorkBtn} id="submit-work">
+            Submit
+          </button>
+          <button
+            id="update-work"
+            type="button"
+            ref={updateWorkBtn}
+            onClick={() => updateWork()}
+          >
+            Update
+          </button>
+        </form>
+        <ul className="role-cards">
+          {workDetails.roles.map((role) => (
+            <Role
+              key={role.id}
+              role={role}
+              editRole={editRole}
+              deleteRole={deleteRole}
             />
           ))}
+        </ul>
+        <div className="work-cards">
+          {experiences &&
+            experiences.map((exp) => (
+              <Work
+                key={exp.id}
+                work={exp}
+                editWork={editWork}
+                deleteWork={deleteWork}
+              />
+            ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

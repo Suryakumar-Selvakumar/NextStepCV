@@ -29,6 +29,7 @@ export function General() {
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload
     e.preventDefault();
+    
     // Add a formSubmitted prop to the contactDetails state
     setContactDetails({ ...contactDetails, formSubmitted: true });
 
