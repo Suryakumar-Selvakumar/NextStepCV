@@ -15,6 +15,7 @@ export function ProjectSection() {
     projectDate: "",
     details: [],
   });
+  const [mainVisible, setMainVisible] = useState(false);
   const [detail, setDetail] = useState({ id: 0, value: "" });
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
@@ -27,6 +28,7 @@ export function ProjectSection() {
   const updateProjectBtn = useRef(null);
   const updateDetailBtn = useRef(null);
   const submitProjectBtn = useRef(null);
+  const dropDownSvg = useRef(null);
 
   useEffect(() => {
     if (projects) localStorage.setItem("projects", JSON.stringify(projects));
@@ -136,7 +138,10 @@ export function ProjectSection() {
     }
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    // Prevent form submission to avoid page reload
+    e.preventDefault();
+
     // Logic to add work to the experiences state
     setProjects([...projects, { ...projectDetails, id: crypto.randomUUID() }]);
 
@@ -244,125 +249,158 @@ export function ProjectSection() {
   }
 
   return (
-    <>
-      <button
-        type="button"
-        ref={addProjectBtn}
-        id="add-project"
-        onClick={() => addProject()}
+    <div className="projects">
+      <div
+        className="projects-header"
+        onClick={() => {
+          setMainVisible(!mainVisible);
+          dropDownSvg.current.classList.toggle("rotate-dropdown");
+        }}
       >
-        Add Project
-      </button>
-      <div className="limit-error" ref={limitErrorDiv}>
-        Project limit reached!
-      </div>
-      <form
-        className="project-form"
-        ref={projectForm}
-        onSubmit={() => handleSubmit()}
-      >
-        <label htmlFor="project-name">Project name: </label>
-        <input
-          type="text"
-          id="project-name"
-          value={projectDetails.projectName}
-          onChange={(e) =>
-            setProjectDetails({
-              ...projectDetails,
-              projectName: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="tech-stack">Tech Stack: </label>
-        <input
-          type="text"
-          id="tech-stack"
-          value={projectDetails.techStack}
-          onChange={(e) =>
-            setProjectDetails({
-              ...projectDetails,
-              techStack: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="project-date">Project date: </label>
-        <input
-          type="date"
-          id="project-date"
-          value={projectDetails.projectDate}
-          onChange={(e) =>
-            setProjectDetails({
-              ...projectDetails,
-              projectDate: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="project-detail">Add project details:</label>
-        <input
-          type="text"
-          id="project-detail"
-          value={detail.value}
-          onChange={(e) => setDetail({ ...detail, value: e.target.value })}
-        />
-        <button
-          type="button"
-          ref={addDetailBtn}
-          onClick={() => addDetail()}
-          id="add-detail"
+        <h2
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
         >
-          Add detail
-        </button>
-        <button
-          type="button"
-          ref={updateDetailBtn}
-          onClick={() => updateDetail()}
-          id="update-detail"
+          Projects
+        </h2>
+        <svg
+          ref={dropDownSvg}
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+          className="dropdown-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
         >
-          Update detail
-        </button>
-        <button
-          type="button"
-          id="cancel-project"
-          onClick={() => handleCancel()}
-        >
-          Cancel
-        </button>
-        <button type="submit" ref={submitProjectBtn} id="submit-project">
-          Submit
-        </button>
-        <button
-          ref={updateProjectBtn}
-          id="update-project"
-          type="button"
-          onClick={() => updateProject()}
-        >
-          Update
-        </button>
-      </form>
-      <ul className="detail-cards">
-        {projectDetails.details.map((dt) => (
-          <Detail
-            key={dt.id}
-            detail={dt}
-            editDetail={editDetail}
-            deleteDetail={deleteDetail}
+          <path
+            fill="black"
+            d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
           />
-        ))}
-      </ul>
-      <div className="project-cards">
-        {projects &&
-          projects.map((proj) => (
-            <Project
-              key={proj.id}
-              project={proj}
-              editProject={editProject}
-              deleteProject={deleteProject}
+        </svg>
+      </div>
+      <div className={mainVisible ? "projects-main visible" : "projects-main"}>
+        <button
+          type="button"
+          ref={addProjectBtn}
+          id="add-project"
+          onClick={() => addProject()}
+        >
+          Add Project
+        </button>
+        <div className="limit-error" ref={limitErrorDiv}>
+          Project limit reached!
+        </div>
+        <form
+          className="project-form"
+          ref={projectForm}
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <label htmlFor="project-name">Project name: </label>
+          <input
+            type="text"
+            id="project-name"
+            value={projectDetails.projectName}
+            onChange={(e) =>
+              setProjectDetails({
+                ...projectDetails,
+                projectName: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="tech-stack">Tech Stack: </label>
+          <input
+            type="text"
+            id="tech-stack"
+            value={projectDetails.techStack}
+            onChange={(e) =>
+              setProjectDetails({
+                ...projectDetails,
+                techStack: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="project-date">Project date: </label>
+          <input
+            type="date"
+            id="project-date"
+            value={projectDetails.projectDate}
+            onChange={(e) =>
+              setProjectDetails({
+                ...projectDetails,
+                projectDate: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="project-detail">Add project details:</label>
+          <input
+            type="text"
+            id="project-detail"
+            value={detail.value}
+            onChange={(e) => setDetail({ ...detail, value: e.target.value })}
+          />
+          <button
+            type="button"
+            ref={addDetailBtn}
+            onClick={() => addDetail()}
+            id="add-detail"
+          >
+            Add detail
+          </button>
+          <button
+            type="button"
+            ref={updateDetailBtn}
+            onClick={() => updateDetail()}
+            id="update-detail"
+          >
+            Update detail
+          </button>
+          <button
+            type="button"
+            id="cancel-project"
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </button>
+          <button type="submit" ref={submitProjectBtn} id="submit-project">
+            Submit
+          </button>
+          <button
+            ref={updateProjectBtn}
+            id="update-project"
+            type="button"
+            onClick={() => updateProject()}
+          >
+            Update
+          </button>
+        </form>
+        <ul className="detail-cards">
+          {projectDetails.details.map((dt) => (
+            <Detail
+              key={dt.id}
+              detail={dt}
+              editDetail={editDetail}
+              deleteDetail={deleteDetail}
             />
           ))}
+        </ul>
+        <div className="project-cards">
+          {projects &&
+            projects.map((proj) => (
+              <Project
+                key={proj.id}
+                project={proj}
+                editProject={editProject}
+                deleteProject={deleteProject}
+              />
+            ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
