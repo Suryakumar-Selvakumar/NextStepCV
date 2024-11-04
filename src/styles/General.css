@@ -1,5 +1,5 @@
-.general-form {
-  display: none;
+.general {
+  position: relative;
 }
 
 .general-header {
@@ -10,36 +10,18 @@
 }
 
 .general-main {
+  height: 0px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: height 0.25s ease-out;
+}
+
+.general-main.visible {
+  height: 200px;
+}
+
+.general-form {
   display: none;
-}
-
-.visible {
-  display: block;
-  animation: expand 250ms ease-in-out;
-  transform-origin: top;
-}
-
-.not-visible {
-  animation: shrink 250s ease-in-out;
-  transform-origin: top;
-}
-
-@keyframes expand {
-  0% {
-    transform: scaleY(0);
-  }
-
-  100% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes shrink {
-  0% {
-    transform: scaleY(1);
-  }
-
-  100% {
-    transform: scaleY(0);
-  }
 }
