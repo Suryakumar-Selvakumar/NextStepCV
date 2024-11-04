@@ -1,7 +1,8 @@
 import "../styles/Header.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export function Header() {
+  let [view, setView] = useState(false);
   const modalContainerDiv = useRef(null);
   const resetModalDiv = useRef(null);
 
@@ -201,20 +202,24 @@ export function Header() {
   }
 
   function clearResume() {
-    resetModalDiv.current.style.cssText = "visibility: visible;";
+    setView(true);
     modalContainerDiv.current.style.cssText = "visibility: visible;";
   }
 
   function resetResume() {
     localStorage.clear();
-    modalContainerDiv.current.style.cssText = "visibility: hidden";
-    resetModalDiv.current.style.cssText = "visibility: hidden";
-    location.reload();
+    setView(false);
+    setTimeout(() => {
+      modalContainerDiv.current.style.cssText = "visibility: hidden";
+      location.reload();
+    }, 500);
   }
 
   function cancelResetResume() {
-    modalContainerDiv.current.style.cssText = "visibility: hidden";
-    resetModalDiv.current.style.cssText = "visibility: hidden";
+    setView(false);
+    setTimeout(() => {
+      modalContainerDiv.current.style.cssText = "visibility: hidden";
+    }, 500);
   }
 
   return (
@@ -271,21 +276,25 @@ export function Header() {
         </div>
       </header>
       <div className="modal-container" ref={modalContainerDiv}>
-        <div className="reset-modal" ref={resetModalDiv}>
+        <div
+          className="reset-modal"
+          ref={resetModalDiv}
+          style={{ top: view && "250px", opacity: view && 1 }}
+        >
           <div className="warning-msg">
             <img
               src="./public/warning-gold.svg"
               alt="a warning logo"
               id="warning-img"
             />
-            <p>This will Reset the Entire Resume!</p>
+            <p>This will Reset the entire Resume!</p>
           </div>
           <div className="reset-modal-buttons">
-            <button id="okay-reset" onClick={() => resetResume()}>
-              Okay
-            </button>
             <button id="cancel-reset" onClick={() => cancelResetResume()}>
               Cancel
+            </button>
+            <button id="okay-reset" onClick={() => resetResume()}>
+              Okay
             </button>
           </div>
         </div>

@@ -30,8 +30,8 @@ header {
   display: flex;
   align-items: center;
   gap: 0.05rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 #logo-img {
@@ -63,11 +63,18 @@ header {
   align-items: center;
 }
 
+#load-dummy > span,
+#clear-resume > span,
+#download-resume > span {
+  position: relative;
+  top: 2.5px;
+}
+
 #load-dummy:hover,
 #clear-resume:hover,
 #download-resume:hover {
   cursor: pointer;
-  box-shadow: inset 0 -0.25rem rgb(255, 230, 0);
+  box-shadow: inset 0 -0.225rem rgb(255, 230, 0);
 }
 
 .svg-header-btns {
@@ -98,13 +105,16 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  visibility: hidden;
+  top: -250px;
+  transition: top 0.5s ease-out, opacity 0.5s ease-out;
   position: absolute;
   background-color: #ffffff;
   box-shadow: 2px 2px 10px rgb(255, 127, 127);
   font-size: 2rem;
   gap: 1rem;
   font-family: myFontRegular;
+  opacity: 0;
+  border-radius: 15px;
 }
 
 .warning-msg {
@@ -125,10 +135,29 @@ header {
 
 #okay-reset,
 #cancel-reset {
-  padding: 0 1rem;
+  padding: 0 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--header-bg-color);
+}
+
+#cancel-reset {
+  color: var(--header-bg-color);
 }
 
 #okay-reset:hover,
 #cancel-reset:hover {
   cursor: pointer;
+}
+
+#okay-reset {
+  color: white;
+  background-color: var(--header-bg-color);
+}
+
+#okay-reset:hover {
+  background-color: rgb(0, 138, 223);
+}
+
+#cancel-reset:hover {
+  background-color: rgb(228, 228, 228);
 }
