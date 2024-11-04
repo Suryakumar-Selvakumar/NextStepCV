@@ -1,7 +1,3 @@
-.general {
-  position: relative;
-}
-
 .general-header {
   display: flex;
   justify-content: space-between;
@@ -11,7 +7,6 @@
 
 .general-main {
   height: 0px;
-  position: absolute;
   display: flex;
   flex-direction: column;
   overflow: hidden;

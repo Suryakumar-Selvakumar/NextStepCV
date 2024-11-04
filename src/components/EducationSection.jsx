@@ -16,6 +16,7 @@ export function EducationSection() {
     completedStudy: true,
   });
   const [limit, setLimit] = useState(3);
+  const [mainVisible, setMainVisible] = useState(false);
 
   // DOM refs
   const addEducationBtn = useRef(null);
@@ -23,6 +24,7 @@ export function EducationSection() {
   const submitEducationBtn = useRef(null);
   const updateEducationBtn = useRef(null);
   const limitErrorDiv = useRef(null);
+  const dropDownSvg = useRef(null);
 
   useEffect(() => {
     if (courses) localStorage.setItem("courses", JSON.stringify(courses));
@@ -136,7 +138,10 @@ export function EducationSection() {
     }
   }
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    // Prevent form submission to avoid page reload
+    e.preventDefault();
+
     // Logic to add the education to the courses state
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
@@ -172,151 +177,189 @@ export function EducationSection() {
   }
 
   return (
-    <>
-      <button
-        type="button"
-        id="add-education"
-        ref={addEducationBtn}
-        onClick={() => addEducation()}
+    <div className="education">
+      <div
+        className="education-header"
+        onClick={() => {
+          setMainVisible(!mainVisible);
+          dropDownSvg.current.classList.toggle("rotate-dropdown");
+        }}
       >
-        Add Education
-      </button>
-      <div className="limit-error" ref={limitErrorDiv}>
-        Education limit reached!
+        <h2
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+        >
+          Education
+        </h2>
+        <svg
+          ref={dropDownSvg}
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+          className="dropdown-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="black"
+            d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+          />
+        </svg>
       </div>
-      <form
-        className="education-form"
-        ref={educationForm}
-        onSubmit={() => handleSubmit()}
+      <div
+        className={mainVisible ? "education-main visible" : "education-main"}
       >
-        <label htmlFor="school">School name: </label>
-        <input
-          type="text"
-          id="school"
-          value={educationDetails.school}
-          onChange={(e) =>
-            setEducationDetails({ ...educationDetails, school: e.target.value })
-          }
-          required
-        />
-        <label htmlFor="place-study">Place of Study: </label>
-        <input
-          type="text"
-          id="place-study"
-          value={educationDetails.placeStudy}
-          onChange={(e) =>
-            setEducationDetails({
-              ...educationDetails,
-              placeStudy: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="title-study">Title of Study: </label>
-        <input
-          type="text"
-          id="title-study"
-          value={educationDetails.titleStudy}
-          onChange={(e) =>
-            setEducationDetails({
-              ...educationDetails,
-              titleStudy: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="gpa">GPA: </label>
-        <input
-          type="number"
-          id="gpa"
-          value={educationDetails.gpa}
-          onChange={(e) =>
-            e.target.value < 4 &&
-            e.target.value > 0 &&
-            setEducationDetails({
-              ...educationDetails,
-              gpa: e.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="completed-study">Completed Study? </label>
-        <input
-          type="checkbox"
-          id="completed-study"
-          checked={educationDetails.completedStudy}
-          onChange={(e) =>
-            setEducationDetails({
-              ...educationDetails,
-              startDateStudy: "",
-              completedStudy: e.target.checked,
-            })
-          }
-        />
-        {educationDetails.completedStudy && (
-          <>
-            <label htmlFor="start-date-study">Start Date: </label>
-            <input
-              type="date"
-              id="start-date-study"
-              value={educationDetails.startDateStudy}
-              onChange={(e) =>
-                setEducationDetails({
-                  ...educationDetails,
-                  startDateStudy: e.target.value,
-                })
-              }
-              required
-            />
-          </>
-        )}
-        <label htmlFor="end-date-study">
-          {educationDetails.completedStudy
-            ? "End Date: "
-            : "Expected Graduation Year: "}
-        </label>
-        <input
-          type="date"
-          id="end-date-study"
-          value={educationDetails.endDateStudy}
-          onChange={(e) =>
-            setEducationDetails({
-              ...educationDetails,
-              endDateStudy: e.target.value,
-            })
-          }
-          required
-        />
         <button
           type="button"
-          id="cancel-education"
-          onClick={() => handleCancel()}
+          id="add-education"
+          ref={addEducationBtn}
+          onClick={() => addEducation()}
         >
-          Cancel
+          Add Education
         </button>
-        <button type="submit" ref={submitEducationBtn} id="submit-education">
-          Submit
-        </button>
-        <button
-          type="button"
-          id="update-education"
-          ref={updateEducationBtn}
-          onClick={() => updateEducation()}
+        <div className="limit-error" ref={limitErrorDiv}>
+          Education limit reached!
+        </div>
+        <form
+          className="education-form"
+          ref={educationForm}
+          onSubmit={(e) => handleSubmit(e)}
         >
-          Update
-        </button>
-      </form>
-      <div className="education-cards">
-        {courses &&
-          courses.map((exp) => (
-            <Education
-              key={exp.id}
-              education={exp}
-              editEducation={editEducation}
-              deleteEducation={deleteEducation}
-            />
-          ))}
+          <label htmlFor="school">School name: </label>
+          <input
+            type="text"
+            id="school"
+            value={educationDetails.school}
+            onChange={(e) =>
+              setEducationDetails({
+                ...educationDetails,
+                school: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="place-study">Place of Study: </label>
+          <input
+            type="text"
+            id="place-study"
+            value={educationDetails.placeStudy}
+            onChange={(e) =>
+              setEducationDetails({
+                ...educationDetails,
+                placeStudy: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="title-study">Title of Study: </label>
+          <input
+            type="text"
+            id="title-study"
+            value={educationDetails.titleStudy}
+            onChange={(e) =>
+              setEducationDetails({
+                ...educationDetails,
+                titleStudy: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="gpa">GPA: </label>
+          <input
+            type="number"
+            id="gpa"
+            value={educationDetails.gpa}
+            onChange={(e) =>
+              e.target.value < 4 &&
+              e.target.value > 0 &&
+              setEducationDetails({
+                ...educationDetails,
+                gpa: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="completed-study">Completed Study? </label>
+          <input
+            type="checkbox"
+            id="completed-study"
+            checked={educationDetails.completedStudy}
+            onChange={(e) =>
+              setEducationDetails({
+                ...educationDetails,
+                startDateStudy: "",
+                completedStudy: e.target.checked,
+              })
+            }
+          />
+          {educationDetails.completedStudy && (
+            <>
+              <label htmlFor="start-date-study">Start Date: </label>
+              <input
+                type="date"
+                id="start-date-study"
+                value={educationDetails.startDateStudy}
+                onChange={(e) =>
+                  setEducationDetails({
+                    ...educationDetails,
+                    startDateStudy: e.target.value,
+                  })
+                }
+                required
+              />
+            </>
+          )}
+          <label htmlFor="end-date-study">
+            {educationDetails.completedStudy
+              ? "End Date: "
+              : "Expected Graduation Year: "}
+          </label>
+          <input
+            type="date"
+            id="end-date-study"
+            value={educationDetails.endDateStudy}
+            onChange={(e) =>
+              setEducationDetails({
+                ...educationDetails,
+                endDateStudy: e.target.value,
+              })
+            }
+            required
+          />
+          <button
+            type="button"
+            id="cancel-education"
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </button>
+          <button type="submit" ref={submitEducationBtn} id="submit-education">
+            Submit
+          </button>
+          <button
+            type="button"
+            id="update-education"
+            ref={updateEducationBtn}
+            onClick={() => updateEducation()}
+          >
+            Update
+          </button>
+        </form>
+        <div className="education-cards">
+          {courses &&
+            courses.map((exp) => (
+              <Education
+                key={exp.id}
+                education={exp}
+                editEducation={editEducation}
+                deleteEducation={deleteEducation}
+              />
+            ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }
