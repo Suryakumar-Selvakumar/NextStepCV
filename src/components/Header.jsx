@@ -192,7 +192,6 @@ export function Header() {
         techStack: "Spigot API, Java, Maven, TravisCI, Git",
       },
     ];
-    localStorage.clear();
     localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
     localStorage.setItem("courses", JSON.stringify(dummyCourses));
     localStorage.setItem("skills", JSON.stringify(dummyTechnicalSkills));
@@ -207,7 +206,21 @@ export function Header() {
   }
 
   function resetResume() {
-    localStorage.clear();
+    localStorage.setItem(
+      "contactDetails",
+      JSON.stringify({
+        name: "",
+        phNo: "",
+        email: "",
+        linkedIn: "",
+        gitHub: "",
+        formSubmitted: false,
+      })
+    );
+    localStorage.setItem("courses", JSON.stringify([]));
+    localStorage.setItem("skills", JSON.stringify([]));
+    localStorage.setItem("experiences", JSON.stringify([]));
+    localStorage.setItem("projects", JSON.stringify([]));
     setView(false);
     setTimeout(() => {
       modalContainerDiv.current.style.cssText = "visibility: hidden";

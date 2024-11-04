@@ -5,6 +5,9 @@ export function General() {
   const updatedContactDetails = JSON.parse(
     localStorage.getItem("contactDetails")
   );
+  const storedMainVisible = JSON.parse(
+    localStorage.getItem("contactMainVisible")
+  );
   const [contactDetails, setContactDetails] = useState(
     updatedContactDetails
       ? updatedContactDetails
@@ -17,19 +20,22 @@ export function General() {
           formSubmitted: false,
         }
   );
-  const [mainVisible, setMainVisible] = useState(false);
+  const [mainVisible, setMainVisible] = useState(
+    storedMainVisible ? storedMainVisible : false
+  );
   const editGeneralDetailsBtn = useRef(null);
   const generalForm = useRef(null);
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
-    localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
-  }, [contactDetails]);
+    // localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
+    localStorage.setItem("contactMainVisible", JSON.stringify(mainVisible));
+  }, [mainVisible]);
 
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload
     e.preventDefault();
-    
+
     // Add a formSubmitted prop to the contactDetails state
     setContactDetails({ ...contactDetails, formSubmitted: true });
 
@@ -38,6 +44,8 @@ export function General() {
 
     // Will hide the form
     generalForm.current.style.cssText = "display: none;";
+
+    localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
   }
 
   function handleEdit() {
@@ -63,13 +71,13 @@ export function General() {
         className="general-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          dropDownSvg.current.classList.toggle("rotate-dropdown");
+          // dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
+            // dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           General Information
@@ -78,9 +86,11 @@ export function General() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
+            // dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
-          className="dropdown-svg"
+          className={
+            mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"
+          }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -90,9 +100,7 @@ export function General() {
           />
         </svg>
       </div>
-      <div
-        className={mainVisible ? "general-main visible" : "general-main"}
-      >
+      <div className={mainVisible ? "general-main visible" : "general-main"}>
         <button
           id="edit-general-details"
           ref={editGeneralDetailsBtn}
@@ -171,15 +179,13 @@ export function General() {
             Save
           </button>
         </form>
-        {contactDetails.formSubmitted && (
-          <div className="contact-details-card">
-            <p>{contactDetails.name}</p>
-            <p>{contactDetails.phNo}</p>
-            <p>{contactDetails.email}</p>
-            <p>{contactDetails.linkedIn}</p>
-            <p>{contactDetails.gitHub}</p>
-          </div>
-        )}
+        <div className="contact-details-card">
+          <p>{contactDetails.name}</p>
+          <p>{contactDetails.phNo}</p>
+          <p>{contactDetails.email}</p>
+          <p>{contactDetails.linkedIn}</p>
+          <p>{contactDetails.gitHub}</p>
+        </div>
       </div>
     </div>
   );

@@ -334,6 +334,7 @@ export function WorkSection() {
             onChange={(e) =>
               setWorkDetails({ ...workDetails, company: e.target.value })
             }
+            autoComplete="on"
             required
           />
           <label htmlFor="place">Company location: </label>
