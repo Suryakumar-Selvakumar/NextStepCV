@@ -4,6 +4,9 @@ import "../styles/EducationSection.css";
 
 export function EducationSection() {
   const storedCourses = JSON.parse(localStorage.getItem("courses"));
+  const storedMainVisible = JSON.parse(
+    localStorage.getItem("coursesMainVisible")
+  );
   const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
@@ -16,7 +19,9 @@ export function EducationSection() {
     completedStudy: true,
   });
   const [limit, setLimit] = useState(3);
-  const [mainVisible, setMainVisible] = useState(false);
+  const [mainVisible, setMainVisible] = useState(
+    storedMainVisible ? storedMainVisible : false
+  );
 
   // DOM refs
   const addEducationBtn = useRef(null);
@@ -28,7 +33,9 @@ export function EducationSection() {
 
   useEffect(() => {
     if (courses) localStorage.setItem("courses", JSON.stringify(courses));
-  }, [courses]);
+
+    localStorage.setItem("coursesMainVisible", JSON.stringify(mainVisible));
+  }, [courses, mainVisible]);
 
   function addEducation() {
     if (courses.length < limit) {
@@ -182,13 +189,11 @@ export function EducationSection() {
         className="education-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           Education
@@ -197,9 +202,10 @@ export function EducationSection() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
-          className="dropdown-svg"
+          className={
+            mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"
+          }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

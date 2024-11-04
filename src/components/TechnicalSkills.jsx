@@ -4,6 +4,9 @@ import "../styles/TechnicalSkills.css";
 
 export function TechnicalSkills() {
   const storedSkills = JSON.parse(localStorage.getItem("skills"));
+  const storedMainVisible = JSON.parse(
+    localStorage.getItem("skillsMainVisible")
+  );
   const [skills, setSkills] = useState(storedSkills ? storedSkills : []);
   const [skillsGroup, setSkillsGroup] = useState({
     id: 0,
@@ -11,7 +14,9 @@ export function TechnicalSkills() {
     skillsList: "",
   });
   const [limit, setLimit] = useState(5);
-  const [mainVisible, setMainVisible] = useState(false);
+  const [mainVisible, setMainVisible] = useState(
+    storedMainVisible ? storedMainVisible : false
+  );
 
   // useRef hooks for DOM nodes
   const addTechnicalSkillsBtn = useRef(null);
@@ -23,7 +28,9 @@ export function TechnicalSkills() {
 
   useEffect(() => {
     if (skills) localStorage.setItem("skills", JSON.stringify(skills));
-  }, [skills]);
+
+    localStorage.setItem("skillsMainVisible", JSON.stringify(mainVisible));
+  }, [skills, mainVisible]);
 
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload
@@ -195,13 +202,11 @@ export function TechnicalSkills() {
         className="technical-skills-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           Technical Skills
@@ -210,9 +215,10 @@ export function TechnicalSkills() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
-          className="dropdown-svg"
+          className={
+            mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"
+          }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

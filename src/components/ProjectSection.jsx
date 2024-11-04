@@ -5,6 +5,9 @@ import { Detail } from "./Detail";
 
 export function ProjectSection() {
   const storedProjects = JSON.parse(localStorage.getItem("projects"));
+  const storedMainVisible = JSON.parse(
+    localStorage.getItem("projectsMainVisible")
+  );
   const [projects, setProjects] = useState(
     storedProjects ? storedProjects : []
   );
@@ -15,7 +18,9 @@ export function ProjectSection() {
     projectDate: "",
     details: [],
   });
-  const [mainVisible, setMainVisible] = useState(false);
+  const [mainVisible, setMainVisible] = useState(
+    storedMainVisible ? storedMainVisible : false
+  );
   const [detail, setDetail] = useState({ id: 0, value: "" });
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
@@ -32,7 +37,9 @@ export function ProjectSection() {
 
   useEffect(() => {
     if (projects) localStorage.setItem("projects", JSON.stringify(projects));
-  }, [projects]);
+
+    localStorage.setItem("projectsMainVisible", JSON.stringify(mainVisible));
+  }, [projects, mainVisible]);
 
   function addProject() {
     if (projects.length < projectLimit) {
@@ -254,13 +261,11 @@ export function ProjectSection() {
         className="projects-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           Projects
@@ -269,9 +274,10 @@ export function ProjectSection() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
-          className="dropdown-svg"
+          className={
+            mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"
+          }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

@@ -3,10 +3,10 @@ import "../styles/General.css";
 
 export function General() {
   const updatedContactDetails = JSON.parse(
-    localStorage.getItem("contactDetails")
+    localStorage.getItem("general")
   );
   const storedMainVisible = JSON.parse(
-    localStorage.getItem("contactMainVisible")
+    localStorage.getItem("generalMainVisible")
   );
   const [contactDetails, setContactDetails] = useState(
     updatedContactDetails
@@ -28,8 +28,7 @@ export function General() {
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
-    // localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
-    localStorage.setItem("contactMainVisible", JSON.stringify(mainVisible));
+    localStorage.setItem("generalMainVisible", JSON.stringify(mainVisible));
   }, [mainVisible]);
 
   function handleSubmit(e) {
@@ -45,7 +44,7 @@ export function General() {
     // Will hide the form
     generalForm.current.style.cssText = "display: none;";
 
-    localStorage.setItem("contactDetails", JSON.stringify(contactDetails));
+    localStorage.setItem("general", JSON.stringify(contactDetails));
   }
 
   function handleEdit() {
@@ -71,13 +70,11 @@ export function General() {
         className="general-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          // dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            // dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           General Information
@@ -86,7 +83,6 @@ export function General() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            // dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
           className={
             mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"

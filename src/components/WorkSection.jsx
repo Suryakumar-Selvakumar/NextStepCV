@@ -5,6 +5,7 @@ import "../styles/WorkSection.css";
 
 export function WorkSection() {
   const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
+  const storedMainVisible = JSON.parse(localStorage.getItem("experiencesMainVisible"));
   const [experiences, setExperiences] = useState(
     storedExperiences ? storedExperiences : []
   );
@@ -18,7 +19,9 @@ export function WorkSection() {
     roles: [],
     stillWorking: false,
   });
-  const [mainVisible, setMainVisible] = useState(false);
+  const [mainVisible, setMainVisible] = useState(
+    storedMainVisible ? storedMainVisible : false
+  );
   const [role, setRole] = useState({ id: 0, value: "" });
   const [workLimit, setWorkLimit] = useState(2);
   const [roleLimit, setRoleLimit] = useState(4);
@@ -36,7 +39,9 @@ export function WorkSection() {
   useEffect(() => {
     if (experiences)
       localStorage.setItem("experiences", JSON.stringify(experiences));
-  }, [experiences]);
+
+    localStorage.setItem("experiencesMainVisible", JSON.stringify(mainVisible));
+  }, [experiences, mainVisible]);
 
   function addWork() {
     updateWorkBtn.current.style.cssText = "display: none;";
@@ -282,13 +287,11 @@ export function WorkSection() {
         className="work-header"
         onClick={() => {
           setMainVisible(!mainVisible);
-          dropDownSvg.current.classList.toggle("rotate-dropdown");
         }}
       >
         <h2
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
         >
           Work Experience
@@ -297,9 +300,10 @@ export function WorkSection() {
           ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
-            dropDownSvg.current.classList.toggle("rotate-dropdown");
           }}
-          className="dropdown-svg"
+          className={
+            mainVisible ? "dropdown-svg rotate-dropdown" : "dropdown-svg"
+          }
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

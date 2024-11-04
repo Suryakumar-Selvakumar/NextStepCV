@@ -13,7 +13,7 @@ export function Header() {
       email: "JohnSmith@fakeemail.com",
       linkedIn: "www.linkedin.com/in/John-Smith-fake/",
       gitHub: "github.com/john-smith-fake",
-      formSubmitted: false,
+      formSubmitted: true,
     };
     const dummyCourses = [
       {
@@ -192,7 +192,7 @@ export function Header() {
         techStack: "Spigot API, Java, Maven, TravisCI, Git",
       },
     ];
-    localStorage.setItem("contactDetails", JSON.stringify(dummyContactDetails));
+    localStorage.setItem("general", JSON.stringify(dummyContactDetails));
     localStorage.setItem("courses", JSON.stringify(dummyCourses));
     localStorage.setItem("skills", JSON.stringify(dummyTechnicalSkills));
     localStorage.setItem("experiences", JSON.stringify(dummyExperiences));
@@ -207,7 +207,7 @@ export function Header() {
 
   function resetResume() {
     localStorage.setItem(
-      "contactDetails",
+      "general",
       JSON.stringify({
         name: "",
         phNo: "",
@@ -241,7 +241,7 @@ export function Header() {
         <div className="logo">
           <p id="logo-text">NextStep</p>
           <img
-            src="./public/next-gold.svg"
+            src="/next-gold.svg"
             alt="logo of the app"
             id="logo-img"
           />
