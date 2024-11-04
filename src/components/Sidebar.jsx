@@ -10,8 +10,8 @@ export function Sidebar() {
     <div className="sidebar">
       <General />
       <EducationSection />
-      {/* <TechnicalSkills />
-      <WorkSection />
+      <TechnicalSkills />
+      {/* <WorkSection />
       <ProjectSection /> */}
     </div>
   );

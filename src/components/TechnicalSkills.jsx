@@ -11,6 +11,7 @@ export function TechnicalSkills() {
     skillsList: "",
   });
   const [limit, setLimit] = useState(5);
+  const [mainVisible, setMainVisible] = useState(false);
 
   // useRef hooks for DOM nodes
   const addTechnicalSkillsBtn = useRef(null);
@@ -18,18 +19,32 @@ export function TechnicalSkills() {
   const technicalSkillsForm = useRef(null);
   const addSkillsGroupBtn = useRef(null);
   const updateSkillsGroupBtn = useRef(null);
+  const dropDownSvg = useRef(null);
 
   useEffect(() => {
     if (skills) localStorage.setItem("skills", JSON.stringify(skills));
   }, [skills]);
 
-  function handleSubmit() {
+  function handleSubmit(e) {
+    // Prevent form submission to avoid page reload
+    e.preventDefault();
+
     if (skills.length >= 1) {
       // Hide the form
       technicalSkillsForm.current.style.cssText = "display: none;";
 
       // Display the Add Technical Skills button
       addTechnicalSkillsBtn.current.style.cssText = "display: block";
+
+      updateSkillsGroupBtn.current.style.cssText = "display: none;";
+      addSkillsGroupBtn.current.style.cssText = "display: inline;";
+
+      // Reset skillsGroup
+      setSkillsGroup({
+        id: 0,
+        skillsType: "",
+        skillsList: "",
+      });
     }
   }
 
@@ -175,79 +190,118 @@ export function TechnicalSkills() {
   }
 
   return (
-    <>
-      <button
-        type="button"
-        id="add-technical-skills"
-        ref={addTechnicalSkillsBtn}
-        onClick={() => addTechnicalSkills()}
+    <div className="technical-skills">
+      <div
+        className="technical-skills-header"
+        onClick={() => {
+          setMainVisible(!mainVisible);
+          dropDownSvg.current.classList.toggle("rotate-dropdown");
+        }}
       >
-        Add Technical Skills
-      </button>
-      <div className="limit-error" ref={limitErrorDiv}>
-        Skills limit reached!
+        <h2
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+        >
+          Technical Skills
+        </h2>
+        <svg
+          ref={dropDownSvg}
+          onClick={() => {
+            setMainVisible(!mainVisible);
+            dropDownSvg.current.classList.toggle("rotate-dropdown");
+          }}
+          className="dropdown-svg"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="black"
+            d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+          />
+        </svg>
       </div>
-      <form
-        className="technical-skills-form"
-        ref={technicalSkillsForm}
-        onSubmit={() => handleSubmit()}
+      <div
+        className={
+          mainVisible
+            ? "technical-skills-main visible"
+            : "technical-skills-main"
+        }
       >
-        <label htmlFor="skills-type">Enter skills type: </label>
-        <input
-          type="text"
-          id="skills-type"
-          value={skillsGroup.skillsType}
-          onChange={(e) =>
-            setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
-          }
-        />
-        <label htmlFor="skills-list">Enter list of skills: </label>
-        <input
-          type="text"
-          id="skills-list"
-          value={skillsGroup.skillsList}
-          onChange={(e) =>
-            setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
-          }
-        />
         <button
           type="button"
-          onClick={() => addSkillsGroup()}
-          id="add-skills-group"
-          ref={addSkillsGroupBtn}
+          id="add-technical-skills"
+          ref={addTechnicalSkillsBtn}
+          onClick={() => addTechnicalSkills()}
         >
-          Add Skills Group
+          Add Technical Skills
         </button>
-        <button
-          type="button"
-          onClick={() => updateSkillsGroup()}
-          id="update-skills-group"
-          ref={updateSkillsGroupBtn}
+        <div className="limit-error" ref={limitErrorDiv}>
+          Skills limit reached!
+        </div>
+        <form
+          className="technical-skills-form"
+          ref={technicalSkillsForm}
+          onSubmit={(e) => handleSubmit(e)}
         >
-          Update Skills Group
-        </button>
-        <button
-          type="button"
-          id="cancel-technical-skills"
-          onClick={() => handleCancel()}
-        >
-          Cancel
-        </button>
-        <button type="submit" id="submit-technical-skills">
-          Save
-        </button>
-      </form>
-      <div className="technical-skills-cards">
-        {skills &&
-          skills.map((skillsGroup) => (
-            <SkillsGroup
-              key={skillsGroup.id}
-              skillsGroup={skillsGroup}
-              editSkillsGroup={editSkillsGroup}
-              deleteSkillsGroup={deleteSkillsGroup}
-            />
-          ))}
+          <label htmlFor="skills-type">Enter skills type: </label>
+          <input
+            type="text"
+            id="skills-type"
+            value={skillsGroup.skillsType}
+            onChange={(e) =>
+              setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
+            }
+          />
+          <label htmlFor="skills-list">Enter list of skills: </label>
+          <input
+            type="text"
+            id="skills-list"
+            value={skillsGroup.skillsList}
+            onChange={(e) =>
+              setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
+            }
+          />
+          <button
+            type="button"
+            onClick={() => addSkillsGroup()}
+            id="add-skills-group"
+            ref={addSkillsGroupBtn}
+          >
+            Add Skills Group
+          </button>
+          <button
+            type="button"
+            onClick={() => updateSkillsGroup()}
+            id="update-skills-group"
+            ref={updateSkillsGroupBtn}
+          >
+            Update Skills Group
+          </button>
+          <button
+            type="button"
+            id="cancel-technical-skills"
+            onClick={() => handleCancel()}
+          >
+            Cancel
+          </button>
+          <button type="submit" id="submit-technical-skills">
+            Save
+          </button>
+        </form>
+        <div className="technical-skills-cards">
+          {skills &&
+            skills.map((skillsGroup) => (
+              <SkillsGroup
+                key={skillsGroup.id}
+                skillsGroup={skillsGroup}
+                editSkillsGroup={editSkillsGroup}
+                deleteSkillsGroup={deleteSkillsGroup}
+              />
+            ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 }

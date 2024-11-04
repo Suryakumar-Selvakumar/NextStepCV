@@ -20,7 +20,6 @@ export function General() {
   const [mainVisible, setMainVisible] = useState(false);
   const editGeneralDetailsBtn = useRef(null);
   const generalForm = useRef(null);
-  const generalMainDiv = useRef(null);
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
@@ -90,96 +89,97 @@ export function General() {
           />
         </svg>
       </div>
-        <div
-          className={mainVisible ? "general-main visible" : "general-main"}
-          ref={generalMainDiv}
+      <div
+        className={mainVisible ? "general-main visible" : "general-main"}
+      >
+        <button
+          id="edit-general-details"
+          ref={editGeneralDetailsBtn}
+          onClick={() => handleEdit()}
         >
+          {contactDetails.formSubmitted ? "Edit Details" : "Add Details"}
+        </button>
+        <form
+          className="general-form"
+          ref={generalForm}
+          onSubmit={(e) => handleSubmit(e)}
+        >
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            id="name"
+            value={contactDetails.name}
+            onChange={(e) =>
+              setContactDetails({ ...contactDetails, name: e.target.value })
+            }
+            autoComplete="on"
+            required
+          />
+          <label htmlFor="ph-no">Phone Number: </label>
+          <input
+            type="tel"
+            id="ph-no"
+            value={contactDetails.phNo}
+            onChange={(e) =>
+              setContactDetails({ ...contactDetails, phNo: e.target.value })
+            }
+            required
+          />
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email"
+            id="email"
+            value={contactDetails.email}
+            onChange={(e) =>
+              setContactDetails({ ...contactDetails, email: e.target.value })
+            }
+            autoComplete="on"
+            required
+          />
+          <label htmlFor="linked-in">LinkedIn: </label>
+          <input
+            type="text"
+            id="linked-in"
+            value={contactDetails.linkedIn}
+            onChange={(e) =>
+              setContactDetails({
+                ...contactDetails,
+                linkedIn: e.target.value,
+              })
+            }
+            required
+          />
+          <label htmlFor="github">GitHub: </label>
+          <input
+            type="text"
+            id="github"
+            value={contactDetails.gitHub}
+            onChange={(e) =>
+              setContactDetails({ ...contactDetails, gitHub: e.target.value })
+            }
+            required
+          />
           <button
-            id="edit-general-details"
-            ref={editGeneralDetailsBtn}
-            onClick={() => handleEdit()}
+            type="button"
+            id="cancel-general"
+            onClick={() => handleCancel()}
           >
-            {contactDetails.formSubmitted ? "Edit Details" : "Add Details"}
+            Cancel
           </button>
-          <form
-            className="general-form"
-            ref={generalForm}
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <label htmlFor="name">Name: </label>
-            <input
-              type="text"
-              id="name"
-              value={contactDetails.name}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, name: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="ph-no">Phone Number: </label>
-            <input
-              type="tel"
-              id="ph-no"
-              value={contactDetails.phNo}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, phNo: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="email">Email: </label>
-            <input
-              type="email"
-              id="email"
-              value={contactDetails.email}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, email: e.target.value })
-              }
-              required
-            />
-            <label htmlFor="linked-in">LinkedIn: </label>
-            <input
-              type="text"
-              id="linked-in"
-              value={contactDetails.linkedIn}
-              onChange={(e) =>
-                setContactDetails({
-                  ...contactDetails,
-                  linkedIn: e.target.value,
-                })
-              }
-              required
-            />
-            <label htmlFor="github">GitHub: </label>
-            <input
-              type="text"
-              id="github"
-              value={contactDetails.gitHub}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, gitHub: e.target.value })
-              }
-              required
-            />
-            <button
-              type="button"
-              id="cancel-general"
-              onClick={() => handleCancel()}
-            >
-              Cancel
-            </button>
-            <button type="submit" id="submit-general">
-              Save
-            </button>
-          </form>
-          {contactDetails.formSubmitted && (
-            <div className="contact-details-card">
-              <p>{contactDetails.name}</p>
-              <p>{contactDetails.phNo}</p>
-              <p>{contactDetails.email}</p>
-              <p>{contactDetails.linkedIn}</p>
-              <p>{contactDetails.gitHub}</p>
-            </div>
-          )}
-        </div>
+          <button type="submit" id="submit-general">
+            Save
+          </button>
+        </form>
+        {contactDetails.formSubmitted && (
+          <div className="contact-details-card">
+            <p>{contactDetails.name}</p>
+            <p>{contactDetails.phNo}</p>
+            <p>{contactDetails.email}</p>
+            <p>{contactDetails.linkedIn}</p>
+            <p>{contactDetails.gitHub}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
