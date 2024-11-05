@@ -55,6 +55,21 @@ h6 {
   isolation: isolate;
 }
 
+@font-face {
+  font-family: myFontTitle;
+  src: url("../fonts/SHUTTLE-X.woff");
+}
+
+@font-face {
+  font-family: myFontHeader;
+  src: url("../fonts/Ubuntu-BoldItalic.ttf");
+}
+
+@font-face {
+  font-family: myFontRegular;
+  src: url("../fonts/Ubuntu-Regular.ttf");
+}
+
 main {
   display: grid;
   grid-template-columns: 0.4fr 0.6fr;

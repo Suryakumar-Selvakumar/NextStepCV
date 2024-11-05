@@ -296,7 +296,7 @@ export function Header() {
         >
           <div className="warning-msg">
             <img
-              src="./public/warning-gold.svg"
+              src="/warning-gold.svg"
               alt="a warning logo"
               id="warning-img"
             />

@@ -2,9 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "../styles/General.css";
 
 export function General() {
-  const updatedContactDetails = JSON.parse(
-    localStorage.getItem("general")
-  );
+  const updatedContactDetails = JSON.parse(localStorage.getItem("general"));
   const storedMainVisible = JSON.parse(
     localStorage.getItem("generalMainVisible")
   );
@@ -91,12 +89,15 @@ export function General() {
           viewBox="0 0 24 24"
         >
           <path
-            fill="black"
+            fill="rgb(67, 67, 67)"
             d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
           />
         </svg>
       </div>
-      <div className={mainVisible ? "general-main visible" : "general-main"}>
+      <div
+        className={mainVisible ? "general-main visible" : "general-main"}
+        // style={{ padding: mainVisible && "1rem" }}
+      >
         <button
           id="edit-general-details"
           ref={editGeneralDetailsBtn}

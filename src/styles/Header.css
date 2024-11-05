@@ -1,18 +1,3 @@
-@font-face {
-  font-family: myFontTitle;
-  src: url("../fonts/SHUTTLE-X.woff");
-}
-
-@font-face {
-  font-family: myFontHeader;
-  src: url("../fonts/Ubuntu-BoldItalic.ttf");
-}
-
-@font-face {
-  font-family: myFontRegular;
-  src: url("../fonts/Montserrat.ttf");
-}
-
 :root {
   --header-bg-color: rgb(31, 151, 255);
 }

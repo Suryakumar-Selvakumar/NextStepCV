@@ -3,20 +3,37 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--sidebar-border-color);
 }
 
 .general-main {
   height: 0px;
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   overflow: hidden;
-  transition: height 0.25s ease-out;
+  transition: height 0.2s ease-out;
+  font-family: myFontRegular;
+  border-bottom: 1px solid var(--sidebar-border-color);
+  padding: 0 1rem;
 }
 
 .general-main.visible {
-  height: 250px;
+  height: 300px;
 }
 
 .general-form {
   display: none;
+  margin-top: 1rem;
+}
+
+h2 {
+  font-family: myFontRegular;
+  font-weight: 400;
+}
+
+#edit-general-details {
+  width: 100px;
+  align-self: flex-end;
+  margin-top: 1rem;
 }

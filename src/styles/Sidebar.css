@@ -1,3 +1,7 @@
+:root {
+  --sidebar-border-color: rgb(160, 160, 160);
+}
+
 .limit-error {
   display: none;
 }
@@ -5,9 +9,13 @@
 .dropdown-svg {
   width: 40px;
   height: 40px;
-  transition: transform 250ms ease-out;
+  transition: transform 200ms ease-out;
 }
 
 .rotate-dropdown {
   transform: rotate(180deg);
+}
+
+.sidebar {
+  border-right: 1px solid var(--sidebar-border-color);
 }
