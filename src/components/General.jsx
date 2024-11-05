@@ -24,6 +24,11 @@ export function General() {
   const editGeneralDetailsBtn = useRef(null);
   const generalForm = useRef(null);
   const dropDownSvg = useRef(null);
+  const name = useRef(null);
+  const phNo = useRef(null);
+  const email = useRef(null);
+  const linkedIn = useRef(null);
+  const gitHub = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("generalMainVisible", JSON.stringify(mainVisible));
@@ -34,7 +39,14 @@ export function General() {
     e.preventDefault();
 
     // Add a formSubmitted prop to the contactDetails state
-    setContactDetails({ ...contactDetails, formSubmitted: true });
+    setContactDetails({
+      name: name.current.value,
+      phNo: phNo.current.value,
+      email: email.current.value,
+      linkedIn: linkedIn.current.value,
+      gitHub: gitHub.current.value,
+      formSubmitted: true,
+    });
 
     // Display the editDetails button on submit
     editGeneralDetailsBtn.current.style.cssText = "display: block;";
@@ -57,6 +69,7 @@ export function General() {
   }
 
   function handleCancel() {
+    generalForm.current.reset();
     generalForm.current.style.cssText = "display: none;";
     editGeneralDetailsBtn.current.style.cssText = "display: inline;";
     setContactDetails({ ...contactDetails, formSubmitted: true });
@@ -115,65 +128,32 @@ export function General() {
             <input
               type="text"
               id="name"
-              value={contactDetails.name}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, name: e.target.value })
-              }
+              ref={name}
               autoComplete="on"
               required
             />
           </div>
           <div className="general-ph-no">
             <label htmlFor="ph-no">Phone Number </label>
-            <input
-              type="tel"
-              id="ph-no"
-              value={contactDetails.phNo}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, phNo: e.target.value })
-              }
-              required
-            />
+            <input type="tel" id="ph-no" ref={phNo} required />
           </div>
           <div className="general-email">
             <label htmlFor="email">Email </label>
             <input
               type="email"
               id="email"
-              value={contactDetails.email}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, email: e.target.value })
-              }
+              ref={email}
               autoComplete="on"
               required
             />
           </div>
           <div className="general-linked-in">
             <label htmlFor="linked-in">LinkedIn </label>
-            <input
-              type="text"
-              id="linked-in"
-              value={contactDetails.linkedIn}
-              onChange={(e) =>
-                setContactDetails({
-                  ...contactDetails,
-                  linkedIn: e.target.value,
-                })
-              }
-              required
-            />
+            <input type="text" id="linked-in" ref={linkedIn} required />
           </div>
           <div className="general-github">
             <label htmlFor="github">GitHub </label>
-            <input
-              type="text"
-              id="github"
-              value={contactDetails.gitHub}
-              onChange={(e) =>
-                setContactDetails({ ...contactDetails, gitHub: e.target.value })
-              }
-              required
-            />
+            <input type="text" id="github" ref={gitHub} required />
           </div>
           <div className="general-form-btns">
             <button
@@ -188,21 +168,13 @@ export function General() {
             </button>
           </div>
         </form>
-        {/* {
-          name: "",
-          phNo: "",
-          email: "",
-          linkedIn: "",
-          gitHub: "",
-          formSubmitted: false,
-        } */}
         {contactDetails.formSubmitted && (
           <div className="contact-details-card">
-            <p>{contactDetails.name}</p>
-            <p>{contactDetails.phNo}</p>
-            <p>{contactDetails.email}</p>
-            <p>{contactDetails.linkedIn}</p>
-            <p>{contactDetails.gitHub}</p>
+            {contactDetails.name && <p>{contactDetails.name}</p>}
+            {contactDetails.phNo && <p>{contactDetails.phNo}</p>}
+            {contactDetails.email && <p>{contactDetails.email}</p>}
+            {contactDetails.linkedIn && <p>{contactDetails.linkedIn}</p>}
+            {contactDetails.gitHub && <p>{contactDetails.gitHub}</p>}
           </div>
         )}
       </div>
