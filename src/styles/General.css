@@ -12,7 +12,7 @@
   gap: 1rem;
   flex-direction: column;
   overflow: hidden;
-  transition: height 0.45s ease-out;
+  transition: height 0.45s ease;
   font-family: myFontRegular;
   padding: 0 1rem;
   padding-bottom: 1rem;
@@ -39,6 +39,7 @@ h3 {
   border: none;
   outline: none;
   cursor: pointer;
+  gap: 0.5rem;
 }
 
 .general-form {

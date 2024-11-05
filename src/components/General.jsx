@@ -49,7 +49,7 @@ export function General() {
     });
 
     // Display the editDetails button on submit
-    editGeneralDetailsBtn.current.style.cssText = "display: block;";
+    editGeneralDetailsBtn.current.style.cssText = "display: flex;";
 
     // Will hide the form
     generalForm.current.style.cssText = "display: none;";
@@ -61,6 +61,13 @@ export function General() {
     // Hide the edit button after it was pressed
     editGeneralDetailsBtn.current.style.cssText = "display: none;";
 
+    // Add values to the input fields
+    name.current.value = contactDetails.name;
+    phNo.current.value = contactDetails.phNo;
+    email.current.value = contactDetails.email;
+    linkedIn.current.value = contactDetails.linkedIn;
+    gitHub.current.value = contactDetails.gitHub;
+
     // Make formSubmitted false on edit
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
@@ -71,7 +78,7 @@ export function General() {
   function handleCancel() {
     generalForm.current.reset();
     generalForm.current.style.cssText = "display: none;";
-    editGeneralDetailsBtn.current.style.cssText = "display: inline;";
+    editGeneralDetailsBtn.current.style.cssText = "display: flex;";
     setContactDetails({ ...contactDetails, formSubmitted: true });
   }
 
@@ -107,16 +114,24 @@ export function General() {
           />
         </svg>
       </div>
-      <div
-        className={mainVisible ? "general-main visible" : "general-main"}
-        // style={{ padding: mainVisible && "1rem" }}
-      >
+      <div className={mainVisible ? "general-main visible" : "general-main"}>
         <button
+          style={{ display: "flex", alignItems: "center" }}
           id="edit-general-details"
           ref={editGeneralDetailsBtn}
           onClick={() => handleEdit()}
         >
-          {contactDetails.formSubmitted ? "Edit Details" : "Add Details"}
+          <svg
+            style={{ width: "25px" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M4 6H2V20C2 21.11 2.9 22 4 22H18V20H4V6M18.7 7.35L17.7 8.35L15.65 6.3L16.65 5.3C16.86 5.08 17.21 5.08 17.42 5.3L18.7 6.58C18.92 6.79 18.92 7.14 18.7 7.35M9 12.94L15.06 6.88L17.12 8.94L11.06 15H9V12.94M20 4L20 4L20 16L8 16L8 4H20M20 2H8C6.9 2 6 2.9 6 4V16C6 17.1 6.9 18 8 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+            />
+          </svg>
+          <span>Edit Details</span>
         </button>
         <form
           className="general-form"
