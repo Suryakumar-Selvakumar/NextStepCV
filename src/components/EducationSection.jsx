@@ -191,13 +191,13 @@ export function EducationSection() {
           setMainVisible(!mainVisible);
         }}
       >
-        <h2
+        <h3
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
         >
           Education
-        </h2>
+        </h3>
         <svg
           ref={dropDownSvg}
           onClick={() => {
@@ -234,125 +234,151 @@ export function EducationSection() {
           ref={educationForm}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <label htmlFor="school">School name: </label>
-          <input
-            type="text"
-            id="school"
-            value={educationDetails.school}
-            onChange={(e) =>
-              setEducationDetails({
-                ...educationDetails,
-                school: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="place-study">Place of Study: </label>
-          <input
-            type="text"
-            id="place-study"
-            value={educationDetails.placeStudy}
-            onChange={(e) =>
-              setEducationDetails({
-                ...educationDetails,
-                placeStudy: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="title-study">Title of Study: </label>
-          <input
-            type="text"
-            id="title-study"
-            value={educationDetails.titleStudy}
-            onChange={(e) =>
-              setEducationDetails({
-                ...educationDetails,
-                titleStudy: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="gpa">GPA: </label>
-          <input
-            type="number"
-            id="gpa"
-            value={educationDetails.gpa}
-            onChange={(e) =>
-              e.target.value < 4 &&
-              e.target.value > 0 &&
-              setEducationDetails({
-                ...educationDetails,
-                gpa: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="completed-study">Completed Study? </label>
-          <input
-            type="checkbox"
-            id="completed-study"
-            checked={educationDetails.completedStudy}
-            onChange={(e) =>
-              setEducationDetails({
-                ...educationDetails,
-                startDateStudy: "",
-                completedStudy: e.target.checked,
-              })
-            }
-          />
-          {educationDetails.completedStudy && (
-            <>
-              <label htmlFor="start-date-study">Start Date: </label>
+          <div>
+            <div>
+              <label htmlFor="school">School name: </label>
               <input
-                type="date"
-                id="start-date-study"
-                value={educationDetails.startDateStudy}
+                type="text"
+                id="school"
+                value={educationDetails.school}
                 onChange={(e) =>
                   setEducationDetails({
                     ...educationDetails,
-                    startDateStudy: e.target.value,
+                    school: e.target.value,
                   })
                 }
                 required
               />
-            </>
-          )}
-          <label htmlFor="end-date-study">
-            {educationDetails.completedStudy
-              ? "End Date: "
-              : "Expected Graduation Year: "}
-          </label>
-          <input
-            type="date"
-            id="end-date-study"
-            value={educationDetails.endDateStudy}
-            onChange={(e) =>
-              setEducationDetails({
-                ...educationDetails,
-                endDateStudy: e.target.value,
-              })
-            }
-            required
-          />
-          <button
-            type="button"
-            id="cancel-education"
-            onClick={() => handleCancel()}
-          >
-            Cancel
-          </button>
-          <button type="submit" ref={submitEducationBtn} id="submit-education">
-            Submit
-          </button>
-          <button
-            type="button"
-            id="update-education"
-            ref={updateEducationBtn}
-            onClick={() => updateEducation()}
-          >
-            Update
-          </button>
+            </div>
+            <div>
+              <label htmlFor="place-study">Place of Study: </label>
+              <input
+                type="text"
+                id="place-study"
+                value={educationDetails.placeStudy}
+                onChange={(e) =>
+                  setEducationDetails({
+                    ...educationDetails,
+                    placeStudy: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label htmlFor="title-study">Title of Study: </label>
+              <input
+                type="text"
+                id="title-study"
+                value={educationDetails.titleStudy}
+                onChange={(e) =>
+                  setEducationDetails({
+                    ...educationDetails,
+                    titleStudy: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+            <div>
+              <label htmlFor="gpa">GPA: </label>
+              <input
+                type="number"
+                id="gpa"
+                value={educationDetails.gpa}
+                onChange={(e) =>
+                  e.target.value < 4 &&
+                  e.target.value > 0 &&
+                  setEducationDetails({
+                    ...educationDetails,
+                    gpa: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <div>
+              <label htmlFor="completed-study">Completed Study? </label>
+              <input
+                type="checkbox"
+                id="completed-study"
+                checked={educationDetails.completedStudy}
+                onChange={(e) =>
+                  setEducationDetails({
+                    ...educationDetails,
+                    startDateStudy: "",
+                    completedStudy: e.target.checked,
+                  })
+                }
+              />
+            </div>
+            <div>
+              {educationDetails.completedStudy && (
+                <>
+                  <label htmlFor="start-date-study">Start Date: </label>
+                  <input
+                    type="date"
+                    id="start-date-study"
+                    value={educationDetails.startDateStudy}
+                    onChange={(e) =>
+                      setEducationDetails({
+                        ...educationDetails,
+                        startDateStudy: e.target.value,
+                      })
+                    }
+                    required
+                  />
+                </>
+              )}
+            </div>
+            <div>
+              <label htmlFor="end-date-study">
+                {educationDetails.completedStudy
+                  ? "End Date: "
+                  : "Expected Graduation Year: "}
+              </label>
+              <input
+                type="date"
+                id="end-date-study"
+                value={educationDetails.endDateStudy}
+                onChange={(e) =>
+                  setEducationDetails({
+                    ...educationDetails,
+                    endDateStudy: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              type="button"
+              id="cancel-education"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              ref={submitEducationBtn}
+              id="submit-education"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              id="update-education"
+              ref={updateEducationBtn}
+              onClick={() => updateEducation()}
+            >
+              Update
+            </button>
+          </div>
         </form>
         <div className="education-cards">
           {courses &&

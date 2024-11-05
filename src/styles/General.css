@@ -15,18 +15,12 @@
   transition: height 0.45s ease;
   font-family: myFontRegular;
   padding: 0 1rem;
-  padding-bottom: 1rem;
   justify-content: space-between;
 }
 
 .general-main.visible {
   height: 525px;
   border-bottom: 1px solid var(--sidebar-border-color);
-}
-
-h3 {
-  font-family: myFontRegular;
-  font-weight: 400;
 }
 
 #edit-general-details {
@@ -115,6 +109,7 @@ h3 {
   flex-direction: column;
   gap: 1rem;
   margin-top: 3.65rem;
+  margin-bottom: 1rem;
 }
 
 .contact-details-card p {

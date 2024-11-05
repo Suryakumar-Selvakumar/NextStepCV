@@ -20,3 +20,8 @@
   border-right: 1px solid var(--sidebar-border-color);
   box-shadow: 3px 5px 15px rgb(199, 199, 199);
 }
+
+h3 {
+  font-family: myFontRegular;
+  font-weight: 400;
+}
