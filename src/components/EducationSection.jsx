@@ -22,6 +22,7 @@ export function EducationSection() {
   const [mainVisible, setMainVisible] = useState(
     storedMainVisible ? storedMainVisible : false
   );
+  const [showStartDate, setShowStartDate] = useState(true);
 
   // DOM refs
   const addEducationBtn = useRef(null);
@@ -38,9 +39,19 @@ export function EducationSection() {
   }, [courses, mainVisible]);
 
   function addEducation() {
+    setEducationDetails({
+      id: 0,
+      school: "",
+      placeStudy: "",
+      titleStudy: "",
+      startDateStudy: "",
+      endDateStudy: "",
+      gpa: 0,
+      completedStudy: true,
+    });
     if (courses.length < limit) {
       addEducationBtn.current.style.cssText = "display: none;";
-      educationForm.current.style.cssText = "display: block;";
+      educationForm.current.style.cssText = "display: flex;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
       limitErrorDiv.current.style.cssText = "display: block;";
@@ -56,7 +67,7 @@ export function EducationSection() {
     updateEducationBtn.current.style.cssText = "display: inline;";
 
     // Display the form to allow editing of details
-    educationForm.current.style.cssText = "display: block;";
+    educationForm.current.style.cssText = "display: flex;";
 
     // Hide the limit reached error
     limitErrorDiv.current.style.cssText = "display: none;";
@@ -74,17 +85,24 @@ export function EducationSection() {
           gpa: ed.gpa,
           completedStudy: ed.completedStudy,
         });
+        if (ed.completedStudy) {
+          setShowStartDate(true);
+        } else {
+          setShowStartDate(false);
+        }
       }
     });
   }
 
-  function updateEducation() {
+  function updateEducation(e) {
+    e.preventDefault();
     if (
       educationDetails.school !== "" &&
       educationDetails.placeStudy !== "" &&
       educationDetails.titleStudy !== "" &&
       educationDetails.endDateStudy !== "" &&
-      educationDetails.gpa !== 0
+      educationDetails.gpa !== 0 &&
+      (educationDetails.completedStudy ? educationDetails.startDateStudy : true)
     ) {
       const updatedCourses = courses.map((ed) => {
         if (ed.id === educationDetails.id) {
@@ -146,6 +164,7 @@ export function EducationSection() {
   }
 
   function handleSubmit(e) {
+    console.log(1);
     // Prevent form submission to avoid page reload
     e.preventDefault();
 
@@ -234,112 +253,101 @@ export function EducationSection() {
           ref={educationForm}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <div>
-            <div>
-              <label htmlFor="school">School name: </label>
-              <input
-                type="text"
-                id="school"
-                value={educationDetails.school}
-                onChange={(e) =>
-                  setEducationDetails({
-                    ...educationDetails,
-                    school: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="place-study">Place of Study: </label>
-              <input
-                type="text"
-                id="place-study"
-                value={educationDetails.placeStudy}
-                onChange={(e) =>
-                  setEducationDetails({
-                    ...educationDetails,
-                    placeStudy: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
+          <div className="education-school">
+            <label htmlFor="school">School name </label>
+            <input
+              type="text"
+              id="school"
+              value={educationDetails.school}
+              onChange={(e) =>
+                setEducationDetails({
+                  ...educationDetails,
+                  school: e.target.value,
+                })
+              }
+              required
+            />
           </div>
-          <div>
-            <div>
-              <label htmlFor="title-study">Title of Study: </label>
-              <input
-                type="text"
-                id="title-study"
-                value={educationDetails.titleStudy}
-                onChange={(e) =>
-                  setEducationDetails({
-                    ...educationDetails,
-                    titleStudy: e.target.value,
-                  })
-                }
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="gpa">GPA: </label>
+          <div className="education-place-study">
+            <label htmlFor="place-study">Place of Study </label>
+            <input
+              type="text"
+              id="place-study"
+              value={educationDetails.placeStudy}
+              onChange={(e) =>
+                setEducationDetails({
+                  ...educationDetails,
+                  placeStudy: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
+          <div className="education-title-study">
+            <label htmlFor="title-study">Title of Study </label>
+            <input
+              type="text"
+              id="title-study"
+              value={educationDetails.titleStudy}
+              onChange={(e) =>
+                setEducationDetails({
+                  ...educationDetails,
+                  titleStudy: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
+          <div className="education-gpa-start-end">
+            <div
+              className="education-gpa"
+              style={{ width: !educationDetails.completedStudy && "350px" }}
+            >
+              <label htmlFor="gpa">GPA </label>
               <input
                 type="number"
                 id="gpa"
                 value={educationDetails.gpa}
                 onChange={(e) =>
-                  e.target.value < 4 &&
-                  e.target.value > 0 &&
                   setEducationDetails({
                     ...educationDetails,
                     gpa: e.target.value,
                   })
                 }
+                pattern="(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)"
                 required
               />
             </div>
-          </div>
-          <div>
-            <div>
-              <label htmlFor="completed-study">Completed Study? </label>
-              <input
-                type="checkbox"
-                id="completed-study"
-                checked={educationDetails.completedStudy}
-                onChange={(e) =>
-                  setEducationDetails({
-                    ...educationDetails,
-                    startDateStudy: "",
-                    completedStudy: e.target.checked,
-                  })
-                }
-              />
-            </div>
-            <div>
-              {educationDetails.completedStudy && (
-                <>
-                  <label htmlFor="start-date-study">Start Date: </label>
-                  <input
-                    type="date"
-                    id="start-date-study"
-                    value={educationDetails.startDateStudy}
-                    onChange={(e) =>
-                      setEducationDetails({
-                        ...educationDetails,
-                        startDateStudy: e.target.value,
-                      })
-                    }
-                    required
-                  />
-                </>
-              )}
-            </div>
-            <div>
+            {educationDetails.completedStudy && showStartDate && (
+              <div
+                className="education-start-date"
+                style={{
+                  width: "200px",
+                }}
+              >
+                <label htmlFor="start-date-study">Start Date </label>
+                <input
+                  type="date"
+                  id="start-date-study"
+                  value={educationDetails.startDateStudy}
+                  onChange={(e) =>
+                    setEducationDetails({
+                      ...educationDetails,
+                      startDateStudy: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
+            )}
+            <div
+              className="education-end-date"
+              style={{ width: !educationDetails.completedStudy && "350px" }}
+            >
               <label htmlFor="end-date-study">
                 {educationDetails.completedStudy
-                  ? "End Date: "
-                  : "Expected Graduation Year: "}
+                  ? "End Date "
+                  : "Expected Graduation Year "}
               </label>
               <input
                 type="date"
@@ -356,6 +364,22 @@ export function EducationSection() {
             </div>
           </div>
           <div>
+            <label htmlFor="completed-study">Completed Study? </label>
+            <input
+              type="checkbox"
+              id="completed-study"
+              checked={educationDetails.completedStudy}
+              onChange={(e) => {
+                setEducationDetails({
+                  ...educationDetails,
+                  startDateStudy: "",
+                  completedStudy: e.target.checked,
+                });
+                setTimeout(() => setShowStartDate(!showStartDate), 250);
+              }}
+            />
+          </div>
+          <div className="education-form-btns">
             <button
               type="button"
               id="cancel-education"
@@ -371,10 +395,10 @@ export function EducationSection() {
               Submit
             </button>
             <button
-              type="button"
+              type="submit"
               id="update-education"
               ref={updateEducationBtn}
-              onClick={() => updateEducation()}
+              onClick={(e) => updateEducation(e)}
             >
               Update
             </button>

@@ -38,8 +38,79 @@
 
 .education-form {
   display: none;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.education-form > div:first-of-type,
+.education-form > div:nth-child(2),
+.education-form > div:nth-child(3) {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-gpa-start-end {
+  display: flex;
+  justify-content: space-between;
+}
+
+.education-gpa-start-end > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-gpa,
+.education-end-date {
+  width: 200px;
+  transition: width 0.25s ease-out;
+}
+
+.education-form input {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.education-form input:focus {
+  border: 1px solid rgb(67, 122, 232);
+  box-shadow: 3px 3px 10px rgba(111, 105, 105, 0.3);
+}
+
+.education-form input:user-invalid {
+  border: 1px solid red;
+}
+
+.education-form-btns {
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+}
+
+#cancel-education,
+#update-education,
+#submit-education {
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#cancel-education {
+  color: rgb(255, 62, 62);
+  border: 1px solid rgb(255, 62, 62);
+}
+
+#submit-education {
+  color: white;
+  background-color: var(--header-bg-color);
+  border: 1px solid var(--header-bg-color);
 }
 
 #update-education {
   display: none;
+  color: white;
+  background-color: rgb(0, 195, 0);
+  border: 1px solid rgb(0, 195, 0);
 }
