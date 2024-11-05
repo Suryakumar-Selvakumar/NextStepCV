@@ -188,13 +188,23 @@ export function General() {
             </button>
           </div>
         </form>
-        <div className="contact-details-card">
-          <p>{contactDetails.name}</p>
-          <p>{contactDetails.phNo}</p>
-          <p>{contactDetails.email}</p>
-          <p>{contactDetails.linkedIn}</p>
-          <p>{contactDetails.gitHub}</p>
-        </div>
+        {/* {
+          name: "",
+          phNo: "",
+          email: "",
+          linkedIn: "",
+          gitHub: "",
+          formSubmitted: false,
+        } */}
+        {contactDetails.formSubmitted && (
+          <div className="contact-details-card">
+            <p>{contactDetails.name}</p>
+            <p>{contactDetails.phNo}</p>
+            <p>{contactDetails.email}</p>
+            <p>{contactDetails.linkedIn}</p>
+            <p>{contactDetails.gitHub}</p>
+          </div>
+        )}
       </div>
     </div>
   );
