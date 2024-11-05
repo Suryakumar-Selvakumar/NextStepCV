@@ -9,7 +9,7 @@
 .dropdown-svg {
   width: 40px;
   height: 40px;
-  transition: transform 200ms ease-out;
+  transition: transform 0.25s ease-out;
 }
 
 .rotate-dropdown {

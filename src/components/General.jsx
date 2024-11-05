@@ -53,7 +53,7 @@ export function General() {
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
     // Will display the form to update the details
-    generalForm.current.style.cssText = "display: block;";
+    generalForm.current.style.cssText = "display: flex;";
   }
 
   function handleCancel() {
@@ -70,13 +70,13 @@ export function General() {
           setMainVisible(!mainVisible);
         }}
       >
-        <h2
+        <h3
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
         >
           General Information
-        </h2>
+        </h3>
         <svg
           ref={dropDownSvg}
           onClick={() => {
@@ -110,71 +110,83 @@ export function General() {
           ref={generalForm}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <label htmlFor="name">Name: </label>
-          <input
-            type="text"
-            id="name"
-            value={contactDetails.name}
-            onChange={(e) =>
-              setContactDetails({ ...contactDetails, name: e.target.value })
-            }
-            autoComplete="on"
-            required
-          />
-          <label htmlFor="ph-no">Phone Number: </label>
-          <input
-            type="tel"
-            id="ph-no"
-            value={contactDetails.phNo}
-            onChange={(e) =>
-              setContactDetails({ ...contactDetails, phNo: e.target.value })
-            }
-            required
-          />
-          <label htmlFor="email">Email: </label>
-          <input
-            type="email"
-            id="email"
-            value={contactDetails.email}
-            onChange={(e) =>
-              setContactDetails({ ...contactDetails, email: e.target.value })
-            }
-            autoComplete="on"
-            required
-          />
-          <label htmlFor="linked-in">LinkedIn: </label>
-          <input
-            type="text"
-            id="linked-in"
-            value={contactDetails.linkedIn}
-            onChange={(e) =>
-              setContactDetails({
-                ...contactDetails,
-                linkedIn: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="github">GitHub: </label>
-          <input
-            type="text"
-            id="github"
-            value={contactDetails.gitHub}
-            onChange={(e) =>
-              setContactDetails({ ...contactDetails, gitHub: e.target.value })
-            }
-            required
-          />
-          <button
-            type="button"
-            id="cancel-general"
-            onClick={() => handleCancel()}
-          >
-            Cancel
-          </button>
-          <button type="submit" id="submit-general">
-            Save
-          </button>
+          <div className="general-name">
+            <label htmlFor="name">Name </label>
+            <input
+              type="text"
+              id="name"
+              value={contactDetails.name}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, name: e.target.value })
+              }
+              autoComplete="on"
+              required
+            />
+          </div>
+          <div className="general-ph-no">
+            <label htmlFor="ph-no">Phone Number </label>
+            <input
+              type="tel"
+              id="ph-no"
+              value={contactDetails.phNo}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, phNo: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="general-email">
+            <label htmlFor="email">Email </label>
+            <input
+              type="email"
+              id="email"
+              value={contactDetails.email}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, email: e.target.value })
+              }
+              autoComplete="on"
+              required
+            />
+          </div>
+          <div className="general-linked-in">
+            <label htmlFor="linked-in">LinkedIn </label>
+            <input
+              type="text"
+              id="linked-in"
+              value={contactDetails.linkedIn}
+              onChange={(e) =>
+                setContactDetails({
+                  ...contactDetails,
+                  linkedIn: e.target.value,
+                })
+              }
+              required
+            />
+          </div>
+          <div className="general-github">
+            <label htmlFor="github">GitHub </label>
+            <input
+              type="text"
+              id="github"
+              value={contactDetails.gitHub}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, gitHub: e.target.value })
+              }
+              required
+            />
+          </div>
+          <div className="general-form-btns">
+            <button
+              type="button"
+              id="cancel-general"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button type="submit" id="submit-general">
+              Save
+            </button>
+          </div>
         </form>
         <div className="contact-details-card">
           <p>{contactDetails.name}</p>

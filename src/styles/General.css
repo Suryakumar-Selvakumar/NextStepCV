@@ -12,28 +12,94 @@
   gap: 1rem;
   flex-direction: column;
   overflow: hidden;
-  transition: height 0.2s ease-out;
+  transition: height 0.45s ease-out;
   font-family: myFontRegular;
-  border-bottom: 1px solid var(--sidebar-border-color);
   padding: 0 1rem;
 }
 
 .general-main.visible {
-  height: 300px;
+  height: 750px;
+  border-bottom: 1px solid var(--sidebar-border-color);
 }
 
-.general-form {
-  display: none;
-  margin-top: 1rem;
-}
-
-h2 {
+h3 {
   font-family: myFontRegular;
   font-weight: 400;
 }
 
 #edit-general-details {
-  width: 100px;
   align-self: flex-end;
   margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: rgb(34, 34, 34);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.general-form {
+  display: none;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.general-name,
+.general-ph-no,
+.general-email,
+.general-linked-in,
+.general-github {
+  display: flex;
+  flex-direction: column;
+}
+
+.general-form input {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.general-form input:focus {
+  border: 1px solid rgb(67, 122, 232);
+  box-shadow: 3px 3px 10px rgba(111, 105, 105, 0.3);
+}
+
+.general-form input:user-invalid {
+  border: 1px solid red;
+}
+
+.general-form-btns {
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+}
+
+#cancel-general,
+#submit-general {
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#cancel-general {
+  color: rgb(255, 62, 62);
+  border: 1px solid rgb(255, 62, 62);
+}
+
+#submit-general {
+  color: white;
+  background-color: var(--header-bg-color);
+  border: 1px solid var(--header-bg-color);
+}
+
+#submit-general:hover {
+  background-color: rgb(0, 138, 223);
+}
+
+#cancel-general:hover {
+  background-color: rgb(228, 228, 228);
 }

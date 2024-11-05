@@ -122,21 +122,18 @@ header {
 #cancel-reset {
   padding: 0 1.5rem;
   border-radius: 15px;
-  border: 1px solid var(--header-bg-color);
+  cursor: pointer;
 }
 
 #cancel-reset {
-  color: var(--header-bg-color);
-}
-
-#okay-reset:hover,
-#cancel-reset:hover {
-  cursor: pointer;
+  color: rgb(255, 62, 62);
+  border: 1px solid rgb(255, 62, 62);
 }
 
 #okay-reset {
   color: white;
   background-color: var(--header-bg-color);
+  border: 1px solid var(--header-bg-color);
 }
 
 #okay-reset:hover {
