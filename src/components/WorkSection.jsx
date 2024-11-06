@@ -342,111 +342,143 @@ export function WorkSection() {
           ref={workForm}
           onSubmit={() => handleSubmit()}
         >
-          <label htmlFor="company">Company name: </label>
-          <input
-            type="text"
-            id="company"
-            value={workDetails.company}
-            onChange={(e) =>
-              setWorkDetails({ ...workDetails, company: e.target.value })
-            }
-            autoComplete="on"
-            required
-          />
-          <label htmlFor="place">Company location: </label>
-          <input
-            type="text"
-            id="place"
-            value={workDetails.place}
-            onChange={(e) =>
-              setWorkDetails({ ...workDetails, place: e.target.value })
-            }
-            required
-          />
-          <label htmlFor="position">Position: </label>
-          <input
-            type="text"
-            id="position"
-            value={workDetails.position}
-            onChange={(e) =>
-              setWorkDetails({ ...workDetails, position: e.target.value })
-            }
-            required
-          />
-          <label htmlFor="still-working">Still Working? </label>
-          <input
-            type="checkbox"
-            id="still-working"
-            checked={workDetails.stillWorking}
-            onChange={(e) =>
-              setWorkDetails({
-                ...workDetails,
-                endWork: "",
-                stillWorking: e.target.checked,
-              })
-            }
-          />
-          <label htmlFor="start-work">Position start date: </label>
-          <input
-            type="date"
-            id="start-work"
-            value={workDetails.startWork}
-            onChange={(e) =>
-              setWorkDetails({ ...workDetails, startWork: e.target.value })
-            }
-            required
-          />
-          {!workDetails.stillWorking && (
-            <>
-              <label htmlFor="end-work">Position end date: </label>
+          <div className="work-company-position">
+            <div className="work-company-name">
+              <label htmlFor="company">Company name </label>
               <input
-                type="date"
-                id="end-work"
-                value={workDetails.endWork}
+                type="text"
+                id="company"
+                value={workDetails.company}
                 onChange={(e) =>
-                  setWorkDetails({ ...workDetails, endWork: e.target.value })
+                  setWorkDetails({ ...workDetails, company: e.target.value })
+                }
+                autoComplete="on"
+                required
+              />
+            </div>
+            <div className="work-position">
+              <label htmlFor="position">Position </label>
+              <input
+                type="text"
+                id="position"
+                value={workDetails.position}
+                onChange={(e) =>
+                  setWorkDetails({ ...workDetails, position: e.target.value })
                 }
                 required
               />
-            </>
-          )}
-          <label htmlFor="role">Job roles:</label>
-          <input
-            type="text"
-            id="role"
-            value={role.value}
-            onChange={(e) => setRole({ ...role, value: e.target.value })}
-          />
-          <button
-            type="button"
-            ref={addRoleBtn}
-            onClick={() => addRole()}
-            id="add-role"
-          >
-            Add role
-          </button>
-          <button
-            type="button"
-            ref={updateRoleBtn}
-            onClick={() => updateRole()}
-            id="update-role"
-          >
-            Update role
-          </button>
-          <button type="button" id="cancel-work" onClick={() => handleCancel()}>
-            Cancel
-          </button>
-          <button type="submit" ref={submitWorkBtn} id="submit-work">
-            Submit
-          </button>
-          <button
-            id="update-work"
-            type="button"
-            ref={updateWorkBtn}
-            onClick={() => updateWork()}
-          >
-            Update
-          </button>
+            </div>
+          </div>
+          <div className="work-dates">
+            <div
+              className="work-company-location"
+              style={{ width: workDetails.stillWorking && "425px" }}
+            >
+              <label htmlFor="place">Company location </label>
+              <input
+                type="text"
+                id="place"
+                value={workDetails.place}
+                onChange={(e) =>
+                  setWorkDetails({ ...workDetails, place: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div
+              className="work-start-date"
+              style={{ width: workDetails.stillWorking && "425px" }}
+            >
+              <label htmlFor="start-work">Position start date </label>
+              <input
+                type="date"
+                id="start-work"
+                value={workDetails.startWork}
+                onChange={(e) =>
+                  setWorkDetails({ ...workDetails, startWork: e.target.value })
+                }
+                required
+              />
+            </div>
+            {!workDetails.stillWorking && (
+              <div className="work-end-date">
+                <label htmlFor="end-work">Position end date </label>
+                <input
+                  type="date"
+                  id="end-work"
+                  value={workDetails.endWork}
+                  onChange={(e) =>
+                    setWorkDetails({ ...workDetails, endWork: e.target.value })
+                  }
+                  required
+                />
+              </div>
+            )}
+          </div>
+          <div className="work-still-working">
+            <label htmlFor="still-working">Still Working? </label>
+            <input
+              type="checkbox"
+              id="still-working"
+              checked={workDetails.stillWorking}
+              onChange={(e) =>
+                setWorkDetails({
+                  ...workDetails,
+                  endWork: "",
+                  stillWorking: e.target.checked,
+                })
+              }
+            />
+          </div>
+          <div className="work-role">
+            <label htmlFor="role">Job roles</label>
+            <div>
+              <input
+                type="text"
+                id="role"
+                value={role.value}
+                onChange={(e) => setRole({ ...role, value: e.target.value })}
+              />
+              <>
+                <button
+                  type="button"
+                  ref={addRoleBtn}
+                  onClick={() => addRole()}
+                  id="add-role"
+                >
+                  Add role
+                </button>
+                <button
+                  type="button"
+                  ref={updateRoleBtn}
+                  onClick={() => updateRole()}
+                  id="update-role"
+                >
+                  Update role
+                </button>
+              </>
+            </div>
+          </div>
+          <div className="work-form-btns">
+            <button
+              type="button"
+              id="cancel-work"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button type="submit" ref={submitWorkBtn} id="submit-work">
+              Submit
+            </button>
+            <button
+              id="update-work"
+              type="button"
+              ref={updateWorkBtn}
+              onClick={() => updateWork()}
+            >
+              Update
+            </button>
+          </div>
         </form>
         <ul className="role-cards">
           {workDetails.roles.map((role) => (
