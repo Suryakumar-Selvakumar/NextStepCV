@@ -26,14 +26,14 @@ export function Education(props) {
   return (
     <div className="education-card" data-id={education.id}>
       <div>
-        <div>
+        {/* <div>
           <p>{education.school}</p>
           <hr />
         </div>
         <div>
           <p>{education.placeStudy}</p>
           <hr />
-        </div>
+        </div> */}
         <div>
           <p>{education.titleStudy}</p>
           <hr />

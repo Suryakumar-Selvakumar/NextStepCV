@@ -389,6 +389,14 @@ export function EducationSection() {
                   if (educationDetails.completedStudy) {
                     document
                       .getElementById("end-date-study")
+                      .setAttribute(
+                        "min",
+                        educationDetails.startDateStudy
+                          ? educationDetails.startDateStudy
+                          : "1900-12-31"
+                      );
+                    document
+                      .getElementById("end-date-study")
                       .setAttribute("max", returnToday());
                   } else {
                     document
@@ -396,7 +404,7 @@ export function EducationSection() {
                       .setAttribute("min", returnToday());
                     document
                       .getElementById("end-date-study")
-                      .setAttribute("max", 2100 - 12 - 31);
+                      .setAttribute("max", "2100-12-31");
                   }
                 }}
                 required

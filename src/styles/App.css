@@ -72,5 +72,5 @@ h6 {
 
 main {
   display: grid;
-  grid-template-columns: 0.45fr 0.55fr;
+  grid-template-columns: 915px 0.55fr;
 }
