@@ -20,7 +20,7 @@
 }
 
 .technical-skills-main.visible {
-  height: 450px;
+  height: 475px;
   border-bottom: 1px solid var(--sidebar-border-color);
 }
 
@@ -40,10 +40,82 @@
   width: max-content;
 }
 
-#update-skills-group {
-  display: none;
-}
-
 .technical-skills-form {
   display: none;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.technical-skills-type,
+.technical-skills-list,
+.skills-group-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+#add-skills-group {
+  place-self: start;
+  padding: 0.5rem 1rem;
+  background-color: rgb(45, 45, 45);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: max-content;
+}
+
+#update-skills-group {
+  display: none;
+  place-self: start;
+  padding: 0.5rem 1rem;
+  background-color: rgb(45, 45, 45);
+  color: white;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: max-content;
+}
+
+.technical-skills-form input {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+}
+
+.technical-skills-form input:focus {
+  border: 1px solid rgb(67, 122, 232);
+  box-shadow: 3px 3px 10px rgba(111, 105, 105, 0.3);
+}
+
+.technical-skills-form input:user-invalid {
+  border: 1px solid red;
+}
+
+.technical-skills-form-btns {
+  align-self: end;
+  display: flex;
+  gap: 1rem;
+}
+
+#cancel-technical-skills,
+#submit-technical-skills {
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#cancel-technical-skills {
+  color: rgb(255, 62, 62);
+  border: 1px solid rgb(255, 62, 62);
+}
+
+#submit-technical-skills {
+  color: white;
+  background-color: var(--header-bg-color);
+  border: 1px solid var(--header-bg-color);
 }

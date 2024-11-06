@@ -261,50 +261,58 @@ export function TechnicalSkills() {
           ref={technicalSkillsForm}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <label htmlFor="skills-type">Enter skills type: </label>
-          <input
-            type="text"
-            id="skills-type"
-            value={skillsGroup.skillsType}
-            onChange={(e) =>
-              setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
-            }
-          />
-          <label htmlFor="skills-list">Enter list of skills: </label>
-          <input
-            type="text"
-            id="skills-list"
-            value={skillsGroup.skillsList}
-            onChange={(e) =>
-              setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
-            }
-          />
-          <button
-            type="button"
-            onClick={() => addSkillsGroup()}
-            id="add-skills-group"
-            ref={addSkillsGroupBtn}
-          >
-            Add Skills Group
-          </button>
-          <button
-            type="button"
-            onClick={() => updateSkillsGroup()}
-            id="update-skills-group"
-            ref={updateSkillsGroupBtn}
-          >
-            Update Skills Group
-          </button>
-          <button
-            type="button"
-            id="cancel-technical-skills"
-            onClick={() => handleCancel()}
-          >
-            Cancel
-          </button>
-          <button type="submit" id="submit-technical-skills">
-            Save
-          </button>
+          <div className="technical-skills-type">
+            <label htmlFor="skills-type">Enter skills type </label>
+            <input
+              type="text"
+              id="skills-type"
+              value={skillsGroup.skillsType}
+              onChange={(e) =>
+                setSkillsGroup({ ...skillsGroup, skillsType: e.target.value })
+              }
+            />
+          </div>
+          <div className="technical-skills-list">
+            <label htmlFor="skills-list">Enter list of skills </label>
+            <input
+              type="text"
+              id="skills-list"
+              value={skillsGroup.skillsList}
+              onChange={(e) =>
+                setSkillsGroup({ ...skillsGroup, skillsList: e.target.value })
+              }
+            />
+          </div>
+          <div className="skills-group-btns">
+            <button
+              type="button"
+              onClick={() => addSkillsGroup()}
+              id="add-skills-group"
+              ref={addSkillsGroupBtn}
+            >
+              Add Skills Group
+            </button>
+            <button
+              type="button"
+              onClick={() => updateSkillsGroup()}
+              id="update-skills-group"
+              ref={updateSkillsGroupBtn}
+            >
+              Update Skills Group
+            </button>
+          </div>
+          <div className="technical-skills-form-btns">
+            <button
+              type="button"
+              id="cancel-technical-skills"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button type="submit" id="submit-technical-skills">
+              Save
+            </button>
+          </div>
         </form>
         <div className="technical-skills-cards">
           {skills &&
