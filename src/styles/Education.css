@@ -20,8 +20,8 @@
   justify-content: space-between;
 }
 
-.education-card hr {
-  width: 250px;
+.education-card > div > div:first-child > hr {
+  width: 260px;
 }
 
 #edit-education,

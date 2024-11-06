@@ -39,11 +39,11 @@ export function Education(props) {
           <p>{education.gpa}</p>
           {education.startDateStudy && (
             <>
-              <span>|</span>
+              <hr/>
               <p>{formatDate(education.startDateStudy)}</p>{" "}
             </>
           )}
-          <span>|</span>
+          <hr />
           <p>{formatDate(education.endDateStudy)}</p>
         </div>
       </div>
