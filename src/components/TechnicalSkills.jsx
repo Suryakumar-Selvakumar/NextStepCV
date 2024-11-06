@@ -41,10 +41,10 @@ export function TechnicalSkills() {
       technicalSkillsForm.current.style.cssText = "display: none;";
 
       // Display the Add Technical Skills button
-      addTechnicalSkillsBtn.current.style.cssText = "display: block";
+      addTechnicalSkillsBtn.current.style.cssText = "display: flex";
 
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
-      addSkillsGroupBtn.current.style.cssText = "display: inline;";
+      addSkillsGroupBtn.current.style.cssText = "display: flex;";
 
       // Reset skillsGroup
       setSkillsGroup({
@@ -60,10 +60,10 @@ export function TechnicalSkills() {
     technicalSkillsForm.current.style.cssText = "display: none;";
 
     // Display the Add Technical Skills button
-    addTechnicalSkillsBtn.current.style.cssText = "display: block";
+    addTechnicalSkillsBtn.current.style.cssText = "display: flex";
 
     updateSkillsGroupBtn.current.style.cssText = "display: none;";
-    addSkillsGroupBtn.current.style.cssText = "display: inline;";
+    addSkillsGroupBtn.current.style.cssText = "display: flex;";
 
     // Reset skillsGroup
     setSkillsGroup({
@@ -75,11 +75,11 @@ export function TechnicalSkills() {
 
   function addTechnicalSkills() {
     if (skills.length < limit) {
-      technicalSkillsForm.current.style.cssText = "display: block;";
+      technicalSkillsForm.current.style.cssText = "display: flex;";
       addTechnicalSkillsBtn.current.style.cssText = "display: none;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      limitErrorDiv.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: flex;";
     }
   }
 
@@ -134,10 +134,10 @@ export function TechnicalSkills() {
         });
       }
     });
-    updateSkillsGroupBtn.current.style.cssText = "display: inline;";
+    updateSkillsGroupBtn.current.style.cssText = "display: flex;";
     addSkillsGroupBtn.current.style.cssText = "display: none;";
     addTechnicalSkillsBtn.current.style.cssText = "display: none;";
-    technicalSkillsForm.current.style.cssText = "display: block;";
+    technicalSkillsForm.current.style.cssText = "display: flex;";
     limitErrorDiv.current.style.cssText = "display: none;";
   }
 
@@ -161,10 +161,10 @@ export function TechnicalSkills() {
         skillsList: "",
       });
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
-      addSkillsGroupBtn.current.style.cssText = "display: inline;";
+      addSkillsGroupBtn.current.style.cssText = "display: flex;";
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
       // addTechnicalSkillsBtn.current.style.cssText =
-      //   "display: inline;";
+      //   "display: flex;";
 
       if (skills.length === limit) {
         addSkillsGroupBtn.current.disabled = true;
@@ -179,7 +179,7 @@ export function TechnicalSkills() {
 
     if (skillsGroup.id === skillsGroupId || skills.length === 1) {
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
-      addSkillsGroupBtn.current.style.cssText = "display: inline;";
+      addSkillsGroupBtn.current.style.cssText = "display: flex;";
       setSkillsGroup({
         id: 0,
         skillsType: "",
@@ -241,7 +241,17 @@ export function TechnicalSkills() {
           ref={addTechnicalSkillsBtn}
           onClick={() => addTechnicalSkills()}
         >
-          Add Technical Skills
+          <svg
+            style={{ width: "30px" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M3 16H10V14H3M18 14V10H16V14H12V16H16V20H18V16H22V14M14 6H3V8H14M14 10H3V12H14V10Z"
+            />
+          </svg>
+          <span>Add Technical Skills</span>
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
           Skills limit reached!
