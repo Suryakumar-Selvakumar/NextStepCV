@@ -4,6 +4,13 @@
 
 .limit-error {
   display: none;
+  align-items: center;
+  align-self: center;
+  gap: 0.5rem;
+}
+
+.limit-error span {
+  font-size: 1.5rem;
 }
 
 .dropdown-svg {

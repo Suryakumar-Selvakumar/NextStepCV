@@ -22,7 +22,6 @@ export function EducationSection() {
   const [mainVisible, setMainVisible] = useState(
     storedMainVisible ? storedMainVisible : false
   );
-  const [showStartDate, setShowStartDate] = useState(true);
 
   // DOM refs
   const addEducationBtn = useRef(null);
@@ -31,6 +30,7 @@ export function EducationSection() {
   const updateEducationBtn = useRef(null);
   const limitErrorDiv = useRef(null);
   const dropDownSvg = useRef(null);
+  const educationCards = useRef(null);
 
   useEffect(() => {
     if (courses) localStorage.setItem("courses", JSON.stringify(courses));
@@ -39,6 +39,7 @@ export function EducationSection() {
   }, [courses, mainVisible]);
 
   function addEducation() {
+    educationForm.current.reset();
     setEducationDetails({
       id: 0,
       school: "",
@@ -51,10 +52,12 @@ export function EducationSection() {
     });
     if (courses.length < limit) {
       addEducationBtn.current.style.cssText = "display: none;";
+      updateEducationBtn.current.style.cssText = "display: none;";
+      submitEducationBtn.current.style.cssText = "display: flex;";
       educationForm.current.style.cssText = "display: flex;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      limitErrorDiv.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: flex;";
     }
   }
 
@@ -64,7 +67,7 @@ export function EducationSection() {
 
     // Update the styles of the submit and update buttons
     submitEducationBtn.current.style.cssText = "display: none;";
-    updateEducationBtn.current.style.cssText = "display: inline;";
+    updateEducationBtn.current.style.cssText = "display: flex;";
 
     // Display the form to allow editing of details
     educationForm.current.style.cssText = "display: flex;";
@@ -85,11 +88,6 @@ export function EducationSection() {
           gpa: ed.gpa,
           completedStudy: ed.completedStudy,
         });
-        if (ed.completedStudy) {
-          setShowStartDate(true);
-        } else {
-          setShowStartDate(false);
-        }
       }
     });
   }
@@ -134,21 +132,22 @@ export function EducationSection() {
       });
 
       updateEducationBtn.current.style.cssText = "display: none;";
-      addEducationBtn.current.style.cssText = "display: inline;";
-      submitEducationBtn.current.style.cssText = "display: inline;";
+      addEducationBtn.current.style.cssText = "display: flex;";
+      submitEducationBtn.current.style.cssText = "display: flex;";
       educationForm.current.style.cssText = "display: none;";
     }
   }
 
   function deleteEducation(courseId) {
     setCourses(courses.filter((exp) => exp.id !== courseId));
+
     limitErrorDiv.current.style.cssText = "display: none;";
 
     if (educationDetails.id === courseId || courses.length === 1) {
       educationForm.current.style.cssText = "display: none;";
-      addEducationBtn.current.style.cssText = "display: inline;";
+      addEducationBtn.current.style.cssText = "display: flex;";
       updateEducationBtn.current.style.cssText = "display: none;";
-      submitEducationBtn.current.style.cssText = "display: inline;";
+      submitEducationBtn.current.style.cssText = "display: flex;";
 
       setEducationDetails({
         id: 0,
@@ -164,7 +163,6 @@ export function EducationSection() {
   }
 
   function handleSubmit(e) {
-    console.log(1);
     // Prevent form submission to avoid page reload
     e.preventDefault();
 
@@ -172,14 +170,13 @@ export function EducationSection() {
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
-    addEducationBtn.current.style.cssText = "display: inline;";
+    addEducationBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
     educationForm.current.style.cssText = "display: none;";
 
     // Display the class containing Education component cards
-    document.querySelector(".education-cards").style.cssText =
-      "display: block;";
+    document.querySelector(".education-cards").style.cssText = "display: flex;";
   }
 
   function handleCancel() {
@@ -187,7 +184,7 @@ export function EducationSection() {
     educationForm.current.style.cssText = "display: none;";
 
     // Display the add button again
-    addEducationBtn.current.style.cssText = "display: inline;";
+    addEducationBtn.current.style.cssText = "display: flex;";
 
     // Reset educationDetails
     setEducationDetails({
@@ -243,10 +240,21 @@ export function EducationSection() {
           ref={addEducationBtn}
           onClick={() => addEducation()}
         >
-          Add Education
+          <svg
+            style={{ width: "25px" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M21 15V18H24V20H21V23H19V20H16V18H19V15H21M14 18H3V6H19V13H21V6C21 4.89 20.11 4 19 4H3C1.9 4 1 4.89 1 6V18C1 19.11 1.9 20 3 20H14V18Z"
+            />
+          </svg>
+          <span>Add Education</span>
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
-          Education limit reached!
+          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <span>Education limit reached!</span>
         </div>
         <form
           className="education-form"
@@ -307,6 +315,9 @@ export function EducationSection() {
               <input
                 type="number"
                 id="gpa"
+                min={0}
+                max={4}
+                step={0.01}
                 value={educationDetails.gpa}
                 onChange={(e) =>
                   setEducationDetails({
@@ -318,11 +329,11 @@ export function EducationSection() {
                 required
               />
             </div>
-            {educationDetails.completedStudy && showStartDate && (
+            {educationDetails.completedStudy && (
               <div
                 className="education-start-date"
                 style={{
-                  width: "200px",
+                  width: "250px",
                 }}
               >
                 <label htmlFor="start-date-study">Start Date </label>
@@ -375,7 +386,6 @@ export function EducationSection() {
                   startDateStudy: "",
                   completedStudy: e.target.checked,
                 });
-                setTimeout(() => setShowStartDate(!showStartDate), 250);
               }}
             />
           </div>
@@ -404,7 +414,7 @@ export function EducationSection() {
             </button>
           </div>
         </form>
-        <div className="education-cards">
+        <div className="education-cards" ref={educationCards}>
           {courses &&
             courses.map((exp) => (
               <Education
