@@ -387,13 +387,14 @@ export function EducationSection() {
                 }
                 onFocus={() => {
                   if (educationDetails.completedStudy) {
+                    console.log(educationDetails.startDateStudy);
                     document
                       .getElementById("end-date-study")
                       .setAttribute(
                         "min",
                         educationDetails.startDateStudy
                           ? educationDetails.startDateStudy
-                          : "1900-12-31"
+                          : "1950-11-31"
                       );
                     document
                       .getElementById("end-date-study")
