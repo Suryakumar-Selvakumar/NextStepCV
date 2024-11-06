@@ -204,13 +204,13 @@ export function TechnicalSkills() {
           setMainVisible(!mainVisible);
         }}
       >
-        <h2
+        <h3
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
         >
           Technical Skills
-        </h2>
+        </h3>
         <svg
           ref={dropDownSvg}
           onClick={() => {
@@ -254,7 +254,8 @@ export function TechnicalSkills() {
           <span>Add Technical Skills</span>
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
-          Skills limit reached!
+          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <span>Skills limit reached!</span>
         </div>
         <form
           className="technical-skills-form"

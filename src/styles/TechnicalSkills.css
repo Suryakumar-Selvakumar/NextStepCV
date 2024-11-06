@@ -20,7 +20,7 @@
 }
 
 .technical-skills-main.visible {
-  height: 475px;
+  height: 575px;
   border-bottom: 1px solid var(--sidebar-border-color);
 }
 
@@ -64,6 +64,13 @@
   outline: none;
   cursor: pointer;
   width: max-content;
+}
+
+#add-skills-group:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
 }
 
 #update-skills-group {
@@ -118,4 +125,13 @@
   color: white;
   background-color: var(--header-bg-color);
   border: 1px solid var(--header-bg-color);
+}
+
+.technical-skills-cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }

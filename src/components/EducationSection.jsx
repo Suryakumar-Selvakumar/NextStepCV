@@ -263,7 +263,7 @@ export function EducationSection() {
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
           <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
-          <span>Education limit reached!</span>
+          <span>Courses limit reached!</span>
         </div>
         <form
           className="education-form"
