@@ -5,7 +5,9 @@ import "../styles/WorkSection.css";
 
 export function WorkSection() {
   const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
-  const storedMainVisible = JSON.parse(localStorage.getItem("experiencesMainVisible"));
+  const storedMainVisible = JSON.parse(
+    localStorage.getItem("experiencesMainVisible")
+  );
   const [experiences, setExperiences] = useState(
     storedExperiences ? storedExperiences : []
   );
@@ -48,10 +50,10 @@ export function WorkSection() {
 
     if (experiences.length < workLimit) {
       addWorkBtn.current.style.cssText = "display: none;";
-      workForm.current.style.cssText = "display: block;";
+      workForm.current.style.cssText = "display: flex;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      limitErrorDiv.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: flex;";
     }
 
     if (workDetails.roles.length === roleLimit) {
@@ -84,8 +86,8 @@ export function WorkSection() {
     });
     addWorkBtn.current.style.cssText = "display: none;";
     submitWorkBtn.current.style.cssText = "display: none;";
-    updateWorkBtn.current.style.cssText = "display: inline;";
-    workForm.current.style.cssText = "display: block;";
+    updateWorkBtn.current.style.cssText = "display: flex;";
+    workForm.current.style.cssText = "display: flex;";
     limitErrorDiv.current.style.cssText = "display: none;";
   }
 
@@ -128,11 +130,11 @@ export function WorkSection() {
         value: "",
       });
       updateWorkBtn.current.style.cssText = "display: none;";
-      addWorkBtn.current.style.cssText = "display: inline;";
-      submitWorkBtn.current.style.cssText = "display: inline;";
+      addWorkBtn.current.style.cssText = "display: flex;";
+      submitWorkBtn.current.style.cssText = "display: flex;";
       workForm.current.style.cssText = "display: none;";
       updateRoleBtn.current.style.cssText = "display: none;";
-      addRoleBtn.current.style.cssText = "display: inline;";
+      addRoleBtn.current.style.cssText = "display: flex;";
     }
   }
 
@@ -142,11 +144,11 @@ export function WorkSection() {
 
     if (workDetails.id === workId || experiences.length === 1) {
       updateRoleBtn.current.style.cssText = "display: none;";
-      addRoleBtn.current.style.cssText = "display: inline;";
+      addRoleBtn.current.style.cssText = "display: flex;";
       workForm.current.style.cssText = "display: none;";
-      addWorkBtn.current.style.cssText = "display: inline;";
+      addWorkBtn.current.style.cssText = "display: flex;";
       updateWorkBtn.current.style.cssText = "display: none;";
-      submitWorkBtn.current.style.cssText = "display: inline;";
+      submitWorkBtn.current.style.cssText = "display: flex;";
 
       setWorkDetails({
         id: 0,
@@ -173,29 +175,29 @@ export function WorkSection() {
     ]);
 
     // Display the add button again
-    addWorkBtn.current.style.cssText = "display: inline;";
+    addWorkBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
     workForm.current.style.cssText = "display: none;";
 
     // Display the class containing Work component cards
-    document.querySelector(".work-cards").style.cssText = "display: block;";
+    document.querySelector(".work-cards").style.cssText = "display: flex;";
   }
 
   function handleCancel() {
     // Display the add button again
-    addWorkBtn.current.style.cssText = "display: inline;";
+    addWorkBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
     workForm.current.style.cssText = "display: none;";
 
     // Hide Update role button and bring back Add role button
     updateRoleBtn.current.style.cssText = "display: none;";
-    addRoleBtn.current.style.cssText = "display: inline;";
+    addRoleBtn.current.style.cssText = "display: flex;";
 
     // Hide Update button and bring back submit button
     updateWorkBtn.current.style.cssText = "display: none;";
-    submitWorkBtn.current.style.cssText = "display: inline;";
+    submitWorkBtn.current.style.cssText = "display: flex;";
 
     // Reset workDetails and role
     setWorkDetails({
@@ -233,7 +235,7 @@ export function WorkSection() {
         setRole({ id: r.id, value: r.value });
       }
     });
-    updateRoleBtn.current.style.cssText = "display: inline;";
+    updateRoleBtn.current.style.cssText = "display: flex;";
     addRoleBtn.current.style.cssText = "display: none;";
     limitErrorDiv.current.style.cssText = "display: none;";
   }
@@ -250,7 +252,7 @@ export function WorkSection() {
       setWorkDetails({ ...workDetails, roles: updatedRoles });
       setRole({ id: 0, value: "" });
       updateRoleBtn.current.style.cssText = "display: none;";
-      addRoleBtn.current.style.cssText = "display: inline;";
+      addRoleBtn.current.style.cssText = "display: flex;";
 
       if (workDetails.roles.length === roleLimit) {
         addRoleBtn.current.disabled = true;
@@ -268,7 +270,7 @@ export function WorkSection() {
 
     if (role.id === roleId || workDetails.roles.length === 1) {
       updateRoleBtn.current.style.cssText = "display: none;";
-      addRoleBtn.current.style.cssText = "display: inline;";
+      addRoleBtn.current.style.cssText = "display: flex;";
       setRole({ id: 0, value: "" });
     }
 
@@ -289,13 +291,13 @@ export function WorkSection() {
           setMainVisible(!mainVisible);
         }}
       >
-        <h2
+        <h3
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
         >
           Work Experience
-        </h2>
+        </h3>
         <svg
           ref={dropDownSvg}
           onClick={() => {
@@ -320,7 +322,17 @@ export function WorkSection() {
           ref={addWorkBtn}
           onClick={() => addWork()}
         >
-          Add Work Experience
+          <svg
+            style={{ width: "25px" }}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="white"
+              d="M10,2H14A2,2 0 0,1 16,4V6H20A2,2 0 0,1 22,8V13.53C21.42,13 20.75,12.6 20,12.34V8H4V19H12.08C12.2,19.72 12.45,20.39 12.8,21H4A2,2 0 0,1 2,19V8A2,2 0 0,1 4,6H8V4A2,2 0 0,1 10,2M14,6V4H10V6H14M14,17H17V14H19V17H22V19H19V22H17V19H14V17Z"
+            />
+          </svg>
+          <span>Add Work Experience</span>
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
           Work limit reached!
