@@ -199,6 +199,15 @@ export function EducationSection() {
     });
   }
 
+  function returnToday() {
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0");
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    return today;
+  }
+
   return (
     <div className="education">
       <div
@@ -347,6 +356,12 @@ export function EducationSection() {
                       startDateStudy: e.target.value,
                     })
                   }
+                  onFocus={() => {
+                    let today = returnToday();
+                    document
+                      .getElementById("start-date-study")
+                      .setAttribute("max", today);
+                  }}
                   required
                 />
               </div>
@@ -370,6 +385,20 @@ export function EducationSection() {
                     endDateStudy: e.target.value,
                   })
                 }
+                onFocus={() => {
+                  if (educationDetails.completedStudy) {
+                    document
+                      .getElementById("end-date-study")
+                      .setAttribute("max", returnToday());
+                  } else {
+                    document
+                      .getElementById("end-date-study")
+                      .setAttribute("min", returnToday());
+                    document
+                      .getElementById("end-date-study")
+                      .setAttribute("max", 2100 - 12 - 31);
+                  }
+                }}
                 required
               />
             </div>
