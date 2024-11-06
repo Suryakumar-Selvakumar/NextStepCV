@@ -2,6 +2,27 @@ import "../styles/Education.css";
 
 export function Education(props) {
   const education = props.education;
+  // const startDate = new Date(education.startDateStudy);
+  function formatDate(date) {
+    date = new Date(date);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthName = months[date.getMonth()];
+
+    return `${monthName} ${date.getFullYear()}`;
+  }
   return (
     <div className="education-card" data-id={education.id}>
       <div>
@@ -17,10 +38,22 @@ export function Education(props) {
           <p>{education.titleStudy}</p>
           <hr />
         </div>
-        <div>
+        <div
+          style={{
+            justifyContent: !education.startDateStudy && "start",
+            gap: !education.startDateStudy && "1rem",
+          }}
+        >
           <p>{education.gpa}</p>
+          {education.startDateStudy && (
+            <>
+              <span>|</span>
+              <p>{formatDate(education.startDateStudy)}</p>{" "}
+            </>
+          )}
+          <span>|</span>
+          <p>{formatDate(education.endDateStudy)}</p>
         </div>
-        {/* <hr /> */}
       </div>
       <div>
         <button
