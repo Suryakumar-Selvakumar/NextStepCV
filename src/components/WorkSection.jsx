@@ -482,12 +482,15 @@ export function WorkSection() {
         </form>
         <ul className="role-cards">
           {workDetails.roles.map((role) => (
-            <Role
-              key={role.id}
-              role={role}
-              editRole={editRole}
-              deleteRole={deleteRole}
-            />
+            <>
+              <Role
+                key={role.id}
+                role={role}
+                editRole={editRole}
+                deleteRole={deleteRole}
+              />
+              <hr />
+            </>
           ))}
         </ul>
         <div className="work-cards">

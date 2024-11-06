@@ -1,0 +1,25 @@
+.role-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-card > div {
+  display: flex;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#edit-role,
+#delete-role {
+  border: none;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 10px;
+  top: -2.5px;
+}
