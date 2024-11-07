@@ -50,7 +50,7 @@ h6 {
 #root {
   height: 100vh;
   display: grid;
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: 1fr;
   width: 100%;
   isolation: isolate;
 }
@@ -73,4 +73,5 @@ h6 {
 main {
   display: grid;
   grid-template-columns: 915px 0.55fr;
+  margin-top: 4rem;
 }
