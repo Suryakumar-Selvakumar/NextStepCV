@@ -340,7 +340,7 @@ export function WorkSection() {
           />
         </svg>
       </div>
-      <div className={mainVisible ? "work-main visible" : "work-main"}>
+      <div className={mainVisible ? "work-main" : "work-main closed"}>
         <button
           type="button"
           id="add-work"

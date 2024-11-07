@@ -231,8 +231,8 @@ export function TechnicalSkills() {
       <div
         className={
           mainVisible
-            ? "technical-skills-main visible"
-            : "technical-skills-main"
+            ? "technical-skills-main"
+            : "technical-skills-main closed"
         }
       >
         <button

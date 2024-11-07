@@ -241,7 +241,7 @@ export function EducationSection() {
         </svg>
       </div>
       <div
-        className={mainVisible ? "education-main visible" : "education-main"}
+        className={mainVisible ? "education-main" : "education-main closed"}
       >
         <button
           type="button"
@@ -343,9 +343,6 @@ export function EducationSection() {
             {educationDetails.completedStudy && (
               <div
                 className="education-start-date"
-                style={{
-                  width: "250px",
-                }}
               >
                 <label htmlFor="start-date-study">Start Date </label>
                 <input

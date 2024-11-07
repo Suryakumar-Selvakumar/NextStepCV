@@ -7,21 +7,24 @@
 }
 
 .education-main {
-  height: 0px;
+  max-height: 750px;
   display: grid;
   grid-template-rows: repeat(3, max-content);
   grid-template-columns: 1fr;
   overflow: hidden;
-  transition: height 0.45s ease;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
   gap: 1rem;
   font-family: myFontRegular;
   padding: 0 1rem;
   box-sizing: content-box;
+  border-bottom: 1px solid var(--sidebar-border-color);
 }
 
-.education-main.visible {
-  height: 650px;
-  border-bottom: 1px solid var(--sidebar-border-color);
+.education-main.closed {
+  max-height: 0;
+  border-bottom: 0px solid var(--sidebar-border-color);
 }
 
 #add-education {
@@ -54,9 +57,16 @@
   flex-direction: column;
 }
 
+.education-school,
+.education-place-study,
+.education-title-study {
+  width: calc(100%);
+}
+
 .education-gpa-start-end {
   display: flex;
   justify-content: space-between;
+  gap: 0.1rem;
 }
 
 .education-gpa-start-end > div {
@@ -65,8 +75,9 @@
 }
 
 .education-gpa,
-.education-end-date {
-  width: 250px;
+.education-end-date,
+.education-start-date {
+  width: 30%;
 }
 
 .education-form input {
@@ -120,9 +131,17 @@
 
 .education-cards {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding: 0.75rem 0rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   gap: 1rem;
+}
+
+@media (min-width: 360px) and (max-width: 1440px) {
+  .education-main.visible {
+    height: 100vh;
+    border-bottom: 1px solid var(--sidebar-border-color);
+    overflow: auto;
+  }
 }

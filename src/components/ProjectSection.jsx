@@ -301,7 +301,7 @@ export function ProjectSection() {
           />
         </svg>
       </div>
-      <div className={mainVisible ? "projects-main visible" : "projects-main"}>
+      <div className={mainVisible ? "projects-main" : "projects-main closed"}>
         <button
           type="button"
           ref={addProjectBtn}

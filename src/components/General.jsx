@@ -114,7 +114,7 @@ export function General() {
           />
         </svg>
       </div>
-      <div className={mainVisible ? "general-main visible" : "general-main"}>
+      <div className={mainVisible ? "general-main" : "general-main closed"}>
         <button
           style={{ display: "flex", alignItems: "center" }}
           id="edit-general-details"
