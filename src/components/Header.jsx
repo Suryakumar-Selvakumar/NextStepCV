@@ -70,22 +70,22 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
-              "Worked with product managers to re-architect a multi-page web app into a single page web-app, boosting yearly revenue by $1.4M",
+              "Worked with product managers to re-architect a multi-page web app into a single page web-app, boosting yearly revenue by _$1.4M",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Constructed the logic for a streamlined ad-serving platform that scaled to our 35M users, which improved the page speed by 15% after implementation",
+              "Constructed the logic for a streamlined ad-serving platform that scaled to our _35M users, which improved the page speed by _15% after implementation",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Tested software for bugs and operating speed, fixing bugs and documenting processes to increase efficiency by 18%",
+              "Tested software for bugs and operating speed, fixing bugs and documenting processes to increase efficiency by _18%",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Iterated platform for college admissions, collaborating with a group of 4 engineers to create features across the software",
+              "Iterated platform for college admissions, collaborating with a group of _4 engineers to create features across the software",
           },
         ],
         startWork: "2023-06-05",
@@ -101,17 +101,17 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
-              "Developed a REST API using FastAPI and PostgreSQL to store data from learning management systems",
+              "Developed a *REST *API using *FastAPI and *PostgreSQL to store data from learning management systems",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Developed a full-stack web application using Flask, React, PostgreSQL and Docker to analyze GitHub data",
+              "Developed a full-stack web application using *Flask, *React, *PostgreSQL and *Docker to analyze *GitHub data",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Explored ways to visualize GitHub Collaboration in a classroom setting",
+              "Explored ways to visualize *GitHub Collaboration in a classroom setting",
           },
         ],
         startWork: "2022-08-05",
@@ -124,20 +124,20 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
-              "Developed a full-stack web application using with Flask serving a REST API with React as the frontend",
+              "Developed a full-stack web application using with *Flask serving a *REST API with *React as the frontend",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Implemented GitHub OAuth to get data from user’s repositories",
+              "Implemented *GitHub OAuth to get data from user’s repositories",
           },
           {
             id: crypto.randomUUID(),
-            value: "Visualized GitHub data to show collaboration",
+            value: "Visualized *GitHub data to show collaboration",
           },
           {
             id: crypto.randomUUID(),
-            value: "Used Celery and Redis for asynchronous tasks",
+            value: "Used *Celery and *Redis for asynchronous tasks",
           },
         ],
         id: crypto.randomUUID(),
@@ -155,7 +155,7 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
-              "Utilized sci-kit learn in Python to simulate possible outcomes under different scenarios that the user chose",
+              "Utilized sci-kit learn in *Python to simulate possible outcomes under different scenarios that the user chose",
           },
         ],
         id: crypto.randomUUID(),
@@ -173,12 +173,12 @@ export function Header() {
           {
             id: crypto.randomUUID(),
             value:
-              "Published plugin to websites gaining 2K+ downloads and an average 4.5/5-star review",
+              "Published plugin to websites gaining _2K+ downloads and an average _4.5/5-star review",
           },
           {
             id: crypto.randomUUID(),
             value:
-              "Implemented continuous delivery using TravisCI to build the plugin upon new a release",
+              "Implemented continuous delivery using *TravisCI to build the plugin upon new a release",
           },
           {
             id: crypto.randomUUID(),
@@ -240,11 +240,7 @@ export function Header() {
       <header>
         <div className="logo">
           <p id="logo-text">NextStep</p>
-          <img
-            src="/next-gold.svg"
-            alt="logo of the app"
-            id="logo-img"
-          />
+          <img src="/next-gold.svg" alt="logo of the app" id="logo-img" />
         </div>
         <div className="header-buttons">
           <button onClick={() => loadDummy()} id="load-dummy">
