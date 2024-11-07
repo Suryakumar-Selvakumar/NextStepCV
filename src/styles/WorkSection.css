@@ -79,12 +79,6 @@
   width: 275px;
 }
 
-.work-roles-btns {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .work-role {
   display: flex;
   flex-direction: column;

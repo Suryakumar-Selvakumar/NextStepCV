@@ -12,7 +12,7 @@ export function Sidebar() {
       <EducationSection />
       <TechnicalSkills />
       <WorkSection />
-      {/* <ProjectSection /> */}
+      <ProjectSection />
     </div>
   );
 }

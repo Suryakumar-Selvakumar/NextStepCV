@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
@@ -44,10 +44,10 @@ export function ProjectSection() {
   function addProject() {
     if (projects.length < projectLimit) {
       addProjectBtn.current.style.cssText = "display: none;";
-      projectForm.current.style.cssText = "display: block;";
+      projectForm.current.style.cssText = "display: flex;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
-      limitErrorDiv.current.style.cssText = "display: block;";
+      limitErrorDiv.current.style.cssText = "display: flex;";
     }
 
     if (projectDetails.details.length === detailLimit) {
@@ -77,8 +77,8 @@ export function ProjectSection() {
     });
     addProjectBtn.current.style.cssText = "display: none;";
     submitProjectBtn.current.style.cssText = "display: none;";
-    updateProjectBtn.current.style.cssText = "display: inline;";
-    projectForm.current.style.cssText = "display: block;";
+    updateProjectBtn.current.style.cssText = "display: flex;";
+    projectForm.current.style.cssText = "display: flex;";
     limitErrorDiv.current.style.cssText = "display: none;";
   }
 
@@ -114,11 +114,11 @@ export function ProjectSection() {
         value: "",
       });
       updateProjectBtn.current.style.cssText = "display: none;";
-      addProjectBtn.current.style.cssText = "display: inline;";
-      submitProjectBtn.current.style.cssText = "display: block;";
+      addProjectBtn.current.style.cssText = "display: flex;";
+      submitProjectBtn.current.style.cssText = "display: flex;";
       projectForm.current.style.cssText = "display: none;";
       updateDetailBtn.current.style.cssText = "display: none;";
-      addDetailBtn.current.style.cssText = "display: inline;";
+      addDetailBtn.current.style.cssText = "display: flex;";
     }
   }
 
@@ -128,11 +128,11 @@ export function ProjectSection() {
 
     if (projectDetails.id === projectId || projects.length === 1) {
       updateDetailBtn.current.style.cssText = "display: none;";
-      addDetailBtn.current.style.cssText = "display: inline;";
+      addDetailBtn.current.style.cssText = "display: flex;";
       projectForm.current.style.cssText = "display: none;";
-      addProjectBtn.current.style.cssText = "display: inline;";
+      addProjectBtn.current.style.cssText = "display: flex;";
       updateProjectBtn.current.style.cssText = "display: none;";
-      submitProjectBtn.current.style.cssText = "display: inline;";
+      submitProjectBtn.current.style.cssText = "display: flex;";
 
       setProjectDetails({
         id: 0,
@@ -153,7 +153,7 @@ export function ProjectSection() {
     setProjects([...projects, { ...projectDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
-    addProjectBtn.current.style.cssText = "display: inline;";
+    addProjectBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
     projectForm.current.style.cssText = "display: none;";
@@ -161,18 +161,18 @@ export function ProjectSection() {
 
   function handleCancel() {
     // Display the add button again
-    addProjectBtn.current.style.cssText = "display: inline;";
+    addProjectBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
     projectForm.current.style.cssText = "display: none;";
 
     // Hide Update detail button and bring back Add detail button
     updateDetailBtn.current.style.cssText = "display: none;";
-    addDetailBtn.current.style.cssText = "display: inline;";
+    addDetailBtn.current.style.cssText = "display: flex;";
 
     // Hide Update button and bring back Submit button
     updateProjectBtn.current.style.cssText = "display: none;";
-    submitProjectBtn.current.style.cssText = "display: inline;";
+    submitProjectBtn.current.style.cssText = "display: flex;";
 
     // Reset projectDetails and detail
     setProjectDetails({
@@ -207,7 +207,7 @@ export function ProjectSection() {
         setDetail({ id: dt.id, value: dt.value });
       }
     });
-    updateDetailBtn.current.style.cssText = "display: inline;";
+    updateDetailBtn.current.style.cssText = "display: flex;";
     addDetailBtn.current.style.cssText = "display: none;";
     limitErrorDiv.current.style.cssText = "display: none;";
   }
@@ -224,7 +224,7 @@ export function ProjectSection() {
       setProjectDetails({ ...projectDetails, details: updatedDetails });
       setDetail({ id: 0, value: "" });
       updateDetailBtn.current.style.cssText = "display: none;";
-      addDetailBtn.current.style.cssText = "display: inline;";
+      addDetailBtn.current.style.cssText = "display: flex;";
 
       if (projectDetails.details.length === detailLimit) {
         addDetailBtn.current.disabled = true;
@@ -242,7 +242,7 @@ export function ProjectSection() {
 
     if (detail.id === detailId || projectDetails.details.length === 1) {
       updateDetailBtn.current.style.cssText = "display: none;";
-      addDetailBtn.current.style.cssText = "display: inline;";
+      addDetailBtn.current.style.cssText = "display: flex;";
       setDetail({ id: 0, value: "" });
     }
 
@@ -263,13 +263,13 @@ export function ProjectSection() {
           setMainVisible(!mainVisible);
         }}
       >
-        <h2
+        <h3
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
         >
           Projects
-        </h2>
+        </h3>
         <svg
           ref={dropDownSvg}
           onClick={() => {
@@ -304,97 +304,117 @@ export function ProjectSection() {
           ref={projectForm}
           onSubmit={(e) => handleSubmit(e)}
         >
-          <label htmlFor="project-name">Project name: </label>
-          <input
-            type="text"
-            id="project-name"
-            value={projectDetails.projectName}
-            onChange={(e) =>
-              setProjectDetails({
-                ...projectDetails,
-                projectName: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="tech-stack">Tech Stack: </label>
-          <input
-            type="text"
-            id="tech-stack"
-            value={projectDetails.techStack}
-            onChange={(e) =>
-              setProjectDetails({
-                ...projectDetails,
-                techStack: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="project-date">Project date: </label>
-          <input
-            type="date"
-            id="project-date"
-            value={projectDetails.projectDate}
-            onChange={(e) =>
-              setProjectDetails({
-                ...projectDetails,
-                projectDate: e.target.value,
-              })
-            }
-            required
-          />
-          <label htmlFor="project-detail">Add project details:</label>
-          <input
-            type="text"
-            id="project-detail"
-            value={detail.value}
-            onChange={(e) => setDetail({ ...detail, value: e.target.value })}
-          />
-          <button
-            type="button"
-            ref={addDetailBtn}
-            onClick={() => addDetail()}
-            id="add-detail"
-          >
-            Add detail
-          </button>
-          <button
-            type="button"
-            ref={updateDetailBtn}
-            onClick={() => updateDetail()}
-            id="update-detail"
-          >
-            Update detail
-          </button>
-          <button
-            type="button"
-            id="cancel-project"
-            onClick={() => handleCancel()}
-          >
-            Cancel
-          </button>
-          <button type="submit" ref={submitProjectBtn} id="submit-project">
-            Submit
-          </button>
-          <button
-            ref={updateProjectBtn}
-            id="update-project"
-            type="button"
-            onClick={() => updateProject()}
-          >
-            Update
-          </button>
-        </form>
-        <ul className="detail-cards">
-          {projectDetails.details.map((dt) => (
-            <Detail
-              key={dt.id}
-              detail={dt}
-              editDetail={editDetail}
-              deleteDetail={deleteDetail}
+          <div className="project-name-date">
+            <div className="project-name-div">
+              <label htmlFor="project-name">Project Name </label>
+              <input
+                type="text"
+                id="project-name"
+                value={projectDetails.projectName}
+                onChange={(e) =>
+                  setProjectDetails({
+                    ...projectDetails,
+                    projectName: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+            <div className="project-date-div">
+              <label htmlFor="project-date">Project Date </label>
+              <input
+                type="date"
+                id="project-date"
+                value={projectDetails.projectDate}
+                onChange={(e) =>
+                  setProjectDetails({
+                    ...projectDetails,
+                    projectDate: e.target.value,
+                  })
+                }
+                required
+              />
+            </div>
+          </div>
+          <div className="project-tech-stack-div">
+            <label htmlFor="tech-stack">Tech Stack </label>
+            <input
+              type="text"
+              id="tech-stack"
+              value={projectDetails.techStack}
+              onChange={(e) =>
+                setProjectDetails({
+                  ...projectDetails,
+                  techStack: e.target.value,
+                })
+              }
+              required
             />
-          ))}
-        </ul>
+          </div>
+          <div className="project-detail-btns">
+            <label htmlFor="project-detail">Add Project Details</label>
+            <div>
+              <input
+                type="text"
+                id="project-detail"
+                value={detail.value}
+                onChange={(e) =>
+                  setDetail({ ...detail, value: e.target.value })
+                }
+              />
+              <>
+                <button
+                  type="button"
+                  ref={addDetailBtn}
+                  onClick={() => addDetail()}
+                  id="add-detail"
+                >
+                  Add detail
+                </button>
+                <button
+                  type="button"
+                  ref={updateDetailBtn}
+                  onClick={() => updateDetail()}
+                  id="update-detail"
+                >
+                  Update detail
+                </button>
+              </>
+            </div>
+          </div>
+          <div className="project-form-btns">
+            <button
+              type="button"
+              id="cancel-project"
+              onClick={() => handleCancel()}
+            >
+              Cancel
+            </button>
+            <button type="submit" ref={submitProjectBtn} id="submit-project">
+              Submit
+            </button>
+            <button
+              ref={updateProjectBtn}
+              id="update-project"
+              type="button"
+              onClick={() => updateProject()}
+            >
+              Update
+            </button>
+          </div>
+          <ul className="detail-cards">
+            {projectDetails.details.map((dt) => (
+              <Fragment key={dt.id}>
+                <Detail
+                  detail={dt}
+                  editDetail={editDetail}
+                  deleteDetail={deleteDetail}
+                />
+                <hr />
+              </Fragment>
+            ))}
+          </ul>
+        </form>
         <div className="project-cards">
           {projects &&
             projects.map((proj) => (
