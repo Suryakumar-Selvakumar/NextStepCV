@@ -37,7 +37,7 @@ export function WorkSection() {
   const updateRoleBtn = useRef(null);
   const submitWorkBtn = useRef(null);
   const dropDownSvg = useRef(null);
-  const roleCardsDiv = useRef(null);
+  const roleCardsUl = useRef(null);
 
   useEffect(() => {
     if (experiences)
@@ -111,7 +111,7 @@ export function WorkSection() {
     updateWorkBtn.current.style.cssText = "display: flex;";
     workForm.current.style.cssText = "display: flex;";
     limitErrorDiv.current.style.cssText = "display: none;";
-    roleCardsDiv.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
+    roleCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
 
   function updateWork() {
@@ -158,7 +158,7 @@ export function WorkSection() {
       workForm.current.style.cssText = "display: none;";
       updateRoleBtn.current.style.cssText = "display: none;";
       addRoleBtn.current.style.cssText = "display: flex;";
-      roleCardsDiv.current.style.cssText = "border: none;";
+      roleCardsUl.current.style.cssText = "border: none;";
     }
   }
 
@@ -173,7 +173,7 @@ export function WorkSection() {
       addWorkBtn.current.style.cssText = "display: flex;";
       updateWorkBtn.current.style.cssText = "display: none;";
       submitWorkBtn.current.style.cssText = "display: flex;";
-      roleCardsDiv.current.style.cssText = "border: none;";
+      roleCardsUl.current.style.cssText = "border: none;";
 
       setWorkDetails({
         id: 0,
@@ -208,7 +208,7 @@ export function WorkSection() {
     // Display the class containing Work component cards
     document.querySelector(".work-cards").style.cssText = "display: flex;";
 
-    roleCardsDiv.current.style.cssText = "border: none;";
+    roleCardsUl.current.style.cssText = "border: none;";
   }
 
   function handleCancel() {
@@ -225,7 +225,7 @@ export function WorkSection() {
     // Hide Update button and bring back submit button
     updateWorkBtn.current.style.cssText = "display: none;";
     submitWorkBtn.current.style.cssText = "display: flex;";
-    roleCardsDiv.current.style.cssText = "border: none;";
+    roleCardsUl.current.style.cssText = "border: none;";
 
     // Reset workDetails and role
     setWorkDetails({
@@ -250,7 +250,7 @@ export function WorkSection() {
           { id: crypto.randomUUID(), value: role.value },
         ],
       });
-      roleCardsDiv.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
+      roleCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
     }
     setRole({ id: 0, value: "" });
     if (workDetails.roles.length + 1 === roleLimit) {
@@ -304,7 +304,7 @@ export function WorkSection() {
     }
 
     if (workDetails.roles.length === 1) {
-      roleCardsDiv.current.style.cssText = "border: none;";
+      roleCardsUl.current.style.cssText = "border: none;";
     }
 
     limitErrorDiv.current.style.cssText = "display: none;";
@@ -527,7 +527,7 @@ export function WorkSection() {
               Update
             </button>
           </div>
-          <ul className="role-cards" ref={roleCardsDiv}>
+          <ul className="role-cards" ref={roleCardsUl}>
             {workDetails.roles &&
               workDetails.roles.map((role) => (
                 <Fragment key={role.id}>

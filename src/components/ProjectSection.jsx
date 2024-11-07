@@ -34,6 +34,7 @@ export function ProjectSection() {
   const updateDetailBtn = useRef(null);
   const submitProjectBtn = useRef(null);
   const dropDownSvg = useRef(null);
+  const detailCardsUl = useRef(null);
 
   useEffect(() => {
     if (projects) localStorage.setItem("projects", JSON.stringify(projects));
@@ -80,6 +81,7 @@ export function ProjectSection() {
     updateProjectBtn.current.style.cssText = "display: flex;";
     projectForm.current.style.cssText = "display: flex;";
     limitErrorDiv.current.style.cssText = "display: none;";
+    detailCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
 
   function updateProject() {
@@ -119,6 +121,7 @@ export function ProjectSection() {
       projectForm.current.style.cssText = "display: none;";
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
+      detailCardsUl.current.style.cssText = "border: none;";
     }
   }
 
@@ -133,6 +136,7 @@ export function ProjectSection() {
       addProjectBtn.current.style.cssText = "display: flex;";
       updateProjectBtn.current.style.cssText = "display: none;";
       submitProjectBtn.current.style.cssText = "display: flex;";
+      detailCardsUl.current.style.cssText = "border: none;";
 
       setProjectDetails({
         id: 0,
@@ -157,6 +161,8 @@ export function ProjectSection() {
 
     // Hide the form
     projectForm.current.style.cssText = "display: none;";
+
+    detailCardsUl.current.style.cssText = "border: none;";
   }
 
   function handleCancel() {
@@ -173,6 +179,7 @@ export function ProjectSection() {
     // Hide Update button and bring back Submit button
     updateProjectBtn.current.style.cssText = "display: none;";
     submitProjectBtn.current.style.cssText = "display: flex;";
+    detailCardsUl.current.style.cssText = "border: none;";
 
     // Reset projectDetails and detail
     setProjectDetails({
@@ -194,6 +201,8 @@ export function ProjectSection() {
           { id: crypto.randomUUID(), value: detail.value },
         ],
       });
+      detailCardsUl.current.style.cssText =
+        "border: 1px solid rgb(55, 55, 55);";
     }
     setDetail({ id: 0, value: "" });
     if (projectDetails.details.length + 1 === detailLimit) {
@@ -244,6 +253,10 @@ export function ProjectSection() {
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
       setDetail({ id: 0, value: "" });
+    }
+
+    if (projectDetails.details.length === 1) {
+      detailCardsUl.current.style.cssText = "border: none;";
     }
 
     limitErrorDiv.current.style.cssText = "display: none;";
@@ -402,17 +415,18 @@ export function ProjectSection() {
               Update
             </button>
           </div>
-          <ul className="detail-cards">
-            {projectDetails.details.map((dt) => (
-              <Fragment key={dt.id}>
-                <Detail
-                  detail={dt}
-                  editDetail={editDetail}
-                  deleteDetail={deleteDetail}
-                />
-                <hr />
-              </Fragment>
-            ))}
+          <ul className="detail-cards" ref={detailCardsUl}>
+            {projectDetails.details &&
+              projectDetails.details.map((dt) => (
+                <Fragment key={dt.id}>
+                  <Detail
+                    detail={dt}
+                    editDetail={editDetail}
+                    deleteDetail={deleteDetail}
+                  />
+                  <hr />
+                </Fragment>
+              ))}
           </ul>
         </form>
         <div className="project-cards">

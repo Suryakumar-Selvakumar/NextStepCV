@@ -20,7 +20,7 @@
 }
 
 .work-main.visible {
-  height: 950px;
+  height: 900px;
   border-bottom: 1px solid var(--sidebar-border-color);
 }
 
@@ -105,6 +105,13 @@
   width: 150px;
   display: flex;
   justify-content: center;
+}
+
+#add-role:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
 }
 
 #update-role {

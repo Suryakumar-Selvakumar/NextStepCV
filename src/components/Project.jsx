@@ -3,24 +3,78 @@ import "../styles/Project.css";
 export function Project(props) {
   const project = props.project;
 
+  function formatDate(date) {
+    date = new Date(date);
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthName = months[date.getMonth()];
+
+    return `${monthName} ${date.getFullYear()}`;
+  }
+
   return (
     <div className="project-card">
-      <p>{project.projectName}</p>
-      <p>{project.projectDate}</p>
-      <button
-        id="edit-project"
-        type="button"
-        onClick={() => props.editProject(project.id)}
-      >
-        Edit Project
-      </button>
-      <button
-        id="delete-project"
-        type="button"
-        onClick={() => props.deleteProject(project.id)}
-      >
-        Delete Project
-      </button>
+      <div>
+        <div>
+          <p>{project.projectName}</p>
+          <hr />
+        </div>
+        <p>{formatDate(project.projectDate)}</p>
+      </div>
+      <div>
+        <button
+          id="delete-project"
+          type="button"
+          onClick={() => props.deleteProject(project.id)}
+        >
+          <svg
+            style={{ width: "27.5px" }}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 5L4.99998 19M5.00001 5L19 19"
+              stroke="red"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+        <button
+          id="edit-project"
+          type="button"
+          onClick={() => props.editProject(project.id)}
+        >
+          <svg
+            style={{ width: "30px" }}
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14.6716 6.763L5.58013 15.8544L5.41376 18.8492L8.40856 18.6829L17.5 9.59142M14.6716 6.763L16.0204 5.41421C16.8014 4.63316 18.0677 4.63316 18.8488 5.41421V5.41421C19.6298 6.19526 19.6298 7.46159 18.8488 8.24264V8.24264L17.5 9.59142M14.6716 6.763L17.5 9.59142"
+              stroke="rgb(0, 140, 255)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 }
