@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, Fragment } from "react";
 import { Work } from "./Work";
 import { Role } from "./Role";
 import "../styles/WorkSection.css";
+import { returnToday } from "./utils";
 
 export function WorkSection() {
   const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
@@ -45,15 +46,6 @@ export function WorkSection() {
 
     localStorage.setItem("experiencesMainVisible", JSON.stringify(mainVisible));
   }, [experiences, mainVisible]);
-
-  function returnToday() {
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-  }
 
   function addWork() {
     updateWorkBtn.current.style.cssText = "display: none;";

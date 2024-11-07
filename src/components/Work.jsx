@@ -1,29 +1,8 @@
-import { useState } from "react";
 import "../styles/Work.css";
+import { formatDate } from "./utils";
 
 export function Work(props) {
   const work = props.work;
-
-  function formatDate(date) {
-    date = new Date(date);
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const monthName = months[date.getMonth()];
-
-    return `${monthName} ${date.getFullYear()}`;
-  }
 
   return (
     <div className="work-card">
