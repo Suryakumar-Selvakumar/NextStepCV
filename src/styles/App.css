@@ -48,9 +48,9 @@ h6 {
 }
 
 #root {
-  height: 100vh;
+  height: 100%;
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: 100%;
   width: 100%;
   isolation: isolate;
 }
@@ -62,7 +62,7 @@ h6 {
 
 @font-face {
   font-family: myFontHeader;
-  src: url("../fonts/Ubuntu-BoldItalic.ttf");
+  src: url("../fonts/Montserrat.ttf");
 }
 
 @font-face {
@@ -72,6 +72,6 @@ h6 {
 
 main {
   display: grid;
-  grid-template-columns: 915px 0.55fr;
+  grid-template-columns: 0.45fr 0.55fr;
   margin-top: 4rem;
 }
