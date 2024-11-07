@@ -46,6 +46,15 @@ export function WorkSection() {
     localStorage.setItem("experiencesMainVisible", JSON.stringify(mainVisible));
   }, [experiences, mainVisible]);
 
+  function returnToday() {
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0");
+    var yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+    return today;
+  }
+
   function addWork() {
     updateWorkBtn.current.style.cssText = "display: none;";
     workForm.current.reset();
@@ -359,7 +368,8 @@ export function WorkSection() {
           <span>Add Work Experience</span>
         </button>
         <div className="limit-error" ref={limitErrorDiv}>
-          Work limit reached!
+          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <span>Experiences limit reached!</span>
         </div>
         <form
           className="work-form"
@@ -421,6 +431,13 @@ export function WorkSection() {
                 onChange={(e) =>
                   setWorkDetails({ ...workDetails, startWork: e.target.value })
                 }
+                onFocus={() => {
+                  if (!workDetails.stillWorking) {
+                    document
+                      .getElementById("start-work")
+                      .setAttribute("max", returnToday());
+                  }
+                }}
                 required
               />
             </div>
@@ -434,6 +451,13 @@ export function WorkSection() {
                   onChange={(e) =>
                     setWorkDetails({ ...workDetails, endWork: e.target.value })
                   }
+                  onFocus={() => {
+                    if (!workDetails.stillWorking) {
+                      document
+                        .getElementById("end-work")
+                        .setAttribute("max", returnToday());
+                    }
+                  }}
                   required
                 />
               </div>

@@ -2,7 +2,6 @@ import "../styles/Education.css";
 
 export function Education(props) {
   const education = props.education;
-  // const startDate = new Date(education.startDateStudy);
   function formatDate(date) {
     date = new Date(date);
     const months = [
@@ -39,12 +38,16 @@ export function Education(props) {
           <p>{education.gpa}</p>
           {education.startDateStudy && (
             <>
-              <hr/>
-              <p>{formatDate(education.startDateStudy)}</p>{" "}
+              <hr />
+              <p>{formatDate(education.startDateStudy)}</p>
             </>
           )}
           <hr />
-          <p>{formatDate(education.endDateStudy)}</p>
+          {education.completedStudy ? (
+            <p>{formatDate(education.endDateStudy)}</p>
+          ) : (
+            <p>Exp. Grad. {formatDate(education.endDateStudy)}</p>
+          )}
         </div>
       </div>
       <div>

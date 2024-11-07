@@ -320,7 +320,7 @@ export function EducationSection() {
           <div className="education-gpa-start-end">
             <div
               className="education-gpa"
-              style={{ width: !educationDetails.completedStudy && "350px" }}
+              style={{ width: !educationDetails.completedStudy && "425px" }}
             >
               <label htmlFor="gpa">GPA </label>
               <input
@@ -370,7 +370,7 @@ export function EducationSection() {
             )}
             <div
               className="education-end-date"
-              style={{ width: !educationDetails.completedStudy && "350px" }}
+              style={{ width: !educationDetails.completedStudy && "425px" }}
             >
               <label htmlFor="end-date-study">
                 {educationDetails.completedStudy

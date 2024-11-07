@@ -20,7 +20,7 @@
 }
 
 .work-main.visible {
-  height: 875px;
+  height: 950px;
   border-bottom: 1px solid var(--sidebar-border-color);
 }
 
@@ -189,4 +189,13 @@
 
 .role-cards > hr:last-of-type {
   display: none;
+}
+
+.work-cards {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.75rem 0rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
 }
