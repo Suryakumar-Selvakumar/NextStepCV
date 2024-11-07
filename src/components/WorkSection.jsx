@@ -471,7 +471,7 @@ export function WorkSection() {
             />
           </div>
           <div className="work-role">
-            <label htmlFor="role">Job roles</label>
+            <label htmlFor="role">Add Job Roles</label>
             <div>
               <input
                 type="text"

@@ -3,10 +3,26 @@ import "../styles/Role.css";
 export function Role(props) {
   const role = props.role;
 
+  function formatRole(roleItem) {
+    return roleItem
+      .split(" ")
+      .map((word, i) => {
+        if (word.startsWith("*")) {
+          let boldWord = word.split("").slice(1).join("");
+          return <b key={i}>{boldWord}</b>;
+        } else if (word.startsWith("_")) {
+          return <i key={i}>{word.split("").slice(1).join("")}</i>;
+        } else {
+          return word;
+        }
+      })
+      .map((word, i) => <span key={i}>{word} </span>);
+  }
+
   return (
     <li className="role-card">
       <div>
-        <span>{role.value}</span>
+        <span>{formatRole(role.value)}</span>
         <div>
           <button
             type="button"

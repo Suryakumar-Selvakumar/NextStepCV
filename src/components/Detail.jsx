@@ -3,10 +3,26 @@ import "../styles/Detail.css";
 export function Detail(props) {
   const detail = props.detail;
 
+  function formatDetail(detailItem) {
+    return detailItem
+      .split(" ")
+      .map((word, i) => {
+        if (word.startsWith("*")) {
+          let boldWord = word.split("").slice(1).join("");
+          return <b key={i}>{boldWord}</b>;
+        } else if (word.startsWith("_")) {
+          return <i key={i}>{word.split("").slice(1).join("")}</i>;
+        } else {
+          return word;
+        }
+      })
+      .map((word, i) => <span key={i}>{word} </span>);
+  }
+
   return (
     <li className="detail-card">
       <div>
-        <span>{detail.value}</span>
+        <span>{formatDetail(detail.value)}</span>
         <div>
           <button
             type="button"
