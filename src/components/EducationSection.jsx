@@ -203,6 +203,10 @@ export function EducationSection() {
     return today;
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 768px)"
+  );
+
   return (
     <div className="education">
       <div
@@ -313,7 +317,12 @@ export function EducationSection() {
           <div className="education-gpa-start-end">
             <div
               className="education-gpa"
-              style={{ width: !educationDetails.completedStudy && "50%" }}
+              style={{
+                width:
+                  !educationDetails.completedStudy &&
+                  !mediaQuery.matches &&
+                  "50%",
+              }}
             >
               <label htmlFor="gpa">GPA </label>
               <input
@@ -358,7 +367,12 @@ export function EducationSection() {
             )}
             <div
               className="education-end-date"
-              style={{ width: !educationDetails.completedStudy && "50%" }}
+              style={{
+                width:
+                  !educationDetails.completedStudy &&
+                  !mediaQuery.matches &&
+                  "50%",
+              }}
             >
               <label htmlFor="end-date-study">
                 {educationDetails.completedStudy

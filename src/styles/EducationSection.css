@@ -65,7 +65,7 @@
   transition: all 0.45s ease;
   overflow: hidden;
   display: flex;
-  max-height: 500px;
+  max-height: 650px;
   margin-bottom: 1.25rem;
   position: relative;
   top: -5px;
@@ -178,8 +178,31 @@
 
 @media (min-width: 360px) and (max-width: 1440px) {
   .education-main.visible {
-    height: 100vh;
+    max-height: 100vh;
     border-bottom: 1px solid var(--sidebar-border-color);
-    overflow: auto;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 768px) {
+  .education-gpa-start-end {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .education-gpa,
+  .education-end-date,
+  .education-start-date {
+    width: 100%;
+  }
+
+  .education-form {
+    max-height: 1000px;
+    gap: 1.25rem;
+  }
+
+  .education-cards {
+    margin-top: 0;
+    flex-direction: row;
   }
 }

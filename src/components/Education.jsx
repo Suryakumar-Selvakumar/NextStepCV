@@ -22,33 +22,40 @@ export function Education(props) {
 
     return `${monthName} ${date.getFullYear()}`;
   }
+
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 768px)"
+  );
+
   return (
     <div className="education-card" data-id={education.id}>
       <div>
         <div>
           <p>{education.titleStudy}</p>
-          <hr />
+          {!mediaQuery.matches && <hr />}
         </div>
-        <div
-          style={{
-            justifyContent: !education.startDateStudy && "start",
-            gap: !education.startDateStudy && "1rem",
-          }}
-        >
-          <p>{education.gpa}</p>
-          {education.startDateStudy && (
-            <>
-              <hr />
-              <p>{formatDate(education.startDateStudy)}</p>
-            </>
-          )}
-          <hr />
-          {education.completedStudy ? (
-            <p>{formatDate(education.endDateStudy)}</p>
-          ) : (
-            <p>Exp. Grad. {formatDate(education.endDateStudy)}</p>
-          )}
-        </div>
+        {!mediaQuery.matches && (
+          <div
+            style={{
+              justifyContent: !education.startDateStudy && "start",
+              gap: !education.startDateStudy && "1rem",
+            }}
+          >
+            <p>{education.gpa}</p>
+            {education.startDateStudy && (
+              <>
+                <hr />
+                <p>{formatDate(education.startDateStudy)}</p>
+              </>
+            )}
+            <hr />
+            {education.completedStudy ? (
+              <p>{formatDate(education.endDateStudy)}</p>
+            ) : (
+              <p>Exp. Grad. {formatDate(education.endDateStudy)}</p>
+            )}
+          </div>
+        )}
       </div>
       <div>
         <button

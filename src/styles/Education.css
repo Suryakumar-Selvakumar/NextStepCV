@@ -49,3 +49,45 @@
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
 }
+
+@media (min-width: 360px) and (max-width: 768px) {
+  .education-card {
+    display: flex;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: 105px;
+    flex-wrap: wrap-reverse;
+    align-items: start;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .education-card > div:last-child {
+    display: grid;
+    grid-template-areas: "edit-edu delete-edu";
+    gap: 1.25rem;
+  }
+
+  #edit-education {
+    grid-area: edit-edu;
+  }
+  #delete-education {
+    grid-area: delete-edu;
+  }
+
+  #edit-education,
+  #delete-education {
+    border: none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    left: 10px;
+    top: -1px;
+    padding: 0;
+  }
+}
