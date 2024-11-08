@@ -64,7 +64,6 @@
   overflow: hidden;
   display: flex;
   max-height: 800px;
-  margin-bottom: 1.25rem;
   position: relative;
   top: -5px;
 }

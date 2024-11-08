@@ -59,8 +59,6 @@ export function TechnicalSkills() {
     // Hide the form
     setFormVisible(false);
 
-    // Display the Add Technical Skills button
-
     updateSkillsGroupBtn.current.style.cssText = "display: none;";
     addSkillsGroupBtn.current.style.cssText = "display: flex;";
 
@@ -70,6 +68,8 @@ export function TechnicalSkills() {
       skillsType: "",
       skillsList: "",
     });
+
+    technicalSkillsForm.current.reset();
   }
 
   function addTechnicalSkills() {
@@ -161,7 +161,6 @@ export function TechnicalSkills() {
       });
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
       addSkillsGroupBtn.current.style.cssText = "display: flex;";
-      updateSkillsGroupBtn.current.style.cssText = "display: none;";
 
       if (skills.length === limit) {
         addSkillsGroupBtn.current.disabled = true;
