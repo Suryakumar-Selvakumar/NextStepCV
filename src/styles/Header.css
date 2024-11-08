@@ -146,3 +146,75 @@ header {
 #cancel-reset:hover {
   background-color: rgb(228, 228, 228);
 }
+
+@media (min-width: 360px) and (max-width: 768px) {
+  .button-text {
+    display: none;
+  }
+
+  #load-dummy,
+  #clear-resume,
+  #download-resume {
+    padding: 0;
+  }
+
+  .header-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.05rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  #logo-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  #logo-text {
+    font-family: myFontTitle;
+    font-weight: 500;
+    font-size: 1.85rem;
+  }
+
+  .svg-header-btns {
+    width: 35px;
+    height: 35px;
+  }
+
+  header {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .reset-modal {
+    width: 350px;
+    height: max-content;
+    font-size: 1rem;
+    padding: 0.75rem 0;
+  }
+
+  #warning-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .warning-msg {
+    gap: 0.25rem;
+  }
+
+  #okay-reset,
+  #cancel-reset {
+    padding: 0 0.5rem;
+  }
+
+  .reset-modal-buttons {
+    gap: 0.5rem;
+  }
+}

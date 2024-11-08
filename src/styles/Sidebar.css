@@ -32,3 +32,10 @@ h3 {
   font-family: myFontRegular;
   font-weight: 400;
 }
+
+@media (min-width: 360px) and (max-width: 1440px) {
+  .sidebar {
+    border-right: none;
+    box-shadow: 1px 1px 15px rgb(199, 199, 199);
+  }
+}
