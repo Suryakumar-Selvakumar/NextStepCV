@@ -43,6 +43,10 @@
   width: max-content;
 }
 
+#add-technical-skills:hover {
+  background-color: black;
+}
+
 .technical-skills-form {
   flex-direction: column;
   gap: 1.5rem;
@@ -96,6 +100,10 @@
   width: max-content;
 }
 
+#update-skills-group:hover {
+  background-color: black;
+}
+
 .technical-skills-form input {
   padding: 0.5rem 1rem;
   outline: none;
@@ -135,6 +143,14 @@
   color: white;
   background-color: var(--header-bg-color);
   border: 1px solid var(--header-bg-color);
+}
+
+#submit-technical-skills:hover {
+  background-color: rgb(0, 138, 223);
+}
+
+#cancel-technical-skills:hover {
+  background-color: rgb(228, 228, 228);
 }
 
 .technical-skills-cards {

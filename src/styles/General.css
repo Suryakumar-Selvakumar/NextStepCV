@@ -42,6 +42,10 @@
   width: max-content;
 }
 
+#edit-general-details:hover {
+  background-color: black;
+}
+
 .general-form {
   flex-direction: column;
   gap: 1.5rem;
