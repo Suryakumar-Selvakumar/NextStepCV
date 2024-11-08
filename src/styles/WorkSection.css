@@ -12,10 +12,10 @@
   grid-template-rows: repeat(3, max-content);
   grid-template-columns: 1fr;
   overflow: hidden;
-  transition: all 0.5s ease;
+  transition: all 0.45s ease-in-out;
   gap: 1rem;
   font-family: myFontRegular;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
   box-sizing: content-box;
   border-bottom: 1px solid var(--sidebar-border-color);
   overflow-x: auto;
@@ -28,7 +28,7 @@
 
 #add-work {
   place-self: end;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   padding: 0.5rem 1rem;
   background-color: rgb(45, 45, 45);
   color: white;
@@ -44,7 +44,7 @@
 
 .work-form {
   display: none;
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   flex-direction: column;
   gap: 1.5rem;
 }
