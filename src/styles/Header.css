@@ -46,6 +46,7 @@ header {
   font-size: 1.5rem;
   font-family: myFontHeader;
   font-weight: 700;
+  font-style: italic;
   display: flex;
   align-items: center;
 }

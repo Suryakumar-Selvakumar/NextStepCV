@@ -19,7 +19,19 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   left: 10px;
-  top: -2.5px;
+  top: -1px;
+  padding: 0;
+}
+
+#delete-detail {
+  padding: 1.5px;
+}
+
+#edit-detail:hover,
+#delete-detail:hover {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
 }

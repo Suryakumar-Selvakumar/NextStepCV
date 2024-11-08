@@ -24,6 +24,18 @@
   display: flex;
   align-items: center;
   position: relative;
-  left: 15px;
+  left: 10px;
   top: -1px;
+  padding: 0;
+  justify-content: center;
+}
+
+#delete-skills-group {
+  padding: 1.5px;
+}
+
+#edit-skills-group:hover,
+#delete-skills-group:hover {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
 }

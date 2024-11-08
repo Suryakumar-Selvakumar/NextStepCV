@@ -28,7 +28,19 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
-  left: 15px;
+  left: 10px;
   top: -1px;
+  padding: 0;
+}
+
+#delete-project {
+  padding: 1.5px;
+}
+
+#edit-project:hover,
+#delete-project:hover {
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
 }
