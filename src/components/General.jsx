@@ -52,8 +52,6 @@ export function General() {
     });
 
     // Display the editDetails button on submit
-    editGeneralDetailsBtn.current.style.cssText = "display: flex;";
-    generalForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Will hide the form
     setFormVisible(false);
@@ -63,7 +61,6 @@ export function General() {
 
   function handleEdit() {
     // Hide the edit button after it was pressed
-    editGeneralDetailsBtn.current.style.cssText = "display: none;";
 
     // Add values to the input fields
     name.current.value = contactDetails.name;
@@ -76,8 +73,7 @@ export function General() {
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
     // Will display the form to update the details
-    generalForm.current.style.cssText =
-      "margin-top: 1.25rem;margin-bottom: 1rem;";
+
     setFormVisible(true);
   }
 
@@ -85,8 +81,6 @@ export function General() {
     generalForm.current.reset();
     setFormVisible(false);
 
-    editGeneralDetailsBtn.current.style.cssText = "display: flex;";
-    generalForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setContactDetails({ ...contactDetails, formSubmitted: true });
   }
 
@@ -125,7 +119,11 @@ export function General() {
       <div className={mainVisible ? "general-main" : "general-main closed"}>
         <button
           style={{ display: "flex", alignItems: "center" }}
-          id="edit-general-details"
+          className={
+            formVisible
+              ? "edit-general-details"
+              : "edit-general-details visible"
+          }
           ref={editGeneralDetailsBtn}
           onClick={() => handleEdit()}
         >
@@ -191,6 +189,7 @@ export function General() {
             </button>
           </div>
         </form>
+
         {contactDetails.formSubmitted && (
           <div className="contact-details-card">
             {contactDetails.name && <p>{contactDetails.name}</p>}

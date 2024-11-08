@@ -52,11 +52,8 @@ export function EducationSection() {
       completedStudy: true,
     });
     if (courses.length < limit) {
-      addEducationBtn.current.style.cssText = "display: none;";
       updateEducationBtn.current.style.cssText = "display: none;";
       submitEducationBtn.current.style.cssText = "display: flex;";
-      educationForm.current.style.cssText =
-        "margin-top: 1.25rem;margin-bottom: 1rem;";
       setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
@@ -66,15 +63,13 @@ export function EducationSection() {
 
   function editEducation(courseId) {
     // Hide the add education button
-    addEducationBtn.current.style.cssText = "display: none;";
 
     // Update the styles of the submit and update buttons
     submitEducationBtn.current.style.cssText = "display: none;";
     updateEducationBtn.current.style.cssText = "display: flex;";
 
     // Display the form to allow editing of details
-    educationForm.current.style.cssText =
-      "margin-top: 1.25rem;margin-bottom: 1rem;";
+
     setFormVisible(true);
 
     // Hide the limit reached error
@@ -137,8 +132,7 @@ export function EducationSection() {
       });
 
       updateEducationBtn.current.style.cssText = "display: none;";
-      addEducationBtn.current.style.cssText = "display: flex;";
-      educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+
       submitEducationBtn.current.style.cssText = "display: flex;";
       setFormVisible(false);
       educationForm.current.reset();
@@ -152,8 +146,7 @@ export function EducationSection() {
 
     if (educationDetails.id === courseId || courses.length === 1) {
       setFormVisible(false);
-      educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
-      addEducationBtn.current.style.cssText = "display: flex;";
+
       updateEducationBtn.current.style.cssText = "display: none;";
       submitEducationBtn.current.style.cssText = "display: flex;";
 
@@ -178,8 +171,6 @@ export function EducationSection() {
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
     // Display the add button again
-    addEducationBtn.current.style.cssText = "display: flex;";
-    educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Hide the form
     setFormVisible(false);
@@ -188,10 +179,6 @@ export function EducationSection() {
   function handleCancel() {
     // Hide the form
     setFormVisible(false);
-
-    // Display the add button again
-    addEducationBtn.current.style.cssText = "display: flex;";
-    educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Reset educationDetails
     setEducationDetails({
@@ -204,6 +191,8 @@ export function EducationSection() {
       gpa: 0,
       completedStudy: true,
     });
+
+    educationForm.current.reset();
   }
 
   function returnToday() {
@@ -250,7 +239,7 @@ export function EducationSection() {
       <div className={mainVisible ? "education-main" : "education-main closed"}>
         <button
           type="button"
-          id="add-education"
+          className={formVisible ? "add-education" : "add-education visible"}
           ref={addEducationBtn}
           onClick={() => addEducation()}
         >
@@ -453,7 +442,11 @@ export function EducationSection() {
             </button>
           </div>
         </form>
-        <div className="education-cards" ref={educationCards}>
+        <div
+          className="education-cards"
+          ref={educationCards}
+          style={{ display: courses.length ? "flex" : "none" }}
+        >
           {courses &&
             courses.map((exp) => (
               <Education
