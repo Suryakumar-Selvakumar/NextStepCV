@@ -64,9 +64,6 @@ export function WorkSection() {
     });
 
     if (experiences.length < workLimit) {
-      addWorkBtn.current.style.cssText = "display: none;";
-      workForm.current.style.cssText =
-        "margin-top: 1.25rem;margin-bottom: 1rem;";
       setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
@@ -101,10 +98,9 @@ export function WorkSection() {
         });
       }
     });
-    addWorkBtn.current.style.cssText = "display: none;";
+
     submitWorkBtn.current.style.cssText = "display: none;";
     updateWorkBtn.current.style.cssText = "display: flex;";
-    workForm.current.style.cssText = "margin-top: 1.25rem;margin-bottom: 1rem;";
     setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
     roleCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
@@ -149,9 +145,7 @@ export function WorkSection() {
         value: "",
       });
       updateWorkBtn.current.style.cssText = "display: none;";
-      addWorkBtn.current.style.cssText = "display: flex;";
       submitWorkBtn.current.style.cssText = "display: flex;";
-      workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       setFormVisible(false);
       updateRoleBtn.current.style.cssText = "display: none;";
       addRoleBtn.current.style.cssText = "display: flex;";
@@ -167,9 +161,7 @@ export function WorkSection() {
     if (workDetails.id === workId || experiences.length === 1) {
       updateRoleBtn.current.style.cssText = "display: none;";
       addRoleBtn.current.style.cssText = "display: flex;";
-      workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       setFormVisible(false);
-      addWorkBtn.current.style.cssText = "display: flex;";
       updateWorkBtn.current.style.cssText = "display: none;";
       submitWorkBtn.current.style.cssText = "display: flex;";
       roleCardsUl.current.style.cssText = "border: none;";
@@ -198,11 +190,7 @@ export function WorkSection() {
       { ...workDetails, id: crypto.randomUUID() },
     ]);
 
-    // Display the add button again
-    addWorkBtn.current.style.cssText = "display: flex;";
-
     // Hide the form
-    workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setFormVisible(false);
 
     // Display the class containing Work component cards
@@ -213,11 +201,7 @@ export function WorkSection() {
   }
 
   function handleCancel() {
-    // Display the add button again
-    addWorkBtn.current.style.cssText = "display: flex;";
-
     // Hide the form
-    workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setFormVisible(false);
 
     // Hide Update role button and bring back Add role button
@@ -354,7 +338,7 @@ export function WorkSection() {
       <div className={mainVisible ? "work-main" : "work-main closed"}>
         <button
           type="button"
-          id="add-work"
+          className={formVisible ? "add-work" : "add-work visible"}
           ref={addWorkBtn}
           onClick={() => addWork()}
         >
@@ -552,7 +536,10 @@ export function WorkSection() {
               ))}
           </ul>
         </form>
-        <div className="work-cards">
+        <div
+          className="work-cards"
+          style={{ display: experiences.length ? "flex" : "none" }}
+        >
           {experiences &&
             experiences.map((exp) => (
               <Work

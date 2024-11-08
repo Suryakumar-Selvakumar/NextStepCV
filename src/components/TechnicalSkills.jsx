@@ -42,9 +42,6 @@ export function TechnicalSkills() {
       setFormVisible(false);
 
       // Display the Add Technical Skills button
-      addTechnicalSkillsBtn.current.style.cssText = "display: flex";
-      technicalSkillsForm.current.style.cssText =
-        "margin-top: 0;margin-bottom: 0;";
 
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
       addSkillsGroupBtn.current.style.cssText = "display: flex;";
@@ -63,9 +60,6 @@ export function TechnicalSkills() {
     setFormVisible(false);
 
     // Display the Add Technical Skills button
-    addTechnicalSkillsBtn.current.style.cssText = "display: flex";
-    technicalSkillsForm.current.style.cssText =
-      "margin-top: 0;margin-bottom: 0;";
 
     updateSkillsGroupBtn.current.style.cssText = "display: none;";
     addSkillsGroupBtn.current.style.cssText = "display: flex;";
@@ -80,10 +74,8 @@ export function TechnicalSkills() {
 
   function addTechnicalSkills() {
     if (skills.length < limit) {
-      technicalSkillsForm.current.style.cssText =
-        "margin-top: 1.25rem;margin-bottom: 1rem;";
       setFormVisible(true);
-      addTechnicalSkillsBtn.current.style.cssText = "display: none;";
+
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
       limitErrorDiv.current.style.cssText = "display: flex;";
@@ -143,9 +135,7 @@ export function TechnicalSkills() {
     });
     updateSkillsGroupBtn.current.style.cssText = "display: flex;";
     addSkillsGroupBtn.current.style.cssText = "display: none;";
-    addTechnicalSkillsBtn.current.style.cssText = "display: none;";
-    technicalSkillsForm.current.style.cssText =
-      "margin-top: 1.25rem;margin-bottom: 1rem;";
+
     setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
   }
@@ -172,8 +162,6 @@ export function TechnicalSkills() {
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
       addSkillsGroupBtn.current.style.cssText = "display: flex;";
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
-      // addTechnicalSkillsBtn.current.style.cssText =
-      //   "display: flex;";
 
       if (skills.length === limit) {
         addSkillsGroupBtn.current.disabled = true;
@@ -244,7 +232,9 @@ export function TechnicalSkills() {
       >
         <button
           type="button"
-          id="add-technical-skills"
+          className={
+            formVisible ? "add-technical-skills" : "add-education visible"
+          }
           ref={addTechnicalSkillsBtn}
           onClick={() => addTechnicalSkills()}
         >
@@ -326,7 +316,10 @@ export function TechnicalSkills() {
             </button>
           </div>
         </form>
-        <div className="technical-skills-cards">
+        <div
+          className="technical-skills-cards"
+          style={{ display: skills.length ? "flex" : "none" }}
+        >
           {skills &&
             skills.map((skillsGroup) => (
               <SkillsGroup

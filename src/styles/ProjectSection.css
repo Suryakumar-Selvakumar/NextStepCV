@@ -9,16 +9,14 @@
 .projects-main {
   max-height: 950px;
   display: grid;
-  grid-template-rows: repeat(3, max-content);
+  grid-template-rows: repeat(2, max-content);
   grid-template-columns: 1fr;
   overflow: hidden;
   transition: all 0.45s ease-in-out;
-  gap: 1rem;
   font-family: myFontRegular;
   padding: 0 1.25rem;
   box-sizing: content-box;
   border-bottom: 1px solid var(--sidebar-border-color);
-  overflow-x: auto;
 }
 
 .projects-main.closed {
@@ -26,10 +24,8 @@
   border-bottom: 0px solid var(--sidebar-border-color);
 }
 
-#add-project {
+.add-project {
   place-self: end;
-  margin-top: 1.25rem;
-  padding: 0.5rem 1rem;
   background-color: rgb(45, 45, 45);
   color: white;
   border-radius: 5px;
@@ -40,9 +36,24 @@
   display: flex;
   align-items: center;
   width: max-content;
+  transition: all 0.45s ease;
+  position: relative;
+  top: -150px;
+  overflow: hidden;
+  transform: scaleY(0);
 }
 
-#add-project:hover {
+.add-project.visible {
+  position: relative;
+  top: 0px;
+  transform: scaleY(1);
+  margin-top: 1.25rem;
+  padding: 0.5rem 1rem;
+  transform-origin: top;
+  margin-bottom: 1.25rem;
+}
+
+.add-project:hover {
   background-color: black;
 }
 
@@ -53,6 +64,9 @@
   overflow: hidden;
   display: flex;
   max-height: 800px;
+  margin-bottom: 1.25rem;
+  position: relative;
+  top: -5px;
 }
 
 .project-form.closed {

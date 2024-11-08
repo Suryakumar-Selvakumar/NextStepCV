@@ -46,9 +46,6 @@ export function ProjectSection() {
 
   function addProject() {
     if (projects.length < projectLimit) {
-      addProjectBtn.current.style.cssText = "display: none;";
-      projectForm.current.style.cssText =
-        "margin-top: 1.25rem;margin-bottom: 1rem;";
       setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
@@ -80,11 +77,9 @@ export function ProjectSection() {
         });
       }
     });
-    addProjectBtn.current.style.cssText = "display: none;";
+
     submitProjectBtn.current.style.cssText = "display: none;";
     updateProjectBtn.current.style.cssText = "display: flex;";
-    projectForm.current.style.cssText =
-      "margin-top: 1.25rem;margin-bottom: 1rem;";
     setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
     detailCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
@@ -122,9 +117,8 @@ export function ProjectSection() {
         value: "",
       });
       updateProjectBtn.current.style.cssText = "display: none;";
-      addProjectBtn.current.style.cssText = "display: flex;";
+
       submitProjectBtn.current.style.cssText = "display: flex;";
-      projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       setFormVisible(false);
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
@@ -139,9 +133,8 @@ export function ProjectSection() {
     if (projectDetails.id === projectId || projects.length === 1) {
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
-      projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       setFormVisible(false);
-      addProjectBtn.current.style.cssText = "display: flex;";
+
       updateProjectBtn.current.style.cssText = "display: none;";
       submitProjectBtn.current.style.cssText = "display: flex;";
       detailCardsUl.current.style.cssText = "border: none;";
@@ -164,22 +157,14 @@ export function ProjectSection() {
     // Logic to add work to the experiences state
     setProjects([...projects, { ...projectDetails, id: crypto.randomUUID() }]);
 
-    // Display the add button again
-    addProjectBtn.current.style.cssText = "display: flex;";
-
     // Hide the form
-    projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setFormVisible(false);
 
     detailCardsUl.current.style.cssText = "border: none;";
   }
 
   function handleCancel() {
-    // Display the add button again
-    addProjectBtn.current.style.cssText = "display: flex;";
-
     // Hide the form
-    projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setFormVisible(false);
 
     // Hide Update detail button and bring back Add detail button
@@ -314,7 +299,7 @@ export function ProjectSection() {
         <button
           type="button"
           ref={addProjectBtn}
-          id="add-project"
+          className={formVisible ? "add-project" : "add-project visible"}
           onClick={() => addProject()}
         >
           <svg
@@ -454,7 +439,10 @@ export function ProjectSection() {
               ))}
           </ul>
         </form>
-        <div className="project-cards">
+        <div
+          className="project-cards"
+          style={{ display: projects.length ? "flex" : "none" }}
+        >
           {projects &&
             projects.map((proj) => (
               <Project

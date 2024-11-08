@@ -15,7 +15,6 @@
   transition-property: all;
   transition-duration: 0.45s;
   transition-timing-function: ease-in-out;
-  gap: 1rem;
   font-family: myFontRegular;
   padding: 0 1.25rem;
   box-sizing: content-box;
@@ -27,10 +26,8 @@
   border-bottom: 0px solid var(--sidebar-border-color);
 }
 
-#add-technical-skills {
+.add-technical-skills {
   place-self: end;
-  margin-top: 1.25rem;
-  padding: 0.5rem 1rem;
   background-color: rgb(45, 45, 45);
   color: white;
   border-radius: 5px;
@@ -41,9 +38,24 @@
   display: flex;
   align-items: center;
   width: max-content;
+  transition: all 0.45s ease;
+  position: relative;
+  top: -150px;
+  overflow: hidden;
+  transform: scaleY(0);
 }
 
-#add-technical-skills:hover {
+.add-technical-skills.visible {
+  position: relative;
+  top: 0px;
+  transform: scaleY(1);
+  margin-top: 1.25rem;
+  padding: 0.5rem 1rem;
+  transform-origin: top;
+  margin-bottom: 1.25rem;
+}
+
+.add-technical-skills:hover {
   background-color: black;
 }
 
@@ -54,6 +66,9 @@
   overflow: hidden;
   display: flex;
   max-height: 500px;
+  margin-bottom: 1.25rem;
+  position: relative;
+  top: -5px;
 }
 
 .technical-skills-form.closed {

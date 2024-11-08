@@ -31,7 +31,6 @@ export function EducationSection() {
   const updateEducationBtn = useRef(null);
   const limitErrorDiv = useRef(null);
   const dropDownSvg = useRef(null);
-  const educationCards = useRef(null);
 
   useEffect(() => {
     if (courses) localStorage.setItem("courses", JSON.stringify(courses));
@@ -444,7 +443,6 @@ export function EducationSection() {
         </form>
         <div
           className="education-cards"
-          ref={educationCards}
           style={{ display: courses.length ? "flex" : "none" }}
         >
           {courses &&
