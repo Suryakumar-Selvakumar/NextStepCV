@@ -18,6 +18,7 @@
   padding: 0 1rem;
   box-sizing: content-box;
   border-bottom: 1px solid var(--sidebar-border-color);
+  overflow-x: auto;
 }
 
 .projects-main.closed {
@@ -59,11 +60,12 @@
 .project-name-date {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .project-name-div,
 .project-date-div {
-  width: 425px;
+  width: 50%;
 }
 
 .project-detail-btns > div {

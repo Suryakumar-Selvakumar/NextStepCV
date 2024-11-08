@@ -398,7 +398,7 @@ export function WorkSection() {
           <div className="work-dates">
             <div
               className="work-company-location"
-              style={{ width: workDetails.stillWorking && "425px" }}
+              style={{ width: workDetails.stillWorking && "50%" }}
             >
               <label htmlFor="place">Company location </label>
               <input
@@ -413,7 +413,7 @@ export function WorkSection() {
             </div>
             <div
               className="work-start-date"
-              style={{ width: workDetails.stillWorking && "425px" }}
+              style={{ width: workDetails.stillWorking && "50%" }}
             >
               <label htmlFor="start-work">Position start date </label>
               <input

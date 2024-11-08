@@ -240,9 +240,7 @@ export function EducationSection() {
           />
         </svg>
       </div>
-      <div
-        className={mainVisible ? "education-main" : "education-main closed"}
-      >
+      <div className={mainVisible ? "education-main" : "education-main closed"}>
         <button
           type="button"
           id="add-education"
@@ -320,7 +318,7 @@ export function EducationSection() {
           <div className="education-gpa-start-end">
             <div
               className="education-gpa"
-              style={{ width: !educationDetails.completedStudy && "425px" }}
+              style={{ width: !educationDetails.completedStudy && "50%" }}
             >
               <label htmlFor="gpa">GPA </label>
               <input
@@ -341,9 +339,7 @@ export function EducationSection() {
               />
             </div>
             {educationDetails.completedStudy && (
-              <div
-                className="education-start-date"
-              >
+              <div className="education-start-date">
                 <label htmlFor="start-date-study">Start Date </label>
                 <input
                   type="date"
@@ -367,7 +363,7 @@ export function EducationSection() {
             )}
             <div
               className="education-end-date"
-              style={{ width: !educationDetails.completedStudy && "425px" }}
+              style={{ width: !educationDetails.completedStudy && "50%" }}
             >
               <label htmlFor="end-date-study">
                 {educationDetails.completedStudy
