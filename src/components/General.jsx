@@ -21,6 +21,9 @@ export function General() {
   const [mainVisible, setMainVisible] = useState(
     storedMainVisible ? storedMainVisible : false
   );
+  const [formVisible, setFormVisible] = useState(false);
+
+  // DOM Refs
   const editGeneralDetailsBtn = useRef(null);
   const generalForm = useRef(null);
   const dropDownSvg = useRef(null);
@@ -50,9 +53,10 @@ export function General() {
 
     // Display the editDetails button on submit
     editGeneralDetailsBtn.current.style.cssText = "display: flex;";
+    generalForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Will hide the form
-    generalForm.current.style.cssText = "display: none;";
+    setFormVisible(false);
 
     localStorage.setItem("general", JSON.stringify(contactDetails));
   }
@@ -72,13 +76,17 @@ export function General() {
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
     // Will display the form to update the details
-    generalForm.current.style.cssText = "display: flex;";
+    generalForm.current.style.cssText =
+      "margin-top: 1.25rem;margin-bottom: 1rem;";
+    setFormVisible(true);
   }
 
   function handleCancel() {
     generalForm.current.reset();
-    generalForm.current.style.cssText = "display: none;";
+    setFormVisible(false);
+
     editGeneralDetailsBtn.current.style.cssText = "display: flex;";
+    generalForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
     setContactDetails({ ...contactDetails, formSubmitted: true });
   }
 
@@ -134,7 +142,7 @@ export function General() {
           <span>Edit Details</span>
         </button>
         <form
-          className="general-form"
+          className={formVisible ? "general-form" : "general-form closed"}
           ref={generalForm}
           onSubmit={(e) => handleSubmit(e)}
         >

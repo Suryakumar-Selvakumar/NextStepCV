@@ -43,10 +43,17 @@
 }
 
 .work-form {
-  display: none;
-  margin-top: 1.25rem;
   flex-direction: column;
   gap: 1.5rem;
+  transition: all 0.45s ease;
+  overflow: hidden;
+  display: flex;
+  max-height: 800px;
+}
+
+.work-form.closed {
+  max-height: 0;
+  margin: 0;
 }
 
 .work-company-name,

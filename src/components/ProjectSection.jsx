@@ -25,6 +25,7 @@ export function ProjectSection() {
   const [detail, setDetail] = useState({ id: 0, value: "" });
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
+  const [formVisible, setFormVisible] = useState(false);
 
   // DOM refs
   const addProjectBtn = useRef(null);
@@ -46,7 +47,9 @@ export function ProjectSection() {
   function addProject() {
     if (projects.length < projectLimit) {
       addProjectBtn.current.style.cssText = "display: none;";
-      projectForm.current.style.cssText = "display: flex;";
+      projectForm.current.style.cssText =
+        "margin-top: 1.25rem;margin-bottom: 1rem;";
+      setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
       limitErrorDiv.current.style.cssText = "display: flex;";
@@ -80,7 +83,9 @@ export function ProjectSection() {
     addProjectBtn.current.style.cssText = "display: none;";
     submitProjectBtn.current.style.cssText = "display: none;";
     updateProjectBtn.current.style.cssText = "display: flex;";
-    projectForm.current.style.cssText = "display: flex;";
+    projectForm.current.style.cssText =
+      "margin-top: 1.25rem;margin-bottom: 1rem;";
+    setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
     detailCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
@@ -119,7 +124,8 @@ export function ProjectSection() {
       updateProjectBtn.current.style.cssText = "display: none;";
       addProjectBtn.current.style.cssText = "display: flex;";
       submitProjectBtn.current.style.cssText = "display: flex;";
-      projectForm.current.style.cssText = "display: none;";
+      projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+      setFormVisible(false);
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
       detailCardsUl.current.style.cssText = "border: none;";
@@ -133,7 +139,8 @@ export function ProjectSection() {
     if (projectDetails.id === projectId || projects.length === 1) {
       updateDetailBtn.current.style.cssText = "display: none;";
       addDetailBtn.current.style.cssText = "display: flex;";
-      projectForm.current.style.cssText = "display: none;";
+      projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+      setFormVisible(false);
       addProjectBtn.current.style.cssText = "display: flex;";
       updateProjectBtn.current.style.cssText = "display: none;";
       submitProjectBtn.current.style.cssText = "display: flex;";
@@ -161,7 +168,8 @@ export function ProjectSection() {
     addProjectBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
-    projectForm.current.style.cssText = "display: none;";
+    projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+    setFormVisible(false);
 
     detailCardsUl.current.style.cssText = "border: none;";
   }
@@ -171,7 +179,8 @@ export function ProjectSection() {
     addProjectBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
-    projectForm.current.style.cssText = "display: none;";
+    projectForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+    setFormVisible(false);
 
     // Hide Update detail button and bring back Add detail button
     updateDetailBtn.current.style.cssText = "display: none;";
@@ -324,7 +333,7 @@ export function ProjectSection() {
           Project limit reached!
         </div>
         <form
-          className="project-form"
+          className={formVisible ? "project-form" : "project-form closed"}
           ref={projectForm}
           onSubmit={(e) => handleSubmit(e)}
         >

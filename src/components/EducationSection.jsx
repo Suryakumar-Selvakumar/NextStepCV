@@ -22,6 +22,7 @@ export function EducationSection() {
   const [mainVisible, setMainVisible] = useState(
     storedMainVisible ? storedMainVisible : false
   );
+  const [formVisible, setFormVisible] = useState(false);
 
   // DOM refs
   const addEducationBtn = useRef(null);
@@ -54,7 +55,9 @@ export function EducationSection() {
       addEducationBtn.current.style.cssText = "display: none;";
       updateEducationBtn.current.style.cssText = "display: none;";
       submitEducationBtn.current.style.cssText = "display: flex;";
-      educationForm.current.style.cssText = "display: flex;";
+      educationForm.current.style.cssText =
+        "margin-top: 1.25rem;margin-bottom: 1rem;";
+      setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
       limitErrorDiv.current.style.cssText = "display: flex;";
@@ -70,7 +73,9 @@ export function EducationSection() {
     updateEducationBtn.current.style.cssText = "display: flex;";
 
     // Display the form to allow editing of details
-    educationForm.current.style.cssText = "display: flex;";
+    educationForm.current.style.cssText =
+      "margin-top: 1.25rem;margin-bottom: 1rem;";
+    setFormVisible(true);
 
     // Hide the limit reached error
     limitErrorDiv.current.style.cssText = "display: none;";
@@ -133,8 +138,10 @@ export function EducationSection() {
 
       updateEducationBtn.current.style.cssText = "display: none;";
       addEducationBtn.current.style.cssText = "display: flex;";
+      educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       submitEducationBtn.current.style.cssText = "display: flex;";
-      educationForm.current.style.cssText = "display: none;";
+      setFormVisible(false);
+      educationForm.current.reset();
     }
   }
 
@@ -144,7 +151,8 @@ export function EducationSection() {
     limitErrorDiv.current.style.cssText = "display: none;";
 
     if (educationDetails.id === courseId || courses.length === 1) {
-      educationForm.current.style.cssText = "display: none;";
+      setFormVisible(false);
+      educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
       addEducationBtn.current.style.cssText = "display: flex;";
       updateEducationBtn.current.style.cssText = "display: none;";
       submitEducationBtn.current.style.cssText = "display: flex;";
@@ -171,20 +179,19 @@ export function EducationSection() {
 
     // Display the add button again
     addEducationBtn.current.style.cssText = "display: flex;";
+    educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Hide the form
-    educationForm.current.style.cssText = "display: none;";
-
-    // Display the class containing Education component cards
-    document.querySelector(".education-cards").style.cssText = "display: flex;";
+    setFormVisible(false);
   }
 
   function handleCancel() {
     // Hide the form
-    educationForm.current.style.cssText = "display: none;";
+    setFormVisible(false);
 
     // Display the add button again
     addEducationBtn.current.style.cssText = "display: flex;";
+    educationForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
 
     // Reset educationDetails
     setEducationDetails({
@@ -266,7 +273,7 @@ export function EducationSection() {
           <span>Courses limit reached!</span>
         </div>
         <form
-          className="education-form"
+          className={formVisible ? "education-form" : "education-form closed"}
           ref={educationForm}
           onSubmit={(e) => handleSubmit(e)}
         >
@@ -382,7 +389,6 @@ export function EducationSection() {
                 }
                 onFocus={() => {
                   if (educationDetails.completedStudy) {
-                    console.log(educationDetails.startDateStudy);
                     document
                       .getElementById("end-date-study")
                       .setAttribute(

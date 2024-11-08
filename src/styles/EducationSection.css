@@ -44,10 +44,17 @@
 }
 
 .education-form {
-  display: none;
-  margin-top: 1.25rem;
   flex-direction: column;
   gap: 1.5rem;
+  transition: all 0.45s ease;
+  overflow: hidden;
+  display: flex;
+  max-height: 500px;
+}
+
+.education-form.closed {
+  max-height: 0;
+  margin: 0;
 }
 
 .education-form > div:first-of-type,

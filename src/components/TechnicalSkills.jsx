@@ -17,6 +17,7 @@ export function TechnicalSkills() {
   const [mainVisible, setMainVisible] = useState(
     storedMainVisible ? storedMainVisible : false
   );
+  const [formVisible, setFormVisible] = useState(false);
 
   // useRef hooks for DOM nodes
   const addTechnicalSkillsBtn = useRef(null);
@@ -38,10 +39,12 @@ export function TechnicalSkills() {
 
     if (skills.length >= 1) {
       // Hide the form
-      technicalSkillsForm.current.style.cssText = "display: none;";
+      setFormVisible(false);
 
       // Display the Add Technical Skills button
       addTechnicalSkillsBtn.current.style.cssText = "display: flex";
+      technicalSkillsForm.current.style.cssText =
+        "margin-top: 0;margin-bottom: 0;";
 
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
       addSkillsGroupBtn.current.style.cssText = "display: flex;";
@@ -57,10 +60,12 @@ export function TechnicalSkills() {
 
   function handleCancel() {
     // Hide the form
-    technicalSkillsForm.current.style.cssText = "display: none;";
+    setFormVisible(false);
 
     // Display the Add Technical Skills button
     addTechnicalSkillsBtn.current.style.cssText = "display: flex";
+    technicalSkillsForm.current.style.cssText =
+      "margin-top: 0;margin-bottom: 0;";
 
     updateSkillsGroupBtn.current.style.cssText = "display: none;";
     addSkillsGroupBtn.current.style.cssText = "display: flex;";
@@ -75,7 +80,9 @@ export function TechnicalSkills() {
 
   function addTechnicalSkills() {
     if (skills.length < limit) {
-      technicalSkillsForm.current.style.cssText = "display: flex;";
+      technicalSkillsForm.current.style.cssText =
+        "margin-top: 1.25rem;margin-bottom: 1rem;";
+      setFormVisible(true);
       addTechnicalSkillsBtn.current.style.cssText = "display: none;";
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
@@ -137,7 +144,9 @@ export function TechnicalSkills() {
     updateSkillsGroupBtn.current.style.cssText = "display: flex;";
     addSkillsGroupBtn.current.style.cssText = "display: none;";
     addTechnicalSkillsBtn.current.style.cssText = "display: none;";
-    technicalSkillsForm.current.style.cssText = "display: flex;";
+    technicalSkillsForm.current.style.cssText =
+      "margin-top: 1.25rem;margin-bottom: 1rem;";
+    setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
   }
 
@@ -230,9 +239,7 @@ export function TechnicalSkills() {
       </div>
       <div
         className={
-          mainVisible
-            ? "technical-skills-main"
-            : "technical-skills-main closed"
+          mainVisible ? "technical-skills-main" : "technical-skills-main closed"
         }
       >
         <button
@@ -258,7 +265,11 @@ export function TechnicalSkills() {
           <span>Skills limit reached!</span>
         </div>
         <form
-          className="technical-skills-form"
+          className={
+            formVisible
+              ? "technical-skills-form"
+              : "technical-skills-form closed"
+          }
           ref={technicalSkillsForm}
           onSubmit={(e) => handleSubmit(e)}
         >

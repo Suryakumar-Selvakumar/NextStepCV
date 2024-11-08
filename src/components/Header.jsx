@@ -93,7 +93,7 @@ export function Header() {
       },
       {
         company: "Tesla",
-        endWork: "2022-06-05",
+        endWork: "2022-09-05",
         id: crypto.randomUUID(),
         place: "Austin, Texas",
         position: "Software Engineer Intern",
@@ -114,7 +114,7 @@ export function Header() {
               "Explored ways to visualize *GitHub Collaboration in a classroom setting",
           },
         ],
-        startWork: "2022-08-05",
+        startWork: "2022-06-05",
         stillWorking: false,
       },
     ];

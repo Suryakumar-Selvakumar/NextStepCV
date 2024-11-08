@@ -28,6 +28,7 @@ export function WorkSection() {
   const [role, setRole] = useState({ id: 0, value: "" });
   const [workLimit, setWorkLimit] = useState(2);
   const [roleLimit, setRoleLimit] = useState(4);
+  const [formVisible, setFormVisible] = useState(false);
 
   // DOM refs
   const limitErrorDiv = useRef(null);
@@ -64,7 +65,9 @@ export function WorkSection() {
 
     if (experiences.length < workLimit) {
       addWorkBtn.current.style.cssText = "display: none;";
-      workForm.current.style.cssText = "display: flex;";
+      workForm.current.style.cssText =
+        "margin-top: 1.25rem;margin-bottom: 1rem;";
+      setFormVisible(true);
       limitErrorDiv.current.style.cssText = "display: none;";
     } else {
       limitErrorDiv.current.style.cssText = "display: flex;";
@@ -101,7 +104,8 @@ export function WorkSection() {
     addWorkBtn.current.style.cssText = "display: none;";
     submitWorkBtn.current.style.cssText = "display: none;";
     updateWorkBtn.current.style.cssText = "display: flex;";
-    workForm.current.style.cssText = "display: flex;";
+    workForm.current.style.cssText = "margin-top: 1.25rem;margin-bottom: 1rem;";
+    setFormVisible(true);
     limitErrorDiv.current.style.cssText = "display: none;";
     roleCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
@@ -147,10 +151,12 @@ export function WorkSection() {
       updateWorkBtn.current.style.cssText = "display: none;";
       addWorkBtn.current.style.cssText = "display: flex;";
       submitWorkBtn.current.style.cssText = "display: flex;";
-      workForm.current.style.cssText = "display: none;";
+      workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+      setFormVisible(false);
       updateRoleBtn.current.style.cssText = "display: none;";
       addRoleBtn.current.style.cssText = "display: flex;";
       roleCardsUl.current.style.cssText = "border: none;";
+      workForm.current.reset();
     }
   }
 
@@ -161,7 +167,8 @@ export function WorkSection() {
     if (workDetails.id === workId || experiences.length === 1) {
       updateRoleBtn.current.style.cssText = "display: none;";
       addRoleBtn.current.style.cssText = "display: flex;";
-      workForm.current.style.cssText = "display: none;";
+      workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+      setFormVisible(false);
       addWorkBtn.current.style.cssText = "display: flex;";
       updateWorkBtn.current.style.cssText = "display: none;";
       submitWorkBtn.current.style.cssText = "display: flex;";
@@ -195,12 +202,14 @@ export function WorkSection() {
     addWorkBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
-    workForm.current.style.cssText = "display: none;";
+    workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+    setFormVisible(false);
 
     // Display the class containing Work component cards
     document.querySelector(".work-cards").style.cssText = "display: flex;";
 
     roleCardsUl.current.style.cssText = "border: none;";
+    workForm.current.reset();
   }
 
   function handleCancel() {
@@ -208,7 +217,8 @@ export function WorkSection() {
     addWorkBtn.current.style.cssText = "display: flex;";
 
     // Hide the form
-    workForm.current.style.cssText = "display: none;";
+    workForm.current.style.cssText = "margin-top: 0;margin-bottom: 0;";
+    setFormVisible(false);
 
     // Hide Update role button and bring back Add role button
     updateRoleBtn.current.style.cssText = "display: none;";
@@ -231,6 +241,7 @@ export function WorkSection() {
       stillWorking: false,
     });
     setRole({ id: 0, value: "" });
+    workForm.current.reset();
   }
 
   function addRole() {
@@ -364,7 +375,7 @@ export function WorkSection() {
           <span>Experiences limit reached!</span>
         </div>
         <form
-          className="work-form"
+          className={formVisible ? "work-form" : "work-form closed"}
           ref={workForm}
           onSubmit={(e) => handleSubmit(e)}
         >
@@ -445,6 +456,14 @@ export function WorkSection() {
                   }
                   onFocus={() => {
                     if (!workDetails.stillWorking) {
+                      document
+                        .getElementById("end-work")
+                        .setAttribute(
+                          "min",
+                          workDetails.startWork
+                            ? workDetails.startWork
+                            : "1950-11-31"
+                        );
                       document
                         .getElementById("end-work")
                         .setAttribute("max", returnToday());
