@@ -7,10 +7,41 @@
   align-items: center;
   place-self: center;
   gap: 0.5rem;
+  animation: 0.2s error-drop ease;
 }
 
 .limit-error span {
   font-size: 1.5rem;
+}
+
+.limit-error.visible {
+  display: flex;
+}
+
+@keyframes error-drop {
+  0% {
+    transform: scaleY(0);
+  }
+
+  25% {
+    transform: scaleY(1);
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: scaleY(1);
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: scaleY(1);
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: scaleY(1);
+    transform: translateX(0px);
+  }
 }
 
 .dropdown-svg {

@@ -29,9 +29,9 @@ export function WorkSection() {
   const [workLimit, setWorkLimit] = useState(2);
   const [roleLimit, setRoleLimit] = useState(4);
   const [formVisible, setFormVisible] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
 
   // DOM refs
-  const limitErrorDiv = useRef(null);
   const addWorkBtn = useRef(null);
   const workForm = useRef(null);
   const updateWorkBtn = useRef(null);
@@ -65,9 +65,9 @@ export function WorkSection() {
 
     if (experiences.length < workLimit) {
       setFormVisible(true);
-      limitErrorDiv.current.style.cssText = "display: none;";
+      setLimitReached(false);
     } else {
-      limitErrorDiv.current.style.cssText = "display: flex;";
+      setLimitReached(true);
     }
 
     if (workDetails.roles.length === roleLimit) {
@@ -102,7 +102,7 @@ export function WorkSection() {
     submitWorkBtn.current.style.cssText = "display: none;";
     updateWorkBtn.current.style.cssText = "display: flex;";
     setFormVisible(true);
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
     roleCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
 
@@ -156,7 +156,7 @@ export function WorkSection() {
 
   function deleteWork(workId) {
     setExperiences(experiences.filter((exp) => exp.id !== workId));
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (workDetails.id === workId || experiences.length === 1) {
       updateRoleBtn.current.style.cssText = "display: none;";
@@ -253,7 +253,7 @@ export function WorkSection() {
     });
     updateRoleBtn.current.style.cssText = "display: flex;";
     addRoleBtn.current.style.cssText = "display: none;";
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
   }
 
   function updateRole() {
@@ -294,7 +294,7 @@ export function WorkSection() {
       roleCardsUl.current.style.cssText = "border: none;";
     }
 
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (workDetails.roles.length - 1 === roleLimit) {
       addRoleBtn.current.disabled = true;
@@ -358,7 +358,7 @@ export function WorkSection() {
           </svg>
           <span>Add Work Experience</span>
         </button>
-        <div className="limit-error" ref={limitErrorDiv}>
+        <div className={limitReached ? "limit-error visible" : "limit-error"}>
           <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
           <span>Experiences limit reached!</span>
         </div>

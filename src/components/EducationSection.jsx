@@ -23,13 +23,13 @@ export function EducationSection() {
     storedMainVisible ? storedMainVisible : false
   );
   const [formVisible, setFormVisible] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
 
   // DOM refs
   const addEducationBtn = useRef(null);
   const educationForm = useRef(null);
   const submitEducationBtn = useRef(null);
   const updateEducationBtn = useRef(null);
-  const limitErrorDiv = useRef(null);
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
@@ -54,9 +54,9 @@ export function EducationSection() {
       updateEducationBtn.current.style.cssText = "display: none;";
       submitEducationBtn.current.style.cssText = "display: flex;";
       setFormVisible(true);
-      limitErrorDiv.current.style.cssText = "display: none;";
+      setLimitReached(false);
     } else {
-      limitErrorDiv.current.style.cssText = "display: flex;";
+      setLimitReached(true);
     }
   }
 
@@ -72,7 +72,7 @@ export function EducationSection() {
     setFormVisible(true);
 
     // Hide the limit reached error
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     //Logic to update the form fields to include data from the item whose edit button was clicked on
     courses.forEach((ed) => {
@@ -141,7 +141,7 @@ export function EducationSection() {
   function deleteEducation(courseId) {
     setCourses(courses.filter((exp) => exp.id !== courseId));
 
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (educationDetails.id === courseId || courses.length === 1) {
       setFormVisible(false);
@@ -260,7 +260,7 @@ export function EducationSection() {
 
           <span>Add Education</span>
         </button>
-        <div className="limit-error" ref={limitErrorDiv}>
+        <div className={limitReached ? "limit-error visible" : "limit-error"}>
           <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
           <span>Courses limit reached!</span>
         </div>

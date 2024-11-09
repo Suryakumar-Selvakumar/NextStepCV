@@ -18,10 +18,10 @@ export function TechnicalSkills() {
     storedMainVisible ? storedMainVisible : false
   );
   const [formVisible, setFormVisible] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
 
   // useRef hooks for DOM nodes
   const addTechnicalSkillsBtn = useRef(null);
-  const limitErrorDiv = useRef(null);
   const technicalSkillsForm = useRef(null);
   const addSkillsGroupBtn = useRef(null);
   const updateSkillsGroupBtn = useRef(null);
@@ -76,9 +76,9 @@ export function TechnicalSkills() {
     if (skills.length < limit) {
       setFormVisible(true);
 
-      limitErrorDiv.current.style.cssText = "display: none;";
+      setLimitReached(false);
     } else {
-      limitErrorDiv.current.style.cssText = "display: flex;";
+      setLimitReached(true);
     }
   }
 
@@ -137,7 +137,7 @@ export function TechnicalSkills() {
     addSkillsGroupBtn.current.style.cssText = "display: none;";
 
     setFormVisible(true);
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
   }
 
   function updateSkillsGroup() {
@@ -183,7 +183,7 @@ export function TechnicalSkills() {
       });
     }
 
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (skills.length - 1 === limit) {
       addSkillsGroupBtn.current.disabled = true;
@@ -249,7 +249,7 @@ export function TechnicalSkills() {
           </svg>
           <span>Add Technical Skills</span>
         </button>
-        <div className="limit-error" ref={limitErrorDiv}>
+        <div className={limitReached ? "limit-error visible" : "limit-error"}>
           <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
           <span>Skills limit reached!</span>
         </div>

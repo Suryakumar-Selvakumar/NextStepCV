@@ -26,11 +26,11 @@ export function ProjectSection() {
   const [projectLimit, setProjectLimit] = useState(4);
   const [detailLimit, setDetailLimit] = useState(5);
   const [formVisible, setFormVisible] = useState(false);
+  const [limitReached, setLimitReached] = useState(false);
 
   // DOM refs
   const addProjectBtn = useRef(null);
   const projectForm = useRef(null);
-  const limitErrorDiv = useRef(null);
   const addDetailBtn = useRef(null);
   const updateProjectBtn = useRef(null);
   const updateDetailBtn = useRef(null);
@@ -47,9 +47,9 @@ export function ProjectSection() {
   function addProject() {
     if (projects.length < projectLimit) {
       setFormVisible(true);
-      limitErrorDiv.current.style.cssText = "display: none;";
+      setLimitReached(false);
     } else {
-      limitErrorDiv.current.style.cssText = "display: flex;";
+      setLimitReached(true);
     }
 
     if (projectDetails.details.length === detailLimit) {
@@ -81,7 +81,7 @@ export function ProjectSection() {
     submitProjectBtn.current.style.cssText = "display: none;";
     updateProjectBtn.current.style.cssText = "display: flex;";
     setFormVisible(true);
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
     detailCardsUl.current.style.cssText = "border: 1px solid rgb(55, 55, 55);";
   }
 
@@ -128,7 +128,7 @@ export function ProjectSection() {
 
   function deleteProject(projectId) {
     setProjects(projects.filter((proj) => proj.id !== projectId));
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (projectDetails.id === projectId || projects.length === 1) {
       updateDetailBtn.current.style.cssText = "display: none;";
@@ -185,6 +185,7 @@ export function ProjectSection() {
       details: [],
     });
     setDetail({ id: 0, value: "" });
+    projectForm.current.reset();
   }
 
   function addDetail() {
@@ -213,7 +214,7 @@ export function ProjectSection() {
     });
     updateDetailBtn.current.style.cssText = "display: flex;";
     addDetailBtn.current.style.cssText = "display: none;";
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
   }
 
   function updateDetail() {
@@ -254,7 +255,7 @@ export function ProjectSection() {
       detailCardsUl.current.style.cssText = "border: none;";
     }
 
-    limitErrorDiv.current.style.cssText = "display: none;";
+    setLimitReached(false);
 
     if (projectDetails.details.length - 1 === detailLimit) {
       addDetailBtn.current.disabled = true;
@@ -314,8 +315,9 @@ export function ProjectSection() {
           </svg>
           <span>Add Project</span>
         </button>
-        <div className="limit-error" ref={limitErrorDiv}>
-          Project limit reached!
+        <div className={limitReached ? "limit-error visible" : "limit-error"}>
+          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <span>Project limit reached!</span>
         </div>
         <form
           className={formVisible ? "project-form" : "project-form closed"}
