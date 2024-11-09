@@ -82,5 +82,6 @@ main {
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content;
     margin-top: 3.85rem;
+    box-sizing: border-box;
   }
 }

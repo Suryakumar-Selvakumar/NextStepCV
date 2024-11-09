@@ -4,14 +4,18 @@ import { formatDate } from "./utils";
 export function Project(props) {
   const project = props.project;
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="project-card">
       <div>
         <div>
           <p>{project.projectName}</p>
-          <hr />
+          {!mediaQuery.matches && <hr />}
         </div>
-        <p>{formatDate(project.projectDate)}</p>
+        {!mediaQuery.matches && <p>{formatDate(project.projectDate)}</p>}
       </div>
       <div>
         <button

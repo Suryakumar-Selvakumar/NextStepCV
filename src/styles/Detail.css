@@ -35,3 +35,46 @@
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .detail-card {
+  }
+
+  .detail-card > div > div:first-child {
+    display: flex;
+    width: 80%;
+  }
+
+  .detail-card > div > div:first-child > span {
+    height: 1.25em;
+    overflow: hidden;
+  }
+
+  .detail-card > div {
+    justify-content: start;
+    align-items: center;
+  }
+
+  .detail-card > div > p {
+    display: block;
+  }
+
+  .detail-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "edit-r delete-r";
+  }
+
+  #edit-detail,
+  #delete-detail {
+    padding: 0;
+  }
+
+  #edit-detail {
+    grid-area: edit-r;
+  }
+
+  #delete-detail {
+    grid-area: delete-r;
+  }
+}

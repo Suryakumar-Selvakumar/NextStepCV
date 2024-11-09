@@ -19,11 +19,22 @@ export function Detail(props) {
       .map((word, i) => <span key={i}>{word} </span>);
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 768px)"
+  );
+
   return (
     <li className="detail-card">
       <div>
-        <span>{formatDetail(detail.value)}</span>
-        <div>
+        {!mediaQuery.matches ? (
+          <span>{formatDetail(detail.value)}</span>
+        ) : (
+          <div>
+            <span>{formatDetail(detail.value)}</span>
+            <p>...</p>
+          </div>
+        )}
+        <div className="detail-btns">
           <button
             type="button"
             id="delete-detail"

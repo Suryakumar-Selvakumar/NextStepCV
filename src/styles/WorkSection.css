@@ -286,4 +286,8 @@
   .work-cards {
     max-height: max-content;
   }
+
+  .work-role > div {
+    gap: 0.5rem;
+  }
 }

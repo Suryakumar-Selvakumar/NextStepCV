@@ -221,3 +221,38 @@
   margin-bottom: 1rem;
   gap: 1rem;
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .project-main {
+    max-height: 100vh;
+    padding: 0 1.25rem;
+    overflow: auto;
+  }
+
+  .project-form {
+    max-height: 1100px;
+    gap: 1.25rem;
+  }
+
+  .project-name-date {
+    flex-direction: column;
+  }
+
+  .project-name-div,
+  .project-date-div {
+    width: 100%;
+  }
+
+  .project-cards {
+    max-height: max-content;
+  }
+
+  .project-detail-btns > div > input {
+    margin-right: 0.5rem;
+  }
+
+  #update-detail {
+    padding: 0;
+    width: 150px;
+  }
+}
