@@ -183,7 +183,7 @@
   }
 }
 
-@media (min-width: 360px) and (max-width: 768px) {
+@media (min-width: 360px) and (max-width: 767px) {
   .education-gpa-start-end {
     display: flex;
     flex-direction: column;

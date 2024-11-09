@@ -4,39 +4,45 @@ import { formatDate } from "./utils";
 export function Work(props) {
   const work = props.work;
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="work-card">
       <div>
         <div>
           <p>{work.position}</p>
-          <hr />
+          {!mediaQuery.matches && <hr />}
         </div>
-        <div
-          style={{
-            justifyContent: !work.endWork && "start",
-            gap: !work.endWork && "1rem",
-          }}
-        >
-          <p>{work.company}</p>
-          <hr />
+        {!mediaQuery.matches && (
+          <div
+            style={{
+              justifyContent: !work.endWork && "start",
+              gap: !work.endWork && "1rem",
+            }}
+          >
+            <p>{work.company}</p>
+            <hr />
 
-          {work.stillWorking ? (
-            <>
+            {work.stillWorking ? (
+              <>
+                <p>{formatDate(work.startWork)}</p>
+                <hr />
+                <p>Present</p>
+              </>
+            ) : (
               <p>{formatDate(work.startWork)}</p>
-              <hr />
-              <p>Present</p>
-            </>
-          ) : (
-            <p>{formatDate(work.startWork)}</p>
-          )}
+            )}
 
-          {work.endWork && (
-            <>
-              <hr />
-              <p>{formatDate(work.endWork)}</p>{" "}
-            </>
-          )}
-        </div>
+            {work.endWork && (
+              <>
+                <hr />
+                <p>{formatDate(work.endWork)}</p>{" "}
+              </>
+            )}
+          </div>
+        )}
       </div>
       <div>
         <button

@@ -49,3 +49,42 @@
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .work-card {
+    display: flex;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: 105px;
+    flex-wrap: wrap-reverse;
+    align-items: start;
+    justify-content: center;
+    text-align: center;
+    gap: 0.25rem;
+  }
+
+  .work-card > div > div:first-of-type > p {
+    position: relative;
+    left: 2.5px;
+  }
+
+  .work-card > div:last-child {
+    display: grid;
+    grid-template-areas: "edit-edu delete-edu";
+    gap: 1.5rem;
+  }
+
+  #edit-work {
+    grid-area: edit-edu;
+  }
+  #delete-work {
+    grid-area: delete-edu;
+  }
+
+  #edit-work,
+  #delete-work {
+    position: relative;
+    padding: 0;
+    left: 2.5px;
+  }
+}

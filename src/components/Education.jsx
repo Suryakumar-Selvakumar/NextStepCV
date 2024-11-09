@@ -24,7 +24,7 @@ export function Education(props) {
   }
 
   const mediaQuery = window.matchMedia(
-    "(min-width: 360px) and (max-width: 768px)"
+    "(min-width: 360px) and (max-width: 767px)"
   );
 
   return (

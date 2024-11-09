@@ -19,11 +19,22 @@ export function Role(props) {
       .map((word, i) => <span key={i}>{word} </span>);
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 768px)"
+  );
+
   return (
     <li className="role-card">
       <div>
-        <span>{formatRole(role.value)}</span>
-        <div>
+        {!mediaQuery.matches ? (
+          <span>{formatRole(role.value)}</span>
+        ) : (
+          <div>
+            <span>{formatRole(role.value)}</span>
+            <p>...</p>
+          </div>
+        )}
+        <div className="role-btns">
           <button
             type="button"
             id="delete-role"

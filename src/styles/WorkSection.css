@@ -239,3 +239,51 @@
   margin-bottom: 1rem;
   gap: 1rem;
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .work-main {
+    max-height: 1000px;
+    display: grid;
+    grid-template-rows: repeat(2, max-content);
+    grid-template-columns: 1fr;
+    overflow: hidden;
+    transition: all 0.45s ease-in-out;
+    font-family: myFontRegular;
+    padding: 0 1.25rem;
+    box-sizing: content-box;
+    border-bottom: 1px solid var(--sidebar-border-color);
+  }
+
+  .work-main.closed {
+    max-height: 0;
+    border-bottom: 0px solid var(--sidebar-border-color);
+  }
+
+  .work-form {
+    max-height: 1100px;
+    gap: 1.25rem;
+  }
+
+  .work-company-position {
+    flex-direction: column;
+  }
+
+  .work-company-name,
+  .work-position,
+  .work-end-date {
+    width: 100%;
+  }
+
+  .work-dates {
+    flex-direction: column;
+  }
+
+  .work-company-location,
+  .work-start-date {
+    width: 100%;
+  }
+
+  .work-cards {
+    max-height: max-content;
+  }
+}

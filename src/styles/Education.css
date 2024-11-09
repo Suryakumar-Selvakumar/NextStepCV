@@ -50,7 +50,7 @@
   border-radius: 5px;
 }
 
-@media (min-width: 360px) and (max-width: 768px) {
+@media (min-width: 360px) and (max-width: 767px) {
   .education-card {
     display: flex;
     padding: 0.5rem 1rem;
@@ -63,10 +63,15 @@
     gap: 1rem;
   }
 
+  .education-card > div > div:first-of-type > p {
+    position: relative;
+    left: 2.5px;
+  }
+
   .education-card > div:last-child {
     display: grid;
     grid-template-areas: "edit-edu delete-edu";
-    gap: 1.25rem;
+    gap: 1.5rem;
   }
 
   #edit-education {
@@ -78,16 +83,8 @@
 
   #edit-education,
   #delete-education {
-    border: none;
-    outline: none;
-    background-color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: static;
-    left: 10px;
-    top: -1px;
+    position: relative;
     padding: 0;
+    left: 2.5px;
   }
 }

@@ -303,6 +303,10 @@ export function WorkSection() {
     }
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="work">
       <div
@@ -393,7 +397,9 @@ export function WorkSection() {
           <div className="work-dates">
             <div
               className="work-company-location"
-              style={{ width: workDetails.stillWorking && "50%" }}
+              style={{
+                width: workDetails.stillWorking && !mediaQuery.matches && "50%",
+              }}
             >
               <label htmlFor="place">Company location </label>
               <input
@@ -408,7 +414,9 @@ export function WorkSection() {
             </div>
             <div
               className="work-start-date"
-              style={{ width: workDetails.stillWorking && "50%" }}
+              style={{
+                width: workDetails.stillWorking && !mediaQuery.matches && "50%",
+              }}
             >
               <label htmlFor="start-work">Position start date </label>
               <input

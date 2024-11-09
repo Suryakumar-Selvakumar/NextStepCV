@@ -35,3 +35,46 @@
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
 }
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .role-card {
+  }
+
+  .role-card > div > div:first-child {
+    display: flex;
+    width: 80%;
+  }
+
+  .role-card > div > div:first-child > span {
+    height: 1.25em;
+    overflow: hidden;
+  }
+
+  .role-card > div {
+    justify-content: start;
+    align-items: center;
+  }
+
+  .role-card > div > p {
+    display: block;
+  }
+
+  .role-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "edit-r delete-r";
+  }
+
+  #edit-role,
+  #delete-role {
+    padding: 0;
+  }
+
+  #edit-role {
+    grid-area: edit-r;
+  }
+
+  #delete-role {
+    grid-area: delete-r;
+  }
+}
