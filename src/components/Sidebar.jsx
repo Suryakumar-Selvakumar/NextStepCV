@@ -5,10 +5,10 @@ import { TechnicalSkills } from "./TechnicalSkills";
 import { ProjectSection } from "./ProjectSection";
 import "../styles/Sidebar.css";
 
-export function Sidebar() {
+export function Sidebar(appData) {
   return (
     <div className="sidebar">
-      <General />
+      <General contactDetails={appData.contactDetails}/>
       <EducationSection />
       <TechnicalSkills />
       <WorkSection />
