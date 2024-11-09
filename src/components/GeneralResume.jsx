@@ -1,13 +1,23 @@
 import { useState } from "react";
 
 export function GeneralResume() {
-  const [contactDetails, setContactDetails] = useState({
-    name: "",
-    phNo: "",
-    email: "",
-    linkedIn: "",
-    gitHub: "",
-  });
+  const storedContactDetails = JSON.parse(localStorage.getItem("general"));
+
+  const [contactDetails, setContactDetails] = useState(
+    storedContactDetails
+      ? storedContactDetails
+      : {
+          name: "",
+          phNo: "",
+          email: "",
+          linkedIn: "",
+          gitHub: "",
+        }
+  );
+
+  if (JSON.stringify(contactDetails) !== JSON.stringify(storedContactDetails)) {
+    setContactDetails(storedContactDetails);
+  }
 
   return (
     <div className="general">

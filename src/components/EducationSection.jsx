@@ -135,6 +135,7 @@ export function EducationSection() {
       submitEducationBtn.current.style.cssText = "display: flex;";
       setFormVisible(false);
       educationForm.current.reset();
+      // location.reload();
     }
   }
 
@@ -169,10 +170,10 @@ export function EducationSection() {
     // Logic to add the education to the courses state
     setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
 
-    // Display the add button again
-
     // Hide the form
     setFormVisible(false);
+
+    // location.reload();
   }
 
   function handleCancel() {

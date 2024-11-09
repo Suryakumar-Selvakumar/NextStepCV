@@ -24,14 +24,7 @@ export function General() {
   const [formVisible, setFormVisible] = useState(false);
 
   // DOM Refs
-  const editGeneralDetailsBtn = useRef(null);
   const generalForm = useRef(null);
-  const dropDownSvg = useRef(null);
-  const name = useRef(null);
-  const phNo = useRef(null);
-  const email = useRef(null);
-  const linkedIn = useRef(null);
-  const gitHub = useRef(null);
 
   useEffect(() => {
     localStorage.setItem("generalMainVisible", JSON.stringify(mainVisible));
@@ -42,14 +35,7 @@ export function General() {
     e.preventDefault();
 
     // Add a formSubmitted prop to the contactDetails state
-    setContactDetails({
-      name: name.current.value,
-      phNo: phNo.current.value,
-      email: email.current.value,
-      linkedIn: linkedIn.current.value,
-      gitHub: gitHub.current.value,
-      formSubmitted: true,
-    });
+    setContactDetails({ ...contactDetails, formSubmitted: true });
 
     // Display the editDetails button on submit
 
@@ -60,20 +46,10 @@ export function General() {
   }
 
   function handleEdit() {
-    // Hide the edit button after it was pressed
-
-    // Add values to the input fields
-    name.current.value = contactDetails.name;
-    phNo.current.value = contactDetails.phNo;
-    email.current.value = contactDetails.email;
-    linkedIn.current.value = contactDetails.linkedIn;
-    gitHub.current.value = contactDetails.gitHub;
-
     // Make formSubmitted false on edit
     setContactDetails({ ...contactDetails, formSubmitted: false });
 
     // Will display the form to update the details
-
     setFormVisible(true);
   }
 
@@ -100,7 +76,6 @@ export function General() {
           General Information
         </h3>
         <svg
-          ref={dropDownSvg}
           onClick={() => {
             setMainVisible(!mainVisible);
           }}
@@ -124,7 +99,6 @@ export function General() {
               ? "edit-general-details"
               : "edit-general-details visible"
           }
-          ref={editGeneralDetailsBtn}
           onClick={() => handleEdit()}
         >
           <svg
@@ -149,32 +123,65 @@ export function General() {
             <input
               type="text"
               id="name"
-              ref={name}
+              value={contactDetails.name}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, name: e.target.value })
+              }
               autoComplete="on"
               required
             />
           </div>
           <div className="general-ph-no">
             <label htmlFor="ph-no">Phone Number </label>
-            <input type="tel" id="ph-no" ref={phNo} required />
+            <input
+              type="tel"
+              id="ph-no"
+              value={contactDetails.phNo}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, phNo: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="general-email">
             <label htmlFor="email">Email </label>
             <input
               type="email"
               id="email"
-              ref={email}
+              value={contactDetails.email}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, email: e.target.value })
+              }
               autoComplete="on"
               required
             />
           </div>
           <div className="general-linked-in">
             <label htmlFor="linked-in">LinkedIn </label>
-            <input type="text" id="linked-in" ref={linkedIn} required />
+            <input
+              type="text"
+              id="linked-in"
+              value={contactDetails.linkedIn}
+              onChange={(e) =>
+                setContactDetails({
+                  ...contactDetails,
+                  linkedIn: e.target.value,
+                })
+              }
+              required
+            />
           </div>
           <div className="general-github">
             <label htmlFor="github">GitHub </label>
-            <input type="text" id="github" ref={gitHub} required />
+            <input
+              type="text"
+              id="github"
+              value={contactDetails.gitHub}
+              onChange={(e) =>
+                setContactDetails({ ...contactDetails, gitHub: e.target.value })
+              }
+              required
+            />
           </div>
           <div className="general-form-btns">
             <button

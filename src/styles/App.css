@@ -81,7 +81,12 @@ main {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: min-content min-content;
-    margin-top: 3.85rem;
     box-sizing: border-box;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 767px) {
+  main {
+    margin-top: 3.85rem;
   }
 }

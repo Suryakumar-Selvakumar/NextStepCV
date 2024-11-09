@@ -11,6 +11,11 @@
   width: calc(100% - 12rem);
   aspect-ratio: 1/1.414;
   box-shadow: 0px 0px 25px rgb(171, 171, 171);
+  padding: 0.5in;
+  font-family: Georgia;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 @media (min-width: 360px) and (max-width: 1440px) {

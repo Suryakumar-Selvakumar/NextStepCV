@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function TechnicalSkills() {
+export function TechnicalSkillsResume() {
   const [skills, setSkills] = useState([]);
 
   return (

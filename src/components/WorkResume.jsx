@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function Work() {
+export function WorkResume() {
   const [workDetails, setWorkDetails] = useState({
     company: "",
     place: "",

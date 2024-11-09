@@ -1,37 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function EducationResume() {
-  const [educationDetails, setEducationDetails] = useState({
-    school: "",
-    placeStudy: "",
-    titleStudy: "",
-    startDateStudy: "",
-    endDateStudy: "",
-    gpa: 0,
-    completedStudy: true,
-  });
+  const storedCourses = JSON.parse(localStorage.getItem("courses"));
+  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
+
+  useEffect(() => {
+    const storedCourses = JSON.parse(localStorage.getItem("courses"));
+    if (storedCourses) {
+      setCourses(storedCourses);
+    }
+  }, []);
 
   return (
     <div className="education-resume">
-      <div>
-        <p id="school-education">{educationDetails.school}</p>
-        <p id="place-study-education">{educationDetails.placeStudy}</p>
-      </div>
-      <div>
-        <p id="title-gpa-education">
-          {educationDetails.titleStudy} <b>(GPA: {educationDetails.gpa}/4.0)</b>
-        </p>
-        {educationDetails.startDateStudy ? (
-          <p id="date-study-education">
-            {educationDetails.startDateStudy} &#8210;{" "}
-            {educationDetails.endDateStudy}
-          </p>
-        ) : (
-          <p id="date-study-education">
-            Expected Graduation Year: {educationDetails.endDateStudy}
-          </p>
-        )}
-      </div>
+      {courses.map((edu) => {
+        return (
+          <div key={edu.id}>
+            <div>
+              <p id="school-education">{edu.school}</p>
+              <p id="place-study-education">{edu.placeStudy}</p>
+            </div>
+            <div>
+              <p id="title-gpa-education">
+                {edu.titleStudy} <b>(GPA: {edu.gpa}/4.0)</b>
+              </p>
+              {edu.startDateStudy ? (
+                <p id="date-study-education">
+                  {edu.startDateStudy} &#8210; {edu.endDateStudy}
+                </p>
+              ) : (
+                <p id="date-study-education">
+                  Expected Graduation Year: {edu.endDateStudy}
+                </p>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
