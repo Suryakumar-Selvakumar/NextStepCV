@@ -26,7 +26,7 @@ export function General({ appData, setAppData }) {
 
   useEffect(() => {
     localStorage.setItem("generalMainVisible", JSON.stringify(mainVisible));
-  }, [mainVisible]);
+  }, [mainVisible, appData]);
 
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload
@@ -43,6 +43,18 @@ export function General({ appData, setAppData }) {
   function handleEdit() {
     // Will display the form to update the details
     setFormVisible(true);
+    setContactDetails(
+      Object.keys(appData.contactDetails).length > 0
+        ? appData.contactDetails
+        : {
+            name: "",
+            phNo: "",
+            email: "",
+            linkedIn: "",
+            gitHub: "",
+            formSubmitted: false,
+          }
+    );
   }
 
   function handleCancel() {
@@ -57,6 +69,18 @@ export function General({ appData, setAppData }) {
       gitHub: appData.contactDetails.gitHub,
     });
   }
+
+  const appContactDetails =
+    Object.keys(appData.contactDetails).length > 0
+      ? appData.contactDetails
+      : {
+          name: "",
+          phNo: "",
+          email: "",
+          linkedIn: "",
+          gitHub: "",
+          formSubmitted: false,
+        };
 
   return (
     <div className="general">
@@ -194,13 +218,13 @@ export function General({ appData, setAppData }) {
             </button>
           </div>
         </form>
-        {!formVisible && contactDetails.name != "" && (
+        {!formVisible && appContactDetails.name != "" && (
           <div className="contact-details-card">
-            {contactDetails.name && <p>{contactDetails.name}</p>}
-            {contactDetails.phNo && <p>{contactDetails.phNo}</p>}
-            {contactDetails.email && <p>{contactDetails.email}</p>}
-            {contactDetails.linkedIn && <p>{contactDetails.linkedIn}</p>}
-            {contactDetails.gitHub && <p>{contactDetails.gitHub}</p>}
+            {appContactDetails.name && <p>{appContactDetails.name}</p>}
+            {appContactDetails.phNo && <p>{appContactDetails.phNo}</p>}
+            {appContactDetails.email && <p>{appContactDetails.email}</p>}
+            {appContactDetails.linkedIn && <p>{appContactDetails.linkedIn}</p>}
+            {appContactDetails.gitHub && <p>{appContactDetails.gitHub}</p>}
           </div>
         )}
       </div>

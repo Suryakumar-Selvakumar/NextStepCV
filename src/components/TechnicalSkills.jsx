@@ -30,7 +30,8 @@ export function TechnicalSkills({ appData, setAppData }) {
 
   useEffect(() => {
     localStorage.setItem("skillsMainVisible", JSON.stringify(mainVisible));
-  }, [mainVisible]);
+    setSkills(appData.skills);
+  }, [mainVisible, appData]);
 
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload

@@ -35,7 +35,8 @@ export function EducationSection({ appData, setAppData }) {
 
   useEffect(() => {
     localStorage.setItem("coursesMainVisible", JSON.stringify(mainVisible));
-  }, [mainVisible]);
+    setCourses(appData.courses);
+  }, [mainVisible, appData]);
 
   function addEducation() {
     educationForm.current.reset();
@@ -60,14 +61,11 @@ export function EducationSection({ appData, setAppData }) {
   }
 
   function editEducation(courseId) {
-    // Hide the add education button
-
     // Update the styles of the submit and update buttons
     submitEducationBtn.current.style.cssText = "display: none;";
     updateEducationBtn.current.style.cssText = "display: flex;";
 
     // Display the form to allow editing of details
-
     setFormVisible(true);
 
     // Hide the limit reached error
@@ -135,7 +133,6 @@ export function EducationSection({ appData, setAppData }) {
       submitEducationBtn.current.style.cssText = "display: flex;";
       setFormVisible(false);
       educationForm.current.reset();
-      // location.reload();
     }
   }
 
@@ -460,12 +457,12 @@ export function EducationSection({ appData, setAppData }) {
             </button>
           </div>
         </form>
-        <div
-          className="education-cards"
-          style={{ display: courses.length ? "flex" : "none" }}
-        >
-          {courses &&
-            courses.map((exp) => (
+        {courses && (
+          <div
+            className="education-cards"
+            style={{ display: courses.length ? "flex" : "none" }}
+          >
+            {courses.map((exp) => (
               <Education
                 key={exp.id}
                 education={exp}
@@ -473,7 +470,8 @@ export function EducationSection({ appData, setAppData }) {
                 deleteEducation={deleteEducation}
               />
             ))}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

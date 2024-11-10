@@ -42,7 +42,8 @@ export function WorkSection({ appData, setAppData }) {
 
   useEffect(() => {
     localStorage.setItem("experiencesMainVisible", JSON.stringify(mainVisible));
-  }, [experiences, mainVisible]);
+    setExperiences(appData.experiences);
+  }, [mainVisible, appData]);
 
   function addWork() {
     updateWorkBtn.current.style.cssText = "display: none;";

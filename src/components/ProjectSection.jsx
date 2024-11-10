@@ -39,7 +39,8 @@ export function ProjectSection({ appData, setAppData }) {
 
   useEffect(() => {
     localStorage.setItem("projectsMainVisible", JSON.stringify(mainVisible));
-  }, [projects, mainVisible]);
+    setProjects(appData.projects);
+  }, [mainVisible, appData]);
 
   function addProject() {
     if (projects.length < projectLimit) {
