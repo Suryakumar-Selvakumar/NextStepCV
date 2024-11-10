@@ -1,16 +1,17 @@
 import { useState } from "react";
 
 export function GeneralResume({ appData }) {
-  const contactDetails = appData.contactDetails
-    ? appData.contactDetails
-    : {
-        name: "",
-        phNo: "",
-        email: "",
-        linkedIn: "",
-        gitHub: "",
-        formSubmitted: false,
-      };
+  const contactDetails =
+    Object.keys(appData.contactDetails).length > 0
+      ? appData.contactDetails
+      : {
+          name: "",
+          phNo: "",
+          email: "",
+          linkedIn: "",
+          gitHub: "",
+          formSubmitted: false,
+        };
 
   return (
     <div className="general">

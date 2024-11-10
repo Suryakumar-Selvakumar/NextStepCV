@@ -10,8 +10,8 @@ export function Resume({ appData }) {
     <div className="resume-container">
       <div className="resume">
         <GeneralResume appData={appData} />
-        {/* <EducationResume />
-        <TechnicalSkillsResume />
+        <EducationResume appData={appData} />
+        {/* <TechnicalSkillsResume />
         <WorkResume />
         <ProjectResume /> */}
       </div>

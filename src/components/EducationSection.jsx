@@ -2,12 +2,13 @@ import { Education } from "./Education";
 import { useEffect, useState, useRef } from "react";
 import "../styles/EducationSection.css";
 
-export function EducationSection() {
-  const storedCourses = JSON.parse(localStorage.getItem("courses"));
+export function EducationSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
     localStorage.getItem("coursesMainVisible")
   );
-  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
+  const [courses, setCourses] = useState(
+    appData.courses.length ? appData.courses : []
+  );
   const [educationDetails, setEducationDetails] = useState({
     id: 0,
     school: "",
@@ -33,10 +34,8 @@ export function EducationSection() {
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
-    if (courses) localStorage.setItem("courses", JSON.stringify(courses));
-
     localStorage.setItem("coursesMainVisible", JSON.stringify(mainVisible));
-  }, [courses, mainVisible]);
+  }, [mainVisible]);
 
   function addEducation() {
     educationForm.current.reset();
@@ -119,6 +118,7 @@ export function EducationSection() {
       });
 
       setCourses(updatedCourses);
+      setAppData({ ...appData, courses: updatedCourses });
       setEducationDetails({
         id: 0,
         school: "",
@@ -140,8 +140,9 @@ export function EducationSection() {
   }
 
   function deleteEducation(courseId) {
-    setCourses(courses.filter((exp) => exp.id !== courseId));
-
+    const updatedCourses = courses.filter((exp) => exp.id !== courseId);
+    setCourses(updatedCourses);
+    setAppData({ ...appData, courses: updatedCourses });
     setLimitReached(false);
 
     if (educationDetails.id === courseId || courses.length === 1) {
@@ -168,12 +169,15 @@ export function EducationSection() {
     e.preventDefault();
 
     // Logic to add the education to the courses state
-    setCourses([...courses, { ...educationDetails, id: crypto.randomUUID() }]);
+    const updatedCourses = [
+      ...courses,
+      { ...educationDetails, id: crypto.randomUUID() },
+    ];
+    setCourses(updatedCourses);
+    setAppData({ ...appData, courses: updatedCourses });
 
     // Hide the form
     setFormVisible(false);
-
-    // location.reload();
   }
 
   function handleCancel() {

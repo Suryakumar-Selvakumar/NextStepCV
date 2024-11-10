@@ -1,15 +1,7 @@
 import { useEffect, useState } from "react";
 
-export function EducationResume() {
-  const storedCourses = JSON.parse(localStorage.getItem("courses"));
-  const [courses, setCourses] = useState(storedCourses ? storedCourses : []);
-
-  useEffect(() => {
-    const storedCourses = JSON.parse(localStorage.getItem("courses"));
-    if (storedCourses) {
-      setCourses(storedCourses);
-    }
-  }, []);
+export function EducationResume({ appData }) {
+  const courses = appData.courses.length ? appData.courses : [];
 
   return (
     <div className="education-resume">
