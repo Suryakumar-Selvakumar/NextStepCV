@@ -5,14 +5,14 @@ import { TechnicalSkills } from "./TechnicalSkills";
 import { ProjectSection } from "./ProjectSection";
 import "../styles/Sidebar.css";
 
-export function Sidebar(appData) {
+export function Sidebar({ appData, setAppData }) {
   return (
     <div className="sidebar">
-      <General contactDetails={appData.contactDetails}/>
-      <EducationSection />
-      <TechnicalSkills />
-      <WorkSection />
-      <ProjectSection />
+      <General appData={appData} setAppData={setAppData} />
+      <EducationSection appData={appData} setAppData={setAppData} />
+      <TechnicalSkills appData={appData} setAppData={setAppData} />
+      <WorkSection appData={appData} setAppData={setAppData} />
+      <ProjectSection appData={appData} setAppData={setAppData} />
     </div>
   );
 }

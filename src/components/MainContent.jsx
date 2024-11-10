@@ -1,6 +1,6 @@
 import { Sidebar } from "./Sidebar";
 import { Resume } from "./Resume";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function MainContent() {
   const storedAppData = JSON.parse(localStorage.getItem("app-data"));
@@ -8,14 +8,7 @@ export function MainContent() {
     storedAppData
       ? storedAppData
       : {
-          contactDetails: {
-            name: "",
-            phNo: "",
-            email: "",
-            linkedIn: "",
-            gitHub: "",
-            formSubmitted: false,
-          },
+          contactDetails: {},
           courses: [],
           skills: [],
           experiences: [],
@@ -23,9 +16,13 @@ export function MainContent() {
         }
   );
 
+  useEffect(() => {
+    localStorage.setItem("app-data", JSON.stringify(appData));
+  }, [appData]);
+
   return (
     <main>
-      <Sidebar appData={appData} />
+      <Sidebar appData={appData} setAppData={setAppData} />
       <Resume appData={appData} />
     </main>
   );

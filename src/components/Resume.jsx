@@ -5,13 +5,13 @@ import { TechnicalSkillsResume } from "./TechnicalSkillsResume";
 import { WorkResume } from "./WorkResume";
 import { ProjectResume } from "./ProjectResume";
 
-export function Resume() {
+export function Resume({ appData }) {
   return (
     <div className="resume-container">
       <div className="resume">
-        <GeneralResume />
-        <EducationResume />
-        {/* <TechnicalSkillsResume />
+        <GeneralResume appData={appData} />
+        {/* <EducationResume />
+        <TechnicalSkillsResume />
         <WorkResume />
         <ProjectResume /> */}
       </div>

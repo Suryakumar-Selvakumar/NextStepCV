@@ -1,21 +1,19 @@
 import { useEffect, useState, useRef } from "react";
 import "../styles/General.css";
 
-export function General() {
-  const updatedContactDetails = JSON.parse(localStorage.getItem("general"));
+export function General({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
     localStorage.getItem("generalMainVisible")
   );
   const [contactDetails, setContactDetails] = useState(
-    updatedContactDetails
-      ? updatedContactDetails
+    Object.keys(appData.contactDetails).length > 0
+      ? appData.contactDetails
       : {
           name: "",
           phNo: "",
           email: "",
           linkedIn: "",
           gitHub: "",
-          formSubmitted: false,
         }
   );
   const [mainVisible, setMainVisible] = useState(
@@ -35,20 +33,14 @@ export function General() {
     e.preventDefault();
 
     // Add a formSubmitted prop to the contactDetails state
-    setContactDetails({ ...contactDetails, formSubmitted: true });
-
-    // Display the editDetails button on submit
+    setContactDetails({ ...contactDetails });
+    setAppData({ ...appData, contactDetails: contactDetails });
 
     // Will hide the form
     setFormVisible(false);
-
-    localStorage.setItem("general", JSON.stringify(contactDetails));
   }
 
   function handleEdit() {
-    // Make formSubmitted false on edit
-    setContactDetails({ ...contactDetails, formSubmitted: false });
-
     // Will display the form to update the details
     setFormVisible(true);
   }
@@ -57,7 +49,13 @@ export function General() {
     generalForm.current.reset();
     setFormVisible(false);
 
-    setContactDetails({ ...contactDetails, formSubmitted: true });
+    setContactDetails({
+      name: appData.contactDetails.name,
+      phNo: appData.contactDetails.phNo,
+      email: appData.contactDetails.email,
+      linkedIn: appData.contactDetails.linkedIn,
+      gitHub: appData.contactDetails.gitHub,
+    });
   }
 
   return (
@@ -196,8 +194,7 @@ export function General() {
             </button>
           </div>
         </form>
-
-        {contactDetails.formSubmitted && (
+        {!formVisible && contactDetails.name != "" && (
           <div className="contact-details-card">
             {contactDetails.name && <p>{contactDetails.name}</p>}
             {contactDetails.phNo && <p>{contactDetails.phNo}</p>}

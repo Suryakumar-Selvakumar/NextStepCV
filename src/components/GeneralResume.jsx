@@ -1,23 +1,16 @@
 import { useState } from "react";
 
-export function GeneralResume() {
-  const storedContactDetails = JSON.parse(localStorage.getItem("general"));
-
-  const [contactDetails, setContactDetails] = useState(
-    storedContactDetails
-      ? storedContactDetails
-      : {
-          name: "",
-          phNo: "",
-          email: "",
-          linkedIn: "",
-          gitHub: "",
-        }
-  );
-
-  if (JSON.stringify(contactDetails) !== JSON.stringify(storedContactDetails)) {
-    setContactDetails(storedContactDetails);
-  }
+export function GeneralResume({ appData }) {
+  const contactDetails = appData.contactDetails
+    ? appData.contactDetails
+    : {
+        name: "",
+        phNo: "",
+        email: "",
+        linkedIn: "",
+        gitHub: "",
+        formSubmitted: false,
+      };
 
   return (
     <div className="general">
