@@ -119,6 +119,7 @@ header {
 .reset-modal-buttons {
   display: flex;
   gap: 1rem;
+  font-size: 1.75rem;
 }
 
 #okay-reset,
@@ -126,6 +127,7 @@ header {
   padding: 0 1.5rem;
   border-radius: 5px;
   cursor: pointer;
+  width: 150px;
 }
 
 #cancel-reset {

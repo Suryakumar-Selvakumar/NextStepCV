@@ -194,7 +194,6 @@ export function Header({ appData, setAppData }) {
         },
       ],
     });
-    // location.reload();
   }
 
   function clearResume() {
@@ -213,6 +212,13 @@ export function Header({ appData, setAppData }) {
     setView(false);
     setTimeout(() => {
       modalContainerDiv.current.style.cssText = "visibility: hidden";
+      setAppData({
+        contactDetails: {},
+        courses: [],
+        skills: [],
+        experiences: [],
+        projects: [],
+      });
     }, 500);
   }
 
