@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-export function TechnicalSkillsResume() {
-  const [skills, setSkills] = useState([]);
+export function TechnicalSkillsResume({ appData }) {
+  const skills = appData.skills.length ? appData.skills : [];
 
   return (
     <div className="technical-skills-resume">

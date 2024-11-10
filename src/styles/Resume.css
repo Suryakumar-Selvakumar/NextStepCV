@@ -5,6 +5,7 @@
   align-items: center;
   height: 100%;
   padding: 4rem 0;
+  font-family: Georgia, serif;
 }
 
 .resume {
@@ -12,7 +13,7 @@
   aspect-ratio: 1/1.414;
   box-shadow: 0px 0px 25px rgb(171, 171, 171);
   padding: 0.5in;
-  font-family: Georgia;
+  
   display: flex;
   flex-direction: column;
   gap: 2rem;

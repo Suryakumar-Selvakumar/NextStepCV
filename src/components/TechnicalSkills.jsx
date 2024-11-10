@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { SkillsGroup } from "./SkillsGroup";
 import "../styles/TechnicalSkills.css";
 
-export function TechnicalSkills() {
-  const storedSkills = JSON.parse(localStorage.getItem("skills"));
+export function TechnicalSkills({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
     localStorage.getItem("skillsMainVisible")
   );
-  const [skills, setSkills] = useState(storedSkills ? storedSkills : []);
+  const [skills, setSkills] = useState(
+    appData.skills.length ? appData.skills : []
+  );
   const [skillsGroup, setSkillsGroup] = useState({
     id: 0,
     skillsType: "",
@@ -28,31 +29,26 @@ export function TechnicalSkills() {
   const dropDownSvg = useRef(null);
 
   useEffect(() => {
-    if (skills) localStorage.setItem("skills", JSON.stringify(skills));
-
     localStorage.setItem("skillsMainVisible", JSON.stringify(mainVisible));
-  }, [skills, mainVisible]);
+  }, [mainVisible]);
 
   function handleSubmit(e) {
     // Prevent form submission to avoid page reload
     e.preventDefault();
+    technicalSkillsForm.current.reset();
 
-    if (skills.length >= 1) {
-      // Hide the form
-      setFormVisible(false);
+    // Hide the form
+    setFormVisible(false);
 
-      // Display the Add Technical Skills button
+    updateSkillsGroupBtn.current.style.cssText = "display: none;";
+    addSkillsGroupBtn.current.style.cssText = "display: flex;";
 
-      updateSkillsGroupBtn.current.style.cssText = "display: none;";
-      addSkillsGroupBtn.current.style.cssText = "display: flex;";
-
-      // Reset skillsGroup
-      setSkillsGroup({
-        id: 0,
-        skillsType: "",
-        skillsList: "",
-      });
-    }
+    // Reset skillsGroup
+    setSkillsGroup({
+      id: 0,
+      skillsType: "",
+      skillsList: "",
+    });
   }
 
   function handleCancel() {
@@ -75,7 +71,6 @@ export function TechnicalSkills() {
   function addTechnicalSkills() {
     if (skills.length < limit) {
       setFormVisible(true);
-
       setLimitReached(false);
     } else {
       setLimitReached(true);
@@ -88,14 +83,16 @@ export function TechnicalSkills() {
       skillsGroup.skillsType !== "" &&
       skillsGroup.skillsList !== ""
     ) {
-      setSkills([
+      const updatedSkills = [
         ...skills,
         {
           id: crypto.randomUUID(),
           skillsType: skillsGroup.skillsType,
           skillsList: skillsGroup.skillsList,
         },
-      ]);
+      ];
+      setSkills(updatedSkills);
+      setAppData({ ...appData, skills: updatedSkills });
     }
 
     if (skillsGroup.skillsType === "" && skillsGroup.skillsList !== "") {
@@ -154,6 +151,7 @@ export function TechnicalSkills() {
         }
       });
       setSkills(updatedSkills);
+      setAppData({ ...appData, skills: updatedSkills });
       setSkillsGroup({
         id: 0,
         skillsType: "",
@@ -171,7 +169,9 @@ export function TechnicalSkills() {
   }
 
   function deleteSkillsGroup(skillsGroupId) {
-    setSkills(skills.filter((skill) => skill.id !== skillsGroupId));
+    const updatedSkills = skills.filter((skill) => skill.id !== skillsGroupId);
+    setSkills(updatedSkills);
+    setAppData({ ...appData, skills: updatedSkills });
 
     if (skillsGroup.id === skillsGroupId || skills.length === 1) {
       updateSkillsGroupBtn.current.style.cssText = "display: none;";

@@ -11,8 +11,8 @@ export function Resume({ appData }) {
       <div className="resume">
         <GeneralResume appData={appData} />
         <EducationResume appData={appData} />
-        {/* <TechnicalSkillsResume />
-        <WorkResume />
+        <TechnicalSkillsResume appData={appData} />
+        {/* <WorkResume />
         <ProjectResume /> */}
       </div>
     </div>
