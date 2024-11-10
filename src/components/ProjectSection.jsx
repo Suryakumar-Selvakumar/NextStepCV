@@ -4,13 +4,12 @@ import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
 import { returnToday } from "./utils";
 
-export function ProjectSection() {
-  const storedProjects = JSON.parse(localStorage.getItem("projects"));
+export function ProjectSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
     localStorage.getItem("projectsMainVisible")
   );
   const [projects, setProjects] = useState(
-    storedProjects ? storedProjects : []
+    appData.projects.length ? appData.projects : []
   );
   const [projectDetails, setProjectDetails] = useState({
     id: 0,
@@ -39,8 +38,6 @@ export function ProjectSection() {
   const detailCardsUl = useRef(null);
 
   useEffect(() => {
-    if (projects) localStorage.setItem("projects", JSON.stringify(projects));
-
     localStorage.setItem("projectsMainVisible", JSON.stringify(mainVisible));
   }, [projects, mainVisible]);
 
@@ -105,6 +102,7 @@ export function ProjectSection() {
         }
       });
       setProjects(updatedProjects);
+      setAppData({ ...appData, projects: updatedProjects });
       setProjectDetails({
         id: 0,
         projectName: "",
@@ -127,7 +125,10 @@ export function ProjectSection() {
   }
 
   function deleteProject(projectId) {
-    setProjects(projects.filter((proj) => proj.id !== projectId));
+    const updatedProjects = projects.filter((proj) => proj.id !== projectId);
+    setProjects(updatedProjects);
+    setAppData({ ...appData, projects: updatedProjects });
+
     setLimitReached(false);
 
     if (projectDetails.id === projectId || projects.length === 1) {
@@ -155,7 +156,12 @@ export function ProjectSection() {
     e.preventDefault();
 
     // Logic to add work to the experiences state
-    setProjects([...projects, { ...projectDetails, id: crypto.randomUUID() }]);
+    const updatedProjects = [
+      ...projects,
+      { ...projectDetails, id: crypto.randomUUID() },
+    ];
+    setProjects(updatedProjects);
+    setAppData({ ...appData, projects: updatedProjects });
 
     // Hide the form
     setFormVisible(false);

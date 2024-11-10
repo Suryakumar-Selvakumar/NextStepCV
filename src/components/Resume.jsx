@@ -13,7 +13,7 @@ export function Resume({ appData }) {
         <EducationResume appData={appData} />
         <TechnicalSkillsResume appData={appData} />
         <WorkResume appData={appData} />
-        {/* <ProjectResume /> */}
+        <ProjectResume appData={appData} />
       </div>
     </div>
   );
