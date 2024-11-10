@@ -1,14 +1,7 @@
 import { useState } from "react";
 
-export function WorkResume() {
-  const [workDetails, setWorkDetails] = useState({
-    company: "",
-    place: "",
-    position: "",
-    startWork: "",
-    endWork: "",
-    roles: [],
-  });
+export function WorkResume({ appData }) {
+  const experiences = appData.experiences.length ? appData.experiences : [];
 
   function returnToday() {
     let today = new Date();
@@ -19,35 +12,38 @@ export function WorkResume() {
     return today;
   }
 
-  function renderEndDate() {
+  function renderEndDate(work) {
     const today = returnToday();
-    if (workDetails.endWork >= today) {
+    if (work.endWork >= today) {
       return "Present";
     } else {
-      return workDetails.endWork;
+      return work.endWork;
     }
   }
 
   return (
     <div className="work-resume">
-      <div>
-        <p id="company-work">{workDetails.company}</p>
-        <p id="place-work">{workDetails.place}</p>
-      </div>
-      <div>
-        <p id="position-work">{workDetails.position}</p>
-        <p id="start-end-date">
-          {workDetails.startWork} &#8210; {renderEndDate()}
-        </p>
-      </div>
-      <ul className="roles-resume">
-        {workDetails.roles.map((role) => (
-          <li key={role.id}>{role.value}</li>
-        ))}
-      </ul>
-      <button type="button" onClick={() => handleEdit()}>
-        Edit
-      </button>
+      {experiences.map((work) => {
+        return (
+          <div key={work.id}>
+            <div>
+              <p id="company-work">{work.company}</p>
+              <p id="place-work">{work.place}</p>
+            </div>
+            <div>
+              <p id="position-work">{work.position}</p>
+              <p id="start-end-date">
+                {work.startWork} &#8210; {renderEndDate(work)}
+              </p>
+            </div>
+            <ul className="roles-resume">
+              {work.roles.map((role) => (
+                <li key={role.id}>{role.value}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      })}
     </div>
   );
 }

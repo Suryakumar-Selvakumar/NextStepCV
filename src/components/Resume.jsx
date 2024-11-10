@@ -12,8 +12,8 @@ export function Resume({ appData }) {
         <GeneralResume appData={appData} />
         <EducationResume appData={appData} />
         <TechnicalSkillsResume appData={appData} />
-        {/* <WorkResume />
-        <ProjectResume /> */}
+        <WorkResume appData={appData} />
+        {/* <ProjectResume /> */}
       </div>
     </div>
   );

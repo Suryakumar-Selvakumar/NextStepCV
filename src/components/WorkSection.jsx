@@ -4,13 +4,12 @@ import { Role } from "./Role";
 import "../styles/WorkSection.css";
 import { returnToday } from "./utils";
 
-export function WorkSection() {
-  const storedExperiences = JSON.parse(localStorage.getItem("experiences"));
+export function WorkSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
     localStorage.getItem("experiencesMainVisible")
   );
   const [experiences, setExperiences] = useState(
-    storedExperiences ? storedExperiences : []
+    appData.experiences.length ? appData.experiences : []
   );
   const [workDetails, setWorkDetails] = useState({
     id: 0,
@@ -42,9 +41,6 @@ export function WorkSection() {
   const roleCardsUl = useRef(null);
 
   useEffect(() => {
-    if (experiences)
-      localStorage.setItem("experiences", JSON.stringify(experiences));
-
     localStorage.setItem("experiencesMainVisible", JSON.stringify(mainVisible));
   }, [experiences, mainVisible]);
 
@@ -130,6 +126,7 @@ export function WorkSection() {
         }
       });
       setExperiences(updatedExperiences);
+      setAppData({ ...appData, experiences: updatedExperiences });
       setWorkDetails({
         id: 0,
         company: "",
@@ -155,7 +152,9 @@ export function WorkSection() {
   }
 
   function deleteWork(workId) {
-    setExperiences(experiences.filter((exp) => exp.id !== workId));
+    const updatedExperiences = experiences.filter((exp) => exp.id !== workId);
+    setExperiences(updatedExperiences);
+    setAppData({ ...appData, experiences: updatedExperiences });
     setLimitReached(false);
 
     if (workDetails.id === workId || experiences.length === 1) {
@@ -185,10 +184,12 @@ export function WorkSection() {
     e.preventDefault();
 
     // Logic to add work to the experiences state
-    setExperiences([
+    const updatedExperiences = [
       ...experiences,
       { ...workDetails, id: crypto.randomUUID() },
-    ]);
+    ];
+    setExperiences(updatedExperiences);
+    setAppData({ ...appData, experiences: updatedExperiences });
 
     // Hide the form
     setFormVisible(false);
