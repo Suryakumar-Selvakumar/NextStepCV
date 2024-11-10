@@ -12,7 +12,7 @@ export function Header({ appData, setAppData }) {
         name: "John Smith",
         phNo: "123-456-7890",
         email: "JohnSmith@fakeemail.com",
-        linkedIn: "www.linkedin.com/in/John-Smith-fake/",
+        linkedIn: "linkedin.com/in/John-Smith-fake/",
         gitHub: "github.com/john-smith-fake",
         formSubmitted: true,
       },

@@ -76,7 +76,7 @@ main {
   margin-top: 4rem;
 }
 
-@media (min-width: 360px) and (max-width: 1440px) {
+@media (min-width: 360px) and (max-width: 1700px) {
   main {
     display: grid;
     grid-template-columns: 1fr;
