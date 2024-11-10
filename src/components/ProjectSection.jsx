@@ -43,6 +43,14 @@ export function ProjectSection({ appData, setAppData }) {
 
   function addProject() {
     if (projects.length < projectLimit) {
+      projectForm.current.reset();
+      setProjectDetails({
+        id: 0,
+        projectName: "",
+        techStack: "",
+        projectDate: "",
+        details: [],
+      });
       setFormVisible(true);
       setLimitReached(false);
     } else {
@@ -329,6 +337,9 @@ export function ProjectSection({ appData, setAppData }) {
           className={formVisible ? "project-form" : "project-form closed"}
           ref={projectForm}
           onSubmit={(e) => handleSubmit(e)}
+          style={{
+            paddingBottom: !projects.length && formVisible ? "1rem" : 0,
+          }}
         >
           <div className="project-name-date">
             <div className="project-name-div">

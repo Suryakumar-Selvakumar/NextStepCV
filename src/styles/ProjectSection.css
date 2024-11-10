@@ -71,6 +71,7 @@
 .project-form.closed {
   max-height: 0;
   margin: 0;
+  padding: 0;
 }
 
 .project-name-div,

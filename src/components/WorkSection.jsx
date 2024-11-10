@@ -367,6 +367,9 @@ export function WorkSection({ appData, setAppData }) {
           className={formVisible ? "work-form" : "work-form closed"}
           ref={workForm}
           onSubmit={(e) => handleSubmit(e)}
+          style={{
+            paddingBottom: !experiences.length && formVisible ? "1rem" : 0,
+          }}
         >
           <div className="work-company-position">
             <div className="work-company-name">

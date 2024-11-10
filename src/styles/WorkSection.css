@@ -63,7 +63,7 @@
   transition: all 0.45s ease;
   overflow: hidden;
   display: flex;
-  max-height: 800px;
+  max-height: 825px;
   position: relative;
   top: -5px;
 }
@@ -71,6 +71,7 @@
 .work-form.closed {
   max-height: 0;
   margin: 0;
+  padding: 0;
 }
 
 .work-company-name,

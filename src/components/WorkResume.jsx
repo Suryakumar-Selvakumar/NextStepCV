@@ -14,7 +14,7 @@ export function WorkResume({ appData }) {
 
   function renderEndDate(work) {
     const today = returnToday();
-    if (work.endWork >= today) {
+    if (work.endWork >= today && work.stillWorking) {
       return "Present";
     } else {
       return work.endWork;
