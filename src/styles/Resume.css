@@ -70,6 +70,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 12pt;
+  gap: 9pt;
 }
 
 .education-school-place {
@@ -102,7 +103,7 @@
 .technical-skills-resume {
   display: flex;
   flex-direction: column;
-  gap: 6pt;
+  gap: 3pt;
 }
 
 .skills-container {
@@ -131,6 +132,10 @@
 .work-company-place {
   display: flex;
   justify-content: space-between;
+}
+
+#place-work {
+  font-style: italic;
 }
 
 /* PROJECTS */

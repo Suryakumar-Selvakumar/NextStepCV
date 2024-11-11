@@ -7,130 +7,79 @@ import ReactPDF, {
   StyleSheet,
   Link,
 } from "@react-pdf/renderer";
+import { formatDate } from "./utils";
 
 const styles = StyleSheet.create({
   sectionHeading: {
-    fontSize: "15pt",
+    fontSize: "12pt",
     fontWeight: "bold",
     borderBottom: "1px solid black",
   },
 
-  nameGeneral: {
-    fontSize: "30pt",
-  },
-
-  emailResume: {
-    flex: "flex",
+  divStyles: {
+    display: "flex",
+    justifyContent: "space-between",
     flexDirection: "row",
-    gap: "3pt",
   },
 
-  linkedInResume: {
-    flex: "flex",
-    flexDirection: "row",
-    gap: "3pt",
+  boldStyles: {
+    fontFamily: "Times-Bold",
   },
 
-  educationResume: {
-    flex: "flex",
+  italicStyles: {
+    fontFamily: "Times-Italic",
+  },
+
+  boldItalicStyles: {
+    fontFamily: "Times-BoldItalic",
+  },
+
+  sectionResume: {
+    display: "flex",
     flexDirection: "column",
     gap: "3pt",
-  },
-
-  educationContainer: {
-    flex: "flex",
-    flexDirection: "column",
-    padding: "0 12pt",
-  },
-
-  educationSchoolPlace: {
-    flex: "flex",
-    justifyContent: "space-between",
-  },
-
-  schoolEducation: {
-    fontWeight: 600,
-    fontSize: "15pt",
-  },
-
-  placeStudyEducation: {
-    fontSize: "15pt",
-  },
-
-  educationTitleGpaDates: {
-    flex: "flex",
-    justifyContent: "space-between",
-  },
-
-  titleGpaEducationSpan: {
-    fontStyle: "italic",
-    fontSize: "15pt",
-  },
-
-  titleGpaEducationB: {
-    fontStyle: "italic",
-    fontSize: "15pt",
-  },
-
-  dateStudyEducation: {
-    fontStyle: "italic",
-    fontSize: "15pt",
   },
 
   technicalSkillsResume: {
-    flex: "flex",
+    display: "flex",
     flexDirection: "column",
     gap: "6pt",
   },
 
-  skillsContainer: {
-    flex: "flex",
+  sectionContainer: {
+    display: "flex",
     flexDirection: "column",
-    fontSize: "15pt",
+    fontSize: "12pt",
     padding: "0 12pt",
+    gap: "9pt",
   },
 
   workResume: {
-    flex: "flex",
+    display: "flex",
     flexDirection: "column",
     gap: "3pt",
   },
 
   workContainer: {
-    flex: "flex",
+    display: "flex",
     flexDirection: "column",
     fontSize: "15pt",
     gap: "9pt",
     padding: "0 12pt",
   },
 
-  workPositionDates: {
-    flex: "flex",
-    justifyContent: "space-between",
-  },
-
-  workCompanyPlace: {
-    flex: "flex",
-    justifyContent: "space-between",
-  },
-
   projectResume: {
-    flex: "flex",
+    display: "flex",
     flexDirection: "column",
     gap: "3pt",
   },
 
   projectContainer: {
-    flex: "flex",
+    display: "flex",
     flexDirection: "column",
     fontSize: "15pt",
     gap: "9pt",
     padding: "0 12pt",
-  },
-
-  projectNameTechStackDate: {
-    flex: "flex",
-    justifyContent: "space-between",
   },
 
   anchor: { color: "black" },
@@ -148,6 +97,7 @@ export function MyDocument({ appData }) {
           gitHub: "",
           formSubmitted: false,
         };
+  const courses = appData.courses.length ? appData.courses : [];
 
   return (
     <Document>
@@ -155,79 +105,106 @@ export function MyDocument({ appData }) {
         size="A4"
         style={{
           padding: "0.5in",
-          flex: "flex",
+          display: "flex",
           flexDirection: "column",
           gap: "12pt",
           fontFamily: "Times-Roman",
         }}
       >
+        {/* GENERAL */}
         <View
           style={{
-            flex: "flex",
+            display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "24pt",
           }}
         >
-          {/* GENERAL */}
-          <View
+          <Text
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "24pt",
-              alignItems: "center",
+              fontSize: "24pt",
+              fontFamily: "Times-Bold",
             }}
           >
-            <Text
-              style={{
-                fontSize: "24pt",
-                fontFamily: "Times-Bold",
-              }}
+            {contactDetails.name}
+          </Text>
+          <Text
+            style={{
+              fontSize: "12pt",
+            }}
+          >
+            {contactDetails.phNo} |{" "}
+            <Link
+              style={styles.anchor}
+              href={
+                contactDetails.email.startsWith("http")
+                  ? contactDetails.email
+                  : `http://${contactDetails.email}`
+              }
             >
-              {contactDetails.name}
-            </Text>
-            <Text
-              style={{
-                fontSize: "12pt",
-              }}
+              {contactDetails.email}
+            </Link>{" "}
+            |{" "}
+            <Link
+              style={styles.anchor}
+              href={
+                contactDetails.linkedIn.startsWith("http")
+                  ? contactDetails.linkedIn
+                  : `http://${contactDetails.linkedIn}`
+              }
             >
-              {contactDetails.phNo} |{" "}
-              <Link
-                style={styles.anchor}
-                href={
-                  contactDetails.email.startsWith("http")
-                    ? contactDetails.email
-                    : `http://${contactDetails.email}`
-                }
-              >
-                {contactDetails.email}
-              </Link>{" "}
-              |{" "}
-              <Link
-                style={styles.anchor}
-                href={
-                  contactDetails.linkedIn.startsWith("http")
-                    ? contactDetails.linkedIn
-                    : `http://${contactDetails.linkedIn}`
-                }
-              >
-                {contactDetails.linkedIn}
-              </Link>{" "}
-              |{" "}
-              <Link
-                style={styles.anchor}
-                href={
-                  contactDetails.gitHub.startsWith("http")
-                    ? contactDetails.gitHub
-                    : `http://${contactDetails.gitHub}`
-                }
-              >
-                {contactDetails.gitHub}
-              </Link>
-            </Text>
-          </View>
+              {contactDetails.linkedIn}
+            </Link>{" "}
+            |{" "}
+            <Link
+              style={styles.anchor}
+              href={
+                contactDetails.gitHub.startsWith("http")
+                  ? contactDetails.gitHub
+                  : `http://${contactDetails.gitHub}`
+              }
+            >
+              {contactDetails.gitHub}
+            </Link>
+          </Text>
+        </View>
 
-          {/* EDUCATION */}
+        {/* EDUCATION */}
+        <View style={styles.sectionResume}>
+          {courses.length > 0 && (
+            <Text style={styles.sectionHeading}>EDUCATION</Text>
+          )}
+          <View style={styles.sectionContainer}>
+            {courses.map((edu) => {
+              return (
+                <View key={edu.id}>
+                  <View style={styles.divStyles}>
+                    <Text style={styles.boldStyles}>{edu.school}</Text>
+                    <Text>{edu.placeStudy}</Text>
+                  </View>
+                  <View style={styles.divStyles}>
+                    <Text>
+                      <Text>{edu.titleStudy}</Text>{" "}
+                      <Text style={styles.boldItalicStyles}>
+                        (GPA: {edu.gpa}/4.0)
+                      </Text>
+                    </Text>
+                    {edu.startDateStudy ? (
+                      <Text style={styles.italicStyles}>
+                        {formatDate(edu.startDateStudy)}
+                        {" - "}
+                        {formatDate(edu.endDateStudy)}
+                      </Text>
+                    ) : (
+                      <Text style={styles.italicStyles}>
+                        <Text>Expected Graduation Year:</Text>{" "}
+                        {formatDate(edu.endDateStudy)}
+                      </Text>
+                    )}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
         </View>
       </Page>
     </Document>
