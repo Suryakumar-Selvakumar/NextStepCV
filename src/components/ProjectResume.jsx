@@ -22,7 +22,7 @@ export function ProjectResume({ appData }) {
 
   return (
     <div className="project-resume">
-      <span id="section-heading">PROJECTS</span>
+      {projects.length > 0 && <span id="section-heading">PROJECTS</span>}
       <div className="project-container">
         {projects.map((proj) => {
           return (

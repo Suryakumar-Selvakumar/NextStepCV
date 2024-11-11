@@ -36,11 +36,16 @@
   align-items: center;
 }
 
-.general-resume > div {
+.general-container {
   display: flex;
   gap: 6pt;
   position: relative;
   top: -5px;
+  font-size: 15pt;
+}
+
+.general-container a {
+  color: black;
 }
 
 #name-general {
@@ -54,12 +59,6 @@
   gap: 6pt;
 }
 
-#email-general,
-#linked-in-general,
-#github-general {
-  text-decoration: underline;
-}
-
 /* EDUCATION */
 .education-resume {
   display: flex;
@@ -70,7 +69,7 @@
 .education-container {
   display: flex;
   flex-direction: column;
-  text-indent: 12pt;
+  padding: 0 12pt;
 }
 
 .education-school-place {
@@ -109,8 +108,8 @@
 .skills-container {
   display: flex;
   flex-direction: column;
-  text-indent: 12pt;
   font-size: 15pt;
+  padding: 0 12pt;
 }
 
 /* WORK */
@@ -123,19 +122,15 @@
 .work-container {
   display: flex;
   flex-direction: column;
-  text-indent: 12pt;
   font-size: 15pt;
   gap: 9pt;
+  padding: 0 12pt;
 }
 
 .work-position-dates,
 .work-company-place {
   display: flex;
   justify-content: space-between;
-}
-
-.roles-resume {
-  text-indent: 0;
 }
 
 /* PROJECTS */
@@ -148,18 +143,14 @@
 .project-container {
   display: flex;
   flex-direction: column;
-  text-indent: 12pt;
   font-size: 15pt;
   gap: 9pt;
+  padding: 0 12pt;
 }
 
 .project-name-tech-stack-date {
   display: flex;
   justify-content: space-between;
-}
-
-.details-resume {
-  text-indent: 0;
 }
 
 @media (min-width: 360px) and (max-width: 1440px) {

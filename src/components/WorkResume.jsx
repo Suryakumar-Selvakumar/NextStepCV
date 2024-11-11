@@ -30,7 +30,7 @@ export function WorkResume({ appData }) {
 
   return (
     <div className="work-resume">
-      <span id="section-heading">EXPERIENCE</span>
+      {experiences.length > 0 && <span id="section-heading">EXPERIENCE</span>}
       <div className="work-container">
         {experiences.map((work) => {
           return (

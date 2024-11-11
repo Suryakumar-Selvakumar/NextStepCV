@@ -6,7 +6,7 @@ export function EducationResume({ appData }) {
 
   return (
     <div className="education-resume">
-      <span id="section-heading">EDUCATION</span>
+      {courses.length > 0 && <span id="section-heading">EDUCATION</span>}
       <div className="education-container">
         {courses.map((edu) => {
           return (

@@ -16,7 +16,7 @@ export function GeneralResume({ appData }) {
   return (
     <div className="general-resume">
       <h1 id="name-general">{contactDetails.name}</h1>
-      <div>
+      <div className="general-container">
         {contactDetails.phNo && (
           <div className="ph-no-resume">
             <p id="ph-no-general">{contactDetails.phNo}</p>
@@ -25,18 +25,45 @@ export function GeneralResume({ appData }) {
         )}
         {contactDetails.email && (
           <div className="email-resume">
-            <p id="email-general">{contactDetails.email}</p>
+            <a
+              href={
+                contactDetails.email.startsWith("http")
+                  ? contactDetails.email
+                  : `http://${contactDetails.email}`
+              }
+              id="email-general"
+            >
+              {contactDetails.email}
+            </a>
             <p> | </p>
           </div>
         )}
         {contactDetails.linkedIn && (
           <div className="linked-in-resume">
-            <p id="linked-in-general">{contactDetails.linkedIn}</p>
+            <a
+              href={
+                contactDetails.linkedIn.startsWith("http")
+                  ? contactDetails.linkedIn
+                  : `http://${contactDetails.linkedIn}`
+              }
+              id="linked-in-general"
+            >
+              {contactDetails.linkedIn}
+            </a>
             <p> | </p>
           </div>
         )}
         {contactDetails.gitHub && (
-          <p id="github-general">{contactDetails.gitHub}</p>
+          <a
+            href={
+              contactDetails.gitHub.startsWith("http")
+                ? contactDetails.gitHub
+                : `http://${contactDetails.gitHub}`
+            }
+            id="github-general"
+          >
+            {contactDetails.gitHub}
+          </a>
         )}
       </div>
     </div>
