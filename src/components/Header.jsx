@@ -5,7 +5,6 @@ import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 
 export function Header({ appData, setAppData }) {
   let [view, setView] = useState(false);
-  // const [instance, updateInstance] = usePDF({ document: MyDocument });
   const modalContainerDiv = useRef(null);
   const resetModalDiv = useRef(null);
 
