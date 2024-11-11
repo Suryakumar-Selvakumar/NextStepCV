@@ -18,7 +18,7 @@ function renderEndDate(work) {
   }
 }
 
-function formatItem(item) {
+function formatListItem(item) {
   return item
     .split(" ")
     .map((word, i) => {
@@ -43,6 +43,14 @@ function formatItem(item) {
 }
 
 const styles = StyleSheet.create({
+  page: {
+    padding: "0.5in",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12pt",
+    fontFamily: "Times-Roman",
+  },
+
   sectionResume: {
     display: "flex",
     flexDirection: "column",
@@ -52,15 +60,16 @@ const styles = StyleSheet.create({
   sectionHeading: {
     fontSize: "12pt",
     fontWeight: "bold",
-    borderBottom: "1px solid black",
+    paddingBottom: "1.75pt",
+    borderBottom: "0.5pt solid black",
   },
 
   sectionContainer: {
     display: "flex",
     flexDirection: "column",
-    fontSize: "12pt",
-    padding: "0 12pt",
-    gap: "6pt",
+    fontSize: "11pt",
+    padding: "0 10pt",
+    gap: "9pt",
   },
 
   divStyles: {
@@ -83,7 +92,9 @@ const styles = StyleSheet.create({
 
   listStyles: {
     paddingLeft: "15pt",
-    paddingTop: "3pt",
+    display: "flex",
+    flexDirection: "column",
+    gap: "3pt",
   },
 
   anchor: { color: "black" },
@@ -104,19 +115,11 @@ export function MyDocument({ appData }) {
   const courses = appData.courses.length ? appData.courses : [];
   const skills = appData.skills.length ? appData.skills : [];
   const experiences = appData.experiences.length ? appData.experiences : [];
+  const projects = appData.projects.length ? appData.projects : [];
 
   return (
     <Document>
-      <Page
-        size="A4"
-        style={{
-          padding: "0.5in",
-          display: "flex",
-          flexDirection: "column",
-          gap: "12pt",
-          fontFamily: "Times-Roman",
-        }}
-      >
+      <Page size="A4" style={styles.page}>
         {/* GENERAL */}
         <View
           style={{
@@ -135,7 +138,7 @@ export function MyDocument({ appData }) {
           </Text>
           <Text
             style={{
-              fontSize: "12pt",
+              fontSize: "11pt",
             }}
           >
             {contactDetails.phNo} |{" "}
@@ -182,11 +185,8 @@ export function MyDocument({ appData }) {
           <View style={styles.sectionContainer}>
             {courses.map((edu) => {
               return (
-                <View
-                  key={edu.id}
-                  style={[styles.sectionResume, { gap: "1pt" }]}
-                >
-                  <View style={styles.divStyles}>
+                <View key={edu.id} style={styles.sectionResume}>
+                  <View style={[styles.divStyles, { fontSize: "12pt" }]}>
                     <Text style={styles.boldStyles}>{edu.school}</Text>
                     <Text>{edu.placeStudy}</Text>
                   </View>
@@ -240,14 +240,11 @@ export function MyDocument({ appData }) {
           {experiences.length > 0 && (
             <Text style={styles.sectionHeading}>EXPERIENCE</Text>
           )}
-          <View style={[styles.sectionContainer, { gap: "6pt" }]}>
+          <View style={styles.sectionContainer}>
             {experiences.map((work) => {
               return (
-                <View
-                  key={work.id}
-                  style={[styles.sectionResume, { gap: "1pt" }]}
-                >
-                  <View style={styles.divStyles}>
+                <View key={work.id} style={styles.sectionResume}>
+                  <View style={[styles.divStyles, { fontSize: "12pt" }]}>
                     <Text style={styles.boldStyles}>{work.position}</Text>
                     <Text>
                       {formatDate(work.startWork) +
@@ -262,7 +259,42 @@ export function MyDocument({ appData }) {
                   <View style={styles.listStyles}>
                     {work.roles.map((role) => (
                       <ListItem key={role.id}>
-                        {formatItem(role.value)}
+                        {formatListItem(role.value)}
+                      </ListItem>
+                    ))}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+
+        {/* PROJECTS */}
+        <View style={styles.sectionResume}>
+          {projects.length > 0 && (
+            <Text style={styles.sectionHeading}>PROJECTS</Text>
+          )}
+          <View style={styles.sectionContainer}>
+            {projects.map((proj) => {
+              return (
+                <View
+                  key={proj.id}
+                  style={[styles.sectionResume, { gap: "3pt" }]}
+                >
+                  <View style={styles.divStyles}>
+                    <Text>
+                      <Text style={styles.boldStyles}>{proj.projectName}</Text>{" "}
+                      {"| "}
+                      <Text style={styles.italicStyles}>{proj.techStack}</Text>
+                    </Text>
+                    <Text style={{ fontSize: "12pt" }}>
+                      {formatDate(proj.projectDate)}
+                    </Text>
+                  </View>
+                  <View style={styles.listStyles}>
+                    {proj.details.map((dt) => (
+                      <ListItem key={dt.id}>
+                        {formatListItem(dt.value)}
                       </ListItem>
                     ))}
                   </View>

@@ -4,7 +4,7 @@ const ListItem = ({ children }) => {
   return (
     <View style={styles.row}>
       <View style={styles.bullet}>
-        <Text>{"\u2022" + " "}</Text>
+        <Text style={{ fontSize: "11pt" }}>{"\u2022" + " "}</Text>
       </View>
       <Text>{children}</Text>
     </View>
