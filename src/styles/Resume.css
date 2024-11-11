@@ -14,13 +14,19 @@
 }
 
 .resume {
-  width: calc(100% - 12rem);
+  width: calc(100% - 144pt);
   aspect-ratio: 1/1.414;
   box-shadow: 0px 0px 25px rgb(171, 171, 171);
   padding: 0.5in;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12pt;
+}
+
+#section-heading {
+  font-size: 15pt;
+  font-weight: bold;
+  border-bottom: 1px solid black;
 }
 
 /* GENERAL */
@@ -32,39 +38,39 @@
 
 .general-resume > div {
   display: flex;
-  gap: 0.5rem;
+  gap: 6pt;
   position: relative;
   top: -5px;
 }
 
 #name-general {
-  font-size: 2.5rem;
+  font-size: 30pt;
 }
 
 .ph-no-resume,
 .email-resume,
 .linked-in-resume {
   display: flex;
-  gap: 0.5rem;
+  gap: 6pt;
 }
 
 #email-general,
 #linked-in-general,
 #github-general {
-  border-bottom: 0.5px solid black;
+  text-decoration: underline;
 }
 
 /* EDUCATION */
 .education-resume {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 3pt;
 }
 
-#education-heading {
-  font-size: 1.25rem;
-  font-weight: bold;
-  border-bottom: 1px solid black;
+.education-container {
+  display: flex;
+  flex-direction: column;
+  text-indent: 12pt;
 }
 
 .education-school-place {
@@ -74,11 +80,11 @@
 
 #school-education {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 15pt;
 }
 
 #place-study-education {
-  font-size: 1.25rem;
+  font-size: 15pt;
 }
 
 .education-title-gpa-dates {
@@ -90,6 +96,70 @@
 #title-gpa-education > b,
 #date-study-education {
   font-style: italic;
+  font-size: 15pt;
+}
+
+/* TECHNICAL SKILLS */
+.technical-skills-resume {
+  display: flex;
+  flex-direction: column;
+  gap: 6pt;
+}
+
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  text-indent: 12pt;
+  font-size: 15pt;
+}
+
+/* WORK */
+.work-resume {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+}
+
+.work-container {
+  display: flex;
+  flex-direction: column;
+  text-indent: 12pt;
+  font-size: 15pt;
+  gap: 9pt;
+}
+
+.work-position-dates,
+.work-company-place {
+  display: flex;
+  justify-content: space-between;
+}
+
+.roles-resume {
+  text-indent: 0;
+}
+
+/* PROJECTS */
+.project-resume {
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+}
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  text-indent: 12pt;
+  font-size: 15pt;
+  gap: 9pt;
+}
+
+.project-name-tech-stack-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-resume {
+  text-indent: 0;
 }
 
 @media (min-width: 360px) and (max-width: 1440px) {

@@ -5,11 +5,14 @@ export function TechnicalSkillsResume({ appData }) {
 
   return (
     <div className="technical-skills-resume">
+      <span id="section-heading">TECHNICAL SKILLS</span>
+      <div className="skills-container">
       {skills.map((skillsGroup) => (
         <div key={skillsGroup.id}>
-          {skillsGroup.skillsType}: {skillsGroup.skillsList}
+          <b>{skillsGroup.skillsType}</b>: {skillsGroup.skillsList}
         </div>
       ))}
+      </div>
     </div>
   );
 }

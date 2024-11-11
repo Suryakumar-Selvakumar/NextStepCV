@@ -1,49 +1,63 @@
 import { useState } from "react";
+import { formatDate } from "./utils";
 
 export function WorkResume({ appData }) {
   const experiences = appData.experiences.length ? appData.experiences : [];
 
-  function returnToday() {
-    let today = new Date();
-    var dd = String(today.getDate()).padStart(2, "0");
-    var mm = String(today.getMonth() + 1).padStart(2, "0");
-    var yyyy = today.getFullYear();
-    today = yyyy + "-" + mm + "-" + dd;
-    return today;
-  }
-
   function renderEndDate(work) {
-    const today = returnToday();
-    if (work.endWork >= today && work.stillWorking) {
+    if (work.stillWorking) {
       return "Present";
     } else {
-      return work.endWork;
+      return formatDate(work.endWork);
     }
+  }
+
+  function formatRole(roleItem) {
+    return roleItem
+      .split(" ")
+      .map((word, i) => {
+        if (word.startsWith("*")) {
+          let boldWord = word.split("").slice(1).join("");
+          return <b key={i}>{boldWord}</b>;
+        } else if (word.startsWith("_")) {
+          return <i key={i}>{word.split("").slice(1).join("")}</i>;
+        } else {
+          return word;
+        }
+      })
+      .map((word, i) => <span key={i}>{word} </span>);
   }
 
   return (
     <div className="work-resume">
-      {experiences.map((work) => {
-        return (
-          <div key={work.id}>
-            <div>
-              <p id="company-work">{work.company}</p>
-              <p id="place-work">{work.place}</p>
+      <span id="section-heading">EXPERIENCE</span>
+      <div className="work-container">
+        {experiences.map((work) => {
+          return (
+            <div key={work.id} className="work">
+              <div className="work-position-dates">
+                <p id="position-work">
+                  <b>{work.position}</b>
+                </p>
+                <p id="start-end-date">
+                  {formatDate(work.startWork)} &#8210; {renderEndDate(work)}
+                </p>
+              </div>
+              <div className="work-company-place">
+                <p id="company-work">
+                  <i>{work.company}</i>
+                </p>
+                <p id="place-work">{work.place}</p>
+              </div>
+              <ul className="roles-resume">
+                {work.roles.map((role) => (
+                  <li key={role.id}>{formatRole(role.value)}</li>
+                ))}
+              </ul>
             </div>
-            <div>
-              <p id="position-work">{work.position}</p>
-              <p id="start-end-date">
-                {work.startWork} &#8210; {renderEndDate(work)}
-              </p>
-            </div>
-            <ul className="roles-resume">
-              {work.roles.map((role) => (
-                <li key={role.id}>{role.value}</li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
