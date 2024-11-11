@@ -8,12 +8,59 @@ import ReactPDF, {
   Link,
 } from "@react-pdf/renderer";
 import { formatDate } from "./utils";
+import ListItem from "./ListItem";
+
+function renderEndDate(work) {
+  if (work.stillWorking) {
+    return "Present";
+  } else {
+    return formatDate(work.endWork);
+  }
+}
+
+function formatItem(item) {
+  return item
+    .split(" ")
+    .map((word, i) => {
+      if (word.startsWith("*")) {
+        let boldWord = word.split("").slice(1).join("");
+        return (
+          <Text style={styles.boldStyles} key={i}>
+            {boldWord}
+          </Text>
+        );
+      } else if (word.startsWith("_")) {
+        return (
+          <Text style={styles.italicStyles} key={i}>
+            {word.split("").slice(1).join("")}
+          </Text>
+        );
+      } else {
+        return word;
+      }
+    })
+    .map((word, i) => <Text key={i}>{word} </Text>);
+}
 
 const styles = StyleSheet.create({
+  sectionResume: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "3pt",
+  },
+
   sectionHeading: {
     fontSize: "12pt",
     fontWeight: "bold",
     borderBottom: "1px solid black",
+  },
+
+  sectionContainer: {
+    display: "flex",
+    flexDirection: "column",
+    fontSize: "12pt",
+    padding: "0 12pt",
+    gap: "6pt",
   },
 
   divStyles: {
@@ -34,36 +81,9 @@ const styles = StyleSheet.create({
     fontFamily: "Times-BoldItalic",
   },
 
-  sectionResume: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "3pt",
-  },
-
-  technicalSkillsResume: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "6pt",
-  },
-
-  sectionContainer: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "12pt",
-    padding: "0 12pt",
-    gap: "9pt",
-  },
-
-  workResume: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "3pt",
-  },
-
-  projectResume: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "3pt",
+  listStyles: {
+    paddingLeft: "15pt",
+    paddingTop: "3pt",
   },
 
   anchor: { color: "black" },
@@ -83,6 +103,7 @@ export function MyDocument({ appData }) {
         };
   const courses = appData.courses.length ? appData.courses : [];
   const skills = appData.skills.length ? appData.skills : [];
+  const experiences = appData.experiences.length ? appData.experiences : [];
 
   return (
     <Document>
@@ -161,14 +182,17 @@ export function MyDocument({ appData }) {
           <View style={styles.sectionContainer}>
             {courses.map((edu) => {
               return (
-                <View key={edu.id}>
+                <View
+                  key={edu.id}
+                  style={[styles.sectionResume, { gap: "1pt" }]}
+                >
                   <View style={styles.divStyles}>
                     <Text style={styles.boldStyles}>{edu.school}</Text>
                     <Text>{edu.placeStudy}</Text>
                   </View>
                   <View style={styles.divStyles}>
                     <Text>
-                      <Text>{edu.titleStudy}</Text>{" "}
+                      <Text style={styles.italicStyles}>{edu.titleStudy}</Text>{" "}
                       <Text style={styles.boldItalicStyles}>
                         (GPA: {edu.gpa}/4.0)
                       </Text>
@@ -176,7 +200,7 @@ export function MyDocument({ appData }) {
                     {edu.startDateStudy ? (
                       <Text style={styles.italicStyles}>
                         {formatDate(edu.startDateStudy)}
-                        {" - "}
+                        {" \u2013 "}
                         {formatDate(edu.endDateStudy)}
                       </Text>
                     ) : (
@@ -208,6 +232,43 @@ export function MyDocument({ appData }) {
                 </Text>
               </View>
             ))}
+          </View>
+        </View>
+
+        {/* EXPERIENCE */}
+        <View style={styles.sectionResume}>
+          {experiences.length > 0 && (
+            <Text style={styles.sectionHeading}>EXPERIENCE</Text>
+          )}
+          <View style={[styles.sectionContainer, { gap: "6pt" }]}>
+            {experiences.map((work) => {
+              return (
+                <View
+                  key={work.id}
+                  style={[styles.sectionResume, { gap: "1pt" }]}
+                >
+                  <View style={styles.divStyles}>
+                    <Text style={styles.boldStyles}>{work.position}</Text>
+                    <Text>
+                      {formatDate(work.startWork) +
+                        " \u2013 " +
+                        renderEndDate(work)}
+                    </Text>
+                  </View>
+                  <View style={styles.divStyles}>
+                    <Text style={styles.italicStyles}>{work.company}</Text>
+                    <Text style={styles.italicStyles}>{work.place}</Text>
+                  </View>
+                  <View style={styles.listStyles}>
+                    {work.roles.map((role) => (
+                      <ListItem key={role.id}>
+                        {formatItem(role.value)}
+                      </ListItem>
+                    ))}
+                  </View>
+                </View>
+              );
+            })}
           </View>
         </View>
       </Page>
