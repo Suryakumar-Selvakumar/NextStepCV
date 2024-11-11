@@ -60,26 +60,10 @@ const styles = StyleSheet.create({
     gap: "3pt",
   },
 
-  workContainer: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "15pt",
-    gap: "9pt",
-    padding: "0 12pt",
-  },
-
   projectResume: {
     display: "flex",
     flexDirection: "column",
     gap: "3pt",
-  },
-
-  projectContainer: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "15pt",
-    gap: "9pt",
-    padding: "0 12pt",
   },
 
   anchor: { color: "black" },
@@ -98,6 +82,7 @@ export function MyDocument({ appData }) {
           formSubmitted: false,
         };
   const courses = appData.courses.length ? appData.courses : [];
+  const skills = appData.skills.length ? appData.skills : [];
 
   return (
     <Document>
@@ -204,6 +189,25 @@ export function MyDocument({ appData }) {
                 </View>
               );
             })}
+          </View>
+        </View>
+
+        {/* TECHNICAL SKILLS */}
+        <View style={styles.sectionResume}>
+          {skills.length > 0 && (
+            <Text style={styles.sectionHeading}>TECHNICAL SKILLS</Text>
+          )}
+          <View style={[styles.sectionContainer, { gap: "3pt" }]}>
+            {skills.map((skillsGroup) => (
+              <View key={skillsGroup.id}>
+                <Text>
+                  <Text style={styles.boldStyles}>
+                    {skillsGroup.skillsType}
+                  </Text>
+                  : {skillsGroup.skillsList}
+                </Text>
+              </View>
+            ))}
           </View>
         </View>
       </Page>
