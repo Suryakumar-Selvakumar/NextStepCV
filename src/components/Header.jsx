@@ -1,8 +1,11 @@
 import "../styles/Header.css";
 import { useRef, useState } from "react";
+import { MyDocument } from "./MyDocument";
+import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 
 export function Header({ appData, setAppData }) {
   let [view, setView] = useState(false);
+  // const [instance, updateInstance] = usePDF({ document: MyDocument });
   const modalContainerDiv = useRef(null);
   const resetModalDiv = useRef(null);
 
@@ -274,7 +277,16 @@ export function Header({ appData, setAppData }) {
                 d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M12,19L8,15H10.5V12H13.5V15H16L12,19Z"
               />
             </svg>
-            <span className="button-text">Download</span>
+            {/* <span className="button-text">Download</span> */}
+            {/* <a href={instance.url} download="test.pdf">
+              Download
+            </a> */}
+            <PDFDownloadLink
+              document={<MyDocument appData={appData} />}
+              fileName="test.pdf"
+            >
+              Download
+            </PDFDownloadLink>
           </button>
         </div>
       </header>
