@@ -77,8 +77,6 @@
 }
 
 .general-container {
-  display: flex;
-  gap: 6pt;
   position: relative;
   top: -5px;
   font-size: 11pt;
@@ -93,30 +91,17 @@
   font-size: 24pt;
 }
 
-#ph-no-general {
-  white-space: nowrap;
-}
-
-.ph-no-resume,
-.email-resume,
-.linked-in-resume {
-  display: flex;
-  gap: 6pt;
-}
-
 @media (min-width: 360px) and (max-width: 767px) {
   .resume-container {
-    padding: 2rem 0;
+    padding: 0.5rem 0;
   }
 
   .resume {
     width: calc(100% - 1rem);
     aspect-ratio: 1/1.414;
     padding: 1rem;
-    box-shadow: 0px 0px 25px rgb(171, 171, 171);
-    display: flex;
-    flex-direction: column;
-    gap: 12pt;
+    box-shadow: 0px 0px 5px rgb(171, 171, 171);
+    gap: 9px;
   }
 
   #section-heading {
@@ -152,19 +137,6 @@
     gap: 2.25px;
   }
 
-  .bold-styles {
-    font-weight: bold;
-  }
-
-  .italic-styles {
-    font-style: italic;
-  }
-
-  .bold-italic-styles {
-    font-weight: bold;
-    font-style: italic;
-  }
-
   /* GENERAL */
   .general-resume {
     display: flex;
@@ -173,11 +145,9 @@
   }
 
   .general-container {
-    display: flex;
-    gap: 2.5px;
     position: relative;
     top: -5px;
-    font-size: 8px;
+    font-size: 7.25px;
   }
 
   .general-container a {
@@ -188,15 +158,18 @@
   #name-general {
     font-size: 18px;
   }
+}
 
-  #ph-no-general {
-    white-space: nowrap;
+@media (min-width: 768px) and (max-width: 1180px) {
+  .resume-container {
+    padding: 2rem 0;
   }
 
-  .ph-no-resume,
-  .email-resume,
-  .linked-in-resume {
-    display: flex;
-    gap: 4.5px;
+  .resume {
+    width: calc(100% - 4rem);
+    aspect-ratio: 1/1.414;
+    padding: 0.5in;
+    box-shadow: 0px 0px 10px rgb(171, 171, 171);
+    gap: 12pt;
   }
 }

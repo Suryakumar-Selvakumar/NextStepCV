@@ -17,43 +17,30 @@ export function GeneralResume({ appData }) {
     <div className="general-resume">
       <h1 id="name-general">{contactDetails.name}</h1>
       <div className="general-container">
-        {contactDetails.phNo && (
-          <div className="ph-no-resume">
-            <p id="ph-no-general">{contactDetails.phNo}</p>
-            <p> | </p>
-          </div>
-        )}
-        {contactDetails.email && (
-          <div className="email-resume">
-            <a
-              href={
-                contactDetails.email.startsWith("http")
-                  ? contactDetails.email
-                  : `http://${contactDetails.email}`
-              }
-              id="email-general"
-            >
-              {contactDetails.email}
-            </a>
-            <p> | </p>
-          </div>
-        )}
-        {contactDetails.linkedIn && (
-          <div className="linked-in-resume">
-            <a
-              href={
-                contactDetails.linkedIn.startsWith("http")
-                  ? contactDetails.linkedIn
-                  : `http://${contactDetails.linkedIn}`
-              }
-              id="linked-in-general"
-            >
-              {contactDetails.linkedIn}
-            </a>
-            <p> | </p>
-          </div>
-        )}
-        {contactDetails.gitHub && (
+        <p id="general-details">
+          {contactDetails.phNo} |{" "}
+          <a
+            href={
+              contactDetails.email.startsWith("http")
+                ? contactDetails.email
+                : `http://${contactDetails.email}`
+            }
+            id="email-general"
+          >
+            {contactDetails.email}
+          </a>{" "}
+          |{" "}
+          <a
+            href={
+              contactDetails.linkedIn.startsWith("http")
+                ? contactDetails.linkedIn
+                : `http://${contactDetails.linkedIn}`
+            }
+            id="linked-in-general"
+          >
+            {contactDetails.linkedIn}
+          </a>{" "}
+          |{" "}
           <a
             href={
               contactDetails.gitHub.startsWith("http")
@@ -64,7 +51,7 @@ export function GeneralResume({ appData }) {
           >
             {contactDetails.gitHub}
           </a>
-        )}
+        </p>
       </div>
     </div>
   );

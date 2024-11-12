@@ -15,7 +15,7 @@ export function Header({ appData, setAppData }) {
       contactDetails: {
         name: "John Smith",
         phNo: "123-456-7890",
-        email: "JohnSmith@fakeemail.com",
+        email: "John@fakeemail.com",
         linkedIn: "linkedin.com/in/John-Smith-fake/",
         gitHub: "github.com/john-smith-fake",
         formSubmitted: true,
