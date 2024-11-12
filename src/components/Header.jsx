@@ -265,7 +265,12 @@ export function Header({ appData, setAppData }) {
             </svg>
             <span className="button-text">Reset</span>
           </button>
-          <button id="download-resume">
+
+          <PDFDownloadLink
+            id="download-resume"
+            document={<MyDocument appData={appData} />}
+            fileName="Resume.pdf"
+          >
             <svg
               className="svg-header-btns"
               xmlns="http://www.w3.org/2000/svg"
@@ -276,17 +281,8 @@ export function Header({ appData, setAppData }) {
                 d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M12,19L8,15H10.5V12H13.5V15H16L12,19Z"
               />
             </svg>
-            {/* <span className="button-text">Download</span> */}
-            {/* <a href={instance.url} download="test.pdf">
-              Download
-            </a> */}
-            <PDFDownloadLink
-              document={<MyDocument appData={appData} />}
-              fileName="test.pdf"
-            >
-              Download
-            </PDFDownloadLink>
-          </button>
+            Download
+          </PDFDownloadLink>
         </div>
       </header>
       <div className="modal-container" ref={modalContainerDiv}>

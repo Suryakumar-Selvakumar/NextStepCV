@@ -51,6 +51,11 @@ header {
   align-items: center;
 }
 
+#download-resume {
+  color: white;
+  text-decoration: none;
+}
+
 #load-dummy > span,
 #clear-resume > span,
 #download-resume > span {
