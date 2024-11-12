@@ -68,7 +68,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     fontSize: "11pt",
-    padding: "0 10pt",
     gap: "6pt",
   },
 
