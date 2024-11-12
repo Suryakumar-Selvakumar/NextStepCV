@@ -88,5 +88,9 @@ main {
 @media (min-width: 360px) and (max-width: 767px) {
   main {
     margin-top: 3.85rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    box-sizing: border-box;
   }
 }

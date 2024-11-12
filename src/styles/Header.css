@@ -147,7 +147,7 @@ header {
   background-color: rgb(228, 228, 228);
 }
 
-@media (min-width: 360px) and (max-width: 768px) {
+@media (min-width: 360px) and (max-width: 767px) {
   .button-text {
     display: none;
   }
@@ -212,6 +212,8 @@ header {
   #okay-reset,
   #cancel-reset {
     padding: 0 0.5rem;
+    width: 75px;
+    font-size: 1rem;
   }
 
   .reset-modal-buttons {
