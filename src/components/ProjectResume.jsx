@@ -20,6 +20,10 @@ export function ProjectResume({ appData }) {
       .map((word, i) => <span key={i}>{word} </span>);
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="section-resume" style={{ gap: "3pt" }}>
       {projects.length > 0 && <span id="section-heading">PROJECTS</span>}
@@ -32,7 +36,7 @@ export function ProjectResume({ appData }) {
                   <span className="bold-styles">{proj.projectName}</span> |{" "}
                   <span className="italic-styles">{proj.techStack}</span>
                 </p>
-                <p style={{ fontSize: "12pt" }}>
+                <p style={{ fontSize: !mediaQuery.matches ? "12pt" : "9px" }}>
                   {formatDate(proj.projectDate)}
                 </p>
               </div>

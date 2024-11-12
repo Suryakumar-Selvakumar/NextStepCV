@@ -4,6 +4,10 @@ import { formatDate } from "./utils";
 export function EducationResume({ appData }) {
   const courses = appData.courses.length ? appData.courses : [];
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="section-resume" style={{ gap: "3pt" }}>
       {courses.length > 0 && <span id="section-heading">EDUCATION</span>}
@@ -11,7 +15,10 @@ export function EducationResume({ appData }) {
         {courses.map((edu) => {
           return (
             <div key={edu.id} style={{ lineHeight: "1.25" }}>
-              <div className="div-styles" style={{ fontSize: "12pt" }}>
+              <div
+                className="div-styles"
+                style={{ fontSize: !mediaQuery.matches ? "12pt" : "9px" }}
+              >
                 <p className="bold-styles">{edu.school}</p>
                 <p>{edu.placeStudy}</p>
               </div>

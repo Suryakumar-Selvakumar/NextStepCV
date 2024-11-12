@@ -28,6 +28,10 @@ export function WorkResume({ appData }) {
       .map((word, i) => <span key={i}>{word} </span>);
   }
 
+  const mediaQuery = window.matchMedia(
+    "(min-width: 360px) and (max-width: 767px)"
+  );
+
   return (
     <div className="section-resume" style={{ gap: "3pt" }}>
       {experiences.length > 0 && <span id="section-heading">EXPERIENCE</span>}
@@ -35,7 +39,10 @@ export function WorkResume({ appData }) {
         {experiences.map((work) => {
           return (
             <div key={work.id} style={{ lineHeight: "1.25" }}>
-              <div className="div-styles" style={{ fontSize: "12pt" }}>
+              <div
+                className="div-styles"
+                style={{ fontSize: !mediaQuery.matches ? "12pt" : "9px" }}
+              >
                 <p className="bold-styles">{work.position}</p>
                 <p>
                   {formatDate(work.startWork)} &#8211; {renderEndDate(work)}

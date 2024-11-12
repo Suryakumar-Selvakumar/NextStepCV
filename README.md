@@ -2,7 +2,7 @@
 
 Make the next step in your career. A CV Maker to streamline Professional CV Creation.
 
-### Domain - https://next-step-cv.vercel.app/
+#### Domain - https://next-step-cv.vercel.app/
 
 <div align="center">
    <img width=auto height=auto src="./public/output-sample.png" alt="Chatbot response in English">
