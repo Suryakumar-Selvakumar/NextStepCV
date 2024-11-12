@@ -24,7 +24,7 @@ export function EducationResume({ appData }) {
               </div>
               <div className="div-styles">
                 <p>
-                  <span>{edu.titleStudy}</span>{" "}
+                  <span className="italic-styles">{edu.titleStudy}</span>{" "}
                   <span className="bold-italic-styles">
                     (GPA: {edu.gpa}/4.0)
                   </span>

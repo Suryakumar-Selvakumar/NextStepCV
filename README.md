@@ -5,7 +5,7 @@ Make the next step in your career. A CV Maker to streamline Professional CV Crea
 #### Domain - https://next-step-cv.vercel.app/
 
 <div align="center">
-   <img width=auto height=auto src="./public/output-sample.png" alt="Chatbot response in English">
+   <img width=auto height=auto src="./public/output.png" alt="NextStepCV Web-App">
 </div>
 
 ## Features
@@ -17,7 +17,7 @@ Make the next step in your career. A CV Maker to streamline Professional CV Crea
 - Mobile Friendly - Features a Unique Layout
 - Load Dummy - Load a dummy CV to see what's possible
 - Reset - Clear all and Start fresh
-- Bold/Italic Styles for list items - Use \* and \_ before word for Bold and Italic text respectively
+- Bold/Italic styles for list items - Use \* and \_ before word for Bold and Italic text respectively
 - Download the Resume - Made possible with React-pdf
 - Continue right where you left off - Data storage on Page Refresh and Revisits
 
@@ -29,3 +29,8 @@ Make the next step in your career. A CV Maker to streamline Professional CV Crea
 - Vite - Bundler
 - React-pdf - Library
 - Vercel - Cloud Platform
+- LocalStorage - Browser API
+
+## Project Plan
+
+For a detailed thought process and planning behind building this project, please refer to the [Project Plan Document](./project-plan.md).
