@@ -1,6 +1,7 @@
 import { Education } from "./Education";
 import { useEffect, useState, useRef, useTransition } from "react";
 import "../styles/EducationSection.css";
+import warningGoldImg from "../assets/warning-gold.svg";
 
 export function EducationSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
@@ -275,7 +276,7 @@ export function EducationSection({ appData, setAppData }) {
           <span>Add Education</span>
         </button>
         <div className={limitReached ? "limit-error visible" : "limit-error"}>
-          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <img src={warningGoldImg} alt="a warning logo" id="warning-img" />
           <span>Courses limit reached!</span>
         </div>
         <form

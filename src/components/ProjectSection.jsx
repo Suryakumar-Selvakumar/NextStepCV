@@ -3,6 +3,7 @@ import { Project } from "./Project";
 import "../styles/ProjectSection.css";
 import { Detail } from "./Detail";
 import { returnToday } from "./utils";
+import warningGoldImg from "../assets/warning-gold.svg";
 
 export function ProjectSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
@@ -342,7 +343,7 @@ export function ProjectSection({ appData, setAppData }) {
           <span>Add Project</span>
         </button>
         <div className={limitReached ? "limit-error visible" : "limit-error"}>
-          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <img src={warningGoldImg} alt="a warning logo" id="warning-img" />
           <span>Project limit reached!</span>
         </div>
         <form

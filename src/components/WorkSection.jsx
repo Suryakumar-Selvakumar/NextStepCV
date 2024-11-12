@@ -3,6 +3,7 @@ import { Work } from "./Work";
 import { Role } from "./Role";
 import "../styles/WorkSection.css";
 import { returnToday } from "./utils";
+import warningGoldImg from "../assets/warning-gold.svg";
 
 export function WorkSection({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
@@ -372,7 +373,7 @@ export function WorkSection({ appData, setAppData }) {
           <span>Add Work Experience</span>
         </button>
         <div className={limitReached ? "limit-error visible" : "limit-error"}>
-          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
+          <img src={warningGoldImg} alt="a warning logo" id="warning-img" />
           <span>Experiences limit reached!</span>
         </div>
         <form

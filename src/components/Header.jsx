@@ -2,6 +2,8 @@ import "../styles/Header.css";
 import { useRef, useState } from "react";
 import { MyDocument } from "./MyDocument";
 import { PDFDownloadLink } from "@react-pdf/renderer";
+import warningGoldImg from "../assets/warning-gold.svg";
+import nextGoldImg from "../assets/next-gold.svg";
 
 export function Header({ appData, setAppData }) {
   let [view, setView] = useState(false);
@@ -237,7 +239,7 @@ export function Header({ appData, setAppData }) {
       <header>
         <div className="logo">
           <p id="logo-text">NextStep</p>
-          <img src="/next-gold.svg" alt="logo of the app" id="logo-img" />
+          <img src={nextGoldImg} alt="logo of the app" id="logo-img" />
         </div>
         <div className="header-buttons">
           <button onClick={() => loadDummy()} id="load-dummy">
@@ -293,11 +295,7 @@ export function Header({ appData, setAppData }) {
           style={{ top: view && "250px", opacity: view && 1 }}
         >
           <div className="warning-msg">
-            <img
-              src="/warning-gold.svg"
-              alt="a warning logo"
-              id="warning-img"
-            />
+            <img src={warningGoldImg} alt="a warning logo" id="warning-img" />
             <p>This will Reset the entire Resume!</p>
           </div>
           <div className="reset-modal-buttons">
