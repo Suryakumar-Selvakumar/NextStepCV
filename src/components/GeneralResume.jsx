@@ -18,7 +18,7 @@ export function GeneralResume({ appData }) {
       <h1 id="name-general">{contactDetails.name}</h1>
       <div className="general-container">
         <p id="general-details">
-          {contactDetails.phNo} |{" "}
+          {contactDetails.phNo} {contactDetails.phNo && "|"}{" "}
           <a
             href={
               contactDetails.email.startsWith("http")
@@ -29,7 +29,7 @@ export function GeneralResume({ appData }) {
           >
             {contactDetails.email}
           </a>{" "}
-          |{" "}
+          {contactDetails.email && "|"}{" "}
           <a
             href={
               contactDetails.linkedIn.startsWith("http")
@@ -40,7 +40,7 @@ export function GeneralResume({ appData }) {
           >
             {contactDetails.linkedIn}
           </a>{" "}
-          |{" "}
+          {contactDetails.linkedIn && "|"}{" "}
           <a
             href={
               contactDetails.gitHub.startsWith("http")
