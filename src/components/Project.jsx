@@ -9,7 +9,7 @@ export function Project(props) {
   );
 
   return (
-    <div className="project-card">
+    <div className="project-card" data-id={project.id}>
       <div>
         <div>
           <p>{project.projectName}</p>

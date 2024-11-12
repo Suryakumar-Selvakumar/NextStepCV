@@ -135,8 +135,19 @@ export function ProjectSection({ appData, setAppData }) {
 
   function deleteProject(projectId) {
     const updatedProjects = projects.filter((proj) => proj.id !== projectId);
-    setProjects(updatedProjects);
-    setAppData({ ...appData, projects: updatedProjects });
+
+    const projectCards = document.querySelector(".project-cards");
+    for (const proj of projectCards.children) {
+      const projId = proj.getAttribute("data-id");
+      if (projId == projectId) {
+        proj.classList.add("delete");
+      }
+    }
+
+    setTimeout(() => {
+      setProjects(updatedProjects);
+      setAppData({ ...appData, projects: updatedProjects });
+    }, 450);
 
     setLimitReached(false);
 

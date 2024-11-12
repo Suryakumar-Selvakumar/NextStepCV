@@ -154,8 +154,19 @@ export function WorkSection({ appData, setAppData }) {
 
   function deleteWork(workId) {
     const updatedExperiences = experiences.filter((exp) => exp.id !== workId);
-    setExperiences(updatedExperiences);
-    setAppData({ ...appData, experiences: updatedExperiences });
+    const workCards = document.querySelector(".work-cards");
+    for (const wk of workCards.children) {
+      const wkId = wk.getAttribute("data-id");
+      if (wkId == workId) {
+        wk.classList.add("delete");
+      }
+    }
+
+    setTimeout(() => {
+      setExperiences(updatedExperiences);
+      setAppData({ ...appData, experiences: updatedExperiences });
+    }, 450);
+
     setLimitReached(false);
 
     if (workDetails.id === workId || experiences.length === 1) {

@@ -9,7 +9,7 @@ export function Work(props) {
   );
 
   return (
-    <div className="work-card">
+    <div className="work-card" data-id={work.id}>
       <div>
         <div>
           <p>{work.position}</p>

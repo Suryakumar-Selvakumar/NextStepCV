@@ -56,13 +56,6 @@ header {
   text-decoration: none;
 }
 
-#load-dummy > span,
-#clear-resume > span,
-#download-resume > span {
-  position: relative;
-  top: 2.5px;
-}
-
 #load-dummy:hover,
 #clear-resume:hover,
 #download-resume:hover {

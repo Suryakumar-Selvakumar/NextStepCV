@@ -32,6 +32,8 @@
 .section-resume {
   display: flex;
   flex-direction: column;
+  position: relative;
+  top: -5px;
 }
 
 .section-container {
@@ -105,18 +107,11 @@
 
 /* EDUCATION */
 
-
-
 /* TECHNICAL SKILLS */
-
-
 
 /* EXPERIENCE */
 
-
-
 /* PROJECTS */
-
 
 .project-container {
   display: flex;

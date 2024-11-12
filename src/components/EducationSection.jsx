@@ -1,5 +1,5 @@
 import { Education } from "./Education";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useTransition } from "react";
 import "../styles/EducationSection.css";
 
 export function EducationSection({ appData, setAppData }) {
@@ -138,8 +138,20 @@ export function EducationSection({ appData, setAppData }) {
 
   function deleteEducation(courseId) {
     const updatedCourses = courses.filter((exp) => exp.id !== courseId);
-    setCourses(updatedCourses);
-    setAppData({ ...appData, courses: updatedCourses });
+
+    const educationCards = document.querySelector(".education-cards");
+    for (const edu of educationCards.children) {
+      const eduId = edu.getAttribute("data-id");
+      if (eduId == courseId) {
+        edu.classList.add("delete");
+      }
+    }
+
+    setTimeout(() => {
+      setCourses(updatedCourses);
+      setAppData({ ...appData, courses: updatedCourses });
+    }, 450);
+
     setLimitReached(false);
 
     if (educationDetails.id === courseId || courses.length === 1) {

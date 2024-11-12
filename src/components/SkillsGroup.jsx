@@ -4,7 +4,7 @@ export function SkillsGroup(props) {
   const skillsGroup = props.skillsGroup;
 
   return (
-    <div className="skills-group-card">
+    <div className="skills-group-card" data-id={skillsGroup.id}>
       <span>{skillsGroup.skillsType}</span>
       <div>
         <button

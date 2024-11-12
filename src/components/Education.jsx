@@ -28,7 +28,10 @@ export function Education(props) {
   );
 
   return (
-    <div className="education-card" data-id={education.id}>
+    <div
+      className="education-card"
+      data-id={education.id}
+    >
       <div>
         <div>
           <p>{education.titleStudy}</p>

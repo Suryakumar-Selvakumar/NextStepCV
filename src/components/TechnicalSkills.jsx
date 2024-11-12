@@ -171,8 +171,19 @@ export function TechnicalSkills({ appData, setAppData }) {
 
   function deleteSkillsGroup(skillsGroupId) {
     const updatedSkills = skills.filter((skill) => skill.id !== skillsGroupId);
-    setSkills(updatedSkills);
-    setAppData({ ...appData, skills: updatedSkills });
+
+    const skillsGroupCards = document.querySelector(".technical-skills-cards");
+    for (const skill of skillsGroupCards.children) {
+      const skillId = skill.getAttribute("data-id");
+      if (skillId == skillsGroupId) {
+        skill.classList.add("delete");
+      }
+    }
+
+    setTimeout(() => {
+      setSkills(updatedSkills);
+      setAppData({ ...appData, skills: updatedSkills });
+    }, 450);
 
     if (skillsGroup.id === skillsGroupId || skills.length === 1) {
       updateSkillsGroupBtn.current.style.cssText = "display: none;";
@@ -233,7 +244,9 @@ export function TechnicalSkills({ appData, setAppData }) {
         <button
           type="button"
           className={
-            formVisible ? "add-technical-skills" : "add-education visible"
+            formVisible
+              ? "add-technical-skills"
+              : "add-technical-skills visible"
           }
           ref={addTechnicalSkillsBtn}
           onClick={() => addTechnicalSkills()}

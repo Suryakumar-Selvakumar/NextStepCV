@@ -1,7 +1,7 @@
 import "../styles/Header.css";
 import { useRef, useState } from "react";
 import { MyDocument } from "./MyDocument";
-import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 export function Header({ appData, setAppData }) {
   let [view, setView] = useState(false);
@@ -214,6 +214,7 @@ export function Header({ appData, setAppData }) {
     setView(false);
     setTimeout(() => {
       modalContainerDiv.current.style.cssText = "visibility: hidden";
+
       setAppData({
         contactDetails: {},
         courses: [],
@@ -281,7 +282,7 @@ export function Header({ appData, setAppData }) {
                 d="M14,2L20,8V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V4A2,2 0 0,1 6,2H14M18,20V9H13V4H6V20H18M12,19L8,15H10.5V12H13.5V15H16L12,19Z"
               />
             </svg>
-            Download
+            <span>Download</span>
           </PDFDownloadLink>
         </div>
       </header>
