@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function GeneralResume({ appData }) {
   const contactDetails =
-    Object.keys(appData.contactDetails).length > 0
+    appData.contactDetails && Object.keys(appData.contactDetails).length > 0
       ? appData.contactDetails
       : {
           name: "",

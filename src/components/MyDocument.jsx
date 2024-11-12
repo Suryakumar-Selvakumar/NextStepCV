@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 
 export function MyDocument({ appData }) {
   const contactDetails =
-    Object.keys(appData.contactDetails).length > 0
+    appData.contactDetails && Object.keys(appData.contactDetails).length > 0
       ? appData.contactDetails
       : {
           name: "",

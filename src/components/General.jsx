@@ -6,7 +6,7 @@ export function General({ appData, setAppData }) {
     localStorage.getItem("generalMainVisible")
   );
   const [contactDetails, setContactDetails] = useState(
-    Object.keys(appData.contactDetails).length > 0
+    appData.contactDetails && Object.keys(appData.contactDetails).length > 0
       ? appData.contactDetails
       : {
           name: "",
@@ -44,7 +44,7 @@ export function General({ appData, setAppData }) {
     // Will display the form to update the details
     setFormVisible(true);
     setContactDetails(
-      Object.keys(appData.contactDetails).length > 0
+      appData.contactDetails && Object.keys(appData.contactDetails).length > 0
         ? appData.contactDetails
         : {
             name: "",
@@ -71,7 +71,7 @@ export function General({ appData, setAppData }) {
   }
 
   const appContactDetails =
-    Object.keys(appData.contactDetails).length > 0
+    appData.contactDetails && Object.keys(appData.contactDetails).length > 0
       ? appData.contactDetails
       : {
           name: "",

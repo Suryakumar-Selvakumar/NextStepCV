@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 function App() {
   const storedAppData = JSON.parse(localStorage.getItem("app-data"));
   const [appData, setAppData] = useState(
-    Object.keys(storedAppData).length > 0
+    storedAppData && Object.keys(storedAppData).length > 0
       ? storedAppData
       : {
           contactDetails: {},
