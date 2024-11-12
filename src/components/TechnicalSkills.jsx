@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { SkillsGroup } from "./SkillsGroup";
 import "../styles/TechnicalSkills.css";
-import warningGoldImg from "../assets/warning-gold.svg";
 
 export function TechnicalSkills({ appData, setAppData }) {
   const storedMainVisible = JSON.parse(
@@ -265,7 +264,7 @@ export function TechnicalSkills({ appData, setAppData }) {
           <span>Add Technical Skills</span>
         </button>
         <div className={limitReached ? "limit-error visible" : "limit-error"}>
-          <img src={warningGoldImg} alt="a warning logo" id="warning-img" />
+          <img src="/warning-gold.svg" alt="a warning logo" id="warning-img" />
           <span>Skills limit reached!</span>
         </div>
         <form
