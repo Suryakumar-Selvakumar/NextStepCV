@@ -16,17 +16,56 @@
 .resume {
   width: calc(100% - 144pt);
   aspect-ratio: 1/1.414;
-  box-shadow: 0px 0px 25px rgb(171, 171, 171);
   padding: 0.5in;
+  box-shadow: 0px 0px 25px rgb(171, 171, 171);
   display: flex;
   flex-direction: column;
   gap: 12pt;
 }
 
 #section-heading {
-  font-size: 15pt;
+  font-size: 12pt;
   font-weight: bold;
-  border-bottom: 1px solid black;
+  border-bottom: 0.5pt solid black;
+}
+
+.section-resume {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 11pt;
+  padding: 0 10pt;
+  gap: 9pt;
+}
+
+.div-styles {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.list-styles {
+  padding-left: 15pt;
+  display: flex;
+  flex-direction: column;
+  gap: 3pt;
+}
+
+.bold-styles {
+  font-weight: bold;
+}
+
+.italic-styles {
+  font-style: italic;
+}
+
+.bold-italic-styles {
+  font-weight: bold;
+  font-style: italic;
 }
 
 /* GENERAL */
@@ -41,15 +80,20 @@
   gap: 6pt;
   position: relative;
   top: -5px;
-  font-size: 15pt;
+  font-size: 11pt;
 }
 
 .general-container a {
   color: black;
+  white-space: nowrap;
 }
 
 #name-general {
-  font-size: 30pt;
+  font-size: 24pt;
+}
+
+#ph-no-general {
+  white-space: nowrap;
 }
 
 .ph-no-resume,
@@ -60,91 +104,19 @@
 }
 
 /* EDUCATION */
-.education-resume {
-  display: flex;
-  flex-direction: column;
-  gap: 3pt;
-}
 
-.education-container {
-  display: flex;
-  flex-direction: column;
-  padding: 0 12pt;
-  gap: 9pt;
-}
 
-.education-school-place {
-  display: flex;
-  justify-content: space-between;
-}
-
-#school-education {
-  font-weight: 600;
-  font-size: 15pt;
-}
-
-#place-study-education {
-  font-size: 15pt;
-}
-
-.education-title-gpa-dates {
-  display: flex;
-  justify-content: space-between;
-}
-
-#title-gpa-education > span,
-#title-gpa-education > b,
-#date-study-education {
-  font-style: italic;
-  font-size: 15pt;
-}
 
 /* TECHNICAL SKILLS */
-.technical-skills-resume {
-  display: flex;
-  flex-direction: column;
-  gap: 3pt;
-}
 
-.skills-container {
-  display: flex;
-  flex-direction: column;
-  font-size: 15pt;
-  padding: 0 12pt;
-  gap: 3pt;
-}
+
 
 /* EXPERIENCE */
-.work-resume {
-  display: flex;
-  flex-direction: column;
-  gap: 3pt;
-}
 
-.work-container {
-  display: flex;
-  flex-direction: column;
-  font-size: 15pt;
-  gap: 9pt;
-  padding: 0 12pt;
-}
 
-.work-position-dates,
-.work-company-place {
-  display: flex;
-  justify-content: space-between;
-}
-
-#place-work {
-  font-style: italic;
-}
 
 /* PROJECTS */
-.project-resume {
-  display: flex;
-  flex-direction: column;
-  gap: 3pt;
-}
+
 
 .project-container {
   display: flex;

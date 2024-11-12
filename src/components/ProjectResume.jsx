@@ -21,20 +21,28 @@ export function ProjectResume({ appData }) {
   }
 
   return (
-    <div className="project-resume">
+    <div className="section-resume" style={{ gap: "3pt" }}>
       {projects.length > 0 && <span id="section-heading">PROJECTS</span>}
-      <div className="project-container">
+      <div className="section-container">
         {projects.map((proj) => {
           return (
-            <div key={proj.id}>
-              {" "}
-              <div className="project-name-tech-stack-date">
-                <p id="name-tech-stack-project">
-                  <b>{proj.projectName}</b> | <i>{proj.techStack}</i>
+            <div key={proj.id} style={{ lineHeight: "1.25" }}>
+              <div className="div-styles">
+                <p>
+                  <span className="bold-styles">{proj.projectName}</span> |{" "}
+                  <span className="italic-styles">{proj.techStack}</span>
                 </p>
-                <p id="date-project">{formatDate(proj.projectDate)}</p>
+                <p style={{ fontSize: "12pt" }}>
+                  {formatDate(proj.projectDate)}
+                </p>
               </div>
-              <ul className="details-resume">
+              <ul
+                className="list-styles"
+                style={{
+                  marginLeft: "9pt",
+                  lineHeight: "1.25",
+                }}
+              >
                 {proj.details.map((dt) => (
                   <li key={dt.id}>{formatDetail(dt.value)}</li>
                 ))}

@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     padding: "0.5in",
     display: "flex",
     flexDirection: "column",
-    gap: "12pt",
+    gap: "9pt",
     fontFamily: "Times-Roman",
   },
 
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     fontSize: "11pt",
     padding: "0 10pt",
-    gap: "9pt",
+    gap: "6pt",
   },
 
   divStyles: {
@@ -92,9 +92,6 @@ const styles = StyleSheet.create({
 
   listStyles: {
     paddingLeft: "15pt",
-    display: "flex",
-    flexDirection: "column",
-    gap: "3pt",
   },
 
   anchor: { color: "black" },
@@ -185,7 +182,7 @@ export function MyDocument({ appData }) {
           <View style={styles.sectionContainer}>
             {courses.map((edu) => {
               return (
-                <View key={edu.id} style={styles.sectionResume}>
+                <View key={edu.id} style={{ lineHeight: "1.25" }}>
                   <View style={[styles.divStyles, { fontSize: "12pt" }]}>
                     <Text style={styles.boldStyles}>{edu.school}</Text>
                     <Text>{edu.placeStudy}</Text>
@@ -221,10 +218,10 @@ export function MyDocument({ appData }) {
           {skills.length > 0 && (
             <Text style={styles.sectionHeading}>TECHNICAL SKILLS</Text>
           )}
-          <View style={[styles.sectionContainer, { gap: "3pt" }]}>
+          <View style={[styles.sectionContainer, { gap: "0pt" }]}>
             {skills.map((skillsGroup) => (
               <View key={skillsGroup.id}>
-                <Text>
+                <Text style={{ lineHeight: "1.25" }}>
                   <Text style={styles.boldStyles}>
                     {skillsGroup.skillsType}
                   </Text>
@@ -243,7 +240,7 @@ export function MyDocument({ appData }) {
           <View style={styles.sectionContainer}>
             {experiences.map((work) => {
               return (
-                <View key={work.id} style={styles.sectionResume}>
+                <View key={work.id} style={{ lineHeight: "1.25" }}>
                   <View style={[styles.divStyles, { fontSize: "12pt" }]}>
                     <Text style={styles.boldStyles}>{work.position}</Text>
                     <Text>
@@ -277,10 +274,7 @@ export function MyDocument({ appData }) {
           <View style={styles.sectionContainer}>
             {projects.map((proj) => {
               return (
-                <View
-                  key={proj.id}
-                  style={[styles.sectionResume, { gap: "3pt" }]}
-                >
+                <View key={proj.id} style={{ lineHeight: "1.25" }}>
                   <View style={styles.divStyles}>
                     <Text>
                       <Text style={styles.boldStyles}>{proj.projectName}</Text>{" "}

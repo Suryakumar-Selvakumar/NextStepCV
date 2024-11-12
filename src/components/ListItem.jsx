@@ -6,7 +6,7 @@ const ListItem = ({ children }) => {
       <View style={styles.bullet}>
         <Text style={{ fontSize: "11pt" }}>{"\u2022" + " "}</Text>
       </View>
-      <Text>{children}</Text>
+      <Text style={{ lineHeight: "1.25" }}>{children}</Text>
     </View>
   );
 };

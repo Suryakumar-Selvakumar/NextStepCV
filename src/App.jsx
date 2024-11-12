@@ -2,8 +2,6 @@ import "./styles/App.css";
 import { Header } from "./components/Header";
 import { MainContent } from "./components/MainContent";
 import { useState, useEffect } from "react";
-import { PDFViewer } from "@react-pdf/renderer";
-import { MyDocument } from "./components/MyDocument";
 
 function App() {
   const storedAppData = JSON.parse(localStorage.getItem("app-data"));
@@ -27,9 +25,6 @@ function App() {
     <>
       <Header appData={appData} setAppData={setAppData} />
       <MainContent appData={appData} setAppData={setAppData} />
-      <PDFViewer>
-        <MyDocument appData={appData} />
-      </PDFViewer>
     </>
   );
 }

@@ -4,12 +4,16 @@ export function TechnicalSkillsResume({ appData }) {
   const skills = appData.skills.length ? appData.skills : [];
 
   return (
-    <div className="technical-skills-resume">
+    <div className="section-resume" style={{ gap: "3pt" }}>
       {skills.length > 0 && <span id="section-heading">TECHNICAL SKILLS</span>}
-      <div className="skills-container">
+      <div
+        className="section-container"
+        style={{ lineHeight: "1.25", gap: "0.25em" }}
+      >
         {skills.map((skillsGroup) => (
           <div key={skillsGroup.id}>
-            <b>{skillsGroup.skillsType}</b>: {skillsGroup.skillsList}
+            <span className="bold-styles">{skillsGroup.skillsType}</span>:{" "}
+            {skillsGroup.skillsList}
           </div>
         ))}
       </div>

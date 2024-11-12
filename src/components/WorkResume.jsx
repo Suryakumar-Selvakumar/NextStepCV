@@ -29,27 +29,26 @@ export function WorkResume({ appData }) {
   }
 
   return (
-    <div className="work-resume">
+    <div className="section-resume" style={{ gap: "3pt" }}>
       {experiences.length > 0 && <span id="section-heading">EXPERIENCE</span>}
-      <div className="work-container">
+      <div className="section-container">
         {experiences.map((work) => {
           return (
-            <div key={work.id} className="work">
-              <div className="work-position-dates">
-                <p id="position-work">
-                  <b>{work.position}</b>
-                </p>
-                <p id="start-end-date">
-                  {formatDate(work.startWork)} &#8210; {renderEndDate(work)}
+            <div key={work.id} style={{ lineHeight: "1.25" }}>
+              <div className="div-styles" style={{ fontSize: "12pt" }}>
+                <p className="bold-styles">{work.position}</p>
+                <p>
+                  {formatDate(work.startWork)} &#8211; {renderEndDate(work)}
                 </p>
               </div>
-              <div className="work-company-place">
-                <p id="company-work">
-                  <i>{work.company}</i>
-                </p>
-                <p id="place-work">{work.place}</p>
+              <div className="div-styles">
+                <p className="italic-styles">{work.company}</p>
+                <p className="italic-styles">{work.place}</p>
               </div>
-              <ul className="roles-resume">
+              <ul
+                className="list-styles"
+                style={{ marginLeft: "9pt", lineHeight: "1.25" }}
+              >
                 {work.roles.map((role) => (
                   <li key={role.id}>{formatRole(role.value)}</li>
                 ))}
