@@ -279,7 +279,7 @@
 
             iii) Then you can download the PDF by using instance.url as the download link in an href attribute and download attribute set in an anchor tag. You can style the anchor tag to look like a button if you so choose.
 
-Let’s go!
+        Let’s go!
 
 8.  I think I’ll go forward with Vercel for deploying the project. If that doesn’t work out, then try netlify and then cloudfare if that fails.
 
@@ -317,7 +317,7 @@ Let’s go!
 
         iii) Why do this? The correct way to reference DOM nodes in react is by using useRef() hooks. This is a great oppurtunity to practice the convention and get used to it!
 
-10.4. Disable dates after today in date-picker:
+    10.4. Disable dates after today in date-picker:
 
         i) For Project component, disable dates after today’s date for the date input. Reason: One cannot include a project that they haven’t finished yet.
 
@@ -325,7 +325,7 @@ Let’s go!
 
         iii) For Education component, when completedStudy is true, disable the dates after today’s date for both the date inputs. Reason: One cannot be studying the same course after today if they’re not currently studying anymore.
 
-10.5. Format dates into month and year for all the components:
+    10.5. Format dates into month and year for all the components:
 
         i) Use dateVar.getMonth() and array with month short-form names to fetch the Month from the date.
 
@@ -333,7 +333,7 @@ Let’s go!
 
         iii) The dates themselves can be stored as they are but format them while displaying them.
 
-10.6. Add bold/italic styling capability for the component's roles/details:
+    10.6. Add bold/italic styling capability for the component's roles/details:
 
         i) Add a feature that allows the user to make text bold by adding a ‘\*’ behind that word and italic by adding ‘\_’ behind that word.
 
@@ -345,7 +345,7 @@ Let’s go!
 
         v) Then you can use array.join(“ “) to rejoin the words into a full sentence.
 
-10.7. Refactor form display/hide logic to use a transition:
+    10.7. Refactor form display/hide logic to use a transition:
 
         i) Create a formVisible state and set it to false by default.
 
