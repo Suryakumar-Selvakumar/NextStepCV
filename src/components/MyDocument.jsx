@@ -137,7 +137,7 @@ export function MyDocument({ appData }) {
               fontSize: "11pt",
             }}
           >
-            {contactDetails.phNo} |{" "}
+            {contactDetails.phNo} {contactDetails.phNo && "|"}{" "}
             <Link
               style={styles.anchor}
               href={
@@ -148,7 +148,7 @@ export function MyDocument({ appData }) {
             >
               {contactDetails.email}
             </Link>{" "}
-            |{" "}
+            {contactDetails.email && "|"}{" "}
             <Link
               style={styles.anchor}
               href={
@@ -159,7 +159,7 @@ export function MyDocument({ appData }) {
             >
               {contactDetails.linkedIn}
             </Link>{" "}
-            |{" "}
+            {contactDetails.linkedIn && "|"}{" "}
             <Link
               style={styles.anchor}
               href={
