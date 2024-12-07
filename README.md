@@ -21,7 +21,7 @@ Make the next step in your career. A CV Maker to streamline Professional CV Crea
 - Download the Resume - Made possible with React-pdf
 - Continue right where you left off - Data storage on Page Refresh and Revisits
 
-## Technologies Used
+## Technologies
 
 - HTML & CSS - Language
 - JavaScript - Language
